@@ -5,6 +5,7 @@ module com.ispw.fixmycity.logic.app {
 	requires transitive net.java.html.boot.fx;
 	requires transitive javafx.web;
 	requires java.base;
+	requires java.persistence;
 
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;
