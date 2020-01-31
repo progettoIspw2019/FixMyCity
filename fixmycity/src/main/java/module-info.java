@@ -17,5 +17,10 @@ module com.ispw.fixmycity.logic.app {
 	exports com.ispw.fixmycity.logic.app;
 	exports com.ispw.fixmycity.logic.controller;
 	exports com.ispw.fixmycity.logic.view;
+	exports com.ispw.fixmycity.logic.bean;
+	exports com.ispw.fixmycity.logic.util;
+	exports com.ispw.fixmycity.logic.model;
+	exports com.ispw.fixmycity.logic.dao;
+	
 
 }
