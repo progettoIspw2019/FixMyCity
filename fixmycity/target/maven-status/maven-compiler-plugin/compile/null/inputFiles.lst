@@ -1,0 +1,11 @@
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\controller\MapController.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\controller\LoginController.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\bean\BaseUserBean.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\controller\SampleController.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\app\App.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\module-info.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\bean\CommunityReportBean.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\bean\ReportBean.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\util\ReportFilter.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\view\LoginForm.java
+C:\Users\anton\Desktop\TemplateMVC\fixmycity\src\main\java\com\ispw\fixmycity\logic\view\MapBoundary.java

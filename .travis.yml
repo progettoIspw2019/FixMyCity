@@ -1,0 +1,16 @@
+dist: trusty
+language: java
+jdk:
+ - openjdk13
+
+before_install:
+  - wget http://apache.mirror.gtcomm.net/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+  - tar xzvf apache-maven-3.6.3-bin.tar.gz
+  - export PATH=`pwd`/apache-maven-3.6.3/bin:$PATH
+  - mvn -v
+
+install: true
+
+script:
+ - cd fixmycity
+ - mvn clean javafx:compile -Pcoverage org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar -Dsonar.organization=progettoispw2019 -Dsonar.login=791af94481812a17969d521fe631ec3db52decd4 -Dsonar.projectKey=progettoIspw2019_FixMyCity -Dsonar.host.url=https://sonarcloud.io
