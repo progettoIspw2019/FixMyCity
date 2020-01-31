@@ -8,15 +8,16 @@ import com.ispw.fixmycity.logic.controller.LoginController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class LoginForm {
 
 	@FXML
-	private TextArea usernameField;
+	private TextField usernameField;
 
 	@FXML
-	private TextArea passwordField;
+	private PasswordField passwordField;
 
 	@FXML
 	private Button submitButton;
