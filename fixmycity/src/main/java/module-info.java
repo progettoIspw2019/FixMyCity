@@ -1,4 +1,5 @@
 module com.ispw.fixmycity.logic.app {
+
 	requires transitive javafx.controls;
 	requires transitive javafx.fxml;
 	requires transitive leaflet4j;
@@ -6,7 +7,9 @@ module com.ispw.fixmycity.logic.app {
 	requires transitive javafx.web;
 	requires java.base;
 	requires java.persistence;
-
+	requires org.hibernate.orm.core;
+	// TODO questo modulo rompe il progetto 
+	// requires java.naming;
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;
 	opens com.ispw.fixmycity.logic.view to javafx.fxml;

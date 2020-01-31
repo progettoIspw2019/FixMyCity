@@ -1,7 +1,10 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ispw.fixmycity.logic.bean.CommunityReportBean;
+import com.ispw.fixmycity.logic.dao.CommunityReportDAOImpl;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.view.MapBoundary;
 
@@ -16,8 +19,6 @@ import net.java.html.leaflet.TileLayer;
 import net.java.html.leaflet.TileLayerOptions;
 
 public class MapController {
-
-
 
 	private WebView mapView;
 
@@ -55,7 +56,7 @@ public class MapController {
 		});
 	}
 
-	public void addEveryCommunityReport(Map map) {
+	public void addEveryCompanyReport(Map map) {
 
 		// sample code showing how to use the Java API
 		map.addLayer(new Circle(new LatLng(41.902782, 12.496365), 500,
@@ -65,19 +66,29 @@ public class MapController {
 						.bindPopup("I am a Polygon"));
 	}
 
-	
-	public void addEveryCompanyReport(Map map) {
+	public void addEveryCommunityReport(Map map) {
+
+		CommunityReportDAOImpl dao = new CommunityReportDAOImpl();
+
+		List<CommunityReportBean> reports = new ArrayList<>();
+		reports = dao.findAll();
+		
+		for (CommunityReportBean report : reports) {
+			map.addLayer(new Circle(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()),
+					500, new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5))
+							.bindPopup(report.getDescription()));
+//			map.addLayer(new Circle(new LatLng(40.902782, 12.496365), 500,
+//					new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5))
+//							.bindPopup("I am a Circle 2"));
+		}
 
 		// sample code showing how to use the Java API
-		map.addLayer(new Circle(new LatLng(40.902782, 12.496365), 500,
-				new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5)).bindPopup("I am a Circle 2"));
+
 		map.addLayer(new Polygon(
 				new LatLng[] { new LatLng(51.509, -0.08), new LatLng(51.503, -0.06), new LatLng(51.51, -0.047) })
 						.bindPopup("I am a Polygon 2"));
 	}
 
-	
-	
 	public WebView getMapView() {
 		return mapView;
 	}
