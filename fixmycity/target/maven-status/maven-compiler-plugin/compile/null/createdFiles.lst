@@ -3,10 +3,12 @@ com\ispw\fixmycity\logic\view\LoginForm.class
 com\ispw\fixmycity\logic\app\App.class
 com\ispw\fixmycity\logic\dao\CommunityReportDAOImpl.class
 com\ispw\fixmycity\logic\model\CommunityReport.class
+com\ispw\fixmycity\logic\dao\BaseDAOImpl.class
 com\ispw\fixmycity\logic\model\CompanyUser.class
 module-info.class
 com\ispw\fixmycity\logic\dao\CommunityReportDAO.class
 com\ispw\fixmycity\logic\controller\LoginController.class
+com\ispw\fixmycity\logic\dao\BaseDAO.class
 com\ispw\fixmycity\logic\util\ReportFilter.class
 com\ispw\fixmycity\logic\controller\SampleController.class
 com\ispw\fixmycity\logic\model\CitizenUser.class
