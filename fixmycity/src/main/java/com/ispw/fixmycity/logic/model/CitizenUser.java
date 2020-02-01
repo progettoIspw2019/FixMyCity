@@ -23,7 +23,7 @@ public class CitizenUser implements Serializable {
 	private String firstName;
 
 	@Column(name="profile_picture")
-	private Object profilePicture;
+	private byte[] profilePicture;
 
 	private String pwd;
 
@@ -60,11 +60,11 @@ public class CitizenUser implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public Object getProfilePicture() {
+	public byte[] getProfilePicture() {
 		return this.profilePicture;
 	}
 
-	public void setProfilePicture(Object profilePicture) {
+	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

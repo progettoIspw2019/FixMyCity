@@ -30,7 +30,7 @@ public class CompanyReport implements Serializable {
 	@Column(name="full_description")
 	private String fullDescription;
 
-	private Object image;
+	private byte[] image;
 
 	private BigDecimal latitude;
 
@@ -88,11 +88,11 @@ public class CompanyReport implements Serializable {
 		this.fullDescription = fullDescription;
 	}
 
-	public Object getImage() {
+	public byte[] getImage() {
 		return this.image;
 	}
 
-	public void setImage(Object image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

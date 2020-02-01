@@ -1,5 +1,8 @@
 package com.ispw.fixmycity.logic.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,7 +24,14 @@ public class BaseDAOImpl implements BaseDAO {
 	}
 
 	public BaseDAOImpl() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("com.ispw.logic.fixmycitydb");
+		try {
+			Class.forName("org.hibernate.jpa.HibernatePersistenceProvider");
+			System.out.println("called class");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
 	}
 
 }

@@ -26,7 +26,8 @@ public class Job implements Serializable {
 	private Date endDate;
 
 	@Column(name="job_info")
-	private Object jobInfo;
+	@Lob
+	private byte[] jobInfo;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="start_date")
@@ -57,11 +58,11 @@ public class Job implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public Object getJobInfo() {
+	public byte[] getJobInfo() {
 		return this.jobInfo;
 	}
 
-	public void setJobInfo(Object jobInfo) {
+	public void setJobInfo(byte[] jobInfo) {
 		this.jobInfo = jobInfo;
 	}
 
