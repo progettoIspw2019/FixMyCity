@@ -26,6 +26,7 @@ public class ReportProblemController {
 	
 	@FXML
 	private void initialize() {
+		category.setItems(categoryList);
 		category.setValue("Leak");
 	}
 	
