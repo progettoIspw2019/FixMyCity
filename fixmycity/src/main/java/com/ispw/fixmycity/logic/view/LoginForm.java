@@ -1,10 +1,13 @@
 package com.ispw.fixmycity.logic.view;
 
 import java.io.IOException;
+import java.util.Date;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
+import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.dao.VolunteeringEventDAOImpl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,6 +27,13 @@ public class LoginForm {
 
 	@FXML
 	private void submitLogin() throws IOException {
+
+		VolunteeringEventDAOImpl dao = new VolunteeringEventDAOImpl();
+		VolunteeringEventBean bean = new VolunteeringEventBean();
+		bean.setCreationDate(new Date());
+		bean.setEventDate(new Date());
+
+		dao.addVolunteeringEvent(bean);
 
 		BaseUserBean baseUser = new BaseUserBean();
 		baseUser.setUsername(usernameField.getText());

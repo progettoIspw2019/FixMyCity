@@ -23,6 +23,7 @@ public class CitizenUser implements Serializable {
 	private String firstName;
 
 	@Column(name="profile_picture")
+	@Lob
 	private byte[] profilePicture;
 
 	private String pwd;

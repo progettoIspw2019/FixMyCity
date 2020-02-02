@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -30,6 +31,7 @@ public class CompanyReport implements Serializable {
 	@Column(name="full_description")
 	private String fullDescription;
 
+	@Lob
 	private byte[] image;
 
 	private BigDecimal latitude;
@@ -49,9 +51,8 @@ public class CompanyReport implements Serializable {
 	private CompanyUser companyUser;
 
 	//bi-directional many-to-one association to Job
-	@ManyToOne
-	@JoinColumn(name="related_job")
-	private Job job;
+	@OneToMany(mappedBy="companyReport")
+	private List<Job> jobs;
 
 	public CompanyReport() {
 	}
@@ -136,12 +137,26 @@ public class CompanyReport implements Serializable {
 		this.companyUser = companyUser;
 	}
 
-	public Job getJob() {
-		return this.job;
+	public List<Job> getJobs() {
+		return this.jobs;
 	}
 
-	public void setJob(Job job) {
-		this.job = job;
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+
+	public Job addJob(Job job) {
+		getJobs().add(job);
+		job.setCompanyReport(this);
+
+		return job;
+	}
+
+	public Job removeJob(Job job) {
+		getJobs().remove(job);
+		job.setCompanyReport(null);
+
+		return job;
 	}
 
 }

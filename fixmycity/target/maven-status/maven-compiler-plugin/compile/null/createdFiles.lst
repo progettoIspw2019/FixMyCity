@@ -1,4 +1,5 @@
 com\ispw\fixmycity\logic\model\Job.class
+com\ispw\fixmycity\logic\view\CreateVolunteeringEventForm.class
 com\ispw\fixmycity\logic\view\LoginForm.class
 com\ispw\fixmycity\logic\app\App.class
 com\ispw\fixmycity\logic\dao\CommunityReportDAOImpl.class
@@ -16,7 +17,12 @@ com\ispw\fixmycity\logic\controller\MapController.class
 com\ispw\fixmycity\logic\bean\CommunityReportBean.class
 com\ispw\fixmycity\logic\controller\MapController$1.class
 com\ispw\fixmycity\logic\model\CompanyReport.class
+com\ispw\fixmycity\logic\controller\VolunteeringEventController.class
 com\ispw\fixmycity\logic\bean\ReportBean.class
 com\ispw\fixmycity\logic\view\MapBoundary.class
 com\ispw\fixmycity\logic\model\VolunteeringEvent.class
+com\ispw\fixmycity\logic\dao\VolunteeringEventDAO.class
 com\ispw\fixmycity\logic\bean\BaseUserBean.class
+com\ispw\fixmycity\logic\util\DateUtil.class
+com\ispw\fixmycity\logic\bean\VolunteeringEventBean.class
+com\ispw\fixmycity\logic\dao\VolunteeringEventDAOImpl.class

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -30,7 +31,6 @@ public class CommunityReport implements Serializable {
 	@Column(name="full_description")
 	private String fullDescription;
 
-	@Column(name="image")
 	@Lob
 	private byte[] image;
 
@@ -46,9 +46,8 @@ public class CommunityReport implements Serializable {
 	private CitizenUser citizenUser;
 
 	//bi-directional many-to-one association to VolunteeringEvent
-	@ManyToOne
-	@JoinColumn(name="related_event")
-	private VolunteeringEvent volunteeringEvent;
+	@OneToMany(mappedBy="communityReport")
+	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CommunityReport() {
 	}
@@ -125,12 +124,26 @@ public class CommunityReport implements Serializable {
 		this.citizenUser = citizenUser;
 	}
 
-	public VolunteeringEvent getVolunteeringEvent() {
-		return this.volunteeringEvent;
+	public List<VolunteeringEvent> getVolunteeringEvents() {
+		return this.volunteeringEvents;
 	}
 
-	public void setVolunteeringEvent(VolunteeringEvent volunteeringEvent) {
-		this.volunteeringEvent = volunteeringEvent;
+	public void setVolunteeringEvents(List<VolunteeringEvent> volunteeringEvents) {
+		this.volunteeringEvents = volunteeringEvents;
+	}
+
+	public VolunteeringEvent addVolunteeringEvent(VolunteeringEvent volunteeringEvent) {
+		getVolunteeringEvents().add(volunteeringEvent);
+		volunteeringEvent.setCommunityReport(this);
+
+		return volunteeringEvent;
+	}
+
+	public VolunteeringEvent removeVolunteeringEvent(VolunteeringEvent volunteeringEvent) {
+		getVolunteeringEvents().remove(volunteeringEvent);
+		volunteeringEvent.setCommunityReport(null);
+
+		return volunteeringEvent;
 	}
 
 }

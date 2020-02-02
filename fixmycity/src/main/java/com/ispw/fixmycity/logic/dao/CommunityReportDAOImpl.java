@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
 import org.hibernate.query.Query;
 
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -57,6 +58,12 @@ public class CommunityReportDAOImpl extends BaseDAOImpl implements CommunityRepo
 	@Override
 	public void delete(CommunityReport entity) {
 //		sessionFactory.getCurrentSession().delete(entity);
+
+	}
+
+	@Override
+	public void assignVolunteeringEvent(Long eventId) {
+		// TODO Auto-generated method stub
 
 	}
 }

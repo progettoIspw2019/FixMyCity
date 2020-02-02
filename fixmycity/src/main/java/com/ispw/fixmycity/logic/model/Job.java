@@ -3,7 +3,6 @@ package com.ispw.fixmycity.logic.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -36,8 +35,9 @@ public class Job implements Serializable {
 	private String state;
 
 	//bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy="job")
-	private List<CompanyReport> companyReports;
+	@ManyToOne
+	@JoinColumn(name="id_company_report")
+	private CompanyReport companyReport;
 
 	public Job() {
 	}
@@ -82,26 +82,12 @@ public class Job implements Serializable {
 		this.state = state;
 	}
 
-	public List<CompanyReport> getCompanyReports() {
-		return this.companyReports;
+	public CompanyReport getCompanyReport() {
+		return this.companyReport;
 	}
 
-	public void setCompanyReports(List<CompanyReport> companyReports) {
-		this.companyReports = companyReports;
-	}
-
-	public CompanyReport addCompanyReport(CompanyReport companyReport) {
-		getCompanyReports().add(companyReport);
-		companyReport.setJob(this);
-
-		return companyReport;
-	}
-
-	public CompanyReport removeCompanyReport(CompanyReport companyReport) {
-		getCompanyReports().remove(companyReport);
-		companyReport.setJob(null);
-
-		return companyReport;
+	public void setCompanyReport(CompanyReport companyReport) {
+		this.companyReport = companyReport;
 	}
 
 }

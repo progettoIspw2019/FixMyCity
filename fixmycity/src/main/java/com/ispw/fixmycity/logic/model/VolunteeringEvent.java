@@ -29,10 +29,6 @@ public class VolunteeringEvent implements Serializable {
 	@Column(name="event_date")
 	private Date eventDate;
 
-	//bi-directional many-to-one association to CommunityReport
-	@OneToMany(mappedBy="volunteeringEvent")
-	private List<CommunityReport> communityReports;
-
 	//bi-directional many-to-many association to CitizenUser
 	@ManyToMany
 	@JoinTable(
@@ -45,6 +41,11 @@ public class VolunteeringEvent implements Serializable {
 			}
 		)
 	private List<CitizenUser> citizenUsers;
+
+	//bi-directional many-to-one association to CommunityReport
+	@ManyToOne
+	@JoinColumn(name="id_community_report")
+	private CommunityReport communityReport;
 
 	public VolunteeringEvent() {
 	}
@@ -73,34 +74,20 @@ public class VolunteeringEvent implements Serializable {
 		this.eventDate = eventDate;
 	}
 
-	public List<CommunityReport> getCommunityReports() {
-		return this.communityReports;
-	}
-
-	public void setCommunityReports(List<CommunityReport> communityReports) {
-		this.communityReports = communityReports;
-	}
-
-	public CommunityReport addCommunityReport(CommunityReport communityReport) {
-		getCommunityReports().add(communityReport);
-		communityReport.setVolunteeringEvent(this);
-
-		return communityReport;
-	}
-
-	public CommunityReport removeCommunityReport(CommunityReport communityReport) {
-		getCommunityReports().remove(communityReport);
-		communityReport.setVolunteeringEvent(null);
-
-		return communityReport;
-	}
-
 	public List<CitizenUser> getCitizenUsers() {
 		return this.citizenUsers;
 	}
 
 	public void setCitizenUsers(List<CitizenUser> citizenUsers) {
 		this.citizenUsers = citizenUsers;
+	}
+
+	public CommunityReport getCommunityReport() {
+		return this.communityReport;
+	}
+
+	public void setCommunityReport(CommunityReport communityReport) {
+		this.communityReport = communityReport;
 	}
 
 }
