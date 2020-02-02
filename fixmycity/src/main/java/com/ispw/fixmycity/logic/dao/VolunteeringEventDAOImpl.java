@@ -24,8 +24,9 @@ public class VolunteeringEventDAOImpl extends BaseDAOImpl implements Volunteerin
 		volunteeringEvent.setEventDate(bean.getEventDate());
 
 		// Setting foreign key
+		Integer idReport = bean.getCommunityReport().getIdReport();
 		CommunityReport communityReport = entityManager.getReference(CommunityReport.class,
-				bean.getCommunityReport().getIdReport());
+				idReport);
 		volunteeringEvent.setCommunityReport(communityReport);
 
 		entityManager.getTransaction().begin();

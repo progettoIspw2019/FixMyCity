@@ -5,9 +5,12 @@ import java.util.Date;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
+import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.dao.CommunityReportDAOImpl;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAOImpl;
+import com.ispw.fixmycity.logic.model.CommunityReport;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,10 +33,23 @@ public class LoginForm {
 
 		VolunteeringEventDAOImpl dao = new VolunteeringEventDAOImpl();
 		VolunteeringEventBean bean = new VolunteeringEventBean();
+		
+		
+		CommunityReport commReport = new CommunityReportDAOImpl().findByPrimaryKey(1);
+		System.out.println(commReport);
+		CommunityReportBean commRepBean = new CommunityReportBean();
+		commRepBean.setIdReport(commReport.getIdReport());
+		commRepBean.setAddress(commRepBean.getAddress());
+		commRepBean.setDescription(commRepBean.getDescription());
+		commRepBean.setLatitude(commReport.getLatitude());
+		commRepBean.setLongitude(commReport.getLongitude());
+		commRepBean.setTitle(commReport.getTitle());
+		
+		bean.setCommunityReport(commRepBean);
 		bean.setCreationDate(new Date());
 		bean.setEventDate(new Date());
 
-		//dao.addVolunteeringEvent(bean);
+		dao.addVolunteeringEvent(bean);
 
 		BaseUserBean baseUser = new BaseUserBean();
 		baseUser.setUsername(usernameField.getText());

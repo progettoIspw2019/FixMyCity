@@ -39,11 +39,9 @@ public class CommunityReportDAOImpl extends BaseDAOImpl implements CommunityRepo
 	// Questi metodi sono tutti commentati perché passeremo dall'uso di
 	// sessionFactory a quello di entityManager
 	@Override
-	public CommunityReport findByPrimaryKey(Long id) {
-//		Session session = sessionFactory.getCurrentSession();
-//		Object o = session.load(CommunityReport.class, id);
-//		return (CommunityReport) o;
-		return null;
+	public CommunityReport findByPrimaryKey(Integer id) {
+		entityManager = getEntityManager();
+		return entityManager.find(CommunityReport.class, id);
 	}
 
 	@Override

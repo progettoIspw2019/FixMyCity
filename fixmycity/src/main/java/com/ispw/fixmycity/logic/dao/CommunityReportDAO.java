@@ -10,7 +10,7 @@ public interface CommunityReportDAO {
 
 	public CommunityReport save(CommunityReport entity);
 
-	public CommunityReport findByPrimaryKey(Long id);
+	public CommunityReport findByPrimaryKey(Integer id);
 
 	public List<CommunityReportBean> findAll();
 	
