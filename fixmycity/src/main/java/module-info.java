@@ -13,6 +13,7 @@ module com.ispw.fixmycity.logic.app {
 	requires transitive mysql.connector.java;
 	requires java.sql;
 	requires java.xml.bind;
+	requires javafx.base;
 	
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;

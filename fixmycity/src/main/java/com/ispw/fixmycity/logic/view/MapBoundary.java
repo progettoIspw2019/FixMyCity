@@ -1,8 +1,10 @@
 package com.ispw.fixmycity.logic.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.controller.MapController;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 
@@ -30,6 +32,11 @@ public class MapBoundary {
 
 	public void setMapContainerWebView(WebView mapContainerWebView) {
 		this.mapContainerWebView = mapContainerWebView;
+	}
+	
+	@FXML
+	private void createReport() throws IOException {
+		App.setRoot("reportProblemForm");
 	}
 
 }

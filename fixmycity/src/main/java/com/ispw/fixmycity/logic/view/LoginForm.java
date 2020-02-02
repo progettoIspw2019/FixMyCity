@@ -33,7 +33,7 @@ public class LoginForm {
 		bean.setCreationDate(new Date());
 		bean.setEventDate(new Date());
 
-		dao.addVolunteeringEvent(bean);
+		//dao.addVolunteeringEvent(bean);
 
 		BaseUserBean baseUser = new BaseUserBean();
 		baseUser.setUsername(usernameField.getText());
