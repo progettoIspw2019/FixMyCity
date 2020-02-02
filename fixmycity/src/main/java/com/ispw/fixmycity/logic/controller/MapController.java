@@ -77,9 +77,6 @@ public class MapController {
 			map.addLayer(new Circle(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()),
 					500, new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5))
 							.bindPopup(report.getDescription()));
-//			map.addLayer(new Circle(new LatLng(40.902782, 12.496365), 500,
-//					new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5))
-//							.bindPopup("I am a Circle 2"));
 		}
 
 		// sample code showing how to use the Java API

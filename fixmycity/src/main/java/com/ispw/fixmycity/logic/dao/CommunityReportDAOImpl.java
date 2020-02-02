@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -14,13 +11,13 @@ import com.ispw.fixmycity.logic.model.CommunityReport;
 
 public class CommunityReportDAOImpl extends BaseDAOImpl implements CommunityReportDAO {
 
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	@Override
 	public List<CommunityReportBean> findAll() {
 
-		em = getEntityManager();
-		Query<CommunityReport> queryResult = (Query<CommunityReport>) em.createQuery("from CommunityReport");
+		entityManager = getEntityManager();
+		Query<CommunityReport> queryResult = (Query<CommunityReport>) entityManager.createQuery("from CommunityReport");
 		List<CommunityReport> result = new ArrayList<CommunityReport>(queryResult.list());
 		List<CommunityReportBean> resultBean = new ArrayList<CommunityReportBean>();
 
