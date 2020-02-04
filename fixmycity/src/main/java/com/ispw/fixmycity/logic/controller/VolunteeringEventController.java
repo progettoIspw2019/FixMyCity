@@ -2,7 +2,6 @@ package com.ispw.fixmycity.logic.controller;
 
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
-import com.ispw.fixmycity.logic.dao.VolunteeringEventDAOImpl;
 
 public class VolunteeringEventController {
 
@@ -22,7 +21,7 @@ public class VolunteeringEventController {
 
 	public void createVolunteeringEvent() {
 
-		VolunteeringEventDAO dao = new VolunteeringEventDAOImpl();
+		VolunteeringEventDAO dao = new VolunteeringEventDAO();
 
 		dao.addVolunteeringEvent(volunteeringEvent);
 

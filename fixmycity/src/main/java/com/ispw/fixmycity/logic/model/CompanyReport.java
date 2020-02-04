@@ -55,6 +55,7 @@ public class CompanyReport implements Serializable {
 	private List<Job> jobs;
 
 	public CompanyReport() {
+		// This is a POJO, and there are no default values
 	}
 
 	public int getIdReport() {

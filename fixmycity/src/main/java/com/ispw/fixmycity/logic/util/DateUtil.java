@@ -12,8 +12,7 @@ public class DateUtil {
 		LocalDate ld = datePicker.getValue();
 		Calendar c = Calendar.getInstance();
 		c.set(ld.getYear(), ld.getMonthValue() - 1, ld.getDayOfMonth());
-		Date date = c.getTime();
-		return date;
+		return c.getTime();
 	}
 
 }

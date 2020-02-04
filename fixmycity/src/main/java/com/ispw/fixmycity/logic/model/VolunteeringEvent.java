@@ -2,6 +2,9 @@ package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
+
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +51,14 @@ public class VolunteeringEvent implements Serializable {
 	private CommunityReport communityReport;
 
 	public VolunteeringEvent() {
+		// This is a POJO, and there are no default values
+	}
+	
+	public void setFromBean(VolunteeringEventBean volEventBean) {
+		this.setCitizenUsers(volEventBean.getCitizenUsers());
+		this.setCommunityReport(volEventBean.getCommunityReport());
+		this.setCreationDate(volEventBean.getCreationDate());
+		this.setEventDate(volEventBean.getEventDate());
 	}
 
 	public int getIdEvent() {

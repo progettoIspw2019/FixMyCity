@@ -1,10 +1,9 @@
 package com.ispw.fixmycity.logic.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ispw.fixmycity.logic.bean.CommunityReportBean;
-import com.ispw.fixmycity.logic.dao.CommunityReportDAOImpl;
+import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
+import com.ispw.fixmycity.logic.model.CommunityReport;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.view.MapBoundary;
 
@@ -68,15 +67,15 @@ public class MapController {
 
 	public void addEveryCommunityReport(Map map) {
 
-		CommunityReportDAOImpl dao = new CommunityReportDAOImpl();
+		CommunityReportDAO dao = new CommunityReportDAO();
 
-		List<CommunityReportBean> reports = new ArrayList<>();
+		List<CommunityReport> reports;
 		reports = dao.findAll();
 		
-		for (CommunityReportBean report : reports) {
+		for (CommunityReport report : reports) {
 			map.addLayer(new Circle(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()),
 					500, new PathOptions().setColor("red").setFillColor("#f03").setOpacity(0.5))
-							.bindPopup(report.getDescription()));
+							.bindPopup(report.getFullDescription()));
 		}
 
 		// sample code showing how to use the Java API

@@ -2,9 +2,10 @@ package com.ispw.fixmycity.logic.view;
 
 import java.util.Date;
 
-import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
+import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
+import com.ispw.fixmycity.logic.model.CommunityReport;
 import com.ispw.fixmycity.logic.util.DateUtil;
 
 import javafx.fxml.FXML;
@@ -19,16 +20,19 @@ public class CreateVolunteeringEventForm {
 	public void handleCreateVolunteeringEvent() {
 
 		// TODO poi il report dovra essere selezionato
-		CommunityReportBean reportBean = new CommunityReportBean();
-		reportBean.setIdReport(1);
-		VolunteeringEventBean volunteeringEvent = new VolunteeringEventBean();
+		
+		CommunityReportDAO daoCompRep = new CommunityReportDAO();
+		CommunityReport compReport = daoCompRep.findByPrimaryKey(1);
+		
+		VolunteeringEventBean volunteeringEventBean = new VolunteeringEventBean();
 
-		volunteeringEvent.setCommunityReport(reportBean);
-		volunteeringEvent.setCreationDate(new Date());
-		volunteeringEvent.setEventDate(DateUtil.dateFromDatePicker(eventDatePicker));
+		volunteeringEventBean.setCommunityReport(compReport);
+		volunteeringEventBean.setCreationDate(new Date());
+		volunteeringEventBean.setEventDate(DateUtil.dateFromDatePicker(eventDatePicker));
 
-		VolunteeringEventController controller = new VolunteeringEventController(volunteeringEvent);
+		VolunteeringEventController controller = new VolunteeringEventController(volunteeringEventBean);
 
+		// forse la bean è meglio passarla qui
 		controller.createVolunteeringEvent();
 
 	}

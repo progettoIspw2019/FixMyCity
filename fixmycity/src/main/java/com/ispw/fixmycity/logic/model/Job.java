@@ -40,6 +40,7 @@ public class Job implements Serializable {
 	private CompanyReport companyReport;
 
 	public Job() {
+		// This is a POJO, and there are no default values
 	}
 
 	public int getIdJob() {

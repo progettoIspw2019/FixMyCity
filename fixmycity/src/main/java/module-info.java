@@ -14,6 +14,7 @@ module com.ispw.fixmycity.logic.app {
 	requires java.sql;
 	requires java.xml.bind;
 	requires javafx.base;
+	requires javafx.graphics;
 	
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;

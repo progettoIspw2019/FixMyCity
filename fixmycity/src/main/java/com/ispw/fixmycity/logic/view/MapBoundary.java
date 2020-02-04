@@ -18,7 +18,7 @@ public class MapBoundary {
 	@FXML
 	public void initialize() {
 
-		List<ReportFilter> reportFilters = new ArrayList<ReportFilter>();
+		List<ReportFilter> reportFilters = new ArrayList<>();
 		reportFilters.add(ReportFilter.ALL_COMMUNITY_REPORT);
 		reportFilters.add(ReportFilter.ALL_COMPANY_REPORT);
 

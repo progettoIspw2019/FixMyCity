@@ -31,6 +31,7 @@ public class CompanyUser implements Serializable {
 	private List<CompanyReport> companyReports;
 
 	public CompanyUser() {
+		// This is a POJO, and there are no default values
 	}
 
 	public String getUsername() {

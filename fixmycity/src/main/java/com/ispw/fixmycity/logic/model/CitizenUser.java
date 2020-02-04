@@ -43,6 +43,7 @@ public class CitizenUser implements Serializable {
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CitizenUser() {
+		// This is a POJO, and there are no default values
 	}
 
 	public String getUsername() {

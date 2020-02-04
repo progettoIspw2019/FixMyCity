@@ -5,11 +5,10 @@ import java.util.Date;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
-import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.LoginController;
-import com.ispw.fixmycity.logic.dao.CommunityReportDAOImpl;
-import com.ispw.fixmycity.logic.dao.VolunteeringEventDAOImpl;
+import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
+import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
 import com.ispw.fixmycity.logic.model.CommunityReport;
 
 import javafx.fxml.FXML;
@@ -31,25 +30,17 @@ public class LoginForm {
 	@FXML
 	private void submitLogin() throws IOException {
 
-		VolunteeringEventDAOImpl dao = new VolunteeringEventDAOImpl();
+		VolunteeringEventDAO daoEvent = new VolunteeringEventDAO();
 		VolunteeringEventBean bean = new VolunteeringEventBean();
 		
+		CommunityReportDAO daoCommRep = new CommunityReportDAO();
+		CommunityReport commReport = daoCommRep.findByPrimaryKey(1);
 		
-		CommunityReport commReport = new CommunityReportDAOImpl().findByPrimaryKey(1);
-		System.out.println(commReport);
-		CommunityReportBean commRepBean = new CommunityReportBean();
-		commRepBean.setIdReport(commReport.getIdReport());
-		commRepBean.setAddress(commRepBean.getAddress());
-		commRepBean.setDescription(commRepBean.getDescription());
-		commRepBean.setLatitude(commReport.getLatitude());
-		commRepBean.setLongitude(commReport.getLongitude());
-		commRepBean.setTitle(commReport.getTitle());
-		
-		bean.setCommunityReport(commRepBean);
+		bean.setCommunityReport(commReport);
 		bean.setCreationDate(new Date());
 		bean.setEventDate(new Date());
 
-		dao.addVolunteeringEvent(bean);
+		daoEvent.addVolunteeringEvent(bean);
 
 		BaseUserBean baseUser = new BaseUserBean();
 		baseUser.setUsername(usernameField.getText());

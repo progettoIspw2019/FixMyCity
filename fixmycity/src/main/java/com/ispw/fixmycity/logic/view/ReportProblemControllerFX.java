@@ -11,7 +11,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class ReportProblemController {
+public class ReportProblemControllerFX {
 	
 	ObservableList<String> categoryList = FXCollections.observableArrayList("Garbage", "Leak", "Pothole");
 	

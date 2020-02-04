@@ -2,6 +2,9 @@ package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.ispw.fixmycity.logic.bean.CommunityReportBean;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +53,16 @@ public class CommunityReport implements Serializable {
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CommunityReport() {
+		// This is a POJO, and there are no default values
+	}
+	
+	public void setFromBean(CommunityReportBean commRepBean) {
+		setAddress(commRepBean.getAddress());
+		setDateSubmission(commRepBean.getDateSubmission());
+		setFullDescription(commRepBean.getDescription());
+		setImage(commRepBean.getImage());
+		setLatitude(commRepBean.getLatitude());
+		setLongitude(commRepBean.getLongitude());
 	}
 
 	public int getIdReport() {

@@ -12,6 +12,7 @@ public class LoginController {
 	}
 
 	public LoginController() {
+		//TODO: che cosa fa?
 
 	}
 
