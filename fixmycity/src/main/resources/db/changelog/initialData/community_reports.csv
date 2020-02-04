@@ -1,0 +1,3 @@
+id_report,title,full_description,date_submission,address,latitude,longitude,submitter,image
+'1','Immondizia ovunque!1!','Non si può vedere!',curdate(),'Via Luigi Luzzatti','41.8919300','12.5113300','ShockGiammy','null'
+2,'Immondizia per la strada!!','Non si può camminare!',curdate(),'Via Pietro Micca','41.8929402','12.5114345','fran_nali','null'
