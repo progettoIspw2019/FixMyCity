@@ -6,7 +6,7 @@ import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.model.CommunityReport;
-import com.ispw.fixmycity.logic.util.DateUtil;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -28,7 +28,7 @@ public class CreateVolunteeringEventForm {
 
 		volunteeringEventBean.setCommunityReport(compReport);
 		volunteeringEventBean.setCreationDate(new Date());
-		volunteeringEventBean.setEventDate(DateUtil.dateFromDatePicker(eventDatePicker));
+		volunteeringEventBean.setEventDate(ConverterUtil.dateFromDatePicker(eventDatePicker));
 
 		VolunteeringEventController controller = new VolunteeringEventController(volunteeringEventBean);
 

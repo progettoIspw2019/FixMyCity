@@ -2,10 +2,10 @@ package com.ispw.fixmycity.logic.controller;
 
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
-import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
@@ -54,7 +54,10 @@ public class LoginController {
 
 		if (dao.userExists(bean.getUsername()))
 			return false;
-		return false;
+
+		dao.insertCitizenUser(bean);
+
+		return true;
 
 	}
 

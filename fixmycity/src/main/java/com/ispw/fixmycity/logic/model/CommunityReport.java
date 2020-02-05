@@ -9,31 +9,31 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the community_reports database table.
  * 
  */
 @Entity
-@Table(name="community_reports")
-@NamedQuery(name="CommunityReport.findAll", query="SELECT c FROM CommunityReport c")
+@Table(name = "community_reports")
+@NamedQuery(name = "CommunityReport.findAll", query = "SELECT c FROM CommunityReport c")
 public class CommunityReport implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_report")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_report")
 	private int idReport;
 
 	private String address;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_submission")
+	@Column(name = "date_submission")
 	private Date dateSubmission;
 
-	@Column(name="full_description")
+	@Column(name = "full_description")
 	private String fullDescription;
 
+	@Column(length = 16777215)
 	@Lob
 	private byte[] image;
 
@@ -43,19 +43,19 @@ public class CommunityReport implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-one association to CitizenUser
+	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne
-	@JoinColumn(name="submitter")
+	@JoinColumn(name = "submitter")
 	private CitizenUser citizenUser;
 
-	//bi-directional many-to-one association to VolunteeringEvent
-	@OneToMany(mappedBy="communityReport")
+	// bi-directional many-to-one association to VolunteeringEvent
+	@OneToMany(mappedBy = "communityReport")
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CommunityReport() {
 		// This is a POJO, and there are no default values
 	}
-	
+
 	public void setFromBean(CommunityReportBean commRepBean) {
 		setAddress(commRepBean.getAddress());
 		setDateSubmission(commRepBean.getDateSubmission());

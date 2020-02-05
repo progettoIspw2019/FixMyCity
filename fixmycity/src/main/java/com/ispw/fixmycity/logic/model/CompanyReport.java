@@ -6,32 +6,32 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the company_reports database table.
  * 
  */
 @Entity
-@Table(name="company_reports")
-@NamedQuery(name="CompanyReport.findAll", query="SELECT c FROM CompanyReport c")
+@Table(name = "company_reports")
+@NamedQuery(name = "CompanyReport.findAll", query = "SELECT c FROM CompanyReport c")
 public class CompanyReport implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_report")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_report")
 	private int idReport;
 
 	private String address;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="date_submission")
+	@Column(name = "date_submission")
 	private Date dateSubmission;
 
-	@Column(name="full_description")
+	@Column(name = "full_description")
 	private String fullDescription;
 
 	@Lob
+	@Column(length = 16777215)
 	private byte[] image;
 
 	private BigDecimal latitude;
@@ -40,18 +40,18 @@ public class CompanyReport implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-one association to CitizenUser
+	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne
-	@JoinColumn(name="submitter")
+	@JoinColumn(name = "submitter")
 	private CitizenUser citizenUser;
 
-	//bi-directional many-to-one association to CompanyUser
+	// bi-directional many-to-one association to CompanyUser
 	@ManyToOne
-	@JoinColumn(name="related_company")
+	@JoinColumn(name = "related_company")
 	private CompanyUser companyUser;
 
-	//bi-directional many-to-one association to Job
-	@OneToMany(mappedBy="companyReport")
+	// bi-directional many-to-one association to Job
+	@OneToMany(mappedBy = "companyReport")
 	private List<Job> jobs;
 
 	public CompanyReport() {

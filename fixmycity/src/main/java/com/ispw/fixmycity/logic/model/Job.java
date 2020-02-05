@@ -4,39 +4,38 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * The persistent class for the jobs database table.
  * 
  */
 @Entity
-@Table(name="jobs")
-@NamedQuery(name="Job.findAll", query="SELECT j FROM Job j")
+@Table(name = "jobs")
+@NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_job")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_job")
 	private int idJob;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="end_date")
+	@Column(name = "end_date")
 	private Date endDate;
 
-	@Column(name="job_info")
+	@Column(name = "job_info", length = 16777215)
 	@Lob
 	private byte[] jobInfo;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="start_date")
+	@Column(name = "start_date")
 	private Date startDate;
 
 	private String state;
 
-	//bi-directional many-to-one association to CompanyReport
+	// bi-directional many-to-one association to CompanyReport
 	@ManyToOne
-	@JoinColumn(name="id_company_report")
+	@JoinColumn(name = "id_company_report")
 	private CompanyReport companyReport;
 
 	public Job() {

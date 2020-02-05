@@ -1,8 +1,23 @@
 package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.ispw.fixmycity.logic.bean.CitizenUserBean;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 /**
  * The persistent class for the citizen_users database table.
@@ -16,13 +31,12 @@ public class CitizenUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String username;
 
 	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "profile_picture")
+	@Column(name = "profile_picture", length = 16777215)
 	@Lob
 	private byte[] profilePicture;
 
@@ -44,6 +58,14 @@ public class CitizenUser implements Serializable {
 
 	public CitizenUser() {
 		// This is a POJO, and there are no default values
+	}
+
+	public void setFromBean(CitizenUserBean citizenUserBean) {
+		setUsername(citizenUserBean.getUsername());
+		setPwd(citizenUserBean.getPassword());
+		setSurname(citizenUserBean.getLastName());
+		setFirstName(citizenUserBean.getFirstName());
+		setProfilePicture(ConverterUtil.byteArrayFromImage(citizenUserBean.getProfilePicture()));
 	}
 
 	public String getUsername() {

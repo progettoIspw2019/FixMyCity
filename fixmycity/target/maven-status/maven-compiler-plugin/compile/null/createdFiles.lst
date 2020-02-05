@@ -13,10 +13,11 @@ com\ispw\fixmycity\logic\bean\ReportBean.class
 com\ispw\fixmycity\logic\view\MapBoundary.class
 com\ispw\fixmycity\logic\dao\VolunteeringEventDAO.class
 com\ispw\fixmycity\logic\bean\CompanyReportBean.class
+com\ispw\fixmycity\logic\view\SignupForm.class
 com\ispw\fixmycity\logic\bean\CompanyUserSessionBean.class
 com\ispw\fixmycity\logic\bean\BaseUserBean.class
-com\ispw\fixmycity\logic\util\DateUtil.class
 com\ispw\fixmycity\logic\bean\VolunteeringEventBean.class
+com\ispw\fixmycity\logic\util\ConverterUtil.class
 com\ispw\fixmycity\logic\view\LoginForm.class
 com\ispw\fixmycity\logic\model\CommunityReport.class
 com\ispw\fixmycity\logic\dao\UserDAO.class
