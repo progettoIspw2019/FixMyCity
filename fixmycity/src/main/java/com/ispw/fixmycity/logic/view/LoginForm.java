@@ -10,6 +10,7 @@ import com.ispw.fixmycity.logic.controller.LoginController;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
 import com.ispw.fixmycity.logic.model.CommunityReport;
+import com.ispw.fixmycity.logic.util.UserMode;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,25 +31,20 @@ public class LoginForm {
 	@FXML
 	private void submitLogin() throws IOException {
 
-		VolunteeringEventDAO daoEvent = new VolunteeringEventDAO();
-		VolunteeringEventBean bean = new VolunteeringEventBean();
-		
-		CommunityReportDAO daoCommRep = new CommunityReportDAO();
-		CommunityReport commReport = daoCommRep.findByPrimaryKey(1);
-		
-		bean.setCommunityReport(commReport);
-		bean.setCreationDate(new Date());
-		bean.setEventDate(new Date());
-
-		daoEvent.addVolunteeringEvent(bean);
-
 		BaseUserBean baseUser = new BaseUserBean();
+		
 		baseUser.setUsername(usernameField.getText());
 		baseUser.setPassword(passwordField.getText());
 
-		// TODO dove deve stare questo if? Nel controller?
-		if (LoginController.checkCredentials(baseUser))
-			App.setRoot("home");
+		LoginController controller = LoginController.getInstance();
+		Boolean credentialsValid = controller.checkCredentials(baseUser);
+
+		if (credentialsValid && controller.getUserMode() == UserMode.CITIZEN)
+			App.setRoot("home_citizen");
+		else if (credentialsValid && controller.getUserMode() == UserMode.COMPANY) {
+			App.setRoot("home_company");
+		}
+		
 	}
 
 }
