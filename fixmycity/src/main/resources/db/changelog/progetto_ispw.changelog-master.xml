@@ -8,7 +8,7 @@
             <column name="pwd" type="CHAR(32)"/>
             <column name="first_name" type="VARCHAR(30)"/>
             <column name="surname" type="VARCHAR(30)"/>
-            <column name="profile_picture" type="BLOB"/>
+            <column name="profile_picture" type="LONGBLOB"/>
         </createTable>
     </changeSet>
     <changeSet author="adria (generated)" id="1580847007586-2">
@@ -23,7 +23,7 @@
             <column name="latitude" type="DECIMAL(10, 8)"/>
             <column name="longitude" type="DECIMAL(11, 8)"/>
             <column name="submitter" type="VARCHAR(30)"/>
-            <column name="image" type="BLOB"/>
+            <column name="image" type="LONGBLOB"/>
         </createTable>
     </changeSet>
     <changeSet author="adria (generated)" id="1580847007586-3">
@@ -38,7 +38,7 @@
             <column name="latitude" type="DECIMAL(10, 8)"/>
             <column name="longitude" type="DECIMAL(11, 8)"/>
             <column name="submitter" type="VARCHAR(30)"/>
-            <column name="image" type="BLOB"/>
+            <column name="image" type="LONGBLOB"/>
             <column name="related_company" type="VARCHAR(30)"/>
         </createTable>
     </changeSet>
@@ -152,7 +152,7 @@
 	        <column name="pwd" type="STRING"/>
 	        <column name="first_name" type="STRING"/>
 	        <column name="surname" type="STRING"/>
-	        <column name="profile_picture" type="SKIP"/>
+	        <column name="profile_picture" type="BLOB"/>
 	    </loadUpdateData>
 	</changeSet>
 
