@@ -4,25 +4,25 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the citizen_users database table.
  * 
  */
 @Entity
-@Table(name="citizen_users")
-@NamedQuery(name="CitizenUser.findAll", query="SELECT c FROM CitizenUser c")
+@Table(name = "citizen_users")
+@NamedQuery(name = "CitizenUser.findAll", query = "SELECT c FROM CitizenUser c")
+@NamedQuery(name = "CitizenUser.findAllFromCredentials", query = "SELECT c FROM CitizenUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
 public class CitizenUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String username;
 
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name="profile_picture")
+	@Column(name = "profile_picture")
 	@Lob
 	private byte[] profilePicture;
 
@@ -30,16 +30,16 @@ public class CitizenUser implements Serializable {
 
 	private String surname;
 
-	//bi-directional many-to-one association to CommunityReport
-	@OneToMany(mappedBy="citizenUser")
+	// bi-directional many-to-one association to CommunityReport
+	@OneToMany(mappedBy = "citizenUser")
 	private List<CommunityReport> communityReports;
 
-	//bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy="citizenUser")
+	// bi-directional many-to-one association to CompanyReport
+	@OneToMany(mappedBy = "citizenUser")
 	private List<CompanyReport> companyReports;
 
-	//bi-directional many-to-many association to VolunteeringEvent
-	@ManyToMany(mappedBy="citizenUsers")
+	// bi-directional many-to-many association to VolunteeringEvent
+	@ManyToMany(mappedBy = "citizenUsers")
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CitizenUser() {

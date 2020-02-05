@@ -4,30 +4,31 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the company_users database table.
  * 
  */
 @Entity
-@Table(name="company_users")
-@NamedQuery(name="CompanyUser.findAll", query="SELECT c FROM CompanyUser c")
+@Table(name = "company_users")
+@NamedQuery(name = "CompanyUser.findAll", query = "SELECT c FROM CompanyUser c")
+@NamedQuery(name = "CompanyUser.findAllFromCredentials", query = "SELECT c FROM CompanyUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
+
 public class CompanyUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String username;
 
 	private String category;
 
-	@Column(name="interested_area")
+	@Column(name = "interested_area")
 	private String interestedArea;
 
 	private String pwd;
 
-	//bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy="companyUser")
+	// bi-directional many-to-one association to CompanyReport
+	@OneToMany(mappedBy = "companyUser")
 	private List<CompanyReport> companyReports;
 
 	public CompanyUser() {

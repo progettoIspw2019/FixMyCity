@@ -32,7 +32,7 @@ public class ReportProblemControllerFX {
 	
 	@FXML
 	private void cancel() throws IOException {
-		App.setRoot("home");
+		App.setRoot("home_citizen");
 	}
 	
 }
