@@ -1,5 +1,7 @@
 package com.ispw.fixmycity.logic.bean;
 
+import java.io.File;
+
 import javafx.scene.image.Image;
 
 public class CitizenUserBean extends BaseUserBean {
@@ -8,7 +10,7 @@ public class CitizenUserBean extends BaseUserBean {
 
 	private String firstName;
 
-	private Image profilePicture;
+	private File profilePicture;
 
 	private String password;
 
@@ -30,11 +32,11 @@ public class CitizenUserBean extends BaseUserBean {
 		this.firstName = firstName;
 	}
 
-	public Image getProfilePicture() {
+	public File getProfilePicture() {
 		return profilePicture;
 	}
 
-	public void setProfilePicture(Image profilePicture) {
+	public void setProfilePicture(File profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

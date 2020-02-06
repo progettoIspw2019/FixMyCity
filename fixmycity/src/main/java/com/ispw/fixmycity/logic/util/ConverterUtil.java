@@ -1,12 +1,13 @@
 package com.ispw.fixmycity.logic.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
 import javafx.scene.control.DatePicker;
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelFormat;
 
 public class ConverterUtil {
 
@@ -17,16 +18,20 @@ public class ConverterUtil {
 		return c.getTime();
 	}
 
-	public static byte[] byteArrayFromImage(Image image) {
+	public static byte[] byteArrayFromImage(File file) {
 
-		int h = (int) image.getHeight();
-		int w = (int) image.getWidth();
+		byte[] b = null;
 
-		byte[] buf = new byte[w * h * 4];
+		try {
+			FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
+			b = fileInputStream.readAllBytes();
+			fileInputStream.close();
 
-		image.getPixelReader().getPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), buf, 0, w * 4);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return b;
 
-		return buf;
 	}
 
 }

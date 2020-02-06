@@ -36,7 +36,7 @@ public class CitizenUser implements Serializable {
 	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name = "profile_picture", length = 16777215)
+	@Column(name = "profile_picture")
 	@Lob
 	private byte[] profilePicture;
 

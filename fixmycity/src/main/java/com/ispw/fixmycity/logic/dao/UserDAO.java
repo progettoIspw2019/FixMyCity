@@ -50,8 +50,6 @@ public class UserDAO {
 		citizenUser.setCommunityReports(new ArrayList<CommunityReport>());
 		citizenUser.setCompanyReports(new ArrayList<CompanyReport>());
 		citizenUser.setVolunteeringEvents(new ArrayList<VolunteeringEvent>());
-		System.out.println("FDSKAJSDKJLFAKSDJFHAKSDFJHAKSJDFHAKJSDHF >>>>>>>>>>>>>>>>>>>>>>>>>> "
-				+ citizenUser.getProfilePicture().length);
 
 		entityManager.getTransaction().begin();
 		entityManager.persist(citizenUser);
