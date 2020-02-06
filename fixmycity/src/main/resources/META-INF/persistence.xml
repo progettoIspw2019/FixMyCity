@@ -9,9 +9,9 @@
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>com.ispw.fixmycity.logic.model.CitizenUser</class>
+		<class>com.ispw.fixmycity.logic.model.CompanyUser</class>
 		<class>com.ispw.fixmycity.logic.model.CommunityReport</class>
 		<class>com.ispw.fixmycity.logic.model.CompanyReport</class>
-		<class>com.ispw.fixmycity.logic.model.CompanyUser</class>
 		<class>com.ispw.fixmycity.logic.model.Job</class>
 		<class>com.ispw.fixmycity.logic.model.VolunteeringEvent</class>
 
@@ -27,7 +27,8 @@
 			<property name="javax.persistence.jdbc.password"
 				value="root" />
 
-			<property name="hibernate.id.new_generator_mappings" value="false"/>
+			<property name="hibernate.id.new_generator_mappings"
+				value="false" />
 
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQLDialect" />

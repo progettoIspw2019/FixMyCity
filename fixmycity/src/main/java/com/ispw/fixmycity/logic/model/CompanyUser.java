@@ -20,12 +20,16 @@ public class CompanyUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String username;
 
+	private String pwd;
+
+	private String companyName;
+
 	private String category;
 
-	@Column(name = "interested_area")
-	private String interestedArea;
+	private String city;
 
-	private String pwd;
+	@Lob
+	private byte[] image;
 
 	// bi-directional many-to-one association to CompanyReport
 	@OneToMany(mappedBy = "companyUser")
@@ -51,12 +55,12 @@ public class CompanyUser implements Serializable {
 		this.category = category;
 	}
 
-	public String getInterestedArea() {
-		return this.interestedArea;
+	public String getCity() {
+		return this.city;
 	}
 
-	public void setInterestedArea(String interestedArea) {
-		this.interestedArea = interestedArea;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getPwd() {
@@ -65,6 +69,22 @@ public class CompanyUser implements Serializable {
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public List<CompanyReport> getCompanyReports() {
