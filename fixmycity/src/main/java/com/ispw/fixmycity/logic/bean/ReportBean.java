@@ -5,6 +5,7 @@ import java.util.Date;
 
 public abstract class ReportBean {
 
+	private int idReport;
 	private String title;
 	private String category;
 	private String fullDescription;
@@ -13,6 +14,14 @@ public abstract class ReportBean {
 	private String address;
 	private byte[] image;
 	private Date dateSubmission;
+
+	public int getIdReport() {
+		return idReport;
+	}
+
+	public void setIdReport(int idReport) {
+		this.idReport = idReport;
+	}
 
 	public String getTitle() {
 		return title;
@@ -30,12 +39,12 @@ public abstract class ReportBean {
 		this.category = category;
 	}
 
-	public String getDescription() {
+	public String getFullDescription() {
 		return fullDescription;
 	}
 
-	public void setDescription(String description) {
-		this.fullDescription = description;
+	public void setFullDescription(String fullDescription) {
+		this.fullDescription = fullDescription;
 	}
 
 	public BigDecimal getLatitude() {
@@ -61,7 +70,7 @@ public abstract class ReportBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public byte[] getImage() {
 		return image;
 	}
@@ -77,4 +86,5 @@ public abstract class ReportBean {
 	public void setDateSubmission(Date dateSubmission) {
 		this.dateSubmission = dateSubmission;
 	}
+
 }

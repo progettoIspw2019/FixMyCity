@@ -1,8 +1,19 @@
 package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.ispw.fixmycity.logic.bean.CompanyUserBean;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 /**
  * The persistent class for the company_users database table.
@@ -12,12 +23,12 @@ import java.util.List;
 @Table(name = "company_users")
 @NamedQuery(name = "CompanyUser.findAll", query = "SELECT c FROM CompanyUser c")
 @NamedQuery(name = "CompanyUser.findAllFromCredentials", query = "SELECT c FROM CompanyUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
+@NamedQuery(name = "CompanyUser.countFromUsername", query = "SELECT count(c.username) FROM CompanyUser c WHERE c.username = :input_username")
 
 public class CompanyUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String username;
 
 	private String pwd;
@@ -37,6 +48,15 @@ public class CompanyUser implements Serializable {
 
 	public CompanyUser() {
 		// This is a POJO, and there are no default values
+	}
+
+	public void setFromBean(CompanyUserBean companyUserBean) {
+		setUsername(companyUserBean.getUsername());
+		setPwd(companyUserBean.getPassword());
+		setCategory(companyUserBean.getCategory());
+		setCompanyName(companyUserBean.getCompanyName());
+		setImage(ConverterUtil.byteArrayFromImage(companyUserBean.getImage()));
+		setCity(companyUserBean.getCity());
 	}
 
 	public String getUsername() {

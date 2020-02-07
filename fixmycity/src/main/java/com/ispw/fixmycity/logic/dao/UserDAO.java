@@ -40,7 +40,17 @@ public class UserDAO {
 	}
 
 	public boolean userExists(String username) {
-		return false;
+
+		entityManager = entityManagerFactory.createEntityManager();
+		int count = 0;
+
+		count += ((Number) entityManager.createNamedQuery("CompanyUser.countFromUsername")
+				.setParameter("input_username", username).getSingleResult()).intValue();
+
+		count += ((Number) entityManager.createNamedQuery("CitizenUser.countFromUsername")
+				.setParameter("input_username", username).getSingleResult()).intValue();
+
+		return (count != 0);
 	}
 
 	public void insertCitizenUser(CitizenUserBean user) {
@@ -58,7 +68,13 @@ public class UserDAO {
 	}
 
 	public void insertCompanyUser(CompanyUserBean user) {
+		CompanyUser companyUser = new CompanyUser();
 
+		companyUser.setFromBean(user);
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(companyUser);
+		entityManager.getTransaction().commit();
 	}
 
 }

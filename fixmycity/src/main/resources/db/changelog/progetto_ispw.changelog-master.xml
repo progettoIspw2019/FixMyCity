@@ -214,16 +214,16 @@
 	<!-- schemaName="progetto_ispw" -->
 	<!-- separator="," -->
 	<!-- tableName="company_users"> -->
+	<!-- <column name="companyName" type="STRING" /> -->
 	<!-- <column name="username" type="STRING"/> -->
 	<!-- <column name="pwd" type="STRING"/> -->
-	<!-- <column name="companyName" type="STRING" /> -->
 	<!-- <column name="category" type="STRING"/> -->
 	<!-- <column name="city" type="STRING"/> -->
 	<!-- <column name="image" type="LONGBLOB"/> -->
 	<!-- </loadUpdateData> -->
 	<!-- </changeSet> -->
 
-	<changeSet author="adria (generated)" id="1580848304201-24"
+	<!-- <changeSet author="adria (generated)" id="1580848304201-24"
 		runAlways="true">
 		<loadUpdateData encoding="UTF-8"
 			file="initialData/community_reports.csv" primaryKey="id_report"
@@ -240,5 +240,5 @@
 			<column name="submitter" type="STRING" />
 			<column name="image" type="BLOB" />
 		</loadUpdateData>
-	</changeSet>
+	</changeSet> -->
 </databaseChangeLog>

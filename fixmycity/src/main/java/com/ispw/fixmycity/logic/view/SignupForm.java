@@ -3,9 +3,11 @@ package com.ispw.fixmycity.logic.view;
 import java.io.File;
 
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
+import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.LoginController;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -16,6 +18,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 public class SignupForm {
+
+	@FXML
+	private Button signupCitizenButton;
+
+	@FXML
+	private Button signupCompanyButton;
 
 	@FXML
 	private RadioButton citizenRadioButton;
@@ -31,6 +39,15 @@ public class SignupForm {
 
 	@FXML
 	private TextField userNameField;
+
+	@FXML
+	private TextField companyNameField;
+
+	@FXML
+	private TextField cityField;
+
+	@FXML
+	private TextField categoryField;
 
 	@FXML
 	private PasswordField passwordField;
@@ -54,11 +71,29 @@ public class SignupForm {
 	}
 
 	public void showCitizenSignupForm() {
-		// TODO
+
+		clearValues();
+		firstNameField.setVisible(true);
+		lastNameField.setVisible(true);
+		companyNameField.setVisible(false);
+		cityField.setVisible(false);
+		categoryField.setVisible(false);
+		signupCitizenButton.setVisible(true);
+		signupCompanyButton.setVisible(false);
+		categoryField.setVisible(false);
+
 	}
 
 	public void showCompanySignupForm() {
-		// TODO
+
+		clearValues();
+		firstNameField.setVisible(false);
+		lastNameField.setVisible(false);
+		companyNameField.setVisible(true);
+		cityField.setVisible(true);
+		signupCitizenButton.setVisible(false);
+		signupCompanyButton.setVisible(true);
+		categoryField.setVisible(true);
 	}
 
 	public void handlePictureUpload() {
@@ -67,11 +102,8 @@ public class SignupForm {
 		imageFile = imageFileChooser.showOpenDialog(window);
 
 		if (imageFile != null) {
-
 			selectedImage = new Image(imageFile.toURI().toString());
-
 			selectedImageView.setImage(selectedImage);
-
 		}
 
 	}
@@ -92,11 +124,31 @@ public class SignupForm {
 		}
 	}
 
+	public void signupCompany() {
+		CompanyUserBean user = new CompanyUserBean();
+		user.setCategory(categoryField.getText());
+		user.setCity(cityField.getText());
+		user.setCompanyName(companyNameField.getText());
+		user.setImage(imageFile);
+		user.setPassword(passwordField.getText());
+		user.setUsername(userNameField.getText());
+
+		if (LoginController.getInstance().signupCompanyUser(user)) {
+			// TODO do something
+		} else {
+			// Show error message
+			clearValues();
+		}
+	}
+
 	public void clearValues() {
 		firstNameField.clear();
 		lastNameField.clear();
 		userNameField.clear();
 		passwordField.clear();
+		companyNameField.clear();
+		cityField.clear();
+		categoryField.clear();
 		selectedImageView.setImage(defaultImage);
 		selectedImage = defaultImage;
 	}
@@ -179,6 +231,38 @@ public class SignupForm {
 
 	public void setSelectedImage(Image selectedImage) {
 		this.selectedImage = selectedImage;
+	}
+
+	public TextField getCompanyNameField() {
+		return companyNameField;
+	}
+
+	public void setCompanyNameField(TextField companyNameField) {
+		this.companyNameField = companyNameField;
+	}
+
+	public TextField getCityField() {
+		return cityField;
+	}
+
+	public void setCityField(TextField cityField) {
+		this.cityField = cityField;
+	}
+
+	public TextField getCategoryField() {
+		return categoryField;
+	}
+
+	public void setCategoryField(TextField categoryField) {
+		this.categoryField = categoryField;
+	}
+
+	public File getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(File imageFile) {
+		this.imageFile = imageFile;
 	}
 
 }

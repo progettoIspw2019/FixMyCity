@@ -8,55 +8,49 @@ import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the volunteering_events database table.
  * 
  */
 @Entity
-@Table(name="volunteering_events")
-@NamedQuery(name="VolunteeringEvent.findAll", query="SELECT v FROM VolunteeringEvent v")
+@Table(name = "volunteering_events")
+@NamedQuery(name = "VolunteeringEvent.findAll", query = "SELECT v FROM VolunteeringEvent v")
 public class VolunteeringEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_event")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_event")
 	private int idEvent;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="creation_date")
+	@Column(name = "creation_date")
 	private Date creationDate;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="event_date")
+	@Column(name = "event_date")
 	private Date eventDate;
 
-	//bi-directional many-to-many association to CitizenUser
+	// bi-directional many-to-many association to CitizenUser
 	@ManyToMany
-	@JoinTable(
-		name="participations"
-		, joinColumns={
-			@JoinColumn(name="id_event")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="username")
-			}
-		)
+	@JoinTable(name = "participations", joinColumns = { @JoinColumn(name = "id_event") }, inverseJoinColumns = {
+			@JoinColumn(name = "username") })
 	private List<CitizenUser> citizenUsers;
 
-	//bi-directional many-to-one association to CommunityReport
+	// bi-directional many-to-one association to CommunityReport
 	@ManyToOne
-	@JoinColumn(name="id_community_report")
+	@JoinColumn(name = "id_community_report")
 	private CommunityReport communityReport;
 
 	public VolunteeringEvent() {
 		// This is a POJO, and there are no default values
 	}
-	
+
 	public void setFromBean(VolunteeringEventBean volEventBean) {
+		CommunityReport cr = new CommunityReport();
+		cr.setFromBean(volEventBean.getCommunityReport());
 		this.setCitizenUsers(volEventBean.getCitizenUsers());
-		this.setCommunityReport(volEventBean.getCommunityReport());
+		this.setCommunityReport(cr);
 		this.setCreationDate(volEventBean.getCreationDate());
 		this.setEventDate(volEventBean.getEventDate());
 	}

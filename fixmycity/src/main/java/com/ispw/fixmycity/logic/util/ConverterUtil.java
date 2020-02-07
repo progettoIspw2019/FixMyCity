@@ -22,8 +22,7 @@ public class ConverterUtil {
 
 		byte[] b = null;
 
-		try {
-			FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
+		try (FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath())) {
 			b = fileInputStream.readAllBytes();
 			fileInputStream.close();
 
@@ -31,6 +30,10 @@ public class ConverterUtil {
 			e.printStackTrace();
 		}
 		return b;
+
+	}
+
+	private ConverterUtil() {
 
 	}
 

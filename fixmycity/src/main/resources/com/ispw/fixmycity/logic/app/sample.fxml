@@ -2,10 +2,11 @@
  
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
- 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.ispw.fixmycity.logic.controller.SampleController">
-    <children>
-        <TextField fx:id="firstNameField"  />
-        <Label fx:id="messageLabel" />
-    </children>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+	fx:controller="com.ispw.fixmycity.logic.controller.SampleController">
+	<children>
+		<TextField fx:id="firstNameField" />
+		<Label fx:id="messageLabel" />
+	</children>
 </VBox>

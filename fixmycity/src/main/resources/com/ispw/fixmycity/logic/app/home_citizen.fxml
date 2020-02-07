@@ -9,39 +9,43 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-
 <BorderPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.MapBoundary">
-   <top>
-      <MenuBar minWidth="600.0" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <center>
-      <AnchorPane minHeight="375.0" minWidth="600.0" prefHeight="375.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <WebView fx:id="mapContainerWebView" maxHeight="-1.0" maxWidth="-1.0" minHeight="375.0" minWidth="600.0" prefHeight="375.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button layoutX="477.0" layoutY="336.0" mnemonicParsing="false" onAction="#createReport" prefHeight="35.0" prefWidth="150.0" text="Report a Problem" textAlignment="CENTER" textFill="#171717" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+	<top>
+		<MenuBar minWidth="600.0" BorderPane.alignment="CENTER">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Close" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Edit">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Delete" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Help">
+					<items>
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+	</top>
+	<center>
+		<AnchorPane minHeight="375.0" minWidth="600.0" prefHeight="375.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+			<children>
+				<WebView fx:id="mapContainerWebView" maxHeight="-1.0" maxWidth="-1.0" minHeight="375.0" minWidth="600.0" prefHeight="375.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				<Button layoutX="477.0" layoutY="336.0" mnemonicParsing="false" onAction="#createReport" prefHeight="35.0" prefWidth="150.0" text="Report a Problem" textAlignment="CENTER" textFill="#171717" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+					<font>
+						<Font size="14.0" />
+					</font>
+				</Button>
+            <Button layoutX="205.0" layoutY="326.0" mnemonicParsing="false" onAction="#createEvent" prefHeight="35.0" prefWidth="218.0" text="Create a Volunteering Event" textAlignment="CENTER" textFill="#171717" AnchorPane.bottomAnchor="14.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-         </children>
-      </AnchorPane>
-   </center>
+			</children>
+		</AnchorPane>
+	</center>
 </BorderPane>

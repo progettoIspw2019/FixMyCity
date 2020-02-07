@@ -4,14 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.ispw.fixmycity.logic.model.CitizenUser;
-import com.ispw.fixmycity.logic.model.CommunityReport;
 
 public class VolunteeringEventBean {
 
 	private Date creationDate;
 	private Date eventDate;
 	private List<CitizenUser> citizenUsers;
-	private CommunityReport communityReport;
+	private CommunityReportBean communityReport;
 
 	public Date getCreationDate() {
 		return creationDate;
@@ -37,11 +36,11 @@ public class VolunteeringEventBean {
 		this.citizenUsers = citizenUsers;
 	}
 
-	public CommunityReport getCommunityReport() {
+	public CommunityReportBean getCommunityReport() {
 		return communityReport;
 	}
 
-	public void setCommunityReport(CommunityReport communityReport) {
+	public void setCommunityReport(CommunityReportBean communityReport) {
 		this.communityReport = communityReport;
 	}
 }

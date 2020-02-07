@@ -33,10 +33,14 @@ public class MapBoundary {
 	public void setMapContainerWebView(WebView mapContainerWebView) {
 		this.mapContainerWebView = mapContainerWebView;
 	}
-	
+
 	@FXML
 	private void createReport() throws IOException {
 		App.setRoot("reportProblemForm");
 	}
 
+	@FXML
+	private void createEvent() throws IOException {
+		App.setRoot("create_event");
+	}
 }

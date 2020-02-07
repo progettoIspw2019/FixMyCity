@@ -15,70 +15,153 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="481.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.SignupForm">
-  <children>
-      <GridPane fx:id="signupGridPane" alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-        <Label alignment="CENTER" prefWidth="253.0" style="&#10;" text="Welcome to FixMyCity" textAlignment="CENTER" textFill="#6b6b6b" wrapText="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
-            <RadioButton fx:id="citizenRadioButton" mnemonicParsing="false" onAction="#showCitizenSignupForm" selected="true" text="Citizen" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <padding>
-                  <Insets right="19.0" />
-               </padding>
-               <toggleGroup>
-                  <ToggleGroup fx:id="signupToggle" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="companyRadioButton" mnemonicParsing="false" onAction="#showCompanySignupForm" text="Company" toggleGroup="$signupToggle" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </RadioButton>
-            <ImageView fx:id="selectedImageView" fitHeight="153.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="5" GridPane.valignment="BASELINE" GridPane.vgrow="ALWAYS">
-               <image>
-                  <Image fx:id="defaultImage" url="@img/placeholder-profile.jpg" />
-               </image>
-               <GridPane.margin>
-                  <Insets bottom="10.0" />
-               </GridPane.margin>
-            </ImageView>
-            <Button mnemonicParsing="false" onAction="#handlePictureUpload" prefHeight="25.0" prefWidth="271.0" text="Choose a Picture" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
-            <TextField fx:id="firstNameField" prefHeight="25.0" prefWidth="263.0" promptText="First name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
-            <TextField fx:id="lastNameField" prefHeight="25.0" prefWidth="268.0" promptText="Last name" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
-            <TextField fx:id="userNameField" prefHeight="25.0" prefWidth="261.0" promptText="Username" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" GridPane.valignment="CENTER" />
-            <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="265.0" promptText="Password" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" onAction="#signupCitizen" prefHeight="25.0" prefWidth="118.0" text="Submit" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14" />
-            <Button mnemonicParsing="false" onAction="#clearValues" prefHeight="25.0" prefWidth="118.0" text="Clear" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="14" />
-         </children>
-      </GridPane>
-  </children>
+<VBox prefHeight="492.0" prefWidth="640.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.ispw.fixmycity.logic.view.SignupForm">
+	<children>
+		<GridPane fx:id="signupGridPane" alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0"
+					vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Label alignment="CENTER" prefWidth="253.0" style="&#10;"
+					text="Welcome to FixMyCity" textAlignment="CENTER"
+					textFill="#6b6b6b" wrapText="false" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1"
+					GridPane.valignment="CENTER">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<RadioButton fx:id="citizenRadioButton"
+					mnemonicParsing="false" onAction="#showCitizenSignupForm"
+					selected="true" text="Citizen" GridPane.columnIndex="2"
+					GridPane.halignment="RIGHT" GridPane.rowIndex="2"
+					GridPane.valignment="CENTER">
+					<padding>
+						<Insets right="19.0" />
+					</padding>
+					<toggleGroup>
+						<ToggleGroup fx:id="signupToggle" />
+					</toggleGroup>
+				</RadioButton>
+				<RadioButton fx:id="companyRadioButton"
+					mnemonicParsing="false" onAction="#showCompanySignupForm"
+					text="Company" toggleGroup="$signupToggle" GridPane.columnIndex="3"
+					GridPane.halignment="LEFT" GridPane.rowIndex="2"
+					GridPane.valignment="CENTER">
+					<padding>
+						<Insets left="10.0" />
+					</padding>
+				</RadioButton>
+				<ImageView fx:id="selectedImageView" fitHeight="153.0"
+					fitWidth="144.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.columnIndex="2" GridPane.columnSpan="2"
+					GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+					GridPane.rowIndex="4" GridPane.rowSpan="6"
+					GridPane.valignment="BASELINE" GridPane.vgrow="ALWAYS">
+					<image>
+						<Image fx:id="defaultImage"
+							url="@img/placeholder-profile.jpg" />
+					</image>
+					<GridPane.margin>
+						<Insets bottom="10.0" />
+					</GridPane.margin>
+				</ImageView>
+				<Button mnemonicParsing="false"
+					onAction="#handlePictureUpload" prefHeight="25.0" prefWidth="271.0"
+					text="Choose a Picture" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+				<TextField fx:id="companyNameField"
+					promptText="Company Name" visible="false" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.rowIndex="10" />
+				<TextField fx:id="cityField" prefHeight="25.0"
+					prefWidth="268.0" promptText="City" visible="false"
+					GridPane.columnIndex="2" GridPane.columnSpan="2"
+					GridPane.rowIndex="11" />
+				<TextField fx:id="firstNameField" prefHeight="25.0"
+					prefWidth="263.0" promptText="First name" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+				<TextField fx:id="lastNameField" prefHeight="25.0"
+					prefWidth="268.0" promptText="Last name" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+				<TextField fx:id="userNameField" prefHeight="25.0"
+					prefWidth="261.0" promptText="Username" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="12" GridPane.valignment="CENTER" />
+				<PasswordField fx:id="passwordField" prefHeight="25.0"
+					prefWidth="265.0" promptText="Password" GridPane.columnIndex="2"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"
+					GridPane.rowIndex="13" GridPane.valignment="CENTER" />
+				<Button fx:id="signupCitizenButton" mnemonicParsing="false"
+					onAction="#signupCitizen" prefHeight="25.0" prefWidth="118.0"
+					text="Submit" GridPane.columnIndex="3" GridPane.halignment="RIGHT"
+					GridPane.rowIndex="15" />
+				<Button fx:id="signupCompanyButton" mnemonicParsing="false"
+					onAction="#signupCompany" visible="false" prefHeight="25.0"
+					prefWidth="118.0" text="Submit" GridPane.columnIndex="3"
+					GridPane.halignment="RIGHT" GridPane.rowIndex="15" />
+				<Button mnemonicParsing="false" onAction="#clearValues"
+					prefHeight="25.0" prefWidth="118.0" text="Clear"
+					GridPane.columnIndex="2" GridPane.halignment="LEFT"
+					GridPane.rowIndex="15" />
+				<TextField fx:id="categoryField" prefHeight="25.0"
+					prefWidth="265.0" promptText="Category" visible="false"
+					GridPane.columnIndex="2" GridPane.columnSpan="2"
+					GridPane.rowIndex="14" />
+			</children>
+		</GridPane>
+	</children>
 </VBox>

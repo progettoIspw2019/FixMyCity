@@ -59,7 +59,7 @@ public class CommunityReport implements Serializable {
 	public void setFromBean(CommunityReportBean commRepBean) {
 		setAddress(commRepBean.getAddress());
 		setDateSubmission(commRepBean.getDateSubmission());
-		setFullDescription(commRepBean.getDescription());
+		setFullDescription(commRepBean.getFullDescription());
 		setImage(commRepBean.getImage());
 		setLatitude(commRepBean.getLatitude());
 		setLongitude(commRepBean.getLongitude());

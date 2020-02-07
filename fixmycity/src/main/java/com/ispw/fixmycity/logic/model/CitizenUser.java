@@ -27,6 +27,8 @@ import com.ispw.fixmycity.logic.util.ConverterUtil;
 @Table(name = "citizen_users")
 @NamedQuery(name = "CitizenUser.findAll", query = "SELECT c FROM CitizenUser c")
 @NamedQuery(name = "CitizenUser.findAllFromCredentials", query = "SELECT c FROM CitizenUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
+@NamedQuery(name = "CitizenUser.countFromUsername", query = "SELECT count(c.username) FROM CitizenUser c WHERE c.username = :input_username")
+
 public class CitizenUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
