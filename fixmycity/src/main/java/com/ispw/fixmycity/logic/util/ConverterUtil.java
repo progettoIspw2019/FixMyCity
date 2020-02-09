@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.scene.control.DatePicker;
 
@@ -24,10 +26,8 @@ public class ConverterUtil {
 
 		try (FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath())) {
 			b = fileInputStream.readAllBytes();
-			fileInputStream.close();
-
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 		}
 		return b;
 

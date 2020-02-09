@@ -1,5 +1,8 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
@@ -32,6 +35,7 @@ public class ReportProblemController {
 		CompanyUser compUser = this.findCompany(repBean.getCategory(), repBean.getCity());
 
 		if (compUser == null) {
+			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!");
 			// TODO: throw some exception
 		}
 

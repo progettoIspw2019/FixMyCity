@@ -3,6 +3,8 @@ package com.ispw.fixmycity.logic.view;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.http.impl.client.HttpClients;
 
@@ -76,8 +78,7 @@ public class MapController {
 					popup.openOn(map);
 
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 				}
 			}
 		};
@@ -89,6 +90,7 @@ public class MapController {
 
 			@Override
 			public void run() {
+				
 				map = new Map("map");
 
 				TileLayer tileLayer = new TileLayer(

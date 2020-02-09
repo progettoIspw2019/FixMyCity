@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -72,8 +74,7 @@ public class ReportProblemControllerFX {
 				selectedImage = data.getData();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 			}
 			
 		}

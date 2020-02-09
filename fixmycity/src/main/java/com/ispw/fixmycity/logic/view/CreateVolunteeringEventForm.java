@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -78,7 +80,7 @@ public class CreateVolunteeringEventForm {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
 				selectionId = keys.get(commrepListView.getSelectionModel().getSelectedIndex());
-				System.out.println("SELECTION ID " + selectionId);
+				Logger.getLogger("fixmycity").log(Level.INFO, "SELECTION ID " + selectionId);
 			}
 		});
 
@@ -102,7 +104,7 @@ public class CreateVolunteeringEventForm {
 		try {
 			App.setRoot("home_citizen");
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
@@ -56,7 +59,7 @@ public class LoginController {
 			return false;
 
 		dao.insertCitizenUser(bean);
-		System.out.println("CitizenUser inserito");
+		Logger.getLogger("fixmycity").log(Level.INFO, "CitizenUser inserito");
 
 		return true;
 
@@ -70,7 +73,7 @@ public class LoginController {
 			return false;
 
 		dao.insertCompanyUser(bean);
-		System.out.println("CompanyUser inserito");
+		Logger.getLogger("fixmycity").log(Level.INFO, "CompanyUser inserito");
 
 		return true;
 

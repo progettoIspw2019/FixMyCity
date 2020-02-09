@@ -32,7 +32,7 @@ public class CompanyReportDAO {
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
-		entityManager.getTransaction().commit();;
+		entityManager.getTransaction().commit();
 		
 		return compReport; // must return entity, auto-generated id might be useful
 	}
