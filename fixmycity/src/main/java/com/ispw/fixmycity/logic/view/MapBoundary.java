@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ispw.fixmycity.logic.app.App;
-import com.ispw.fixmycity.logic.controller.MapController;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.web.WebView;
 
 public class MapBoundary {
@@ -36,7 +38,12 @@ public class MapBoundary {
 
 	@FXML
 	private void createReport() throws IOException {
-		App.setRoot("reportProblemForm");
+		if(SessionView.getLatitudeSetOnMap() != null && SessionView.getLongitudeSetOnMap() != null)
+			App.setRoot("reportProblemForm");
+		else {
+			Alert alert = new Alert(AlertType.INFORMATION, "First pick a position on the map!", ButtonType.OK);
+			alert.showAndWait();
+		}
 	}
 
 	@FXML

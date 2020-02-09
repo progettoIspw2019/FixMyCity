@@ -19,7 +19,7 @@ public class CommunityReportDAO {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
 		entityManager = entityManagerFactory.createEntityManager();
 	}
-
+	
 	public List<CommunityReport> findAll() {
 		return entityManager.createNamedQuery("CommunityReport.findAll").getResultList();
 	}
@@ -31,7 +31,11 @@ public class CommunityReportDAO {
 	public CommunityReport add(CommunityReportBean commRepBean) {
 		CommunityReport commReport = new CommunityReport();
 		commReport.setFromBean(commRepBean);
+		
+		entityManager.getTransaction().begin();
 		entityManager.persist(commReport);
+		entityManager.getTransaction().commit();
+
 		return commReport; // must return entity, auto-generated id might be useful
 	}
 

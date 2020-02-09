@@ -33,7 +33,6 @@ public class CommunityReport implements Serializable {
 	@Column(name = "full_description")
 	private String fullDescription;
 
-	@Column(length = 16777215)
 	@Lob
 	private byte[] image;
 
@@ -42,6 +41,10 @@ public class CommunityReport implements Serializable {
 	private BigDecimal longitude;
 
 	private String title;
+	
+	private String category;
+	
+	private String city;
 
 	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne
@@ -57,12 +60,14 @@ public class CommunityReport implements Serializable {
 	}
 
 	public void setFromBean(CommunityReportBean commRepBean) {
-		setAddress(commRepBean.getAddress());
-		setDateSubmission(commRepBean.getDateSubmission());
-		setFullDescription(commRepBean.getFullDescription());
-		setImage(commRepBean.getImage());
-		setLatitude(commRepBean.getLatitude());
-		setLongitude(commRepBean.getLongitude());
+		this.setAddress(commRepBean.getAddress());
+		this.setDateSubmission(commRepBean.getDateSubmission());
+		this.setFullDescription(commRepBean.getFullDescription());
+		this.setImage(commRepBean.getImage());
+		this.setLatitude(commRepBean.getLatitude());
+		this.setLongitude(commRepBean.getLongitude());
+		this.setCategory(commRepBean.getCategory());
+		this.setCitizenUser(commRepBean.getSubmitter());
 	}
 
 	public int getIdReport() {
@@ -157,6 +162,22 @@ public class CommunityReport implements Serializable {
 		volunteeringEvent.setCommunityReport(null);
 
 		return volunteeringEvent;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

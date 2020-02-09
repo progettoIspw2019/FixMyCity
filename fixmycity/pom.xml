@@ -34,13 +34,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.4.10.Final</version>
 		</dependency>
-
-
-
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.13</version>
+			<version>8.0.19</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.sun.webkit/webview-deps -->
@@ -68,38 +66,38 @@
 			<version>0.7.7</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.4.10.Final</version>
+		  <groupId>fr.dudie</groupId>
+		  <artifactId>nominatim-api</artifactId>
+		  <version>3.4</version>
 		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
-	 		<plugins>
-	 			<plugin>
-				      <groupId>org.liquibase</groupId>
-				      <artifactId>liquibase-maven-plugin</artifactId>
-				      <version>3.8.5</version>
-				      <configuration>
-				        	<changeLogFile>${basedir}/src/main/resources/db/changelog/progetto_ispw.changelog-master.xml</changeLogFile>
-				        	<outputChangeLogFile>${basedir}/src/main/resources/db/changelog/progetto_ispw.changelog.xml</outputChangeLogFile>
-				          	<driver>com.mysql.cj.jdbc.Driver</driver>
-				          	<url>jdbc:mysql://localhost:3306/progetto_ispw?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=Europe/Rome</url>
-				          	<username>root</username>
-				          	<password>root</password>
-				        </configuration>
-			      		<executions>
-			        		<execution>
-			          			<phase>process-resources</phase>
-			          			<goals>
-			            			<goal>update</goal>
-			          			</goals>
-			        		</execution>
-			      		</executions>
-	    		</plugin>
-	    	</plugins>
-	    </pluginManagement>
-	
+			<plugins>
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>3.8.5</version>
+					<configuration>
+						<changeLogFile>${basedir}/src/main/resources/db/changelog/progetto_ispw.changelog-master.xml</changeLogFile>
+						<outputChangeLogFile>${basedir}/src/main/resources/db/changelog/progetto_ispw.changelog.xml</outputChangeLogFile>
+						<driver>com.mysql.cj.jdbc.Driver</driver>
+						<url>jdbc:mysql://localhost:3306/progetto_ispw?useSSL=false&amp;createDatabaseIfNotExist=true&amp;serverTimezone=Europe/Rome</url>
+						<username>root</username>
+						<password>root</password>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>process-resources</phase>
+							<goals>
+								<goal>update</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -109,9 +107,9 @@
 					<release>11</release>
 				</configuration>
 			</plugin>
-			
-			
-			
+
+
+
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>

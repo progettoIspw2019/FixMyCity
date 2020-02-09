@@ -1,4 +1,4 @@
-module com.ispw.fixmycity.logic.app {
+module com.ispw.fixmycity.logic {
 
 	requires transitive javafx.controls;
 	requires transitive javafx.fxml;
@@ -15,6 +15,9 @@ module com.ispw.fixmycity.logic.app {
 	requires java.xml.bind;
 	requires javafx.base;
 	requires javafx.graphics;
+	requires java.desktop;
+	requires nominatim.api;
+	requires org.apache.httpcomponents.httpclient;
 	
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;

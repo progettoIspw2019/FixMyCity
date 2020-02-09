@@ -2,6 +2,9 @@ package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.ispw.fixmycity.logic.bean.CompanyReportBean;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +25,8 @@ public class CompanyReport implements Serializable {
 	private int idReport;
 
 	private String address;
+	
+	private String category;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_submission")
@@ -39,6 +44,8 @@ public class CompanyReport implements Serializable {
 	private BigDecimal longitude;
 
 	private String title;
+	
+	private String city;
 
 	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne
@@ -158,6 +165,35 @@ public class CompanyReport implements Serializable {
 		job.setCompanyReport(null);
 
 		return job;
+	}
+
+	public void setFromBean(CompanyReportBean compRepBean) {
+		this.setAddress(compRepBean.getAddress());
+		this.setCitizenUser(compRepBean.getCitizen());
+		this.setCategory(compRepBean.getCategory());
+		this.setCompanyUser(compRepBean.getCompany());
+		this.setDateSubmission(compRepBean.getDateSubmission());
+		this.setFullDescription(compRepBean.getFullDescription());
+		this.setImage(compRepBean.getImage());
+		this.setLatitude(compRepBean.getLatitude());
+		this.setLongitude(compRepBean.getLongitude());
+		this.setTitle(compRepBean.getTitle());
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

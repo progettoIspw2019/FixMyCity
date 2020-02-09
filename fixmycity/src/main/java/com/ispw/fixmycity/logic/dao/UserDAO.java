@@ -16,6 +16,10 @@ import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 
 public class UserDAO {
+	
+	private static final String PARAM_USRNAME = "input_username";
+	private static final String PARAM_PASSW = "input_pwd";
+	
 
 	private EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
@@ -29,13 +33,13 @@ public class UserDAO {
 		entityManager = entityManagerFactory.createEntityManager();
 
 		return (CitizenUser) entityManager.createNamedQuery("CitizenUser.findAllFromCredentials")
-				.setParameter("input_username", user.getUsername()).setParameter("input_pwd", user.getPassword())
+				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
 	}
 
 	public CompanyUser findAllCompanyUserFromCredentials(BaseUserBean user) {
 		return (CompanyUser) entityManager.createNamedQuery("CompanyUser.findAllFromCredentials")
-				.setParameter("input_username", user.getUsername()).setParameter("input_pwd", user.getPassword())
+				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
 	}
 
@@ -45,10 +49,10 @@ public class UserDAO {
 		int count = 0;
 
 		count += ((Number) entityManager.createNamedQuery("CompanyUser.countFromUsername")
-				.setParameter("input_username", username).getSingleResult()).intValue();
+				.setParameter(PARAM_USRNAME, username).getSingleResult()).intValue();
 
 		count += ((Number) entityManager.createNamedQuery("CitizenUser.countFromUsername")
-				.setParameter("input_username", username).getSingleResult()).intValue();
+				.setParameter(PARAM_USRNAME, username).getSingleResult()).intValue();
 
 		return (count != 0);
 	}

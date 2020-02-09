@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
@@ -22,8 +20,10 @@ import com.ispw.fixmycity.logic.util.ConverterUtil;
 @Entity
 @Table(name = "company_users")
 @NamedQuery(name = "CompanyUser.findAll", query = "SELECT c FROM CompanyUser c")
+@NamedQuery(name = "CompanyUser.find", query = "SELECT c FROM CompanyUser c WHERE c.username=:input_username")
 @NamedQuery(name = "CompanyUser.findAllFromCredentials", query = "SELECT c FROM CompanyUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
 @NamedQuery(name = "CompanyUser.countFromUsername", query = "SELECT count(c.username) FROM CompanyUser c WHERE c.username = :input_username")
+@NamedQuery(name = "CompanyUser.findByCategoryAndCity", query = "SELECT c FROM CompanyUser c WHERE c.category = :input_category AND c.city = :input_city")
 
 public class CompanyUser implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -3,29 +3,16 @@ package com.ispw.fixmycity.logic.bean;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.ispw.fixmycity.logic.model.CitizenUser;
-
-public abstract class ReportBean {
-
-	private int idReport;
+public class ReportBeanView {
 	private String title;
 	private String category;
+	private String city;
 	private String fullDescription;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
 	private String address;
 	private byte[] image;
 	private Date dateSubmission;
-	private CitizenUser referenceSubmitter;
-	private String city;
-
-	public int getIdReport() {
-		return idReport;
-	}
-
-	public void setIdReport(int idReport) {
-		this.idReport = idReport;
-	}
 
 	public String getTitle() {
 		return title;
@@ -43,12 +30,12 @@ public abstract class ReportBean {
 		this.category = category;
 	}
 
-	public String getFullDescription() {
+	public String getDescription() {
 		return fullDescription;
 	}
 
-	public void setFullDescription(String fullDescription) {
-		this.fullDescription = fullDescription;
+	public void setDescription(String description) {
+		this.fullDescription = description;
 	}
 
 	public BigDecimal getLatitude() {
@@ -74,13 +61,15 @@ public abstract class ReportBean {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	
+	
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
 	public byte[] getImage() {
 		return image;
-	}
-
-	public void setImage(byte[] file) {
-		this.image = file;
+		
 	}
 
 	public Date getDateSubmission() {
@@ -91,14 +80,6 @@ public abstract class ReportBean {
 		this.dateSubmission = dateSubmission;
 	}
 
-	public CitizenUser getSubmitter() {
-		return this.referenceSubmitter;
-	}
-
-	public void setSubmitter(CitizenUser referenceSubmitter) {
-		this.referenceSubmitter = referenceSubmitter;
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -106,5 +87,4 @@ public abstract class ReportBean {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 }

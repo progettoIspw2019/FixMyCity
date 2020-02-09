@@ -69,7 +69,7 @@ public class CreateVolunteeringEventForm {
 
 		observableList = FXCollections.observableMap(controller.getCommunityReportMap());
 
-		List<Integer> keys = new ArrayList<Integer>(observableList.keySet());
+		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());
 
 		commrepListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {

@@ -14,7 +14,7 @@ import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 
 public class VolunteeringEventController {
 
-	List<CommunityReportBean> filteredReports = new ArrayList<CommunityReportBean>();
+	List<CommunityReportBean> filteredReports = new ArrayList<>();
 
 	public void createVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
 
@@ -52,7 +52,7 @@ public class VolunteeringEventController {
 
 	public Map<Integer, String> getCommunityReportMap() {
 
-		Map<Integer, String> commReps = new HashMap<Integer, String>();
+		Map<Integer, String> commReps = new HashMap<>();
 
 		for (CommunityReportBean report : filteredReports) {
 			commReps.put(report.getIdReport(), report.getTitle() + " - " + report.getAddress());

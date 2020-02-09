@@ -194,4 +194,288 @@
 	        <column name="image" type="BLOB"/>
 	    </loadUpdateData>
 	</changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-1">
+        <createTable tableName="citizen_users">
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="pwd" type="CHAR(32)"/>
+            <column name="first_name" type="VARCHAR(30)"/>
+            <column name="surname" type="VARCHAR(30)"/>
+            <column name="profile_picture" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-2">
+        <createTable tableName="community_reports">
+            <column autoIncrement="true" name="id_report" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(30)"/>
+            <column name="full_description" type="VARCHAR(90)"/>
+            <column name="date_submission" type="date"/>
+            <column name="address" type="VARCHAR(60)"/>
+            <column name="latitude" type="DECIMAL(10, 8)"/>
+            <column name="longitude" type="DECIMAL(11, 8)"/>
+            <column name="submitter" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-3">
+        <createTable tableName="company_reports">
+            <column autoIncrement="true" name="id_report" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(30)"/>
+            <column name="full_description" type="VARCHAR(90)"/>
+            <column name="date_submission" type="date"/>
+            <column name="address" type="VARCHAR(60)"/>
+            <column name="latitude" type="DECIMAL(10, 8)"/>
+            <column name="longitude" type="DECIMAL(11, 8)"/>
+            <column name="submitter" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+            <column name="related_company" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-4">
+        <createTable tableName="company_users">
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="pwd" type="CHAR(32)"/>
+            <column name="companyName" type="VARCHAR(30)"/>
+            <column name="category" type="VARCHAR(30)"/>
+            <column name="city" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-5">
+        <createTable tableName="jobs">
+            <column autoIncrement="true" name="id_job" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id_company_report" type="INT"/>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
+            <column name="state" type="ENUM('A', 'R', 'E')"/>
+            <column name="job_info" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-6">
+        <createTable tableName="participations">
+            <column name="id_event" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-7">
+        <createTable tableName="volunteering_events">
+            <column autoIncrement="true" name="id_event" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id_community_report" type="INT"/>
+            <column name="creation_date" type="date"/>
+            <column name="event_date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-8">
+        <createIndex indexName="id_community_report" tableName="volunteering_events">
+            <column name="id_community_report"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-9">
+        <createIndex indexName="id_company_report" tableName="jobs">
+            <column name="id_company_report"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-10">
+        <createIndex indexName="related_company" tableName="company_reports">
+            <column name="related_company"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-11">
+        <createIndex indexName="submitter" tableName="community_reports">
+            <column name="submitter"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-12">
+        <createIndex indexName="submitter" tableName="company_reports">
+            <column name="submitter"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-13">
+        <createIndex indexName="username" tableName="participations">
+            <column name="username"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-14">
+        <addForeignKeyConstraint baseColumnNames="submitter" baseTableName="community_reports" constraintName="community_reports_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-15">
+        <addForeignKeyConstraint baseColumnNames="related_company" baseTableName="company_reports" constraintName="company_reports_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="username" referencedTableName="company_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-16">
+        <addForeignKeyConstraint baseColumnNames="submitter" baseTableName="company_reports" constraintName="company_reports_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-17">
+        <addForeignKeyConstraint baseColumnNames="id_company_report" baseTableName="jobs" constraintName="jobs_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_report" referencedTableName="company_reports" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-18">
+        <addForeignKeyConstraint baseColumnNames="username" baseTableName="participations" constraintName="participations_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-19">
+        <addForeignKeyConstraint baseColumnNames="id_event" baseTableName="participations" constraintName="participations_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_event" referencedTableName="volunteering_events" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-20">
+        <addForeignKeyConstraint baseColumnNames="id_community_report" baseTableName="volunteering_events" constraintName="volunteering_events_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id_report" referencedTableName="community_reports" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581005031680-21">
+        <createView fullDefinition="false" remarks="VIEW" viewName="base_user">select `c`.`username` AS `username`,`c`.`pwd` AS `pwd` from `progetto_ispw`.`citizen_users` `c` union select `com`.`username` AS `username`,`com`.`pwd` AS `pwd` from `progetto_ispw`.`company_users` `com` order by `username`</createView>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-1">
+        <createTable tableName="citizen_users">
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="pwd" type="CHAR(32)"/>
+            <column name="first_name" type="VARCHAR(30)"/>
+            <column name="surname" type="VARCHAR(30)"/>
+            <column name="profile_picture" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-2">
+        <createTable tableName="community_reports">
+            <column autoIncrement="true" name="id_report" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category" type="VARCHAR(30)"/>
+            <column name="title" type="VARCHAR(30)"/>
+            <column name="full_description" type="VARCHAR(90)"/>
+            <column name="date_submission" type="date"/>
+            <column name="address" type="VARCHAR(60)"/>
+            <column name="latitude" type="DECIMAL(10, 8)"/>
+            <column name="longitude" type="DECIMAL(11, 8)"/>
+            <column name="city" type="VARCHAR(30)"/>
+            <column name="submitter" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-3">
+        <createTable tableName="company_reports">
+            <column autoIncrement="true" name="id_report" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category" type="VARCHAR(30)"/>
+            <column name="title" type="VARCHAR(30)"/>
+            <column name="full_description" type="VARCHAR(90)"/>
+            <column name="date_submission" type="date"/>
+            <column name="address" type="VARCHAR(60)"/>
+            <column name="latitude" type="DECIMAL(10, 8)"/>
+            <column name="longitude" type="DECIMAL(11, 8)"/>
+            <column name="city" type="VARCHAR(30)"/>
+            <column name="submitter" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+            <column name="related_company" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-4">
+        <createTable tableName="company_users">
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="pwd" type="CHAR(32)"/>
+            <column name="companyName" type="VARCHAR(30)"/>
+            <column name="category" type="VARCHAR(30)"/>
+            <column name="city" type="VARCHAR(30)"/>
+            <column name="image" type="LONGBLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-5">
+        <createTable tableName="jobs">
+            <column autoIncrement="true" name="id_job" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id_company_report" type="INT"/>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
+            <column name="state" type="ENUM('A', 'R', 'E')"/>
+            <column name="job_info" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-6">
+        <createTable tableName="participations">
+            <column name="id_event" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(30)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-7">
+        <createTable tableName="volunteering_events">
+            <column autoIncrement="true" name="id_event" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id_community_report" type="INT"/>
+            <column name="creation_date" type="date"/>
+            <column name="event_date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-8">
+        <createIndex indexName="id_community_report" tableName="volunteering_events">
+            <column name="id_community_report"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-9">
+        <createIndex indexName="id_company_report" tableName="jobs">
+            <column name="id_company_report"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-10">
+        <createIndex indexName="related_company" tableName="company_reports">
+            <column name="related_company"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-11">
+        <createIndex indexName="submitter" tableName="community_reports">
+            <column name="submitter"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-12">
+        <createIndex indexName="submitter" tableName="company_reports">
+            <column name="submitter"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-13">
+        <createIndex indexName="username" tableName="participations">
+            <column name="username"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-14">
+        <addForeignKeyConstraint baseColumnNames="submitter" baseTableName="community_reports" constraintName="community_reports_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-15">
+        <addForeignKeyConstraint baseColumnNames="related_company" baseTableName="company_reports" constraintName="company_reports_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="username" referencedTableName="company_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-16">
+        <addForeignKeyConstraint baseColumnNames="submitter" baseTableName="company_reports" constraintName="company_reports_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-17">
+        <addForeignKeyConstraint baseColumnNames="id_company_report" baseTableName="jobs" constraintName="jobs_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_report" referencedTableName="company_reports" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-18">
+        <addForeignKeyConstraint baseColumnNames="username" baseTableName="participations" constraintName="participations_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="username" referencedTableName="citizen_users" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-19">
+        <addForeignKeyConstraint baseColumnNames="id_event" baseTableName="participations" constraintName="participations_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_event" referencedTableName="volunteering_events" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-20">
+        <addForeignKeyConstraint baseColumnNames="id_community_report" baseTableName="volunteering_events" constraintName="volunteering_events_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id_report" referencedTableName="community_reports" validate="true"/>
+    </changeSet>
+    <changeSet author="adria (generated)" id="1581201652779-21">
+        <createView fullDefinition="false" remarks="VIEW" viewName="base_user">select `c`.`username` AS `username`,`c`.`pwd` AS `pwd` from `progetto_ispw`.`citizen_users` `c` union select `com`.`username` AS `username`,`com`.`pwd` AS `pwd` from `progetto_ispw`.`company_users` `com` order by `username`</createView>
+    </changeSet>
 </databaseChangeLog>
