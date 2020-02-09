@@ -1,0 +1,114 @@
+html, body {
+	height: 100%;
+}
+
+#login-bg {
+	background-image: url('img/background_login.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	-webkit-background-size: cover;
+}
+
+.full-height {
+	min-height: 100%;
+}
+
+#login-box {
+	background-color: white;
+	border-radius: 4px 4px 4px 4px;
+	min-width: 280px
+}
+
+.valign-center {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.halign-center {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.mt15 {
+	margin-top: 15px;
+}
+
+.signupProfileContainer {
+	background-image: url('img/placeholder-profile.jpg');
+	width: 250px;
+	height: 250px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.pic_thumbnail {
+	background-image: url('img/placeholder-profile.jpg');
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border-radius: 100%;
+	background-size: 100% 100%;
+}
+
+.inline-block {
+	display: "inline-block";
+}
+
+#sidebar-wrapper {
+	min-height: 100vh;
+	margin-left: -15rem;
+	-webkit-transition: margin .25s ease-out;
+	-moz-transition: margin .25s ease-out;
+	-o-transition: margin .25s ease-out;
+	transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+	padding: 0.875rem 1.25rem;
+	font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+	width: 15rem;
+}
+
+#page-content-wrapper {
+	min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+	margin-left: 0;
+}
+
+@media ( min-width : 768px) {
+	#sidebar-wrapper {
+		margin-left: 0;
+	}
+	#page-content-wrapper {
+		min-width: 0;
+		width: 100%;
+	}
+	#wrapper.toggled #sidebar-wrapper {
+		margin-left: -15rem;
+	}
+}
+
+.btn-join {
+	padding: .3em .5em .3em .5em;
+	background-color: #005c78;
+	border-radius: .2em .2em .2em .2em;
+	color: white;
+}
+
+.mt-2dot2 {
+	margin-top: 2.2em;
+}

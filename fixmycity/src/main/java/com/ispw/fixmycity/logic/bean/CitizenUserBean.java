@@ -9,7 +9,7 @@ public class CitizenUserBean extends BaseUserBean {
 	private File profilePicture;
 
 	private String lastName;
-
+	
 	public String getFirstName() {
 		return firstName;
 	}
