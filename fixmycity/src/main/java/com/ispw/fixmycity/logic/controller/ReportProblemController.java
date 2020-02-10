@@ -53,6 +53,7 @@ public class ReportProblemController {
 		compRepBean.setImage(repBean.getImage());
 		compRepBean.setCompany(compUser);
 		compRepBean.setSubmitter(UserSessionBean.getInstance().getActiveCitizenUser());
+		compRepBean.setCity(repBean.getCity());
 
 		compRepDAO.add(compRepBean);
 	}

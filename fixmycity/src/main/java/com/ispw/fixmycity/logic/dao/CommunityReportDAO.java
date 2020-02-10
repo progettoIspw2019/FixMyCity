@@ -21,7 +21,7 @@ public class CommunityReportDAO {
 	}
 	
 	public List<CommunityReport> findAll() {
-		return entityManager.createNamedQuery("CommunityReport.findAll").getResultList();
+		return entityManager.createNamedQuery("CommunityReport.findAll", CommunityReport.class).getResultList();
 	}
 
 	public CommunityReport findByPrimaryKey(Integer id) {

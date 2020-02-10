@@ -49,7 +49,7 @@
 						<Button mnemonicParsing="false" onAction="#submitLogin"
 							prefHeight="25.0" prefWidth="191.0" text="Login"
 							GridPane.columnIndex="1" GridPane.rowIndex="3" />
-						<Button mnemonicParsing="false" onAction="#showLoginForm"
+						<Button mnemonicParsing="false" onAction="#showSignupForm"
 							prefHeight="25.0" prefWidth="191.0" text="Sign Up"
 							GridPane.rowIndex="3" />
 					</children>

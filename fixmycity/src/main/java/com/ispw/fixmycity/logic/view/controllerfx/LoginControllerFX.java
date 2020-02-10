@@ -43,7 +43,7 @@ public class LoginControllerFX {
 	}
 
 	@FXML
-	private void showLoginForm() throws IOException {
+	private void showSignupForm() throws IOException {
 		App.setRoot("signup");
 	}
 

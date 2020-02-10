@@ -7,27 +7,41 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
-	private static Scene scene;
+	private static Stage stage;
 
 	@Override
-	public void start(Stage stage) throws IOException {
+	public void start(Stage initialStage) throws IOException {
+		App.setStage(initialStage);
 		stage.setScene(new Scene(loadFXML("login"), 640, 480));
 		stage.show();
 	}
 
-	public static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
+	private static void setStage(Stage initialStage) {
+		App.stage = initialStage;
 	}
 
-	private static Parent loadFXML(String fxml) throws IOException {
+	public static void setRoot(String fxml) {
+		stage.setScene(new Scene(loadFXML(fxml)));
+	}
+
+	private static Parent loadFXML(String fxml) {
+		
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-		return fxmlLoader.load();
+		try {
+			return fxmlLoader.load();
+		}
+		catch(IOException e) {
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
+			return null;
+		}
 	}
 
 	public static void main(String[] args) {

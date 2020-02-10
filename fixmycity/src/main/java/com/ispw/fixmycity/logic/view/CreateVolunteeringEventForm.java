@@ -1,7 +1,6 @@
 package com.ispw.fixmycity.logic.view;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +13,6 @@ import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
@@ -82,14 +80,9 @@ public class CreateVolunteeringEventForm {
 		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());
 
-		commrepListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
+		commrepListView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
 				selectionId = keys.get(commrepListView.getSelectionModel().getSelectedIndex());
 				Logger.getLogger("fixmycity").log(Level.INFO, "SELECTION ID " + selectionId);
-			}
 		});
 
 	}
@@ -109,11 +102,7 @@ public class CreateVolunteeringEventForm {
 
 	@FXML
 	public void handleHomeButton() {
-		try {
 			App.setRoot("home_citizen");
-		} catch (IOException e) {
-			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
-		}
 	}
 
 	@FXML

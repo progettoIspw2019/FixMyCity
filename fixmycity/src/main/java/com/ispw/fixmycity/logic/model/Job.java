@@ -2,6 +2,9 @@ package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.ispw.fixmycity.logic.bean.JobBean;
+
 import java.util.Date;
 
 /**
@@ -33,13 +36,23 @@ public class Job implements Serializable {
 
 	private String state;
 
-	// bi-directional many-to-one association to CompanyReport
+	// omni-directional many-to-one association to CompanyReport
 	@ManyToOne
 	@JoinColumn(name = "id_company_report")
 	private CompanyReport companyReport;
-
-	public Job() {
-		// This is a POJO, and there are no default values
+	
+	// bi-directional many-to-one association to CompanyUser
+	@ManyToOne
+	@JoinColumn(name = "related_company")
+	private CompanyUser relatedCompany;
+	
+	public void setFromBean(JobBean jBean) {
+		this.setCompanyReport(jBean.getRelatedReport());
+		this.setEndDate(jBean.getEndDate());
+		this.setStartDate(jBean.getStartDate());
+		this.setIdJob(jBean.getIdJob());
+		this.setJobInfo(jBean.getJobInfo());
+		this.setState(jBean.getState());
 	}
 
 	public int getIdJob() {
@@ -88,6 +101,14 @@ public class Job implements Serializable {
 
 	public void setCompanyReport(CompanyReport companyReport) {
 		this.companyReport = companyReport;
+	}
+
+	public CompanyUser getRelatedCompany() {
+		return relatedCompany;
+	}
+
+	public void setRelatedCompany(CompanyUser relatedCompany) {
+		this.relatedCompany = relatedCompany;
 	}
 
 }

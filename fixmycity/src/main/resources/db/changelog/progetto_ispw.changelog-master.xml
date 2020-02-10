@@ -58,7 +58,6 @@
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-4">
 		<createTable tableName="company_users">
-
 			<column name="username" type="VARCHAR(30)">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
@@ -80,6 +79,7 @@
 			<column name="end_date" type="date" />
 			<column name="state" type="ENUM('A', 'R', 'E')" />
 			<column name="job_info" type="BLOB" />
+			<column name="related_company" type ="VARCHAR(30)" />
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-6">
@@ -156,6 +156,14 @@
 			referencedColumnNames="username" referencedTableName="company_users"
 			validate="true" />
 	</changeSet>
+	<changeSet author="adria (generated)" id="1580847007586-99">
+		<addForeignKeyConstraint
+			baseColumnNames="related_company" baseTableName="jobs"
+			constraintName="jobs_ibfk_1" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="username" referencedTableName="company_users"
+			validate="true" />
+	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-16">
 		<addForeignKeyConstraint
 			baseColumnNames="submitter" baseTableName="company_reports"
@@ -167,7 +175,7 @@
 	<changeSet author="adria (generated)" id="1580847007586-17">
 		<addForeignKeyConstraint
 			baseColumnNames="id_company_report" baseTableName="jobs"
-			constraintName="jobs_ibfk_1" deferrable="false"
+			constraintName="jobs_ibfk_2" deferrable="false"
 			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
 			referencedColumnNames="id_report"
 			referencedTableName="company_reports" validate="true" />

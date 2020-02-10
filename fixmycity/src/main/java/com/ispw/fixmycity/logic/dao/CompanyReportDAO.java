@@ -19,7 +19,7 @@ public class CompanyReportDAO {
 	}
 	
 	public List<CompanyReport> findAll() {
-		return entityManager.createNamedQuery("CompanyReport.findAll").getResultList();
+		return entityManager.createNamedQuery("CompanyReport.findAll", CompanyReport.class).getResultList();
 	}
 
 	public CompanyReport findByPrimaryKey(Integer id) {
@@ -39,7 +39,9 @@ public class CompanyReportDAO {
 
 	// Versione in cui i controller usano le entity
 	public void update(CompanyReport compReport) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
+		entityManager.getTransaction().commit();
 	}
 
 	public void delete(Integer id) {

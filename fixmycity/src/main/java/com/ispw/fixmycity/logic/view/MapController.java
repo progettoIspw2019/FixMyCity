@@ -38,9 +38,7 @@ public class MapController {
 	public MapController(WebView mapView) {
 		this.setMapView(mapView);
 
-		mouseListener = new MouseListener() {
-			@Override
-			public void onEvent(MouseEvent ev) {
+		mouseListener = (MouseEvent ev) -> {
 				try {
 					BigDecimal latitude = BigDecimal.valueOf(ev.getLatLng().getLatitude());
 					BigDecimal longitude = BigDecimal.valueOf(ev.getLatLng().getLongitude());
@@ -80,17 +78,12 @@ public class MapController {
 				} catch (IOException e) {
 					Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 				}
-			}
 		};
 	}
 
 	public void loadMap(List<ReportFilter> filters) {
 
-		FXBrowsers.load(mapView, MapBoundary.class.getResource("index.html"), new Runnable() {
-
-			@Override
-			public void run() {
-				
+		FXBrowsers.load(mapView, MapBoundary.class.getResource("index.html"), () -> {
 				map = new Map("map");
 
 				TileLayer tileLayer = new TileLayer(
@@ -112,8 +105,6 @@ public class MapController {
 					if (filter == ReportFilter.ALL_COMPANY_REPORT)
 						addEveryCompanyReport(map);
 				}
-
-			}
 		});
 	}
 

@@ -22,7 +22,7 @@ public class VolunteeringEventDAO {
 
 	public List<VolunteeringEvent> getAllVolunteeringEvents() {
 		entityManager = entityManagerFactory.createEntityManager();
-		return entityManager.createNamedQuery("VolunteeringEvent.findAll").getResultList();
+		return entityManager.createNamedQuery("VolunteeringEvent.findAll", VolunteeringEvent.class).getResultList();
 	}
 
 	public VolunteeringEvent addVolunteeringEvent(VolunteeringEventBean eventBean) {
@@ -47,8 +47,7 @@ public class VolunteeringEventDAO {
 		CitizenUser citizenUser = entityManager.find(CitizenUser.class, username);
 		citizenUser.getVolunteeringEvents().add(event);
 
-		//TODO senza questo tempEvent ma usando direttamente event da nullpointerexception. risolvere
-		VolunteeringEvent tempEvent = entityManager.find(VolunteeringEvent.class, event.getIdEvent());
+		VolunteeringEvent tempEvent = entityManager.getReference(VolunteeringEvent.class, event.getIdEvent());
 
 		tempEvent.getCitizenUsers().add(citizenUser);
 

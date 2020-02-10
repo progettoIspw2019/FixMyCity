@@ -97,8 +97,6 @@ public class ReportProblemControllerFX {
 
 		repBean.setTitle(titleField.getText());
 
-		// TODO: va messa anche la città!
-		
 		repBean.setLatitude(latitude);
 		repBean.setLongitude(longitude);
 		repBean.setAddress(address.getRoad());

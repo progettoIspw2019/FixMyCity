@@ -46,6 +46,10 @@ public class CompanyUser implements Serializable {
 	@OneToMany(mappedBy = "companyUser")
 	private List<CompanyReport> companyReports;
 
+	// bi-directional many-to-one association to CompanyReport
+	@OneToMany(mappedBy = "relatedCompany")
+	private List<Job> jobs;
+		
 	public CompanyUser() {
 		// This is a POJO, and there are no default values
 	}
