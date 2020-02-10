@@ -89,6 +89,7 @@
 			<column name="full_description" type="VARCHAR(90)" />
 			<column name="creation_date" type="date" />
 			<column name="event_date" type="date" />
+			<column name="event_time" type="time" />
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-8">

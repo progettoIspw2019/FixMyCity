@@ -1,6 +1,11 @@
 <!doctype html>
+<%@page import="java.awt.ActiveEvent"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.view.ActiveEventsView"%>
+<%@ page
+	import="com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean"%>
+<%@ page import="java.util.List"%>
 
 <html lang="en">
 <%
@@ -8,6 +13,9 @@
 			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
 		response.sendRedirect("login.jsp");
 	}
+
+	ActiveEventsView view = new ActiveEventsView();
+	List<VolunteeringEventListElementBean> events = view.getActiveVolunteeringEvents();
 %>
 
 <head>
@@ -24,7 +32,7 @@
 <title>FixMyCity</title>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
+	<nav class="navbar navbar-dark bg-dark" aria-label="">
 		<ul class="nav navbar-nav navbar-left">
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
@@ -39,19 +47,22 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
-				<a href="#" class="list-group-item list-group-item-action bg-light">Map</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-				<a href="myreports.jsp" class="list-group-item list-group-item-action bg-light">My Reports</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
+				<a href="home_citizen.jsp"
+					class="list-group-item list-group-item-action bg-light">Map</a> <a
+					href="events.jsp"
+					class="list-group-item list-group-item-action bg-light">Active
+					Events</a> <a href="myreports.jsp"
+					class="list-group-item list-group-item-action bg-light">My
+					Reports</a>
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
 			<nav
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
+				class="navbar navbar-expand-lg navbar-light bg-light border-bottom "
+				aria-label="">
+				>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -73,6 +84,9 @@
 			<div class="container-fluid p-0">
 				<ul class="list-group">
 					<!-- Single Row for JSP -->
+					<%
+						for (VolunteeringEventListElementBean event : events) {
+					%>
 					<li class="list-group-item ">
 						<div class="container ml-0">
 							<div class="row  ">
@@ -83,21 +97,45 @@
 								</div>
 								<div class="col-lg-auto">
 									<div class="row">
-										<h5>Pulizia parco degli acquedotti</h5>
+										<h5>
+											<%
+												out.println(event.getTitle());
+											%>
+										</h5>
 									</div>
-									<div class="row">Appuntamento tra volontari per ripulire
-										il parco</div>
-									<div class="row">Via tuscolana 25</div>
-									<div class="row">16/02/2020</div>
+									<div class="row">
+										<%
+											out.println(event.getFullDescription());
+										%>
+									</div>
+									<div class="row">
+										<%
+											out.println(event.getAddress());
+										%>
+									</div>
+									<div class="row">
+										<%
+											out.println(event.getEventDate());
+										%>
+									</div>
 								</div>
 
 								<div class="col">
 									<div class="row justify-content-end mt-2">
-										<button type="button" class="btn btn-join ">Join</button>
+										<%
+											if (event.hasUserJoined()) {
+													out.println("<button type='button' class='btn btn-quit'>Quit</button>");
+												} else {
+													out.println("<button type='button' class='btn btn-join'>Join</button>");
+												}
+										%>
 									</div>
 									<div class="row justify-content-end mt-2dot2">
 										<img src="style/icons/people-fill.svg" alt="" width="24"
-											height="24"> 25 joined this event
+											height="24">
+										<%
+											out.println(event.getParticipantsNumber());
+										%>
 									</div>
 								</div>
 
@@ -105,6 +143,9 @@
 
 						</div>
 					</li>
+					<%
+						}
+					%>
 					<!-- End of Single Row for JSP  -->
 
 				</ul>

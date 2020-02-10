@@ -1,12 +1,24 @@
 package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 
 /**
  * The persistent class for the volunteering_events database table.
@@ -15,6 +27,8 @@ import java.util.List;
 @Entity
 @Table(name = "volunteering_events")
 @NamedQuery(name = "VolunteeringEvent.findAll", query = "SELECT v FROM VolunteeringEvent v")
+@NamedQuery(name = "VolunteeringEvent.findActiveEvents", query = "SELECT v FROM VolunteeringEvent v WHERE v.eventDate >= NOW()")
+
 public class VolunteeringEvent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -35,6 +49,10 @@ public class VolunteeringEvent implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "event_date")
 	private Date eventDate;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "event_time")
+	private Date eventTime;
 
 	// bi-directional many-to-many association to CitizenUser
 	@ManyToMany
@@ -58,6 +76,9 @@ public class VolunteeringEvent implements Serializable {
 		this.setCommunityReport(cr);
 		this.setCreationDate(volEventBean.getCreationDate());
 		this.setEventDate(volEventBean.getEventDate());
+		this.setFullDescription(volEventBean.getFullDescription());
+		this.setTitle(volEventBean.getTitle());
+		this.setCreationDate(volEventBean.getCreationDate());
 	}
 
 	public int getIdEvent() {

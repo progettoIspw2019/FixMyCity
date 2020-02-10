@@ -58,4 +58,9 @@ public class VolunteeringEventDAO {
 		entityManager.getTransaction().commit();
 	}
 
+	public List<VolunteeringEvent> findActiveEvents() {
+		entityManager = entityManagerFactory.createEntityManager();
+		return entityManager.createNamedQuery("VolunteeringEvent.findActiveEvents").getResultList();
+	}
+
 }

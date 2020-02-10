@@ -73,7 +73,6 @@ public class UserDAO {
 
 	public void insertCompanyUser(CompanyUserBean user) {
 		CompanyUser companyUser = new CompanyUser();
-
 		companyUser.setFromBean(user);
 
 		entityManager.getTransaction().begin();

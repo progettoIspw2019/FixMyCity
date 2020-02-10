@@ -8,8 +8,10 @@ import java.util.Map;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
+import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
+import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CommunityReport;
 import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 
@@ -24,6 +26,14 @@ public class VolunteeringEventController {
 
 		dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(), event);
 
+	}
+
+	public void joinVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
+		VolunteeringEventDAO dao = new VolunteeringEventDAO();
+		// VolunteeringEvent event = dao.findById;
+
+		// dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(),
+		// event);
 	}
 
 	public VolunteeringEventController() {
@@ -69,6 +79,38 @@ public class VolunteeringEventController {
 			}
 		}
 		return null;
+	}
+
+	public List<VolunteeringEventListElementBean> getActiveVolunteeringEvents() {
+
+		VolunteeringEventDAO dao = new VolunteeringEventDAO();
+		List<VolunteeringEvent> events = dao.findActiveEvents();
+		ArrayList<VolunteeringEventListElementBean> eventsBean = new ArrayList<>();
+		String currentUser = UserSessionBean.getInstance().getActiveCitizenUser().getUsername();
+		for (VolunteeringEvent event : events) {
+
+			VolunteeringEventListElementBean eventBean = new VolunteeringEventListElementBean();
+
+			eventBean.setParticipantsNumber(event.getCitizenUsers().size());
+			eventBean.setCreationDate(event.getCreationDate());
+			eventBean.setEventDate(event.getEventDate());
+			eventBean.setFullDescription(event.getFullDescription());
+			eventBean.setTitle(event.getTitle());
+
+			for (CitizenUser citizenUser : event.getCitizenUsers()) {
+				if (citizenUser.getUsername().equals(currentUser)) {
+					eventBean.setUserJoined(true);
+					break;
+				}
+				eventBean.setUserJoined(false);
+			}
+
+			eventBean.setAddress(event.getCommunityReport().getAddress());
+			eventBean.setCity(event.getCommunityReport().getCity());
+			eventsBean.add(eventBean);
+		}
+
+		return eventsBean;
 	}
 
 }

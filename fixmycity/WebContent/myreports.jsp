@@ -9,6 +9,11 @@
 <%@ page import="java.util.List"%>
 
 <%
+	if (UserSessionBean.getInstance().getUserMode() != UserMode.CITIZEN
+			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
+		response.sendRedirect("index.jsp");
+	}
+
 	MyReportsView view = new MyReportsView();
 	List<CommunityReportBeanView> commReports = view.getMyCommunityReports();
 	List<CompanyReportBeanView> compReports = view.getMyCompanyReports();
@@ -44,14 +49,13 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
-				<a href="#" class="list-group-item list-group-item-action bg-light">Map</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">Active
-					events</a> <a href="#"
+				<a href="home_citizen.jsp"
+					class="list-group-item list-group-item-action bg-light">Map</a> <a
+					href="events.jsp"
+					class="list-group-item list-group-item-action bg-light">Active
+					Events</a> <a href="myreports.jsp"
 					class="list-group-item list-group-item-action bg-light">My
-					reports</a> <a href="#"
-					class="list-group-item list-group-item-action bg-light">--</a> <a
-					href="#" class="list-group-item list-group-item-action bg-light">--</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
+					Reports</a>
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
@@ -125,10 +129,10 @@
 									<div class="row justify-content-end mt-2dot2">
 
 										<%
-											if (rep.getEvents() != null) {
-													out.println("Event created");
-												} else {
+											if (rep.getEvents() == null || rep.getEvents().isEmpty()) {
 													out.println("No event created");
+												} else {
+													out.println("Event created");
 												}
 										%>
 

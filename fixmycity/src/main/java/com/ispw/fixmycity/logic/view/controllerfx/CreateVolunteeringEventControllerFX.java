@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view;
+package com.ispw.fixmycity.logic.view.controllerfx;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.app.exceptions.InvalidFieldException;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
-import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 import javafx.beans.value.ObservableValue;
@@ -27,7 +27,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-public class CreateVolunteeringEventForm {
+public class CreateVolunteeringEventControllerFX {
 
 	@FXML
 	private DatePicker eventDatePicker;
@@ -74,6 +74,8 @@ public class CreateVolunteeringEventForm {
 
 	private CommunityReportBean selectedReport;
 
+	VolunteeringEventController controller = new VolunteeringEventController();
+
 	@FXML
 	public void initialize() {
 
@@ -81,7 +83,7 @@ public class CreateVolunteeringEventForm {
 		secondGrid.setVisible(false);
 		errorTextField.setVisible(false);
 
-		observableList = FXCollections.observableMap(new SystemFacade().getMappedCommunityReports());
+		observableList = FXCollections.observableMap(controller.getCommunityReportMap());
 
 		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());
@@ -98,7 +100,7 @@ public class CreateVolunteeringEventForm {
 	public void handleNextButton() {
 		firstGrid.setVisible(false);
 		secondGrid.setVisible(true);
-		selectedReport = new SystemFacade().getCommunityReportFromId(selectionId);
+		selectedReport = controller.getCommunityReportFromId(selectionId);
 
 		byte[] bytes = selectedReport.getImage();
 		Image image = new Image(new ByteArrayInputStream(bytes));
@@ -120,9 +122,10 @@ public class CreateVolunteeringEventForm {
 
 	@FXML
 	public void handleSubmitButton() {
-
 		errorTextField.setVisible(false);
+
 		VolunteeringEventBean volunteeringEventBean = new VolunteeringEventBean();
+
 		volunteeringEventBean.setCommunityReport(selectedReport);
 		volunteeringEventBean.setTitle(eventTitleTextField.getText());
 		volunteeringEventBean.setFullDescription(eventDescriptionTextArea.getText());
@@ -135,7 +138,7 @@ public class CreateVolunteeringEventForm {
 			errorTextField.setVisible(true);
 			return;
 		}
-		new SystemFacade().createVolunteeringEvent(volunteeringEventBean);
+		controller.createVolunteeringEvent(volunteeringEventBean);
 
 	}
 
@@ -209,6 +212,14 @@ public class CreateVolunteeringEventForm {
 
 	public void setReportImageView(ImageView reportImageView) {
 		this.reportImageView = reportImageView;
+	}
+
+	public VolunteeringEventController getController() {
+		return controller;
+	}
+
+	public void setController(VolunteeringEventController controller) {
+		this.controller = controller;
 	}
 
 	public ObservableMap<Integer, String> getObservableList() {

@@ -1,11 +1,37 @@
 <!doctype html>
+<%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
+<%@ page
+	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.util.Iterator"%>
+
 <html lang="en">
 <%
 	if (UserSessionBean.getInstance().getUserMode() != UserMode.CITIZEN
 			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
 		response.sendRedirect("index.jsp");
+	}
+
+	VolunteeringEventController controller = new VolunteeringEventController();
+	Map<Integer, String> reports = controller.getCommunityReportMap();
+
+	String id = request.getParameter("reportId");
+	String title = request.getParameter("inputTitleEvent");
+	String description = request.getParameter("inputEventDescription");
+	String date = request.getParameter("inputDateEvent");
+	String time = request.getParameter("inputTimeEvent");
+
+	if (id != null && !title.isBlank() && !description.isBlank() && !date.isBlank() && !time.isBlank()) {
+		CommunityReportBean selectedReport = controller.getCommunityReportFromId(Integer.parseInt(id));
+		VolunteeringEventBean bean = new VolunteeringEventBean();
+		bean.setCommunityReport(selectedReport);
+		bean.setEventDate(date);
+		bean.setEventTime(time);
+		controller.createVolunteeringEvent(bean);
 	}
 %>
 <head>
@@ -37,14 +63,12 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
-				<a href="#" class="list-group-item list-group-item-action bg-light">Map</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">Active
-					Events</a> <a href="myreports.jsp"
+				<a href="home_citizen.jsp" class="list-group-item list-group-item-action bg-light">Map</a>
+				<a href="events.jsp" class="list-group-item list-group-item-action bg-light">Active
+					Events</a> 
+				<a href="myreports.jsp"
 					class="list-group-item list-group-item-action bg-light">My
-					Reports</a> <a href="#"
-					class="list-group-item list-group-item-action bg-light">--</a> <a
-					href="#" class="list-group-item list-group-item-action bg-light">--</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
+					Reports</a> 
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
@@ -137,19 +161,59 @@
 				<!-- Modal body -->
 				<form action="home_citizen.jsp" method="GET">
 					<div class="modal-body">
+
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<input type="text" class="form-control" name="inputReport"
-										placeholder="(TODO) Report ID">
+									<label for="inputReportId">Select a report</label> <select
+										class="form-control" name="reportId">
+										<%
+											if (!reports.isEmpty()) {
+												Iterator<Map.Entry<Integer, String>> iterator = reports.entrySet().iterator();
+												while (iterator.hasNext()) {
+													Map.Entry<Integer, String> pair = (Map.Entry<Integer, String>) iterator.next();
+													out.println("<option value='" + pair.getKey() + "'>" + pair.getValue() + "</option>");
+												}
+											}
+										%>
+									</select>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<input type="date" class="form-control" name="inputDateEvent"
-										placeholder="Date of the Event">
+									<label for="inputTitleEvent">Title of the event</label> <input
+										type="text" class="form-control" name="inputTitleEvent"
+										placeholder="Title of the Event">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputEventDescription">Describe your event</label>
+									<textarea class="form-control" name="inputEventDescription"
+										rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputDateEvent">Date of the event</label> <input
+										type="date" class="form-control" name="inputDateEvent">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputTimeEvent">Time of the event</label> <input
+										type="time" class="form-control" name="inputTimeEvent"
+										placeholder="Time of the Event">
 								</div>
 							</div>
 						</div>

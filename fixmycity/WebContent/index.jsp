@@ -16,7 +16,6 @@
 		redirect = "home_company.jsp";
 	} else {
 		redirect = "login.jsp";
-
 	}
 	response.sendRedirect(redirect);
 %>
