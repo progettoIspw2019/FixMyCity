@@ -16,7 +16,7 @@ import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
 
-	public void checkCredentials(BaseUserBean user) {
+	public boolean checkCredentials(BaseUserBean user) {
 
 		UserDAO dao = new UserDAO();
 		UserSessionBean session = UserSessionBean.getInstance();
@@ -26,7 +26,7 @@ public class LoginController {
 			if (citizenUser != null) {
 				session.setActiveCitizenUser(citizenUser);
 				session.setUserMode(UserMode.CITIZEN);
-				return;
+				return true;
 			}
 		} catch (NoResultException e) {
 		}
@@ -36,14 +36,14 @@ public class LoginController {
 			if (companyUser != null) {
 				session.setActiveCompanyUser(companyUser);
 				session.setUserMode(UserMode.COMPANY);
-				return;
+				return true;
 			}
 		} catch (NoResultException e) {
 		}
 		session.setActiveCompanyUser(null);
 		session.setActiveCitizenUser(null);
 		session.setUserMode(UserMode.GUEST);
-
+		return false;
 	}
 
 	public boolean signupCitizenUser(CitizenUserBean bean) {

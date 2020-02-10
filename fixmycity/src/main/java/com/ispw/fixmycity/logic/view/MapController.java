@@ -11,7 +11,7 @@ import org.apache.http.impl.client.HttpClients;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
-import com.ispw.fixmycity.logic.controller.LoadReportsController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 
 import fr.dudie.nominatim.client.JsonNominatimClient;
@@ -46,6 +46,7 @@ public class MapController {
 					SessionView.setLatitudeSetOnMap(latitude);
 					SessionView.setLongitudeSetOnMap(longitude);
 
+					//TODO: this should be in a controller and it should be used through the facade
 					JsonNominatimClient client = new JsonNominatimClient(HttpClients.createDefault(),
 							"progetto.ispw.uniroma2@gmail.com");
 
@@ -109,7 +110,7 @@ public class MapController {
 	}
 
 	public void addEveryCompanyReport(Map map) {
-		List<CompanyReportBeanView> reports = new LoadReportsController().getCompanyReports();
+		List<CompanyReportBeanView> reports = new SystemFacade().getCompanyReports();
 
 		for (var report : reports) {
 			map.addLayer(new Circle(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()),
@@ -119,7 +120,7 @@ public class MapController {
 	}
 
 	public void addEveryCommunityReport(Map map) {
-		List<CommunityReportBeanView> reports = new LoadReportsController().getCommunityReports();
+		List<CommunityReportBeanView> reports = new SystemFacade().getCommunityReports();
 
 		for (var report : reports) {
 			map.addLayer(new Circle(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()),

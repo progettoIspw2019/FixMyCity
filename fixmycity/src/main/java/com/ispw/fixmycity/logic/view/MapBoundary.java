@@ -1,6 +1,5 @@
 package com.ispw.fixmycity.logic.view;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class MapBoundary {
 	}
 
 	@FXML
-	private void createReport() throws IOException {
+	private void createReport() {
 		if(SessionView.getLatitudeSetOnMap() != null && SessionView.getLongitudeSetOnMap() != null)
 			App.setRoot("reportProblemForm");
 		else {
@@ -47,7 +46,7 @@ public class MapBoundary {
 	}
 
 	@FXML
-	private void createEvent() throws IOException {
+	private void createEvent() {
 		App.setRoot("create_event");
 	}
 }

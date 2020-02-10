@@ -1,7 +1,5 @@
 package com.ispw.fixmycity.logic.view.controllerfx;
 
-import java.io.IOException;
-
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.util.UserMode;
@@ -23,7 +21,7 @@ public class LoginControllerFX {
 	private Button submitButton;
 
 	@FXML
-	private void submitLogin() throws IOException {
+	private void submitLogin() {
 
 		LoginForm loginForm = new LoginForm();
 
@@ -43,7 +41,7 @@ public class LoginControllerFX {
 	}
 
 	@FXML
-	private void showSignupForm() throws IOException {
+	private void showSignupForm() {
 		App.setRoot("signup");
 	}
 

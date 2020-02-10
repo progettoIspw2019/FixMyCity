@@ -1,9 +1,11 @@
 package com.ispw.fixmycity.logic.view;
 
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
-import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 
 public class LoginForm {
+	
+	//TODO: is it really useful?
 
 	private String username;
 	private String password;
@@ -23,8 +25,12 @@ public class LoginForm {
 		baseUser.setUsername(username);
 		baseUser.setPassword(password);
 
-		LoginController controller = new LoginController();
-		controller.checkCredentials(baseUser);
+		if(new SystemFacade().isSignedUp(baseUser)) {
+			// TODO : successful login
+		}
+		else {
+			// failed login 
+		}
 
 	}
 

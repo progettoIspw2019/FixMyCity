@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
-import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,11 +65,9 @@ public class SignupForm {
 
 	private File imageFile;
 
-	private LoginController loginController;
 
 	@FXML
 	public void initialize() {
-		loginController = new LoginController();
 		selectedImage = defaultImage;
 	}
 
@@ -120,7 +118,7 @@ public class SignupForm {
 		user.setPassword(passwordField.getText());
 		user.setProfilePicture(imageFile);
 
-		if (loginController.signupCitizenUser(user)) {
+		if (new SystemFacade().signupCitizenUser(user)) {
 			// TODO do something
 		} else {
 			// Show error message
@@ -137,7 +135,7 @@ public class SignupForm {
 		user.setPassword(passwordField.getText());
 		user.setUsername(userNameField.getText());
 
-		if (loginController.signupCompanyUser(user)) {
+		if (new SystemFacade().signupCompanyUser(user)) {
 			// TODO do something
 		} else {
 			// Show error message

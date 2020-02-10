@@ -15,7 +15,8 @@ import javax.imageio.ImageIO;
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
-import com.ispw.fixmycity.logic.controller.ReportProblemController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -105,8 +106,8 @@ public class ReportProblemControllerFX {
 		repBean.setImage(selectedImage);
 		repBean.setTitle(titleField.getText());
 
-		ReportProblemController reportProbController = new ReportProblemController();
-		reportProbController.reportProblem(repBean);
+		// TODO: try catch exception that should be thrown by the controller
+		new SystemFacade().reportProblem(repBean);
 		
 		App.setRoot("home_citizen");
 	}
