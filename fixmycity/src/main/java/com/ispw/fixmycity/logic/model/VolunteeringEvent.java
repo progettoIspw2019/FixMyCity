@@ -23,6 +23,11 @@ public class VolunteeringEvent implements Serializable {
 	@Column(name = "id_event")
 	private int idEvent;
 
+	private String title;
+
+	@Column(name = "full_description")
+	private String fullDescription;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "creation_date")
 	private Date creationDate;
@@ -93,6 +98,22 @@ public class VolunteeringEvent implements Serializable {
 
 	public void setCommunityReport(CommunityReport communityReport) {
 		this.communityReport = communityReport;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getFullDescription() {
+		return fullDescription;
+	}
+
+	public void setFullDescription(String fullDescription) {
+		this.fullDescription = fullDescription;
 	}
 
 }

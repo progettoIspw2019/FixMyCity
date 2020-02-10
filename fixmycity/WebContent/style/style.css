@@ -109,6 +109,20 @@ html, body {
 	color: white;
 }
 
+.label-community {
+	padding: .2em .4em .2em .4em;
+	background-color: #005c78;
+	border-radius: .1em .1em .1em .1em;
+	color: white;
+}
+
+.label-company {
+	padding: .2em .4em .2em .4em;
+	background-color: #b83d5a;
+	border-radius: .1em .1em .1em .1em;
+	color: white;
+}
+
 .mt-2dot2 {
 	margin-top: 2.2em;
 }

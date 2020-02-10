@@ -1,5 +1,15 @@
 <!doctype html>
+<%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
+<%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+
 <html lang="en">
+<%
+	if (UserSessionBean.getInstance().getUserMode() != UserMode.CITIZEN
+			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
+		response.sendRedirect("login.jsp");
+	}
+%>
+
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -31,7 +41,7 @@
 			<div class="list-group list-group-flush">
 				<a href="#" class="list-group-item list-group-item-action bg-light">Map</a>
 				<a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-				<a href="#" class="list-group-item list-group-item-action bg-light">Reports</a>
+				<a href="myreports.jsp" class="list-group-item list-group-item-action bg-light">My Reports</a>
 				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
 				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
 				<a href="#" class="list-group-item list-group-item-action bg-light">--</a>
@@ -62,8 +72,6 @@
 			</nav>
 			<div class="container-fluid p-0">
 				<ul class="list-group">
-
-
 					<!-- Single Row for JSP -->
 					<li class="list-group-item ">
 						<div class="container ml-0">
@@ -85,7 +93,6 @@
 
 								<div class="col">
 									<div class="row justify-content-end mt-2">
-
 										<button type="button" class="btn btn-join ">Join</button>
 									</div>
 									<div class="row justify-content-end mt-2dot2">
@@ -123,10 +130,10 @@
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
 <script>
-      $("#menu-toggle").click(function(e) {
-      	e.preventDefault();
-      	$("#wrapper").toggleClass("toggled");
-      });
-   </script>
+	$("#menu-toggle").click(function(e) {
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled");
+	});
+</script>
 </body>
 </html>

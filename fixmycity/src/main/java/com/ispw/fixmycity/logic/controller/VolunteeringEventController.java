@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
+import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
@@ -21,7 +22,7 @@ public class VolunteeringEventController {
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
 		VolunteeringEvent event = dao.addVolunteeringEvent(volunteeringEventBean);
 
-		dao.joinVolunteeringEvent(LoginController.getInstance().getActiveCitizenUser().getUsername(), event);
+		dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(), event);
 
 	}
 

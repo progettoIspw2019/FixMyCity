@@ -22,6 +22,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -30,6 +32,12 @@ public class CreateVolunteeringEventForm {
 
 	@FXML
 	private DatePicker eventDatePicker;
+
+	@FXML
+	private TextField eventTitleTextField;
+
+	@FXML
+	private TextArea eventDescriptionTextArea;
 
 	@FXML
 	private GridPane firstGrid;
@@ -120,6 +128,8 @@ public class CreateVolunteeringEventForm {
 		VolunteeringEventBean volunteeringEventBean = new VolunteeringEventBean();
 
 		volunteeringEventBean.setCommunityReport(selectedReport);
+		volunteeringEventBean.setTitle(eventTitleTextField.getText());
+		volunteeringEventBean.setFullDescription(eventDescriptionTextArea.getText());
 		volunteeringEventBean.setCreationDate(new Date());
 		volunteeringEventBean.setEventDate(ConverterUtil.dateFromDatePicker(eventDatePicker));
 

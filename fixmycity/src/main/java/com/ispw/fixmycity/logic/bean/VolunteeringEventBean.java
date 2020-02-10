@@ -9,6 +9,9 @@ public class VolunteeringEventBean {
 
 	private Date creationDate;
 	private Date eventDate;
+	private String title;
+	private String fullDescription;
+	
 	private List<CitizenUser> citizenUsers;
 	private CommunityReportBean communityReport;
 
@@ -43,4 +46,23 @@ public class VolunteeringEventBean {
 	public void setCommunityReport(CommunityReportBean communityReport) {
 		this.communityReport = communityReport;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getFullDescription() {
+		return fullDescription;
+	}
+
+	public void setFullDescription(String fullDescription) {
+		this.fullDescription = fullDescription;
+	}
+	
+	
+	
 }

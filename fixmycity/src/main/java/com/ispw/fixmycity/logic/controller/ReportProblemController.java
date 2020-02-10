@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
+import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyUserDAO;
@@ -51,7 +52,7 @@ public class ReportProblemController {
 		compRepBean.setTitle(repBean.getTitle());
 		compRepBean.setImage(repBean.getImage());
 		compRepBean.setCompany(compUser);
-		compRepBean.setSubmitter(LoginController.getInstance().getActiveCitizenUser());
+		compRepBean.setSubmitter(UserSessionBean.getInstance().getActiveCitizenUser());
 
 		compRepDAO.add(compRepBean);
 	}
@@ -69,7 +70,7 @@ public class ReportProblemController {
 		commRepBean.setTitle(repBean.getTitle());
 		commRepBean.setImage(repBean.getImage());
 		commRepBean.setCity(repBean.getCity());
-		commRepBean.setSubmitter(LoginController.getInstance().getActiveCitizenUser());
+		commRepBean.setSubmitter(UserSessionBean.getInstance().getActiveCitizenUser());
 
 		commRepDAO.add(commRepBean);
 	}

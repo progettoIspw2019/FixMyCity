@@ -1,51 +1,31 @@
 package com.ispw.fixmycity.logic.view;
 
-import java.io.IOException;
-
-import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.LoginController;
-import com.ispw.fixmycity.logic.util.UserMode;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
 public class LoginForm {
 
-	@FXML
-	private TextField usernameField;
+	private String username;
+	private String password;
 
-	@FXML
-	private PasswordField passwordField;
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-	@FXML
-	private Button submitButton;
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-
-	@FXML
-	private void submitLogin() throws IOException {
+	public void submitLogin() {
 
 		BaseUserBean baseUser = new BaseUserBean();
 
-		baseUser.setUsername(usernameField.getText());
-		baseUser.setPassword(passwordField.getText());
+		baseUser.setUsername(username);
+		baseUser.setPassword(password);
 
-		LoginController controller = LoginController.getInstance();
-		boolean credentialsValid = controller.checkCredentials(baseUser);
+		LoginController controller = new LoginController();
+		controller.checkCredentials(baseUser);
 
-		if (credentialsValid && controller.getUserMode() == UserMode.CITIZEN)
-			App.setRoot("home_citizen");
-		else if (credentialsValid && controller.getUserMode() == UserMode.COMPANY) {
-			App.setRoot("home_company");
-		}
-
-	}
-
-	@FXML
-	private void showLoginForm() throws IOException {
-		App.setRoot("signup");
 	}
 
 }

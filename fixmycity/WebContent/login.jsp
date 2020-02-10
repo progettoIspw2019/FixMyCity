@@ -1,5 +1,35 @@
 <!doctype html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.ispw.fixmycity.logic.view.LoginForm"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
+<%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+
 <html lang="en">
+
+<%
+	LoginForm loginForm = new LoginForm();
+	String username = new String();
+	String password = new String();
+	username = (String) request.getParameter("inputUsername");
+	password = (String) request.getParameter("inputPassword");
+
+	if (username != null && password != null && !username.isBlank() && !password.isBlank()) {
+		loginForm.setPassword(password);
+		loginForm.setUsername(username);
+		loginForm.submitLogin();
+	}
+
+	if (UserSessionBean.getInstance().getUserMode() == UserMode.CITIZEN
+			&& UserSessionBean.getInstance().getActiveCitizenUser() != null) {
+		response.sendRedirect("home_citizen.jsp");
+
+	} else if (UserSessionBean.getInstance().getUserMode() == UserMode.COMPANY
+			&& UserSessionBean.getInstance().getActiveCompanyUser() != null) {
+		response.sendRedirect("home_company.jsp");
+
+	}
+%>
 
 <head>
 <!-- Required meta tags -->
@@ -27,20 +57,19 @@
 						<p id="welcome">Welcome to FixMyCity</p>
 					</div>
 				</div>
-				<form>
+				<form action="login.jsp" method="GET">
 					<div class="row">
 						<div class="col-sm">
 							<div class="form-group">
-								<input type="text" class="form-control" id="inputUsername"
+								<input type="text" class="form-control" name="inputUsername"
 									placeholder="Username">
-
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm">
 							<div class="form-group">
-								<input type="password" class="form-control" id="inputPassword"
+								<input type="password" class="form-control" name="inputPassword"
 									placeholder="Password">
 							</div>
 						</div>

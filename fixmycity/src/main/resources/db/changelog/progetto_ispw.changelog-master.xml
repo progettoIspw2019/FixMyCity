@@ -6,12 +6,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 	<changeSet author="adria (generated)" id="1580847007586-0">
-		<sql dbms="mysql"
-	            endDelimiter="\nGO"
-	            splitStatements="true"
-	            stripComments="true">SET GLOBAL max_allowed_packet=1073741824</sql>
+		<sql dbms="mysql" endDelimiter="\nGO" splitStatements="true"
+			stripComments="true">SET GLOBAL max_allowed_packet=1073741824</sql>
 	</changeSet>
-	
+
 	<changeSet author="adria (generated)" id="1580847007586-1">
 		<createTable tableName="citizen_users">
 			<column name="username" type="VARCHAR(30)">
@@ -35,7 +33,7 @@
 			<column name="address" type="VARCHAR(60)" />
 			<column name="latitude" type="DECIMAL(10, 8)" />
 			<column name="longitude" type="DECIMAL(11, 8)" />
-			<column name="city" type="VARCHAR(30)"/>
+			<column name="city" type="VARCHAR(30)" />
 			<column name="submitter" type="VARCHAR(30)" />
 			<column name="image" type="LONGBLOB" />
 		</createTable>
@@ -52,7 +50,7 @@
 			<column name="address" type="VARCHAR(60)" />
 			<column name="latitude" type="DECIMAL(10, 8)" />
 			<column name="longitude" type="DECIMAL(11, 8)" />
-			<column name="city" type="VARCHAR(30)"/>
+			<column name="city" type="VARCHAR(30)" />
 			<column name="submitter" type="VARCHAR(30)" />
 			<column name="image" type="LONGBLOB" />
 			<column name="related_company" type="VARCHAR(30)" />
@@ -100,6 +98,8 @@
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="id_community_report" type="INT" />
+			<column name="title" type="VARCHAR(30)" />
+			<column name="full_description" type="VARCHAR(90)" />
 			<column name="creation_date" type="date" />
 			<column name="event_date" type="date" />
 		</createTable>
@@ -201,7 +201,7 @@
 		<createView fullDefinition="false" remarks="VIEW"
 			viewName="base_user">select `c`.`username` AS `username`,`c`.`pwd` AS `pwd` from `progetto_ispw`.`citizen_users` `c` union select `com`.`username` AS `username`,`com`.`pwd` AS `pwd` from `progetto_ispw`.`company_users` `com` order by `username`</createView>
 	</changeSet>
-	
+
 	<changeSet author="adria (generated)" id="1580848304201-22"
 		runAlways="true">
 		<loadUpdateData encoding="UTF-8"
@@ -216,43 +216,29 @@
 		</loadUpdateData>
 	</changeSet>
 
-	<changeSet author="adria (generated)" id="1580848304201-23" runAlways="true">
-	<loadUpdateData
-	encoding="UTF-8"
-	file="initialData/company_users.csv"
-	primaryKey="username"
-	quotchar="'"
-	relativeToChangelogFile="true"
-	schemaName="progetto_ispw"
-	separator=","
-	tableName="company_users">
-	<column name="username" type="STRING"/>
-	<column name="pwd" type="STRING"/>
-	<column name="companyName" type="STRING" />
-	<column name="category" type="STRING"/>
-	<column name="city" type="STRING"/>
-	<column name="image" type="BLOB"/>
-	</loadUpdateData>
-	</changeSet>
-
-	<!-- <changeSet author="adria (generated)" id="1580848304201-24"
+	<changeSet author="adria (generated)" id="1580848304201-23"
 		runAlways="true">
 		<loadUpdateData encoding="UTF-8"
-			file="initialData/community_reports.csv" primaryKey="id_report"
+			file="initialData/company_users.csv" primaryKey="username"
 			quotchar="'" relativeToChangelogFile="true"
-			schemaName="progetto_ispw" separator=","
-			tableName="community_reports">
-			<column name="id_report" type="NUMERIC" />
-			<column name="category" type="STRING"/>
-			<column name="title" type="STRING" />
-			<column name="full_description" type="STRING" />
-			<column name="date_submission" type="DATE" />
-			<column name="address" type="STRING" />
-			<column name="latitude" type="NUMERIC" />
-			<column name="longitude" type="NUMERIC" />
-			<column name="city" type="STRING"/>
-			<column name="submitter" type="STRING" />
+			schemaName="progetto_ispw" separator="," tableName="company_users">
+			<column name="username" type="STRING" />
+			<column name="pwd" type="STRING" />
+			<column name="companyName" type="STRING" />
+			<column name="category" type="STRING" />
+			<column name="city" type="STRING" />
 			<column name="image" type="BLOB" />
 		</loadUpdateData>
-	</changeSet> -->
+	</changeSet>
+
+	<!-- <changeSet author="adria (generated)" id="1580848304201-24" runAlways="true"> 
+		<loadUpdateData encoding="UTF-8" file="initialData/community_reports.csv" 
+		primaryKey="id_report" quotchar="'" relativeToChangelogFile="true" schemaName="progetto_ispw" 
+		separator="," tableName="community_reports"> <column name="id_report" type="NUMERIC" 
+		/> <column name="category" type="STRING"/> <column name="title" type="STRING" 
+		/> <column name="full_description" type="STRING" /> <column name="date_submission" 
+		type="DATE" /> <column name="address" type="STRING" /> <column name="latitude" 
+		type="NUMERIC" /> <column name="longitude" type="NUMERIC" /> <column name="city" 
+		type="STRING"/> <column name="submitter" type="STRING" /> <column name="image" 
+		type="BLOB" /> </loadUpdateData> </changeSet> -->
 </databaseChangeLog>

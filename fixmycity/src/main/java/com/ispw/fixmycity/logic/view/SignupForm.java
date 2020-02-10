@@ -65,8 +65,11 @@ public class SignupForm {
 
 	private File imageFile;
 
+	private LoginController loginController;
+
 	@FXML
 	public void initialize() {
+		loginController = new LoginController();
 		selectedImage = defaultImage;
 	}
 
@@ -109,6 +112,7 @@ public class SignupForm {
 	}
 
 	public void signupCitizen() {
+
 		CitizenUserBean user = new CitizenUserBean();
 		user.setFirstName(firstNameField.getText());
 		user.setLastName(lastNameField.getText());
@@ -116,7 +120,7 @@ public class SignupForm {
 		user.setPassword(passwordField.getText());
 		user.setProfilePicture(imageFile);
 
-		if (LoginController.getInstance().signupCitizenUser(user)) {
+		if (loginController.signupCitizenUser(user)) {
 			// TODO do something
 		} else {
 			// Show error message
@@ -133,7 +137,7 @@ public class SignupForm {
 		user.setPassword(passwordField.getText());
 		user.setUsername(userNameField.getText());
 
-		if (LoginController.getInstance().signupCompanyUser(user)) {
+		if (loginController.signupCompanyUser(user)) {
 			// TODO do something
 		} else {
 			// Show error message
