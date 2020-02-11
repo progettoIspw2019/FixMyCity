@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.exceptions.InvalidFieldException;
 import com.ispw.fixmycity.logic.model.CitizenUser;
@@ -43,7 +45,7 @@ public class VolunteeringEventBean {
 			setEventDate(date);
 		} catch (ParseException e) {
 			// TODO devo implementare l'eccezione creata
-			e.printStackTrace();
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 		}
 	}
 

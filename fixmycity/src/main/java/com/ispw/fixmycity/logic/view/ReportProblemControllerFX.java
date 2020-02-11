@@ -57,7 +57,7 @@ public class ReportProblemControllerFX {
 	}
 
 	@FXML
-	private void cancel() throws IOException {
+	private void cancel() {
 		App.setRoot("home_citizen");
 	}
 
@@ -82,7 +82,7 @@ public class ReportProblemControllerFX {
 
 	}
 
-	public void handleSubmit() throws IOException {
+	public void handleSubmit() {
 		LocalDateTime localDateTime = LocalDateTime.now();
 
 		ReportBeanView repBean = new ReportBeanView();

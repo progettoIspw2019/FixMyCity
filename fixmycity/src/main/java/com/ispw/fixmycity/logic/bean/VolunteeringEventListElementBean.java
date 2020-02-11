@@ -1,9 +1,6 @@
 package com.ispw.fixmycity.logic.bean;
 
 import java.util.Date;
-import java.util.List;
-
-import com.ispw.fixmycity.logic.model.CitizenUser;
 
 public class VolunteeringEventListElementBean {
 
