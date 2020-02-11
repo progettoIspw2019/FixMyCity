@@ -2,10 +2,10 @@
 <%@page import="com.ispw.fixmycity.logic.model.Job"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
-<%@page import="com.ispw.fixmycity.logic.view.MyReportsView"%>
 <%@page import="com.ispw.fixmycity.logic.bean.ReportBeanView"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="java.util.List"%>
 
 <%
@@ -14,9 +14,8 @@
 		response.sendRedirect("index.jsp");
 	}
 
-	MyReportsView view = new MyReportsView();
-	List<CommunityReportBeanView> commReports = view.getMyCommunityReports();
-	List<CompanyReportBeanView> compReports = view.getMyCompanyReports();
+	List<CommunityReportBeanView> commReports = new SystemFacade().getMyCommunityReports();
+	List<CompanyReportBeanView> compReports = new SystemFacade().getMyCompanyReports();
 %>
 
 <html lang="en">
