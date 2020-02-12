@@ -13,6 +13,7 @@ public class ReportBeanView {
 	private String address;
 	private byte[] image;
 	private Date dateSubmission;
+	private String submitter;
 
 	public String getTitle() {
 		return title;
@@ -86,5 +87,13 @@ public class ReportBeanView {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getSubmitter() {
+		return submitter;
+	}
+
+	public void setSubmitter(String submitter) {
+		this.submitter = submitter;
 	}
 }

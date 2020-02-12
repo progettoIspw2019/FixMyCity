@@ -1,6 +1,8 @@
 package com.ispw.fixmycity.logic.dao;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,7 +31,7 @@ public class CompanyReportDAO {
 	public CompanyReport add(CompanyReportBean compRepBean) {
 		CompanyReport compReport = new CompanyReport();
 		compReport.setFromBean(compRepBean);
-		
+		Logger.getLogger("fixmycity").log(Level.INFO, compReport.getTitle() + "\n" + compReport.getCitizenUser());
 		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
 		entityManager.getTransaction().commit();

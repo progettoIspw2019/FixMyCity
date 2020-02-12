@@ -37,6 +37,7 @@ public class LoadReportsController {
 			commRepBean.setLatitude(rep.getLatitude());
 			commRepBean.setLongitude(rep.getLongitude());
 			commRepBean.setTitle(rep.getTitle());
+			commRepBean.setSubmitter(rep.getCitizenUser().getUsername());
 
 			ArrayList<String> eventsStr = new ArrayList<>();
 
@@ -68,6 +69,7 @@ public class LoadReportsController {
 			compRepBean.setLatitude(rep.getLatitude());
 			compRepBean.setLongitude(rep.getLongitude());
 			compRepBean.setTitle(rep.getTitle());
+			compRepBean.setSubmitter(rep.getCitizenUser().getUsername());
 
 			ArrayList<String> jobsStr = new ArrayList<>();
 

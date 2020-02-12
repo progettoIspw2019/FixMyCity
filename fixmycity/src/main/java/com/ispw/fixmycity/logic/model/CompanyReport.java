@@ -169,7 +169,7 @@ public class CompanyReport implements Serializable {
 
 	public void setFromBean(CompanyReportBean compRepBean) {
 		this.setAddress(compRepBean.getAddress());
-		this.setCitizenUser(compRepBean.getCitizen());
+		this.setCitizenUser(compRepBean.getSubmitter());
 		this.setCategory(compRepBean.getCategory());
 		this.setCompanyUser(compRepBean.getCompany());
 		this.setDateSubmission(compRepBean.getDateSubmission());
@@ -178,6 +178,7 @@ public class CompanyReport implements Serializable {
 		this.setLatitude(compRepBean.getLatitude());
 		this.setLongitude(compRepBean.getLongitude());
 		this.setTitle(compRepBean.getTitle());
+		this.setCity(compRepBean.getCity());
 	}
 
 	public String getCategory() {

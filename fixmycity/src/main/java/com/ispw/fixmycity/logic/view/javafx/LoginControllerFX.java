@@ -32,8 +32,9 @@ public class LoginControllerFX {
 
 		UserSessionBean session = UserSessionBean.getInstance();
 
-		if (session.getActiveCitizenUser() != null && session.getUserMode() == UserMode.CITIZEN)
+		if (session.getActiveCitizenUser() != null && session.getUserMode() == UserMode.CITIZEN) {
 			App.setRoot("home_citizen");
+		}
 		else if (session.getActiveCompanyUser() != null && session.getUserMode() == UserMode.COMPANY) {
 			App.setRoot("home_company");
 		}

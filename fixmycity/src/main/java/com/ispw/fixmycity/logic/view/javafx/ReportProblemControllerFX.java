@@ -32,7 +32,7 @@ import javafx.stage.Window;
 
 public class ReportProblemControllerFX {
 
-	ObservableList<String> categoryList = FXCollections.observableArrayList("Garbage", "Leak", "Pothole");
+	ObservableList<String> categoryList = FXCollections.observableArrayList("Garbage", "Leak", "Pothole", "Filth");
 
 	@FXML
 	private GridPane reportGridPane;

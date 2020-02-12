@@ -68,6 +68,8 @@ public class CommunityReport implements Serializable {
 		this.setLongitude(commRepBean.getLongitude());
 		this.setCategory(commRepBean.getCategory());
 		this.setCitizenUser(commRepBean.getSubmitter());
+		this.setTitle(commRepBean.getTitle());
+		this.setCity(commRepBean.getCity());
 	}
 
 	public int getIdReport() {
