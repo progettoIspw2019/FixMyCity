@@ -1,13 +1,20 @@
 <!doctype html>
+<%@page import="com.ispw.fixmycity.logic.view.MapController"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page
 	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
+	<%@ page
+	import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
+
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
 
 <html lang="en">
 <%
@@ -33,6 +40,10 @@
 		bean.setEventTime(time);
 		controller.createVolunteeringEvent(bean);
 	}
+
+	List<CommunityReportBeanView> commReps = new SystemFacade().getCommunityReports();
+	List<CompanyReportBeanView> compReps = new SystemFacade().getCompanyReports();
+
 %>
 <head>
 <!-- Required meta tags -->
@@ -44,6 +55,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<!-- Map CSS -->
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	crossorigin="" />
 <link rel="stylesheet" href="style/style.css">
 <title>FixMyCity</title>
 </head>
@@ -63,12 +79,13 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
-				<a href="home_citizen.jsp" class="list-group-item list-group-item-action bg-light">Map</a>
-				<a href="events.jsp" class="list-group-item list-group-item-action bg-light">Active
-					Events</a> 
-				<a href="myreports.jsp"
+				<a href="home_citizen.jsp"
+					class="list-group-item list-group-item-action bg-light">Map</a> <a
+					href="events.jsp"
+					class="list-group-item list-group-item-action bg-light">Active
+					Events</a> <a href="myreports.jsp"
 					class="list-group-item list-group-item-action bg-light">My
-					Reports</a> 
+					Reports</a>
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
@@ -102,8 +119,8 @@
 					</ul>
 				</div>
 			</nav>
-			<div class="container-fluid">
-				<h1 class="mt-4">Map will go here</h1>
+			<div class="container-fluid p-0">
+				<div id="mapid"></div>
 			</div>
 		</div>
 	</div>
@@ -255,5 +272,49 @@
 		$("#wrapper").toggleClass("toggled");
 	});
 </script>
+
+<!-- Map Javascript -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+
+<script type="text/javascript">
+	var mymap = L.map('mapid').setView([ 41.902782, 12.496365 ], 13);
+
+	L
+			.tileLayer(
+					'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=f1a0893344e045899384882196dacff3',
+					{
+						attribution : 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+						maxZoom : 18,
+						id : 'eppleton.ia9c2p12',
+						accessToken : 'f1a0893344e045899384882196dacff3'
+					}).addTo(mymap);
+
+	<%
+		for (CommunityReportBeanView commRep : commReps) {
+			out.println("L.marker(["+commRep.getLatitude()+", "+commRep.getLongitude()+"]).addTo(mymap).bindPopup('"+commRep.getTitle()+"');");
+		}
+		for (CompanyReportBeanView compRep : compReps) {
+			out.println("L.marker(["+compRep.getLatitude()+", "+compRep.getLongitude()+"]).addTo(mymap).bindPopup('"+compRep.getTitle()+"');");
+		}
+	
+	%>
+	
+	function responsiveMap() {
+		wrapperSize = $("#page-content-wrapper").height() - 140;
+
+		document.getElementById("mapid").style.height = wrapperSize + "px";
+		mymap.invalidateSize(true);
+
+	}
+
+	window.addEventListener("resize", responsiveMap);
+	$(document).ready(function() {
+		responsiveMap();
+	});
+</script>
+
+
 </body>
 </html>
