@@ -1,12 +1,7 @@
 package com.ispw.fixmycity.logic.view;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.apache.http.impl.client.HttpClients;
 
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
@@ -15,8 +10,6 @@ import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.view.javafx.MapBoundary;
 
-import fr.dudie.nominatim.client.JsonNominatimClient;
-import fr.dudie.nominatim.model.Address;
 import javafx.scene.web.WebView;
 import net.java.html.boot.fx.FXBrowsers;
 import net.java.html.leaflet.Circle;
@@ -40,73 +33,45 @@ public class MapController {
 		this.setMapView(mapView);
 
 		mouseListener = (MouseEvent ev) -> {
-				try {
-					BigDecimal latitude = BigDecimal.valueOf(ev.getLatLng().getLatitude());
-					BigDecimal longitude = BigDecimal.valueOf(ev.getLatLng().getLongitude());
+			BigDecimal latitude = BigDecimal.valueOf(ev.getLatLng().getLatitude());
+			BigDecimal longitude = BigDecimal.valueOf(ev.getLatLng().getLongitude());
 
-					SessionView.setLatitudeSetOnMap(latitude);
-					SessionView.setLongitudeSetOnMap(longitude);
+			new SystemFacade().setAddressForReport(longitude, latitude);
+			AddressBean addr = SessionView.getAddressSetOnMap();
 
-					//TODO: this should be in a controller and it should be used through the facade
-					JsonNominatimClient client = new JsonNominatimClient(HttpClients.createDefault(),
-							"progetto.ispw.uniroma2@gmail.com");
+			PopupOptions popupOptions = new PopupOptions().setMaxWidth(400);
+			Popup popup = new Popup(popupOptions);
+			popup.setLatLng(ev.getLatLng());
 
-					Address address = client.getAddress(longitude.doubleValue(), latitude.doubleValue());
-					
-					AddressBean addr = new AddressBean();
-					
-					for(var elem : address.getAddressElements()) {
-						if(elem.getKey().equals("road"))
-							addr.setRoad(elem.getValue());
-						if(elem.getKey().equals("city"))
-							addr.setCity(elem.getValue());
-						if(elem.getKey().equals("country"))
-							addr.setCountry(elem.getValue());
-					}
-					
-					SessionView.setLatitudeSetOnMap(latitude);
-					SessionView.setLongitudeSetOnMap(longitude);
-					SessionView.setAddressSetOnMap(addr);
-
-					PopupOptions popupOptions = new PopupOptions().setMaxWidth(400);
-					Popup popup = new Popup(popupOptions);
-					popup.setLatLng(ev.getLatLng());
-					
-					popup.setContent(addr.getRoad() + ", "
-							+ addr.getCity() + ", "
-							+ addr.getCountry());
-					popup.openOn(map);
-
-				} catch (IOException e) {
-					Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
-				}
+			popup.setContent(addr.getRoad() + ", " + addr.getCity() + ", " + addr.getCountry());
+			popup.openOn(map);
 		};
 	}
 
 	public void loadMap(List<ReportFilter> filters) {
 
 		FXBrowsers.load(mapView, MapBoundary.class.getResource("index.html"), () -> {
-				map = new Map("map");
+			map = new Map("map");
 
-				TileLayer tileLayer = new TileLayer(
-						"http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=f1a0893344e045899384882196dacff3",
-						new TileLayerOptions().setAttribution(
-								"Map data &copy; <a href='http://www.thunderforest.com/opencyclemap/'>OpenCycleMap</a> contributors, "
-										+ "<a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, "
-										+ "Imagery © <a href='http://www.thunderforest.com/'>Thunderforest</a>")
-								.setMaxZoom(18).setId("eppleton.ia9c2p12"));
-				map.addLayer(tileLayer);
-				// from here we just use the Leaflet API to show some stuff on the map
-				map.setView(new LatLng(41.902782, 12.496365), 13);
+			TileLayer tileLayer = new TileLayer(
+					"http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=f1a0893344e045899384882196dacff3",
+					new TileLayerOptions().setAttribution(
+							"Map data &copy; <a href='http://www.thunderforest.com/opencyclemap/'>OpenCycleMap</a> contributors, "
+									+ "<a href='http://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, "
+									+ "Imagery © <a href='http://www.thunderforest.com/'>Thunderforest</a>")
+							.setMaxZoom(18).setId("eppleton.ia9c2p12"));
+			map.addLayer(tileLayer);
+			// from here we just use the Leaflet API to show some stuff on the map
+			map.setView(new LatLng(41.902782, 12.496365), 13);
 
-				map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
+			map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
 
-				for (ReportFilter filter : filters) {
-					if (filter == ReportFilter.ALL_COMMUNITY_REPORT)
-						addEveryCommunityReport(map);
-					if (filter == ReportFilter.ALL_COMPANY_REPORT)
-						addEveryCompanyReport(map);
-				}
+			for (ReportFilter filter : filters) {
+				if (filter == ReportFilter.ALL_COMMUNITY_REPORT)
+					addEveryCommunityReport(map);
+				if (filter == ReportFilter.ALL_COMPANY_REPORT)
+					addEveryCompanyReport(map);
+			}
 		});
 	}
 

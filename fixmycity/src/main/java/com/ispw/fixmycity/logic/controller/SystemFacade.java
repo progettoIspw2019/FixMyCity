@@ -1,5 +1,6 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +59,9 @@ public class SystemFacade {
 	
 	public CommunityReportBean getCommunityReportFromId(Integer id) {
 		return new VolunteeringEventController().getCommunityReportFromId(id);
+	}
+	
+	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) {
+		new ReportProblemController().setAddressForReport(longitude, latitude);
 	}
 }
