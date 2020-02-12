@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view.controllerfx;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.app.exceptions.InvalidFieldException;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
-import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 import javafx.beans.value.ObservableValue;
@@ -26,8 +26,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
-public class CreateVolunteeringEventControllerFX {
+public class CreateVolunteeringEventForm {
 
 	@FXML
 	private DatePicker eventDatePicker;
@@ -66,7 +67,7 @@ public class CreateVolunteeringEventControllerFX {
 	private TextField eventTimeTextField;
 
 	@FXML
-	private TextField errorTextField;
+	private Text errorText;
 
 	private ObservableMap<Integer, String> observableList;
 
@@ -74,16 +75,14 @@ public class CreateVolunteeringEventControllerFX {
 
 	private CommunityReportBean selectedReport;
 
-	VolunteeringEventController controller = new VolunteeringEventController();
-
 	@FXML
 	public void initialize() {
 
-		secondGrid.setVisible(true);
+		firstGrid.setVisible(true);
 		secondGrid.setVisible(false);
-		errorTextField.setVisible(false);
+		errorText.setVisible(false);
 
-		observableList = FXCollections.observableMap(controller.getCommunityReportMap());
+		observableList = FXCollections.observableMap(new SystemFacade().getMappedCommunityReports());
 
 		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());
@@ -100,7 +99,7 @@ public class CreateVolunteeringEventControllerFX {
 	public void handleNextButton() {
 		firstGrid.setVisible(false);
 		secondGrid.setVisible(true);
-		selectedReport = controller.getCommunityReportFromId(selectionId);
+		selectedReport = new SystemFacade().getCommunityReportFromId(selectionId);
 
 		byte[] bytes = selectedReport.getImage();
 		Image image = new Image(new ByteArrayInputStream(bytes));
@@ -122,10 +121,9 @@ public class CreateVolunteeringEventControllerFX {
 
 	@FXML
 	public void handleSubmitButton() {
-		errorTextField.setVisible(false);
 
+		errorText.setVisible(false);
 		VolunteeringEventBean volunteeringEventBean = new VolunteeringEventBean();
-
 		volunteeringEventBean.setCommunityReport(selectedReport);
 		volunteeringEventBean.setTitle(eventTitleTextField.getText());
 		volunteeringEventBean.setFullDescription(eventDescriptionTextArea.getText());
@@ -134,11 +132,11 @@ public class CreateVolunteeringEventControllerFX {
 		try {
 			volunteeringEventBean.setEventTime(eventTimeTextField.getText());
 		} catch (InvalidFieldException e) {
-			errorTextField.setText(e.getMessage());
-			errorTextField.setVisible(true);
+			errorText.setText(e.getMessage());
+			errorText.setVisible(true);
 			return;
 		}
-		controller.createVolunteeringEvent(volunteeringEventBean);
+		new SystemFacade().createVolunteeringEvent(volunteeringEventBean);
 
 	}
 
@@ -212,14 +210,6 @@ public class CreateVolunteeringEventControllerFX {
 
 	public void setReportImageView(ImageView reportImageView) {
 		this.reportImageView = reportImageView;
-	}
-
-	public VolunteeringEventController getController() {
-		return controller;
-	}
-
-	public void setController(VolunteeringEventController controller) {
-		this.controller = controller;
 	}
 
 	public ObservableMap<Integer, String> getObservableList() {

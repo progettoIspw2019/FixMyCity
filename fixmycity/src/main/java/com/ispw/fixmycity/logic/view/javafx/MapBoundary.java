@@ -1,10 +1,12 @@
-package com.ispw.fixmycity.logic.view;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.util.ReportFilter;
+import com.ispw.fixmycity.logic.view.MapController;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

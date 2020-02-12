@@ -24,9 +24,9 @@ module com.ispw.fixmycity.logic {
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;
 	opens com.ispw.fixmycity.logic.controller to javafx.fxml;
 	opens com.ispw.fixmycity.logic.view to javafx.fxml;
+	opens com.ispw.fixmycity.logic.view.javafx to javafx.fxml;
 	opens com.ispw.fixmycity.logic.model to org.hibernate.orm.core;
-	opens com.ispw.fixmycity.logic.view.controllerfx to javafx.fxml;
-
+	
 	exports com.ispw.fixmycity.logic.app;
 	exports com.ispw.fixmycity.logic.controller;
 	exports com.ispw.fixmycity.logic.view;
@@ -34,5 +34,5 @@ module com.ispw.fixmycity.logic {
 	exports com.ispw.fixmycity.logic.util;
 	exports com.ispw.fixmycity.logic.model;
 	exports com.ispw.fixmycity.logic.dao;
-	exports com.ispw.fixmycity.logic.view.controllerfx;
+	exports com.ispw.fixmycity.logic.view.javafx;
 }

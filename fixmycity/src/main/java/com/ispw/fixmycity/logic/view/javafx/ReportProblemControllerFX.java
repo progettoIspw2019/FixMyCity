@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import java.awt.image.DataBufferByte;
 import java.io.File;
@@ -16,6 +16,7 @@ import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

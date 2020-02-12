@@ -13,6 +13,7 @@ import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ReportFilter;
+import com.ispw.fixmycity.logic.view.javafx.MapBoundary;
 
 import fr.dudie.nominatim.client.JsonNominatimClient;
 import fr.dudie.nominatim.model.Address;

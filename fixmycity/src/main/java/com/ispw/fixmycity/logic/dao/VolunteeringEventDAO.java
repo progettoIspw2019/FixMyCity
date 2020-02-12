@@ -60,7 +60,7 @@ public class VolunteeringEventDAO {
 
 	public List<VolunteeringEvent> findActiveEvents() {
 		entityManager = entityManagerFactory.createEntityManager();
-		return entityManager.createNamedQuery("VolunteeringEvent.findActiveEvents").getResultList();
+		return entityManager.createNamedQuery("VolunteeringEvent.findActiveEvents", VolunteeringEvent.class).getResultList();
 	}
 
 }

@@ -1,4 +1,4 @@
-cred<!doctype html>
+<!doctype html>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <html lang="en">
@@ -22,7 +22,7 @@ cred<!doctype html>
 <title>FixMyCity</title>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
+	<nav aria-label="navbar" class="navbar navbar-dark bg-dark">
 		<ul class="nav navbar-nav navbar-left">
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
@@ -45,7 +45,7 @@ cred<!doctype html>
 		<!-- /#sidebar-wrapper -->
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
-			<nav
+			<nav aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
 				<!-- 		<button class="btn btn-primary" id="menu-toggle">Toggle
                   Menu</button>
@@ -103,6 +103,7 @@ cred<!doctype html>
 				</ul>
 			</div>
 		</div>
+	</div>
 </body>
 <!-- 
       <div class="container-flex">

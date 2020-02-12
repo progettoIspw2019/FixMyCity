@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import java.io.File;
 

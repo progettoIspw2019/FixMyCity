@@ -4,8 +4,6 @@ import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 
 public class LoginForm {
-	
-	//TODO: is it really useful?
 
 	private String username;
 	private String password;

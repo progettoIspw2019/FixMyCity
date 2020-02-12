@@ -29,7 +29,11 @@ public class App extends Application {
 	}
 
 	public static void setRoot(String fxml) {
-		stage.setScene(new Scene(loadFXML(fxml)));
+		Parent newRoot = loadFXML(fxml);
+		if(newRoot == null) {
+			System.exit(-1);
+		}
+		stage.getScene().setRoot(newRoot);
 	}
 
 	private static Parent loadFXML(String fxml) {

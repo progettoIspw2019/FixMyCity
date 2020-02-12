@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view.controllerfx;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.UserSessionBean;

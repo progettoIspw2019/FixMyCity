@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.CreateVolunteeringEventForm">
+<GridPane alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.CreateVolunteeringEventForm">
 
 	<columnConstraints>
 		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -97,7 +97,7 @@
             <TextArea fx:id="eventDescriptionTextArea" prefHeight="200.0" prefWidth="200.0" promptText="Description.." GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2" />
             <TextField fx:id="eventTitleTextField" promptText="Title" GridPane.columnSpan="2" GridPane.rowIndex="7" />
             <TextField fx:id="eventTimeTextField" promptText="Time of the event (hh:mm 24h)" GridPane.columnSpan="2" GridPane.rowIndex="11" />
-            <Text fx:id="errorTextField" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
 			</children>
 		</GridPane>
 	</children>
