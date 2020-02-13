@@ -82,7 +82,6 @@
 			</nav>
 			<div class="container-fluid p-0">
 				<ul class="list-group">
-
 					<%
 						for (CommunityReportBeanView rep : commReports) {
 					%>

@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.bean.AddressBean;
+import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.util.UserMode;
 
 public class SessionView {
@@ -14,18 +15,23 @@ public class SessionView {
 	private static String username;
 	private static byte[] imageProfile;
 	private static UserMode mode;
-	
-	private SessionView() {}
-	
+	private static CityEnum cityEnum;
+
+	private SessionView() {
+	}
+
 	public static BigDecimal getLongitudeSetOnMap() {
 		return longitudeSetOnMap;
 	}
+
 	public static void setLongitudeSetOnMap(BigDecimal longitude) {
 		longitudeSetOnMap = longitude;
 	}
+
 	public static BigDecimal getLatitudeSetOnMap() {
 		return latitudeSetOnMap;
 	}
+
 	public static void setLatitudeSetOnMap(BigDecimal latitude) {
 		latitudeSetOnMap = latitude;
 	}
@@ -62,4 +68,13 @@ public class SessionView {
 	public static void setMode(UserMode mode) {
 		SessionView.mode = mode;
 	}
+
+	public static CityEnum getCityEnum() {
+		return cityEnum;
+	}
+
+	public static void setCityEnum(CityEnum cityEnum) {
+		SessionView.cityEnum = cityEnum;
+	}
+
 }

@@ -2,6 +2,8 @@ package com.ispw.fixmycity.logic.bean;
 
 import java.io.File;
 
+import com.ispw.fixmycity.logic.util.CityEnum;
+
 public class CompanyUserBean {
 	private String username;
 
@@ -11,7 +13,7 @@ public class CompanyUserBean {
 
 	private String category;
 
-	private String city;
+	private CityEnum city;
 
 	private File image;
 
@@ -47,11 +49,11 @@ public class CompanyUserBean {
 		this.category = category;
 	}
 
-	public String getCity() {
+	public CityEnum getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(CityEnum city) {
 		this.city = city;
 	}
 

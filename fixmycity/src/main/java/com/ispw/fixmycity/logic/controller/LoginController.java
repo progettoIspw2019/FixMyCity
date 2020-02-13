@@ -11,6 +11,7 @@ import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
+import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
@@ -24,6 +25,7 @@ public class LoginController {
 			if (citizenUser != null) {
 				user.setMode(UserMode.CITIZEN);
 				user.setImage(citizenUser.getProfilePicture());
+				user.setCity(CityEnum.valueOf(citizenUser.getCity().toUpperCase()));
 				return user;
 			}
 		} catch (NoResultException e) {
@@ -34,6 +36,7 @@ public class LoginController {
 			if (companyUser != null) {
 				user.setMode(UserMode.COMPANY);
 				user.setImage(companyUser.getImage());
+				user.setCity(CityEnum.valueOf(companyUser.getCity().toUpperCase()));
 				return user;
 			}
 		} catch (NoResultException e) {

@@ -41,16 +41,16 @@ public class MapBoundary {
 		byte[] profilePicByte = SessionView.getImageProfile();
 		Image img = new Image(getClass().getResourceAsStream("placeholder-profile.jpg"));
 		profileImg.setImage(img);
-		
+
 		if (profilePicByte != null) {
 			Logger.getLogger("fixmycity").log(Level.INFO, "loaded " + profilePicByte);
 			profileImg.setImage(new Image(new ByteArrayInputStream(profilePicByte)));
 		}
-		double halfWidth = profileImg.getFitWidth()/2;
-		double halfHeight = profileImg.getFitHeight()/2;
-		Circle clip = new Circle(halfWidth-4, halfHeight-4, 15);
+		double halfWidth = profileImg.getFitWidth() / 2;
+		double halfHeight = profileImg.getFitHeight() / 2;
+		Circle clip = new Circle(halfWidth - 4, halfHeight - 4, 15);
 		profileImg.setClip(clip);
-		
+
 		List<ReportFilter> reportFilters = new ArrayList<>();
 		reportFilters.add(ReportFilter.ALL_COMMUNITY_REPORT);
 		reportFilters.add(ReportFilter.ALL_COMPANY_REPORT);

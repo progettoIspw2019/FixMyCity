@@ -18,6 +18,7 @@
 			<column name="pwd" type="CHAR(32)" />
 			<column name="first_name" type="VARCHAR(30)" />
 			<column name="surname" type="VARCHAR(30)" />
+			<column name="city" type="VARCHAR(30)" />
 			<column name="profile_picture" type="LONGBLOB" />
 		</createTable>
 	</changeSet>
@@ -79,7 +80,7 @@
 			<column name="end_date" type="date" />
 			<column name="state" type="ENUM('A', 'R', 'E')" />
 			<column name="job_info" type="BLOB" />
-			<column name="related_company" type ="VARCHAR(30)" />
+			<column name="related_company" type="VARCHAR(30)" />
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-6">
@@ -103,7 +104,7 @@
 			<column name="creation_date" type="date" />
 			<column name="event_date" type="date" />
 			<column name="event_time" type="time" />
-			
+
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-8">
@@ -212,20 +213,13 @@
 			viewName="base_user">select `c`.`username` AS `username`,`c`.`pwd` AS `pwd` from `progetto_ispw`.`citizen_users` `c` union select `com`.`username` AS `username`,`com`.`pwd` AS `pwd` from `progetto_ispw`.`company_users` `com` order by `username`</createView>
 	</changeSet>
 
-	<changeSet author="adria (generated)" id="1580848304201-22"
-		runAlways="true">
-		<loadUpdateData encoding="UTF-8"
-			file="initialData/citizen_users.csv" primaryKey="username"
-			quotchar="" relativeToChangelogFile="true" schemaName="progetto_ispw"
-			separator="," tableName="citizen_users">
-			<column name="username" type="STRING" />
-			<column name="pwd" type="STRING" />
-			<column name="first_name" type="STRING" />
-			<column name="surname" type="STRING" />
-			<column name="profile_picture" type="BLOB" />
-		</loadUpdateData>
-	</changeSet>
-
+	<!-- <changeSet author="adria (generated)" id="1580848304201-22" runAlways="true"> 
+		<loadUpdateData encoding="UTF-8" file="initialData/citizen_users.csv" primaryKey="username" 
+		quotchar="" relativeToChangelogFile="true" schemaName="progetto_ispw" separator="," 
+		tableName="citizen_users"> <column name="username" type="STRING" /> <column 
+		name="pwd" type="STRING" /> <column name="first_name" type="STRING" /> <column 
+		name="surname" type="STRING" /> <column name="profile_picture" type="BLOB" 
+		/> </loadUpdateData> </changeSet> -->
 	<changeSet author="adria (generated)" id="1580848304201-23"
 		runAlways="true">
 		<loadUpdateData encoding="UTF-8"

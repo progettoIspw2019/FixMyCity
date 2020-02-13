@@ -28,17 +28,18 @@ public class LoginControllerFX {
 		userBean.setUsername(usernameField.getText());
 		userBean.setPassword(passwordField.getText());
 		SessionView.setUsername(usernameField.getText());
-		
+
 		BaseUserBean response = new SystemFacade().isSignedUp(userBean);
-		
+
 		SessionView.setImageProfile(response.getImage());
 
 		if (response.getMode() == UserMode.CITIZEN) {
 			SessionView.setMode(UserMode.CITIZEN);
+			SessionView.setCityEnum(response.getCity());
 			App.setRoot("home_citizen");
-		}
-		else if (response.getMode() == UserMode.COMPANY) {
+		} else if (response.getMode() == UserMode.COMPANY) {
 			SessionView.setMode(UserMode.COMPANY);
+			SessionView.setCityEnum(response.getCity());
 			App.setRoot("home_company");
 		}
 

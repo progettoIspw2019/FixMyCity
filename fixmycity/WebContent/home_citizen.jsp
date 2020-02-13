@@ -1,10 +1,13 @@
 <!doctype html>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.ispw.fixmycity.logic.model.CityFactory"%>
+<%@page import="com.ispw.fixmycity.logic.model.City"%>
+
 <%@page import="com.ispw.fixmycity.logic.view.MapController"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page
 	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
-	<%@ page
-	import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
+<%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
@@ -16,6 +19,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Arrays"%>
 
 <html lang="en">
 <%
@@ -43,7 +47,10 @@
 
 	List<CommunityReportBeanView> commReps = new SystemFacade().getCommunityReports();
 	List<CompanyReportBeanView> compReps = new SystemFacade().getCompanyReports();
-
+	CityFactory cityFactory = new CityFactory();
+	City city = cityFactory.getCity(SessionView.getCityEnum());
+	List<String> categories = new ArrayList<String>();
+	categories = city.getAllCategories();
 %>
 <head>
 <!-- Required meta tags -->
@@ -60,6 +67,15 @@
 	href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
 	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
 	crossorigin="" />
+<!-- Load Esri Leaflet Geocoder from CDN -->
+<link rel="stylesheet"
+	href="https://unpkg.com/esri-leaflet-geocoder@2.3.2/dist/esri-leaflet-geocoder.css"
+	integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+	crossorigin="">
+
+
+
+<link rel="stylesheet" href="lib/Control.Coordinates.css" />
 <link rel="stylesheet" href="style/style.css">
 <title>FixMyCity</title>
 </head>
@@ -104,8 +120,8 @@
 				</button>
 				<div class="collapse navbar-collapse " id="navbarSupportedContent">
 					<ul class="navbar-nav  mt-2 mt-lg-0">
-						<li class="nav-item active"><button data-toggle="modal"
-								data-target="#newReport" class="nav-link ">
+						<li class="nav-item active"><button id="addRepBtn" disabled
+								data-toggle="modal" data-target="#newReport" class="nav-link ">
 								<img src="style/icons/Document-text.svg" alt="" width="24"
 									height="24"> Add a Report
 							</button></li>
@@ -136,23 +152,56 @@
 				</div>
 				<!-- Modal body -->
 				<form action="login.jsp" method="GET">
+					<input type="hidden" value="" id="latitudeInputId"
+						name="latitudeInput"> <input type="hidden" value=""
+						id="longitudeInputId" name="longitudeInput"> <input
+						type="hidden" value="" id="addressInputId" name="addressInput">
+
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<input type="text" class="form-control" name="inputUsername"
-										placeholder="Username">
+									<input type="text" class="form-control" name="inputReportTitle"
+										placeholder="Title">
 								</div>
 							</div>
 						</div>
+
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<input type="password" class="form-control"
-										name="inputPassword" placeholder="Password">
+									<textarea class="form-control" name="inputReportDescription"
+										placeholder="Description" rows="10"></textarea>
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputReportCategoryId">Category</label> <select
+										class="form-control" name="inputReportCategory"
+										id="inputReportCategoryId">
+										<% for (String cat : categories) { %>
+										<option><% out.println(cat); %></option>
+										<% } %>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputReportPictureId">Add a picture</label> <br>
+									<input type="file" id="inputReportPictureId"
+										name="inputReportPicture">
+								</div>
+							</div>
+						</div>
+
+
+
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
@@ -266,6 +315,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
+
 <script>
 	$("#menu-toggle").click(function(e) {
 		e.preventDefault();
@@ -277,30 +329,109 @@
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
 	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
 	crossorigin=""></script>
+<script src="lib/Control.Coordinates.js"></script>
+
+
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+	integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
+	crossorigin=""></script>
+
+
+<script
+	src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"
+	integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A=="
+	crossorigin=""></script>
+
+<script
+	src="https://cdn.rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js"></script>
+
 
 <script type="text/javascript">
-	var mymap = L.map('mapid').setView([ 41.902782, 12.496365 ], 13);
 
+
+var cityBorder =  [
+<% int len = city.getBorderShape().length;
+for (int i=0; i<len; i++) 
+{
+	out.println(Arrays.toString(city.getBorderShape()[i]));
+	if (i<len-1) { out.println(", ");  }
+} 
+%>];
+
+
+
+	var mymap = L.map('mapid').setView([<% out.println(city.getLatitude()); %>, <% out.println(city.getLongitude()); %> ], 13);
 	L
 			.tileLayer(
-					'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=f1a0893344e045899384882196dacff3',
+					"https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8"
+							+ "?apiKey=XUbEajSB94rqlnuoXCZkfMe_n3bUeeGghpHSejZkC50",
 					{
-						attribution : 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+						attribution : 'HERE Maps',
 						maxZoom : 18,
 						id : 'eppleton.ia9c2p12',
-						accessToken : 'f1a0893344e045899384882196dacff3'
+						accessToken : 'XUbEajSB94rqlnuoXCZkfMe_n3bUeeGghpHSejZkC50'
 					}).addTo(mymap);
+<%for (CommunityReportBeanView commRep : commReps) {
+				out.println("L.marker([" + commRep.getLatitude() + ", " + commRep.getLongitude()
+						+ "]).addTo(mymap).bindPopup('" + commRep.getTitle() + "');");
+			}
+			for (CompanyReportBeanView compRep : compReps) {
+				out.println("L.marker([" + compRep.getLatitude() + ", " + compRep.getLongitude()
+						+ "]).addTo(mymap).bindPopup('" + compRep.getTitle() + "');");
+			}%>
+	var geocodeService = L.esri.Geocoding.geocodeService();
 
-	<%
-		for (CommunityReportBeanView commRep : commReps) {
-			out.println("L.marker(["+commRep.getLatitude()+", "+commRep.getLongitude()+"]).addTo(mymap).bindPopup('"+commRep.getTitle()+"');");
-		}
-		for (CompanyReportBeanView compRep : compReps) {
-			out.println("L.marker(["+compRep.getLatitude()+", "+compRep.getLongitude()+"]).addTo(mymap).bindPopup('"+compRep.getTitle()+"');");
-		}
+	var polygon = L.polygon(cityBorder, {
+		radius : 8,
+		fillColor : "#343a40",
+		color : "blue",
+
+		opacity : 1,
+		fillOpacity : 0
+
+	}).addTo(mymap);
 	
-	%>
-	
+	mymap.fitBounds(polygon.getBounds());
+
+	var selectionMarker = {};
+
+	mymap
+			.on(
+					'click',
+					function(e) {
+
+						geocodeService
+								.reverse()
+								.latlng(e.latlng)
+								.run(
+										function(error, result) {
+
+											if (polygon.contains(e.latlng)) {
+												mymap
+														.removeLayer(selectionMarker);
+												selectionMarker = L
+														.marker(result.latlng)
+														.addTo(mymap)
+														.bindPopup(
+																result.address.Match_addr)
+														.openPopup();
+												document
+														.getElementById("latitudeInputId").value = e.latlng.lat;
+												document
+														.getElementById("longitudeInputId").value = e.latlng.lat.lng;
+												document
+														.getElementById("addressInputId").value = result.address.Match_addr;
+
+												document
+														.getElementById("addRepBtn").disabled = false;
+											} else {
+												alert("Pick an area inside the city");
+											}
+
+										});
+					});
+
 	function responsiveMap() {
 		wrapperSize = $("#page-content-wrapper").height() - 140;
 

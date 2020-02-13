@@ -2,12 +2,16 @@ package com.ispw.fixmycity.logic.view;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.model.City;
+import com.ispw.fixmycity.logic.model.CityFactory;
+import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.view.javafx.MapBoundary;
 
@@ -20,6 +24,7 @@ import net.java.html.leaflet.Map;
 import net.java.html.leaflet.Marker;
 import net.java.html.leaflet.MarkerOptions;
 import net.java.html.leaflet.Point;
+import net.java.html.leaflet.Polygon;
 import net.java.html.leaflet.Popup;
 import net.java.html.leaflet.PopupOptions;
 import net.java.html.leaflet.TileLayer;
@@ -57,6 +62,9 @@ public class MapController {
 
 	public void loadMap(List<ReportFilter> filters) {
 
+		CityFactory cityFactory = new CityFactory();
+		City city = cityFactory.getCity(SessionView.getCityEnum());
+
 		FXBrowsers.load(mapView, MapBoundary.class.getResource("index.html"), () -> {
 			map = new Map("map");
 
@@ -69,14 +77,24 @@ public class MapController {
 							.setMaxZoom(18).setId("fixmycity.ia9c2p12"));
 			map.addLayer(tileLayer);
 			// from here we just use the Leaflet API to show some stuff on the map
-			map.setView(new LatLng(41.902782, 12.496365), 13);
-
 			map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
 
-			this.iconComp = new Icon(new IconOptions("leaflet-0.7.2/images/marker-icon.png")
-					.setIconSize(new Point(25, 41)).setIconAnchor(new Point(12.5, 41)).setPopupAnchor(new Point(0, -20)));
-			this.iconComm = new Icon(new IconOptions("leaflet-0.7.2/images/marker-icon-community.png")
-					.setIconSize(new Point(25, 41)).setIconAnchor(new Point(12.5, 41)).setPopupAnchor(new Point(0, -20)));
+			LatLng[] borderArray = new LatLng[city.getBorderShape().length];
+			for (int i = 0; i < borderArray.length; i++) {
+				borderArray[i] = new LatLng(city.getBorderShape()[i][0], city.getBorderShape()[i][1]);
+			}
+
+			Polygon borderPolygonLayer = new Polygon(borderArray);
+			int zoom = map.getBoundsZoom(borderPolygonLayer.getBounds());
+			map.setView(new LatLng(city.getLatitude(), city.getLongitude()), zoom);
+
+			map.addLayer(borderPolygonLayer);
+			this.iconComp = new Icon(
+					new IconOptions("leaflet-0.7.2/images/marker-icon.png").setIconSize(new Point(25, 41))
+							.setIconAnchor(new Point(12.5, 41)).setPopupAnchor(new Point(0, -20)));
+			this.iconComm = new Icon(
+					new IconOptions("leaflet-0.7.2/images/marker-icon-community.png").setIconSize(new Point(25, 41))
+							.setIconAnchor(new Point(12.5, 41)).setPopupAnchor(new Point(0, -20)));
 			this.markerOptComp = new MarkerOptions().setIcon(this.iconComp);
 			this.markerOptComm = new MarkerOptions().setIcon(this.iconComm);
 
@@ -94,10 +112,10 @@ public class MapController {
 
 		for (var report : reports) {
 			new Marker(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()), markerOptComp)
-					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle() + "</b><br>" + 
-							report.getDescription() + "<br>" + 
-							"<i>submitted on " + new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) +
-							" by " + report.getSubmitter() + "</i>"))
+					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle()
+							+ "</b><br>" + report.getDescription() + "<br>" + "<i>submitted on "
+							+ new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) + " by "
+							+ report.getSubmitter() + "</i>"))
 					.addTo(map);
 		}
 	}
@@ -107,10 +125,10 @@ public class MapController {
 
 		for (var report : reports) {
 			new Marker(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()), markerOptComm)
-					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle() + "</b><br>" + 
-							report.getDescription() + "<br>" + 
-							"<i>submitted on " + new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) +
-							" by " + report.getSubmitter() + "</i>"))
+					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle()
+							+ "</b><br>" + report.getDescription() + "<br>" + "<i>submitted on "
+							+ new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) + " by "
+							+ report.getSubmitter() + "</i>"))
 					.addTo(map);
 		}
 	}

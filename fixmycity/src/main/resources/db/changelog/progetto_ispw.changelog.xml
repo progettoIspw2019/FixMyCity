@@ -14,6 +14,8 @@
 			<column name="first_name" type="VARCHAR(30)" />
 			<column name="surname" type="VARCHAR(30)" />
 			<column name="profile_picture" type="LONGBLOB" />
+			<column name="city" type="VARCHAR(30)" />
+
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-2">

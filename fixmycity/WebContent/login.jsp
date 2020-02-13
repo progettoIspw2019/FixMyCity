@@ -24,14 +24,15 @@
 		BaseUserBean responseFromSystem = new SystemFacade().isSignedUp(userBean);
 		if (responseFromSystem.getMode() == UserMode.CITIZEN) {
 			SessionView.setMode(UserMode.CITIZEN);
+			SessionView.setCityEnum(responseFromSystem.getCity());
 			response.sendRedirect("home_citizen.jsp");
-	
+
 		} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
 			SessionView.setMode(UserMode.COMPANY);
+			SessionView.setCityEnum(responseFromSystem.getCity());
 			response.sendRedirect("home_company.jsp");
 		}
 	}
-
 %>
 
 <head>

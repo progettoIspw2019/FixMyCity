@@ -6,6 +6,7 @@ import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.util.CityEnum;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,7 +66,6 @@ public class SignupForm {
 	private Image selectedImage;
 
 	private File imageFile;
-
 
 	@FXML
 	public void initialize() {
@@ -131,7 +131,7 @@ public class SignupForm {
 	public void signupCompany() {
 		CompanyUserBean user = new CompanyUserBean();
 		user.setCategory(categoryField.getText());
-		user.setCity(cityField.getText());
+		user.setCity(CityEnum.valueOf(cityField.getText().toUpperCase()));
 		user.setCompanyName(companyNameField.getText());
 		user.setImage(imageFile);
 		user.setPassword(passwordField.getText());

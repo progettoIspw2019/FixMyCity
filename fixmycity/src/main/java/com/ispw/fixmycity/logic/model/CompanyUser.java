@@ -49,7 +49,7 @@ public class CompanyUser implements Serializable {
 	// bi-directional many-to-one association to CompanyReport
 	@OneToMany(mappedBy = "relatedCompany")
 	private List<Job> jobs;
-		
+
 	public CompanyUser() {
 		// This is a POJO, and there are no default values
 	}
@@ -60,7 +60,7 @@ public class CompanyUser implements Serializable {
 		setCategory(companyUserBean.getCategory());
 		setCompanyName(companyUserBean.getCompanyName());
 		setImage(ConverterUtil.byteArrayFromImage(companyUserBean.getImage()));
-		setCity(companyUserBean.getCity());
+		setCity(companyUserBean.getCity().toString());
 	}
 
 	public String getUsername() {

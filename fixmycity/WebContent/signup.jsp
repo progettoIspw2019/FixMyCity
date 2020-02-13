@@ -77,6 +77,18 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
+										<label for="inputCityId">City</label> <select
+											class="form-control" name="inputCity" id="inputCityId">
+											<option>Roma</option>
+											<option>Fiuggi</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm">
+									<div class="form-group">
 										<input type="text" class="form-control" id="inputUsername"
 											placeholder="Username">
 									</div>
@@ -138,7 +150,17 @@
 									</div>
 								</div>
 							</div>
-
+							<div class="row">
+								<div class="col-sm">
+									<div class="form-group">
+										<label for="inputCityId">City</label> <select
+											class="form-control" name="inputCity" id="inputCityId">
+											<option>Roma</option>
+											<option>Fiuggi</option>
+										</select>
+									</div>
+								</div>
+							</div>
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
@@ -182,11 +204,11 @@
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script type="text/javascript">
-         $('#myTab a').on('click', function(e) {
-             e.preventDefault()
-             $(this).tab('show')
-         })
-      </script>
+		$('#myTab a').on('click', function(e) {
+			e.preventDefault()
+			$(this).tab('show')
+		})
+	</script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>

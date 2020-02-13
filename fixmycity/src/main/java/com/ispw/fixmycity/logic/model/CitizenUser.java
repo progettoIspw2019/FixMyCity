@@ -45,6 +45,8 @@ public class CitizenUser implements Serializable {
 
 	private String surname;
 
+	private String city;
+
 	// bi-directional many-to-one association to CommunityReport
 	@OneToMany(mappedBy = "citizenUser")
 	private List<CommunityReport> communityReports;
@@ -63,11 +65,11 @@ public class CitizenUser implements Serializable {
 
 	public void setFromBean(CitizenUserBean citizenUserBean) {
 		setUsername(citizenUserBean.getUsername());
-		setPwd(DigestUtils
-			      .md5Hex(citizenUserBean.getPassword()).toUpperCase());
+		setPwd(DigestUtils.md5Hex(citizenUserBean.getPassword()).toUpperCase());
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
 		setProfilePicture(ConverterUtil.byteArrayFromImage(citizenUserBean.getProfilePicture()));
+		setCity(citizenUserBean.getCity().toString());
 	}
 
 	public String getUsername() {
@@ -160,6 +162,14 @@ public class CitizenUser implements Serializable {
 
 	public void setVolunteeringEvents(List<VolunteeringEvent> volunteeringEvents) {
 		this.volunteeringEvents = volunteeringEvents;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }
