@@ -21,6 +21,8 @@ public class App extends Application {
 	public void start(Stage initialStage) throws IOException {
 		App.setStage(initialStage);
 		stage.setScene(new Scene(loadFXML("login"), 640, 480));
+		stage.setMinHeight(480);
+		stage.setMinWidth(640);
 		stage.show();
 	}
 
@@ -43,6 +45,7 @@ public class App extends Application {
 			return fxmlLoader.load();
 		}
 		catch(IOException e) {
+			e.printStackTrace();
 			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 			return null;
 		}

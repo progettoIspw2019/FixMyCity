@@ -2,6 +2,7 @@ package com.ispw.fixmycity.logic.view.javafx;
 
 import java.io.File;
 
+import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
@@ -120,6 +121,7 @@ public class SignupForm {
 
 		if (new SystemFacade().signupCitizenUser(user)) {
 			// TODO do something
+			App.setRoot("login");
 		} else {
 			// Show error message
 			clearValues();
@@ -137,6 +139,7 @@ public class SignupForm {
 
 		if (new SystemFacade().signupCompanyUser(user)) {
 			// TODO do something
+			App.setRoot("login");
 		} else {
 			// Show error message
 			clearValues();

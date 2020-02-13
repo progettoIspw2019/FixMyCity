@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
 
@@ -23,6 +25,7 @@ import com.ispw.fixmycity.logic.util.ConverterUtil;
 @Table(name = "citizen_users")
 @NamedQuery(name = "CitizenUser.findAll", query = "SELECT c FROM CitizenUser c")
 @NamedQuery(name = "CitizenUser.findAllFromCredentials", query = "SELECT c FROM CitizenUser c WHERE c.username = :input_username AND c.pwd = MD5(:input_pwd)")
+@NamedQuery(name = "CitizenUser.findAllFromUsername", query = "SELECT c FROM CitizenUser c WHERE c.username = :input_username")
 @NamedQuery(name = "CitizenUser.countFromUsername", query = "SELECT count(c.username) FROM CitizenUser c WHERE c.username = :input_username")
 
 public class CitizenUser implements Serializable {
@@ -60,7 +63,8 @@ public class CitizenUser implements Serializable {
 
 	public void setFromBean(CitizenUserBean citizenUserBean) {
 		setUsername(citizenUserBean.getUsername());
-		setPwd(citizenUserBean.getPassword());
+		setPwd(DigestUtils
+			      .md5Hex(citizenUserBean.getPassword()).toUpperCase());
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
 		setProfilePicture(ConverterUtil.byteArrayFromImage(citizenUserBean.getProfilePicture()));

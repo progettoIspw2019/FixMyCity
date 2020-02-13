@@ -23,7 +23,7 @@ public class LoginForm {
 		baseUser.setUsername(username);
 		baseUser.setPassword(password);
 
-		if(new SystemFacade().isSignedUp(baseUser)) {
+		if(new SystemFacade().isSignedUp(baseUser).getMode() != null) {
 			// TODO : successful login
 		}
 		else {

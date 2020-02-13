@@ -11,6 +11,7 @@
 <%@ page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
 
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
@@ -18,8 +19,7 @@
 
 <html lang="en">
 <%
-	if (UserSessionBean.getInstance().getUserMode() != UserMode.CITIZEN
-			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
+	if (SessionView.getMode() != UserMode.CITIZEN) {
 		response.sendRedirect("index.jsp");
 	}
 

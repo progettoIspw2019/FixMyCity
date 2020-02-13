@@ -8,7 +8,6 @@ import javax.persistence.NoResultException;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
-import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
@@ -16,17 +15,16 @@ import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
 
-	public boolean checkCredentials(BaseUserBean user) {
+	public BaseUserBean checkCredentials(BaseUserBean user) {
 
 		UserDAO dao = new UserDAO();
-		UserSessionBean session = UserSessionBean.getInstance();
 		try {
 			CitizenUser citizenUser = dao.findAllCitizensFromCredentials(user);
 
 			if (citizenUser != null) {
-				session.setActiveCitizenUser(citizenUser);
-				session.setUserMode(UserMode.CITIZEN);
-				return true;
+				user.setMode(UserMode.CITIZEN);
+				user.setImage(citizenUser.getProfilePicture());
+				return user;
 			}
 		} catch (NoResultException e) {
 		}
@@ -34,16 +32,14 @@ public class LoginController {
 			CompanyUser companyUser = dao.findAllCompanyUserFromCredentials(user);
 
 			if (companyUser != null) {
-				session.setActiveCompanyUser(companyUser);
-				session.setUserMode(UserMode.COMPANY);
-				return true;
+				user.setMode(UserMode.COMPANY);
+				user.setImage(companyUser.getImage());
+				return user;
 			}
 		} catch (NoResultException e) {
 		}
-		session.setActiveCompanyUser(null);
-		session.setActiveCitizenUser(null);
-		session.setUserMode(UserMode.GUEST);
-		return false;
+		user.setMode(UserMode.GUEST);
+		return user;
 	}
 
 	public boolean signupCitizenUser(CitizenUserBean bean) {

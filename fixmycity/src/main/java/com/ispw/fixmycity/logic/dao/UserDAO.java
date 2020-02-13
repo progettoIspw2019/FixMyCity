@@ -32,13 +32,13 @@ public class UserDAO {
 	public CitizenUser findAllCitizensFromCredentials(BaseUserBean user) {
 		entityManager = entityManagerFactory.createEntityManager();
 
-		return (CitizenUser) entityManager.createNamedQuery("CitizenUser.findAllFromCredentials")
+		return entityManager.createNamedQuery("CitizenUser.findAllFromCredentials", CitizenUser.class)
 				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
 	}
 
 	public CompanyUser findAllCompanyUserFromCredentials(BaseUserBean user) {
-		return (CompanyUser) entityManager.createNamedQuery("CompanyUser.findAllFromCredentials")
+		return entityManager.createNamedQuery("CompanyUser.findAllFromCredentials", CompanyUser.class)
 				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
 	}
@@ -78,6 +78,15 @@ public class UserDAO {
 		entityManager.getTransaction().begin();
 		entityManager.persist(companyUser);
 		entityManager.getTransaction().commit();
+	}
+
+	public CitizenUser findAllCitizensFromUsername(String submitter) {
+		// TODO Auto-generated method stub CitizenUser.findAllFromUsername
+		entityManager = entityManagerFactory.createEntityManager();
+
+		return entityManager.createNamedQuery("CitizenUser.findAllFromUsername", CitizenUser.class)
+				.setParameter(PARAM_USRNAME, submitter)
+				.getSingleResult();
 	}
 
 }

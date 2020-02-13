@@ -6,11 +6,11 @@
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
+<%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.List"%>
 
 <%
-	if (UserSessionBean.getInstance().getUserMode() != UserMode.CITIZEN
-			|| UserSessionBean.getInstance().getActiveCitizenUser() == null) {
+	if (SessionView.getMode() != UserMode.CITIZEN) {
 		response.sendRedirect("index.jsp");
 	}
 

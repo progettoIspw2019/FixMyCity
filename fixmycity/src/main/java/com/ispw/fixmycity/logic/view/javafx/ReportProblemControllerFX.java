@@ -103,7 +103,7 @@ public class ReportProblemControllerFX {
 		repBean.setLongitude(longitude);
 		repBean.setAddress(address.getRoad());
 		repBean.setCity(address.getCity());
-		
+		repBean.setSubmitter(SessionView.getUsername());
 		repBean.setImage(selectedImage);
 		repBean.setTitle(titleField.getText());
 

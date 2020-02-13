@@ -14,6 +14,12 @@
 	</properties>
 	<dependencies>
 		<dependency>
+		    <groupId>com.jfoenix</groupId>
+		    <artifactId>jfoenix</artifactId>
+		    <version>9.0.9</version>
+		</dependency>
+	
+		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
 			<version>13</version>
@@ -78,6 +84,13 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.14</version>
+		</dependency>
+		
 
 		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.1-api</artifactId> 
 			<version>1.0.0.Final</version> </dependency> -->
@@ -126,6 +139,22 @@
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.3</version>
 				<configuration>
+					<options>
+				        <option>--add-opens</option>
+				        <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+				        <option>--add-opens</option>
+				        <option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+				        <option>--add-exports</option>
+				        <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+				        <option>--add-exports</option>
+				        <option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+				        <option>--add-exports</option>
+				        <option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
+				        <option>--add-exports</option>
+				        <option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
+				        <option>--add-exports</option>
+				        <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
+				        </options>
 					<mainClass>com.ispw.fixmycity.logic.app.App</mainClass>
 				</configuration>
 			</plugin>

@@ -19,6 +19,8 @@ module com.ispw.fixmycity.logic {
 	requires nominatim.api;
 	requires org.apache.httpcomponents.httpclient;
 	requires java.logging;
+	requires com.jfoenix;
+	requires org.apache.commons.codec;
 	
 
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;

@@ -1,9 +1,10 @@
 package com.ispw.fixmycity.logic.view.javafx;
 
 import com.ispw.fixmycity.logic.app.App;
-import com.ispw.fixmycity.logic.bean.UserSessionBean;
+import com.ispw.fixmycity.logic.bean.BaseUserBean;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.UserMode;
-import com.ispw.fixmycity.logic.view.LoginForm;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,19 +24,21 @@ public class LoginControllerFX {
 	@FXML
 	private void submitLogin() {
 
-		LoginForm loginForm = new LoginForm();
+		BaseUserBean userBean = new BaseUserBean();
+		userBean.setUsername(usernameField.getText());
+		userBean.setPassword(passwordField.getText());
+		SessionView.setUsername(usernameField.getText());
+		
+		BaseUserBean response = new SystemFacade().isSignedUp(userBean);
+		
+		SessionView.setImageProfile(response.getImage());
 
-		loginForm.setUsername(usernameField.getText());
-		loginForm.setPassword(passwordField.getText());
-
-		loginForm.submitLogin();
-
-		UserSessionBean session = UserSessionBean.getInstance();
-
-		if (session.getActiveCitizenUser() != null && session.getUserMode() == UserMode.CITIZEN) {
+		if (response.getMode() == UserMode.CITIZEN) {
+			SessionView.setMode(UserMode.CITIZEN);
 			App.setRoot("home_citizen");
 		}
-		else if (session.getActiveCompanyUser() != null && session.getUserMode() == UserMode.COMPANY) {
+		else if (response.getMode() == UserMode.COMPANY) {
+			SessionView.setMode(UserMode.COMPANY);
 			App.setRoot("home_company");
 		}
 

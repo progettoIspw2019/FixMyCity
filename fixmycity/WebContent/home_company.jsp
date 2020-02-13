@@ -1,10 +1,10 @@
 <!doctype html>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <html lang="en">
 <%
-	if (UserSessionBean.getInstance().getUserMode() != UserMode.COMPANY
-			|| UserSessionBean.getInstance().getActiveCompanyUser() == null) {
+	if (SessionView.getMode() != UserMode.COMPANY) {
 		response.sendRedirect("index.jsp");
 	}
 %>

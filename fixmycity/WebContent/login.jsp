@@ -1,34 +1,37 @@
 <!doctype html>
+<%@page import="com.ispw.fixmycity.logic.bean.BaseUserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.ispw.fixmycity.logic.view.LoginForm"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
+<%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 
 <html lang="en">
 
 <%
-	LoginForm loginForm = new LoginForm();
 	String username = new String();
 	String password = new String();
 	username = (String) request.getParameter("inputUsername");
 	password = (String) request.getParameter("inputPassword");
+	BaseUserBean userBean = new BaseUserBean();
 
 	if (username != null && password != null && !username.isBlank() && !password.isBlank()) {
-		loginForm.setPassword(password);
-		loginForm.setUsername(username);
-		loginForm.submitLogin();
+		userBean.setUsername(username);
+		userBean.setPassword(password);
+		SessionView.setUsername(username);
+		BaseUserBean responseFromSystem = new SystemFacade().isSignedUp(userBean);
+		if (responseFromSystem.getMode() == UserMode.CITIZEN) {
+			SessionView.setMode(UserMode.CITIZEN);
+			response.sendRedirect("home_citizen.jsp");
+	
+		} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
+			SessionView.setMode(UserMode.COMPANY);
+			response.sendRedirect("home_company.jsp");
+		}
 	}
 
-	if (UserSessionBean.getInstance().getUserMode() == UserMode.CITIZEN
-			&& UserSessionBean.getInstance().getActiveCitizenUser() != null) {
-		response.sendRedirect("home_citizen.jsp");
-
-	} else if (UserSessionBean.getInstance().getUserMode() == UserMode.COMPANY
-			&& UserSessionBean.getInstance().getActiveCompanyUser() != null) {
-		response.sendRedirect("home_company.jsp");
-
-	}
 %>
 
 <head>

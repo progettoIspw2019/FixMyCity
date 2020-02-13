@@ -11,10 +11,11 @@ import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
-import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyUserDAO;
+import com.ispw.fixmycity.logic.dao.UserDAO;
+import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.Category;
 import com.ispw.fixmycity.logic.view.SessionView;
@@ -48,6 +49,8 @@ public class ReportProblemController {
 			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!");
 			// TODO: throw some exception
 		}
+		
+		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());
 
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 
@@ -61,7 +64,7 @@ public class ReportProblemController {
 		compRepBean.setTitle(repBean.getTitle());
 		compRepBean.setImage(repBean.getImage());
 		compRepBean.setCompany(compUser);
-		compRepBean.setSubmitter(UserSessionBean.getInstance().getActiveCitizenUser());
+		compRepBean.setSubmitter(submitter);
 		compRepBean.setCity(repBean.getCity());
 
 		compRepDAO.add(compRepBean);
@@ -94,6 +97,8 @@ public class ReportProblemController {
 
 	private void reportProblemCommunity(ReportBeanView repBean) {
 		CommunityReportDAO commRepDAO = new CommunityReportDAO();
+		
+		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());
 
 		CommunityReportBean commRepBean = new CommunityReportBean();
 		commRepBean.setAddress(repBean.getAddress());
@@ -105,7 +110,7 @@ public class ReportProblemController {
 		commRepBean.setTitle(repBean.getTitle());
 		commRepBean.setImage(repBean.getImage());
 		commRepBean.setCity(repBean.getCity());
-		commRepBean.setSubmitter(UserSessionBean.getInstance().getActiveCitizenUser());
+		commRepBean.setSubmitter(submitter);
 
 		commRepDAO.add(commRepBean);
 	}

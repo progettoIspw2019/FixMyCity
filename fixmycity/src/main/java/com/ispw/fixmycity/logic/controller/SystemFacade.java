@@ -45,7 +45,7 @@ public class SystemFacade {
 		return new LoginController().signupCitizenUser(user);
 	}
 	
-	public boolean isSignedUp(BaseUserBean userBean) {
+	public BaseUserBean isSignedUp(BaseUserBean userBean) {
 		return new LoginController().checkCredentials(userBean);
 	}
 	
