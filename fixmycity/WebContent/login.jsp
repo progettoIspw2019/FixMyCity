@@ -7,6 +7,7 @@
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
+<%@ page import="com.ispw.fixmycity.logic.exceptions.NoUserFound"%>
 
 <html lang="en">
 
@@ -21,16 +22,21 @@
 		userBean.setUsername(username);
 		userBean.setPassword(password);
 		SessionView.setUsername(username);
-		BaseUserBean responseFromSystem = new SystemFacade().isSignedUp(userBean);
-		if (responseFromSystem.getMode() == UserMode.CITIZEN) {
-			SessionView.setMode(UserMode.CITIZEN);
-			SessionView.setCityEnum(responseFromSystem.getCity());
-			response.sendRedirect("home_citizen.jsp");
-
-		} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
-			SessionView.setMode(UserMode.COMPANY);
-			SessionView.setCityEnum(responseFromSystem.getCity());
-			response.sendRedirect("home_company.jsp");
+		try{
+			BaseUserBean responseFromSystem = new SystemFacade().isSignedUp(userBean);
+			if (responseFromSystem.getMode() == UserMode.CITIZEN) {
+				SessionView.setMode(UserMode.CITIZEN);
+				SessionView.setCityEnum(responseFromSystem.getCity());
+				response.sendRedirect("home_citizen.jsp");
+	
+			} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
+				SessionView.setMode(UserMode.COMPANY);
+				SessionView.setCityEnum(responseFromSystem.getCity());
+				response.sendRedirect("home_company.jsp");
+			}
+		} catch(NoUserFound e){
+			//TODO : throw some error
+			
 		}
 	}
 %>

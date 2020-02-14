@@ -1,6 +1,6 @@
 package com.ispw.fixmycity.logic.view;
 
-import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
+import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 

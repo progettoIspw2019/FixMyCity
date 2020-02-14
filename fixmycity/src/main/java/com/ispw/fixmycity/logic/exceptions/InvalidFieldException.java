@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.app.exceptions;
+package com.ispw.fixmycity.logic.exceptions;
 
 public class InvalidFieldException extends Exception {
 	/**

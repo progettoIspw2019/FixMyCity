@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.NoResultException;
 
-import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
+import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;

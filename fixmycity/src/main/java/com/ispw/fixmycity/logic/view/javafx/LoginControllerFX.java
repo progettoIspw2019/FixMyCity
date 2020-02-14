@@ -1,7 +1,7 @@
 package com.ispw.fixmycity.logic.view.javafx;
 
 import com.ispw.fixmycity.logic.app.App;
-import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
+import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.UserMode;

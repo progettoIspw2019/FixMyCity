@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.App;
-import com.ispw.fixmycity.logic.app.exceptions.InvalidFieldException;
+import com.ispw.fixmycity.logic.exceptions.InvalidFieldException;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;

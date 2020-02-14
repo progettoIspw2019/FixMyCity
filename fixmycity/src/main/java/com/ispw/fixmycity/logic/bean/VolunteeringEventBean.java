@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ispw.fixmycity.logic.app.exceptions.InvalidFieldException;
+import com.ispw.fixmycity.logic.exceptions.InvalidFieldException;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 
 public class VolunteeringEventBean {

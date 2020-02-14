@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.apache.http.impl.client.HttpClients;
 
-import com.ispw.fixmycity.logic.app.exceptions.NoMatchingCompanyFound;
+import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;

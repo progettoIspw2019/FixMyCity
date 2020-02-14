@@ -11,6 +11,7 @@
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
+<%@ page import="com.ispw.fixmycity.logic.exceptions.InvalidFieldException"%>
 
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
@@ -34,13 +35,19 @@
 	String description = request.getParameter("inputEventDescription");
 	String date = request.getParameter("inputDateEvent");
 	String time = request.getParameter("inputTimeEvent");
-
+	
+		
+	
 	if (id != null && !title.isBlank() && !description.isBlank() && !date.isBlank() && !time.isBlank()) {
 		CommunityReportBean selectedReport = controller.getCommunityReportFromId(Integer.parseInt(id));
 		VolunteeringEventBean bean = new VolunteeringEventBean();
 		bean.setCommunityReport(selectedReport);
 		bean.setEventDate(date);
-		bean.setEventTime(time);
+		try{
+			bean.setEventTime(time);
+		} catch(InvalidFieldException e){
+			//TODO throw some error
+		}
 		controller.createVolunteeringEvent(bean);
 	}
 
@@ -50,6 +57,7 @@
 	City city = cityFactory.getCity(SessionView.getCityEnum());
 	List<String> categories = new ArrayList<String>();
 	categories = city.getAllCategories();
+		
 %>
 <head>
 <!-- Required meta tags -->
