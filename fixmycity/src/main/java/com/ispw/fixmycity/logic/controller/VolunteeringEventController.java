@@ -29,9 +29,8 @@ public class VolunteeringEventController {
 	}
 
 	public void joinVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
-		VolunteeringEventDAO dao = new VolunteeringEventDAO();
+		// VolunteeringEventDAO dao = new VolunteeringEventDAO();
 		// VolunteeringEvent event = dao.findById;
-
 		// dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(),
 		// event);
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ispw.fixmycity.logic.app.exceptions.NoMatchingCompanyFound;
+import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -46,7 +47,7 @@ public class SystemFacade {
 		return new LoginController().signupCitizenUser(user);
 	}
 	
-	public BaseUserBean isSignedUp(BaseUserBean userBean) {
+	public BaseUserBean isSignedUp(BaseUserBean userBean) throws NoUserFound {
 		return new LoginController().checkCredentials(userBean);
 	}
 	

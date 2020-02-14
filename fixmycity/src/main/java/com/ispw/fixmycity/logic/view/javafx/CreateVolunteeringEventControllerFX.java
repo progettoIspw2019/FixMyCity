@@ -68,8 +68,6 @@ public class CreateVolunteeringEventControllerFX {
 	@FXML
 	private TextField errorTextField;
 
-	private ObservableMap<Integer, String> observableList;
-
 	private Integer selectionId;
 
 	private CommunityReportBean selectedReport;
@@ -83,7 +81,7 @@ public class CreateVolunteeringEventControllerFX {
 		secondGrid.setVisible(false);
 		errorTextField.setVisible(false);
 
-		observableList = FXCollections.observableMap(controller.getCommunityReportMap());
+		ObservableMap<Integer, String> observableList = FXCollections.observableMap(controller.getCommunityReportMap());
 
 		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());

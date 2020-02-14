@@ -1,5 +1,6 @@
 package com.ispw.fixmycity.logic.view;
 
+import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 
@@ -23,10 +24,10 @@ public class LoginForm {
 		baseUser.setUsername(username);
 		baseUser.setPassword(password);
 
-		if(new SystemFacade().isSignedUp(baseUser).getMode() != null) {
-			// TODO : successful login
+		try{
+			new SystemFacade().isSignedUp(baseUser).getMode();
 		}
-		else {
+		catch (NoUserFound e) {
 			// failed login 
 		}
 

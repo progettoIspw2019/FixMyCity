@@ -17,8 +17,10 @@ import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyUserDAO;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.model.CitizenUser;
+import com.ispw.fixmycity.logic.model.City;
+import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.model.CompanyUser;
-import com.ispw.fixmycity.logic.util.Category;
+import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import fr.dudie.nominatim.client.JsonNominatimClient;
@@ -33,12 +35,14 @@ public class ReportProblemController {
 	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		// if repBean has category for companies -> reportProblem company
 		// else -> reportProblem community
+		
+		City city = new CityFactory().getCity(CityEnum.valueOf(repBean.getCity().toUpperCase()));
 
-		if (Category.isForCommunity(Category.valueOf(repBean.getCategory().toUpperCase()))) {
+		if (city.isForCommunity(repBean.getCategory())) {
 			reportProblemCommunity(repBean);
 		}
 
-		if (Category.isForCompany(Category.valueOf(repBean.getCategory().toUpperCase()))) {
+		if (city.isForCompany(repBean.getCategory())) {
 			reportProblemCompany(repBean);
 		}
 	}
@@ -48,7 +52,6 @@ public class ReportProblemController {
 
 		if (compUser == null) {
 			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!\n\n");
-			// TODO: throw some exception
 			throw new NoMatchingCompanyFound();
 		}
 		

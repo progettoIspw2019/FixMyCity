@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.NoResultException;
 
+import com.ispw.fixmycity.logic.app.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
@@ -16,7 +17,7 @@ import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
 
-	public BaseUserBean checkCredentials(BaseUserBean user) {
+	public BaseUserBean checkCredentials(BaseUserBean user) throws NoUserFound {
 
 		UserDAO dao = new UserDAO();
 		try {
@@ -29,6 +30,7 @@ public class LoginController {
 				return user;
 			}
 		} catch (NoResultException e) {
+			throw new NoUserFound();
 		}
 		try {
 			CompanyUser companyUser = dao.findAllCompanyUserFromCredentials(user);
@@ -40,6 +42,7 @@ public class LoginController {
 				return user;
 			}
 		} catch (NoResultException e) {
+			throw new NoUserFound();
 		}
 		user.setMode(UserMode.GUEST);
 		return user;

@@ -2,7 +2,6 @@ package com.ispw.fixmycity.logic.view.javafx;
 
 import java.io.File;
 
-import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
@@ -85,9 +84,7 @@ public class SignupForm {
 		cityChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			categoryList.clear();
 			new CityFactory().getCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase())).getCompaniesCategories()
-					.forEach(cat -> {
-						categoryList.add(cat);
-					});
+					.forEach(cat -> categoryList.add(cat) );
 			categoryChoiceBox.setValue(categoryList.get(0));
 		});
 		cityChoiceBox.setValue(cityList.get(0));
@@ -157,11 +154,11 @@ public class SignupForm {
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));
 
 		if (new SystemFacade().signupCompanyUser(user)) {
-			// TODO do something
-			App.setRoot("login");
+			new LoginControllerFX().loginUser(user.getUsername(), user.getPassword());
 		} else {
-			// Show error message
-			clearValues();
+			Alert alert = new Alert(AlertType.ERROR, "This username is already in use.", ButtonType.OK);
+			alert.setHeaderText("Could not sign you up!");
+			alert.showAndWait();
 		}
 	}
 

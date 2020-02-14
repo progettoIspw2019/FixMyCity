@@ -79,7 +79,7 @@
 <title>FixMyCity</title>
 </head>
 <body>
-	<nav class="navbar navbar-dark bg-dark">
+	<nav aria-label="navbar" class="navbar navbar-dark bg-dark">
 		<ul class="nav navbar-nav navbar-left">
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
@@ -107,6 +107,7 @@
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
 			<nav
+				aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
 				<!-- 		<button class="btn btn-primary" id="menu-toggle">Toggle
                   Menu</button>

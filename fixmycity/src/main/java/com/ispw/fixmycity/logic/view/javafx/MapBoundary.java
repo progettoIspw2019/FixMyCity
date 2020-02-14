@@ -42,7 +42,7 @@ public class MapBoundary {
 		profileImg.setImage(img);
 
 		if (profilePicByte != null) {
-			Logger.getLogger("fixmycity").log(Level.INFO, "loaded " + profilePicByte);
+			Logger.getLogger("fixmycity").log(Level.INFO, "loaded {}", profilePicByte);
 			profileImg.setImage(new Image(new ByteArrayInputStream(profilePicByte)));
 		}
 		double halfWidth = profileImg.getFitWidth() / 2;
