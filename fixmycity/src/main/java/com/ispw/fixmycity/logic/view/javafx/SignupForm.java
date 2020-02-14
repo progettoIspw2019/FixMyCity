@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class SignupForm {
 
@@ -84,7 +85,7 @@ public class SignupForm {
 		cityChoiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			categoryList.clear();
 			new CityFactory().getCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase())).getCompaniesCategories()
-					.forEach(cat -> categoryList.add(cat) );
+					.forEach(cat -> categoryList.add(cat));
 			categoryChoiceBox.setValue(categoryList.get(0));
 		});
 		cityChoiceBox.setValue(cityList.get(0));
@@ -116,6 +117,8 @@ public class SignupForm {
 	public void handlePictureUpload() {
 		Window window = signupGridPane.getScene().getWindow();
 		FileChooser imageFileChooser = new FileChooser();
+		imageFileChooser.getExtensionFilters()
+				.add((new ExtensionFilter("JPG files (*.jpg, *.jpeg)", "*.JPG", "*.jpg", "*.JPEG", "*.jpeg")));
 		imageFile = imageFileChooser.showOpenDialog(window);
 
 		if (imageFile != null) {

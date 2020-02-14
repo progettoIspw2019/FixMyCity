@@ -53,7 +53,9 @@ public class LoginControllerFX {
 			}
 			
 		} catch (NoUserFound e) {
-			Alert alert = new Alert(AlertType.ERROR, "Log in failed!", ButtonType.OK);
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR, "Log in failed.", ButtonType.OK);
+			alert.setHeaderText("No user found with given username and password!");
 			alert.showAndWait();
 		}
 	}

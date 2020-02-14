@@ -29,8 +29,8 @@ public class LoginController {
 				user.setCity(CityEnum.valueOf(citizenUser.getCity().toUpperCase()));
 				return user;
 			}
-		} catch (NoResultException e) {
-			throw new NoUserFound();
+		} catch(NoResultException e) {
+			// ignore first exception
 		}
 		try {
 			CompanyUser companyUser = dao.findAllCompanyUserFromCredentials(user);
