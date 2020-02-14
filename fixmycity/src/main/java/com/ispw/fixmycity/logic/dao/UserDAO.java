@@ -81,7 +81,6 @@ public class UserDAO {
 	}
 
 	public CitizenUser findAllCitizensFromUsername(String submitter) {
-		// TODO Auto-generated method stub CitizenUser.findAllFromUsername
 		entityManager = entityManagerFactory.createEntityManager();
 
 		return entityManager.createNamedQuery("CitizenUser.findAllFromUsername", CitizenUser.class)

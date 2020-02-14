@@ -58,7 +58,7 @@
 						<Insets right="19.0" />
 					</padding>
 					<toggleGroup>
-						<ToggleGroup fx:id="signupToggle" />
+						<ToggleGroup />
 					</toggleGroup>
 				</RadioButton>
 				<RadioButton fx:id="companyRadioButton" mnemonicParsing="false" onAction="#showCompanySignupForm" text="Company" toggleGroup="$signupToggle" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">

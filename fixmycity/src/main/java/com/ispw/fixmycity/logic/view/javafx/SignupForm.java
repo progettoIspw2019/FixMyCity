@@ -12,11 +12,14 @@ import com.ispw.fixmycity.logic.util.CityEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -136,11 +139,11 @@ public class SignupForm {
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));
 
 		if (new SystemFacade().signupCitizenUser(user)) {
-			// TODO do something
-			App.setRoot("login");
+			new LoginControllerFX().loginUser(user.getUsername(), user.getPassword());
 		} else {
-			// Show error message
-			clearValues();
+			Alert alert = new Alert(AlertType.ERROR, "This username is already in use.", ButtonType.OK);
+			alert.setHeaderText("Could not sign you up!");
+			alert.showAndWait();
 		}
 	}
 

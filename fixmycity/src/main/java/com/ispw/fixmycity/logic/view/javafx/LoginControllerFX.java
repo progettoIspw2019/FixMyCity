@@ -26,14 +26,17 @@ public class LoginControllerFX {
 
 	@FXML
 	private void submitLogin() {
-
+		loginUser(usernameField.getText(), passwordField.getText());
+	}
+	
+	public void loginUser(String username, String password) {
 		BaseUserBean userBean = new BaseUserBean();
-		userBean.setUsername(usernameField.getText());
-		userBean.setPassword(passwordField.getText());
-		SessionView.setUsername(usernameField.getText());
-
+		userBean.setUsername(username);
+		userBean.setPassword(password);
+		
 		BaseUserBean response = new SystemFacade().isSignedUp(userBean);
-
+		
+		SessionView.setUsername(username);
 		SessionView.setImageProfile(response.getImage());
 
 		if (response.getMode() == UserMode.CITIZEN) {
