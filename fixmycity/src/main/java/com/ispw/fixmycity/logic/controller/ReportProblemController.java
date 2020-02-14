@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.apache.http.impl.client.HttpClients;
 
+import com.ispw.fixmycity.logic.app.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
@@ -29,7 +30,7 @@ public class ReportProblemController {
 		// there is nothing to instantiate
 	}
 
-	public void reportProblem(ReportBeanView repBean) {
+	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		// if repBean has category for companies -> reportProblem company
 		// else -> reportProblem community
 
@@ -42,12 +43,13 @@ public class ReportProblemController {
 		}
 	}
 
-	private void reportProblemCompany(ReportBeanView repBean) {
+	private void reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		CompanyUser compUser = this.findCompany(repBean.getCategory(), repBean.getCity());
 
 		if (compUser == null) {
-			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!");
+			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!\n\n");
 			// TODO: throw some exception
+			throw new NoMatchingCompanyFound();
 		}
 		
 		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());

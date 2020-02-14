@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import com.ispw.fixmycity.logic.app.App;
+import com.ispw.fixmycity.logic.app.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
@@ -21,9 +22,12 @@ import com.ispw.fixmycity.logic.view.SessionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -108,7 +112,15 @@ public class ReportProblemControllerFX {
 		repBean.setTitle(titleField.getText());
 
 		// TODO: try catch exception that should be thrown by the controller
-		new SystemFacade().reportProblem(repBean);
+		try {
+			new SystemFacade().reportProblem(repBean);
+		} catch (NoMatchingCompanyFound e) {
+			Alert alert = new Alert(AlertType.INFORMATION, "The issue might not get addressed until the public company that is responsible signs up, "
+					+ "we'd be grateful if you could try to get them to contact us so that everyone can benefit from our platform!", ButtonType.OK);
+			alert.setHeaderText("No matching company found!");
+			alert.showAndWait();
+			return;
+		}
 		
 		App.setRoot("home_citizen");
 	}

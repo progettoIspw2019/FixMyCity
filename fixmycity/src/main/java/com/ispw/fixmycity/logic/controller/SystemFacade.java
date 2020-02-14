@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.ispw.fixmycity.logic.app.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -15,7 +16,7 @@ import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 
 public class SystemFacade {
 	
-	public void reportProblem(ReportBeanView repBean) {
+	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		new ReportProblemController().reportProblem(repBean);
 	}
 

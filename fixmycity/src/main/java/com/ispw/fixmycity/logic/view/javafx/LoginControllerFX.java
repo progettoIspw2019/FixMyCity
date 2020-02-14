@@ -7,9 +7,12 @@ import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class LoginControllerFX {
 	@FXML
@@ -42,7 +45,10 @@ public class LoginControllerFX {
 			SessionView.setCityEnum(response.getCity());
 			App.setRoot("home_company");
 		}
-
+		else {
+			Alert alert = new Alert(AlertType.ERROR, "Log in failed!", ButtonType.OK);
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
