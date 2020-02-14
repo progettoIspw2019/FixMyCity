@@ -1,4 +1,4 @@
-package com.ispw.fixmycity.logic.view;
+package com.ispw.fixmycity.logic.view.javafx;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.model.City;
 import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.util.ReportFilter;
-import com.ispw.fixmycity.logic.view.javafx.MapBoundary;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -43,6 +43,7 @@ public class MapController {
 	private MarkerOptions markerOptComp;
 	private MarkerOptions markerOptComm;
 	private City city;
+	private Marker markerSetPosMap;
 
 	public MapController(WebView mapView) {
 		this.setMapView(mapView);
@@ -51,10 +52,12 @@ public class MapController {
 	public void loadMap(List<ReportFilter> filters) {
 
 		city = new CityFactory().getCity(SessionView.getCityEnum());
+		SessionView.setAddressSetOnMap(null);
 
 		FXBrowsers.load(mapView, MapBoundary.class.getResource("index.html"), () -> {
 			map = new Map("map");
 
+			// Map setup for basemap
 			TileLayer tileLayer = new TileLayer(
 					"https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8"
 							+ "?apiKey=XUbEajSB94rqlnuoXCZkfMe_n3bUeeGghpHSejZkC50",
@@ -64,6 +67,7 @@ public class MapController {
 							.setMaxZoom(18).setId("fixmycity.ia9c2p12"));
 			map.addLayer(tileLayer);
 
+			// set city bounds
 			LatLng[] borderArray = new LatLng[city.getBorderShape().length];
 			for (int i = 0; i < borderArray.length; i++) {
 				borderArray[i] = new LatLng(city.getBorderShape()[i][0], city.getBorderShape()[i][1]);
@@ -73,12 +77,14 @@ public class MapController {
 			map.setView(new LatLng(city.getLatitude(), city.getLongitude()), zoom);
 
 			map.addLayer(borderPolygonLayer);
-			
-			this.setMouseListener();
-			
+
+			// initialize listeners
+			this.initListeners();
+
+			// add mouse listener to map -> setting position for problem reporting
 			map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
-			
-			
+
+			// setup for markers
 			this.iconComp = new Icon(
 					new IconOptions("leaflet-0.7.2/images/marker-icon.png").setIconSize(new Point(25, 41))
 							.setIconAnchor(new Point(12.5, 41)).setPopupAnchor(new Point(0, -20)));
@@ -88,6 +94,7 @@ public class MapController {
 			this.markerOptComp = new MarkerOptions().setIcon(this.iconComp);
 			this.markerOptComm = new MarkerOptions().setIcon(this.iconComm);
 
+			// loading reports on map and setting markers in the given positions
 			for (ReportFilter filter : filters) {
 				if (filter == ReportFilter.ALL_COMMUNITY_REPORT)
 					addEveryCommunityReport(map);
@@ -122,59 +129,61 @@ public class MapController {
 					.addTo(map);
 		}
 	}
-	
-	private void setMouseListener() {
+
+	private void initListeners() {
+		// When clicking on the map set position if not out of city bounds
 		mouseListener = (MouseEvent ev) -> {
-			
+
 			var x = ev.getLatLng().getLatitude();
 			var y = ev.getLatLng().getLongitude();
 			Double[][] vs = city.getBorderShape();
-		    
-		    var inside = false;
-		    var i = 0; 
-		    var j = vs.length - 1;
-		    for (; i < vs.length; j = i++) {
-		        var xi = vs[i][0]; 
-		        var yi = vs[i][1];
-		        
-		        var xj = vs[j][0]; 
-		        var yj = vs[j][1];
-		        
-		        var intersect = ((yi > y) != (yj > y))
-		            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-		        if (intersect) inside = !inside;
-		    }
-			
-			if(!inside) {
-				Alert alert = new Alert(AlertType.INFORMATION, "You can only pick locations "
-						+ "that are inside the polygon surrounding your city.", ButtonType.OK);
+
+			var inside = false;
+			var i = 0;
+			var j = vs.length - 1;
+			for (; i < vs.length; j = i++) {
+				var xi = vs[i][0];
+				var yi = vs[i][1];
+
+				var xj = vs[j][0];
+				var yj = vs[j][1];
+
+				var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+				if (intersect)
+					inside = !inside;
+			}
+
+			if (!inside) {
+				Alert alert = new Alert(AlertType.INFORMATION,
+						"You can only pick locations " + "that are inside the polygon surrounding your city.",
+						ButtonType.OK);
 				alert.setHeaderText("Out of city bounds!");
 				alert.showAndWait();
 				return;
 			}
-			
-			BigDecimal latitude = BigDecimal.valueOf(ev.getLatLng().getLatitude());
-			BigDecimal longitude = BigDecimal.valueOf(ev.getLatLng().getLongitude());
-			
-			
+
+			double latD = ev.getLatLng().getLatitude();
+			double longD = ev.getLatLng().getLongitude();
+
+			BigDecimal latitude = BigDecimal.valueOf(latD);
+			BigDecimal longitude = BigDecimal.valueOf(longD);
 
 			new SystemFacade().setAddressForReport(longitude, latitude);
 			AddressBean addr = SessionView.getAddressSetOnMap();
 
-			PopupOptions popupOptions = new PopupOptions().setMaxWidth(400);
-			Popup popup = new Popup(popupOptions);
-			popup.setLatLng(ev.getLatLng());
+			Popup popup = new Popup(new PopupOptions().setMaxWidth(200))
+					.setContent("<b>" + addr.getRoad() + ", " + addr.getCity() + ", " + addr.getCountry() + "</b>");
 
-			popup.setContent(addr.getRoad() + ", " + addr.getCity() + ", " + addr.getCountry());
-			popup.openOn(map);
+			if (markerSetPosMap == null)
+				markerSetPosMap = new Marker(new LatLng(latD, longD), markerOptComm);
+			else
+				markerSetPosMap.setLatLng(new LatLng(latD, longD));
+			markerSetPosMap.setOpacity(1);
+			markerSetPosMap.bindPopup(popup).openPopup().addTo(map);
 		};
 	}
 
-	public WebView getMapView() {
-		return mapView;
-	}
-
-	public void setMapView(WebView mapView) {
+	private void setMapView(WebView mapView) {
 		this.mapView = mapView;
 	}
 }

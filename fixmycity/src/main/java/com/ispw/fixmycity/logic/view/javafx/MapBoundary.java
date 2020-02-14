@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.util.ReportFilter;
-import com.ispw.fixmycity.logic.view.MapController;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
@@ -69,7 +68,7 @@ public class MapBoundary {
 
 	@FXML
 	private void createReport() {
-		if (SessionView.getLatitudeSetOnMap() != null && SessionView.getLongitudeSetOnMap() != null)
+		if (SessionView.getAddressSetOnMap() != null)
 			App.setRoot("reportProblemForm");
 		else {
 			Alert alert = new Alert(AlertType.INFORMATION, "First pick a position on the map!", ButtonType.OK);

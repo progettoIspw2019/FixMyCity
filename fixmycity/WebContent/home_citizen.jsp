@@ -3,11 +3,10 @@
 <%@page import="com.ispw.fixmycity.logic.model.CityFactory"%>
 <%@page import="com.ispw.fixmycity.logic.model.City"%>
 
-<%@page import="com.ispw.fixmycity.logic.view.MapController"%>
-<%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page
 	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
