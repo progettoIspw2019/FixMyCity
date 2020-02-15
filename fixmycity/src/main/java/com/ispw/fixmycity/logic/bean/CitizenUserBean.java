@@ -1,14 +1,12 @@
 package com.ispw.fixmycity.logic.bean;
 
-import java.io.File;
-
 import com.ispw.fixmycity.logic.util.CityEnum;
 
 public class CitizenUserBean extends BaseUserBean {
 
 	private String firstName;
 
-	private File profilePicture;
+	private byte[] profilePicture;
 
 	private String lastName;
 
@@ -22,11 +20,11 @@ public class CitizenUserBean extends BaseUserBean {
 		this.firstName = firstName;
 	}
 
-	public File getProfilePicture() {
+	public byte[] getProfilePicture() {
 		return profilePicture;
 	}
 
-	public void setProfilePicture(File profilePicture) {
+	public void setProfilePicture(byte[] profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

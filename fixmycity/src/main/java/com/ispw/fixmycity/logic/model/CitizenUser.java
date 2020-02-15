@@ -2,6 +2,8 @@ package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,11 +67,11 @@ public class CitizenUser implements Serializable {
 
 	public void setFromBean(CitizenUserBean citizenUserBean) {
 		setUsername(citizenUserBean.getUsername());
-		setPwd(DigestUtils.md5Hex(citizenUserBean.getPassword()).toUpperCase());
+		setPwd(ConverterUtil.md5FromString((citizenUserBean.getPassword())));
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
-		if(citizenUserBean.getImage() != null) {
-			setProfilePicture(ConverterUtil.byteArrayFromImage(citizenUserBean.getProfilePicture()));
+		if (citizenUserBean.getProfilePicture() != null) {
+			setProfilePicture(citizenUserBean.getProfilePicture());
 		}
 		setCity(citizenUserBean.getCity().toString());
 	}

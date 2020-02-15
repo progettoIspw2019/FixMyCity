@@ -1,4 +1,6 @@
 <!doctype html>
+<%@page import="com.ispw.fixmycity.logic.bean.ReportBean"%>
+<%@page import="com.ispw.fixmycity.logic.bean.ReportBeanView"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ispw.fixmycity.logic.model.CityFactory"%>
 <%@page import="com.ispw.fixmycity.logic.model.City"%>
@@ -20,6 +22,11 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Arrays"%>
+<%@ page import="java.util.Base64"%>
+<%@ page import="java.math.BigDecimal"%>
+<%@ page import="java.io.InputStream"%>
+<%@ page import="java.nio.file.Paths"%>
+
 
 <html lang="en">
 <%
@@ -50,7 +57,36 @@
 		}
 		controller.createVolunteeringEvent(bean);
 	}
+	
+	String repLatitude = (String) request.getParameter("latitudeInput");
+	String repLongitude = (String) request.getParameter("longitudeInput");
+	String repAddress = request.getParameter("inputReportAddress");
+	String repTitle = request.getParameter("inputReportTitle");
+	String repDescription = request.getParameter("inputReportDescription");
+	String repCategory = request.getParameter("inputReportCategory");
+	String repBase64Image = request.getParameter("base64ImageReport");
 
+	
+	
+	if (repLatitude != null && repLongitude != null && repAddress != null && repTitle != null && repCategory != null && repBase64Image != null) {
+		   
+	
+		ReportBeanView reportBeanView = new ReportBeanView();
+		reportBeanView.setAddress(repAddress);
+		reportBeanView.setLatitude(new BigDecimal(repLatitude));
+		reportBeanView.setLongitude(new BigDecimal(repLongitude));
+		reportBeanView.setSubmitter(SessionView.getUsername());
+		reportBeanView.setTitle(SessionView.getUsername());
+		reportBeanView.setCategory(repCategory);
+		reportBeanView.setCity(SessionView.getCityEnum().toString());
+		reportBeanView.setDescription(repDescription);
+		reportBeanView.setImage(Base64.getDecoder().decode(repBase64Image));
+		SystemFacade facade = new SystemFacade();
+		facade.reportProblem(reportBeanView);
+	
+	} 
+	
+	
 	List<CommunityReportBeanView> commReps = new SystemFacade().getCommunityReports();
 	List<CompanyReportBeanView> compReps = new SystemFacade().getCompanyReports();
 	CityFactory cityFactory = new CityFactory();
@@ -159,12 +195,13 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
-				<form action="login.jsp" method="GET">
+				<form action="home_citizen.jsp" method="GET" id="reportProblemFormId">
 					<input type="hidden" value="" id="latitudeInputId"
 						name="latitudeInput"> <input type="hidden" value=""
 						id="longitudeInputId" name="longitudeInput"> <input
-						type="hidden" value="" id="addressInputId" name="addressInput">
-
+						type="hidden" value="" id="addressInputId" name="inputReportAddress">
+					<input type="hidden" value="" id="base64ImageReportId"
+						name="base64ImageReport" value="">
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-sm">
@@ -202,7 +239,7 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputReportPictureId">Add a picture</label> <br>
-									<input type="file" id="inputReportPictureId"
+									<input type="file" accept="image/png, image/jpeg" id="inputReportPictureId"
 										name="inputReportPicture">
 								</div>
 							</div>
@@ -358,6 +395,30 @@
 <script type="text/javascript">
 
 
+function getBase64(file) {
+	   var reader = new FileReader();
+	   reader.readAsDataURL(file);
+	   reader.onload = function () {
+	     console.log(reader.result);
+	     document.getElementById('base64ImageReportId').value =btoa(reader.result);
+alert(document.getElementById('base64ImageReportId').value);
+	   };
+	   reader.onerror = function (error) {
+	     alert("Invalid file");
+	   };
+	}
+
+
+
+
+$("#inputReportPictureId").change(function(){
+	var file = document.getElementById('inputReportPictureId').files[0];
+	getBase64(file);});
+
+
+
+
+
 var cityBorder =  [
 <% int len = city.getBorderShape().length;
 for (int i=0; i<len; i++) 
@@ -427,7 +488,7 @@ for (int i=0; i<len; i++)
 												document
 														.getElementById("latitudeInputId").value = e.latlng.lat;
 												document
-														.getElementById("longitudeInputId").value = e.latlng.lat.lng;
+														.getElementById("longitudeInputId").value = e.latlng.lng;
 												document
 														.getElementById("addressInputId").value = result.address.Match_addr;
 

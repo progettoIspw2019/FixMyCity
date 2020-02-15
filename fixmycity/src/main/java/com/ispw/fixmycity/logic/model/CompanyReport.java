@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "company_reports")
 @NamedQuery(name = "CompanyReport.findAll", query = "SELECT c FROM CompanyReport c")
-public class CompanyReport implements Serializable {
+public class CompanyReport implements Serializable, Subject {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,7 +25,7 @@ public class CompanyReport implements Serializable {
 	private int idReport;
 
 	private String address;
-	
+
 	private String category;
 
 	@Temporal(TemporalType.DATE)
@@ -44,8 +44,14 @@ public class CompanyReport implements Serializable {
 	private BigDecimal longitude;
 
 	private String title;
-	
+
 	private String city;
+
+	private String status;
+
+	private int refuseCounter;
+
+	private String refuseDescription;
 
 	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne
@@ -63,6 +69,23 @@ public class CompanyReport implements Serializable {
 
 	public CompanyReport() {
 		// This is a POJO, and there are no default values
+	}
+
+	@Override
+	public void attach() {
+		// form.observableReportId.add(this.idReport);
+
+	}
+
+	@Override
+	public void detach() {
+		// form.observableReportId.remove(this.idReport);
+	}
+
+	@Override
+	public void notifyGui() {
+		// form.update();
+
 	}
 
 	public int getIdReport() {
@@ -197,4 +220,29 @@ public class CompanyReport implements Serializable {
 		this.city = city;
 	}
 
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void setRefuseDescription(String description) {
+		this.refuseDescription = description;
+
+	}
+
+	public String refuseDescription() {
+		return this.refuseDescription;
+	}
+
+	public int getRefuseCounter() {
+		return this.refuseCounter;
+
+	}
+
+	public void setRefuseCounter() {
+		this.refuseCounter++;
+	}
 }

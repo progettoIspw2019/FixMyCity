@@ -1,7 +1,5 @@
 package com.ispw.fixmycity.logic.bean;
 
-import java.io.File;
-
 import com.ispw.fixmycity.logic.util.CityEnum;
 
 public class CompanyUserBean {
@@ -15,7 +13,7 @@ public class CompanyUserBean {
 
 	private CityEnum city;
 
-	private File image;
+	private byte[] image;
 
 	public String getUsername() {
 		return username;
@@ -57,11 +55,11 @@ public class CompanyUserBean {
 		this.city = city;
 	}
 
-	public File getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(File image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

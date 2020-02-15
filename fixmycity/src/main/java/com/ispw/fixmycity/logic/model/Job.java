@@ -34,25 +34,25 @@ public class Job implements Serializable {
 	@Column(name = "start_date")
 	private Date startDate;
 
-	private String state;
+	// private String state;
 
 	// omni-directional many-to-one association to CompanyReport
 	@ManyToOne
 	@JoinColumn(name = "id_company_report")
 	private CompanyReport companyReport;
-	
+
 	// bi-directional many-to-one association to CompanyUser
 	@ManyToOne
 	@JoinColumn(name = "related_company")
 	private CompanyUser relatedCompany;
-	
+
 	public void setFromBean(JobBean jBean) {
 		this.setCompanyReport(jBean.getRelatedReport());
 		this.setEndDate(jBean.getEndDate());
 		this.setStartDate(jBean.getStartDate());
 		this.setIdJob(jBean.getIdJob());
 		this.setJobInfo(jBean.getJobInfo());
-		this.setState(jBean.getState());
+		// this.setState(jBean.getState());
 	}
 
 	public int getIdJob() {
@@ -75,8 +75,8 @@ public class Job implements Serializable {
 		return this.jobInfo;
 	}
 
-	public void setJobInfo(byte[] jobInfo) {
-		this.jobInfo = jobInfo;
+	public void setJobInfo(byte[] bs) {
+		this.jobInfo = bs;
 	}
 
 	public Date getStartDate() {
@@ -85,14 +85,6 @@ public class Job implements Serializable {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
-	}
-
-	public String getState() {
-		return this.state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	public CompanyReport getCompanyReport() {

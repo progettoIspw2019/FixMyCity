@@ -10,8 +10,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
 
@@ -58,12 +56,14 @@ public class CompanyUser implements Serializable {
 
 	public void setFromBean(CompanyUserBean companyUserBean) {
 		setUsername(companyUserBean.getUsername());
-		setPwd(DigestUtils.md5Hex(companyUserBean.getPassword()).toUpperCase());
+		setPwd(ConverterUtil.md5FromString((companyUserBean.getPassword())));
 		setCategory(companyUserBean.getCategory());
 		setCompanyName(companyUserBean.getCompanyName());
-		if(companyUserBean.getImage() != null) {
-			setImage(ConverterUtil.byteArrayFromImage(companyUserBean.getImage()));
+
+		if (companyUserBean.getImage() != null) {
+			setImage(companyUserBean.getImage());
 		}
+
 		setCity(companyUserBean.getCity().toString());
 	}
 

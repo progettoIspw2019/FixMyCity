@@ -7,6 +7,7 @@ import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.util.CityEnum;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -135,7 +136,7 @@ public class SignupForm {
 		user.setLastName(lastNameField.getText());
 		user.setUsername(userNameField.getText());
 		user.setPassword(passwordField.getText());
-		user.setProfilePicture(imageFile);
+		user.setProfilePicture(ConverterUtil.byteArrayFromImage(imageFile));
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));
 
 		if (new SystemFacade().signupCitizenUser(user)) {
@@ -151,7 +152,7 @@ public class SignupForm {
 		CompanyUserBean user = new CompanyUserBean();
 		user.setCategory(categoryChoiceBox.getValue());
 		user.setCompanyName(companyNameField.getText());
-		user.setImage(imageFile);
+		user.setImage(ConverterUtil.byteArrayFromImage(imageFile));
 		user.setPassword(passwordField.getText());
 		user.setUsername(userNameField.getText());
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));

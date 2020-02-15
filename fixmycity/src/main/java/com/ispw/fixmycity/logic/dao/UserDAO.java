@@ -68,7 +68,6 @@ public class UserDAO {
 		entityManager.getTransaction().begin();
 		entityManager.persist(citizenUser);
 		entityManager.getTransaction().commit();
-
 	}
 
 	public void insertCompanyUser(CompanyUserBean user) {

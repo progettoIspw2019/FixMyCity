@@ -3,6 +3,9 @@ package com.ispw.fixmycity.logic.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -32,6 +35,28 @@ public class ConverterUtil {
 		return b;
 
 	}
+
+	public static String md5FromString(String input) {
+		try {
+
+			MessageDigest md = MessageDigest.getInstance("MD5");
+	
+			byte[] messageDigest = md.digest(input.getBytes());
+
+			BigInteger no = new BigInteger(1, messageDigest);
+
+			String hashtext = no.toString(16);
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		}
+
+		catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 
 	private ConverterUtil() {
 
