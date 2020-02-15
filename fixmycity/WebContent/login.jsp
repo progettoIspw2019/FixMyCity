@@ -30,11 +30,13 @@
 			if (responseFromSystem.getMode() == UserMode.CITIZEN) {
 				SessionView.setMode(UserMode.CITIZEN);
 				SessionView.setCityEnum(responseFromSystem.getCity());
+				SessionView.setImageProfile(responseFromSystem.getImage());
 				response.sendRedirect("home_citizen.jsp");
 
 			} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
 				SessionView.setMode(UserMode.COMPANY);
 				SessionView.setCityEnum(responseFromSystem.getCity());
+				SessionView.setImageProfile(responseFromSystem.getImage());
 				response.sendRedirect("home_company.jsp");
 			}
 		} catch (UserNotFoundException e) {
@@ -95,7 +97,8 @@
 				</form>
 				<div class="row">
 					<div class="col-sm">
-						<button class="btn btn-secondary w-100 mt15">Sign up</button>
+						<button class="btn btn-secondary w-100 mt15"
+							onclick="location.href='signup.jsp';">Sign up</button>
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,16 @@ public class VolunteeringEventListElementBean {
 	private String address;
 	private String city;
 	private Integer participantsNumber;
+	private byte[] image;
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	private boolean userJoined;
 
 	public Integer getEventId() {

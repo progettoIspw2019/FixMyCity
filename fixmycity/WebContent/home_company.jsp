@@ -2,6 +2,8 @@
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
+<%@ page import="java.util.Base64"%>
+
 <html lang="en">
 <%
 	if (SessionView.getMode() != UserMode.COMPANY) {
@@ -27,9 +29,9 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><span class="navbar-brand mb-0 h1">Enel</span> <img
-				src="style/img/placeholder-profile.jpg" width="40" height="40"
-				class="rounded-circle" alt=""></li>
+					<li><span class="navbar-brand mb-0 h1"><% out.println(SessionView.getUsername()); %></span> <img
+				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
+				width="40" height="40" class="rounded-circle" alt=""></li>
 		</ul>
 	</nav>
 	<div class="d-flex" id="wrapper">

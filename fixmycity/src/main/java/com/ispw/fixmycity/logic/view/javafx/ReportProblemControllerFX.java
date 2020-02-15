@@ -18,6 +18,7 @@ import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.model.CityFactory;
+import com.ispw.fixmycity.logic.util.ConverterUtil;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.collections.FXCollections;
@@ -38,7 +39,8 @@ import javafx.stage.Window;
 
 public class ReportProblemControllerFX {
 
-	ObservableList<String> categoryList = FXCollections.observableArrayList(new CityFactory().getCity(SessionView.getCityEnum()).getAllCategories());
+	ObservableList<String> categoryList = FXCollections
+			.observableArrayList(new CityFactory().getCity(SessionView.getCityEnum()).getAllCategories());
 
 	@FXML
 	private GridPane reportGridPane;
@@ -76,16 +78,10 @@ public class ReportProblemControllerFX {
 		File imageFile = imageFileChooser.showOpenDialog(window);
 
 		if (imageFile != null) {
-			try {
-				Image selImage = new Image(imageFile.toURI().toString());
+			Image selImage = new Image(imageFile.toURI().toString());
 
-				imgView.setImage(selImage);
-				DataBufferByte data = (DataBufferByte) ImageIO.read(imageFile).getRaster().getDataBuffer();
-				selectedImage = data.getData();
-
-			} catch (IOException e) {
-				Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
-			}
+			imgView.setImage(selImage);
+			selectedImage = ConverterUtil.byteArrayFromImage(imageFile);
 
 		}
 

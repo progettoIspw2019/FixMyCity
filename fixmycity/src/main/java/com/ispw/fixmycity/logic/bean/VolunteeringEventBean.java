@@ -13,6 +13,7 @@ import com.ispw.fixmycity.logic.model.CitizenUser;
 
 public class VolunteeringEventBean {
 
+	private Integer eventId;
 	private Date creationDate;
 	private Date eventDate;
 	private String title;
@@ -94,5 +95,14 @@ public class VolunteeringEventBean {
 			throw new InvalidFieldException("Incorrect date");
 		}
 	}
+
+	public Integer getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
+	}
+
 
 }

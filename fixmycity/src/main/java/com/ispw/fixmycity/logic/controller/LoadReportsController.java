@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
-import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
+import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.model.CommunityReport;
 import com.ispw.fixmycity.logic.model.CompanyReport;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 public class LoadReportsController {
 
@@ -70,7 +71,7 @@ public class LoadReportsController {
 			compRepBean.setLongitude(rep.getLongitude());
 			compRepBean.setTitle(rep.getTitle());
 			compRepBean.setSubmitter(rep.getCitizenUser().getUsername());
-
+			compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
 			ArrayList<String> jobsStr = new ArrayList<>();
 
 			rep.getJobs().forEach(j -> jobsStr.add(String.valueOf(j.getIdJob())));
@@ -83,14 +84,18 @@ public class LoadReportsController {
 		return compRepBeanList;
 	}
 
-	public List<CommunityReportBeanView> getMyCommunityReports() {
+	public List<CommunityReportBeanView> getMyCommunityReports() throws EmptyResultListException {
 
 		CommunityReportDAO daoComm = new CommunityReportDAO();
 
 		List<CommunityReport> reports = daoComm.findAll();
 
+		if (reports == null || reports.isEmpty()) {
+			throw new EmptyResultListException("There are no reports for the Community", null);
+		}
+
 		ArrayList<CommunityReportBeanView> commRepBeanList = new ArrayList<>();
-		String username = UserSessionBean.getInstance().getActiveCitizenUser().getUsername();
+		String username = SessionView.getUsername();
 		for (var rep : reports) {
 			if (rep.getCitizenUser().getUsername().equals(username)) {
 				CommunityReportBeanView commRepBean = new CommunityReportBeanView();
@@ -119,13 +124,15 @@ public class LoadReportsController {
 
 	}
 
-	public List<CompanyReportBeanView> getMyCompanyReports() {
+	public List<CompanyReportBeanView> getMyCompanyReports() throws EmptyResultListException {
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 
 		List<CompanyReport> reports = compRepDAO.findAll();
-
+		if (reports == null || reports.isEmpty()) {
+			throw new EmptyResultListException("There are no reports for the Companies", null);
+		}
 		ArrayList<CompanyReportBeanView> compRepBeanList = new ArrayList<>();
-		String username = UserSessionBean.getInstance().getActiveCitizenUser().getUsername();
+		String username = SessionView.getUsername();
 
 		for (var rep : reports) {
 			if (rep.getCitizenUser().getUsername().equals(username)) {
@@ -141,7 +148,7 @@ public class LoadReportsController {
 				compRepBean.setLatitude(rep.getLatitude());
 				compRepBean.setLongitude(rep.getLongitude());
 				compRepBean.setTitle(rep.getTitle());
-
+				compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
 				ArrayList<String> jobsStr = new ArrayList<>();
 
 				rep.getJobs().forEach(j -> jobsStr.add(String.valueOf(j.getIdJob())));

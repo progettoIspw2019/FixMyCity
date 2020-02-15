@@ -1,4 +1,8 @@
 <!doctype html>
+<%@page
+	import="com.ispw.fixmycity.logic.exceptions.EmptyResultListException"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="javax.persistence.NoResultException"%>
 <%@page import="com.ispw.fixmycity.logic.model.Job"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
@@ -8,15 +12,17 @@
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Base64"%>
+
 
 <%
 	if (SessionView.getMode() != UserMode.CITIZEN) {
 		response.sendRedirect("index.jsp");
 	}
-
-	List<CommunityReportBeanView> commReports = new SystemFacade().getMyCommunityReports();
-	List<CompanyReportBeanView> compReports = new SystemFacade().getMyCompanyReports();
+	List<CommunityReportBeanView> commReports = new ArrayList<>();
+	List<CompanyReportBeanView> compReports = new ArrayList<>();
 %>
+
 
 <html lang="en">
 <head>
@@ -31,6 +37,11 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="style/style.css">
 <title>FixMyCity</title>
+<script>
+	function printError(message) {
+		document.getElementById("errorPrinterId").innerHTML = message;
+	}
+</script>
 </head>
 <body>
 	<nav aria-label="navbar" class="navbar navbar-dark bg-dark">
@@ -38,9 +49,12 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><span class="navbar-brand mb-0 h1">User_96</span> <img
-				src="style/img/placeholder-profile.jpg" width="40" height="40"
-				class="rounded-circle" alt=""></li>
+			<li><span class="navbar-brand mb-0 h1"> <%
+ 	out.println(SessionView.getUsername());
+ %>
+			</span> <img
+				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
+				width="40" height="40" class="rounded-circle" alt=""></li>
 		</ul>
 	</nav>
 	<div class="d-flex" id="wrapper">
@@ -60,27 +74,28 @@
 		<!-- /#sidebar-wrapper -->
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
-			<nav aria-label="navbar"
-				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse " id="navbarSupportedContent">
-					<ul class="navbar-nav  mt-2 mt-lg-0">
-						<li class="nav-item active"><a class="nav-link " href="#">
-								<img src="style/icons/Document-text.svg" alt="" width="24"
-								height="24"> Add a Report
-						</a></li>
-						<li class="nav-item active ml-4"><a class="nav-link" href="#"><img
-								src="style/icons/Calendar.svg" alt="" width="24" height="24">
-								Create an Event</a></li>
-					</ul>
-				</div>
-			</nav>
+
 			<div class="container-fluid p-0">
+				<div id="errorPrinterId"></div>
+				<%
+					String errTemplate = "<script>printError('{0}');</script>";
+					String errMessage = "";
+					try {
+						commReports = new SystemFacade().getMyCommunityReports();
+					} catch (EmptyResultListException e) {
+						errMessage += e.getMessage() + "<br\\>";
+					}
+					try {
+						compReports = new SystemFacade().getMyCompanyReports();
+					} catch (EmptyResultListException e) {
+						errMessage += e.getMessage() + "<br\\>";
+					}
+
+					if (!errMessage.isBlank()) {
+						String err = errTemplate.replace("{0}", errMessage);
+						out.println(err);
+					}
+				%>
 				<ul class="list-group">
 					<%
 						for (CommunityReportBeanView rep : commReports) {
@@ -90,9 +105,12 @@
 						<div class="container ml-0">
 							<div class="row  ">
 								<div class="col-sm-auto  ">
+
+
 									<img
-										src="http://3.citynews-romatoday.stgy.ovh/~media/original-hi/1635172152210/disservizi-a-roma-in-piazza-irnerio-55-piazza-irnerio-degrado-disordine-e-sporcizia.jpg"
-										width="150" height="auto" alt="" />
+										src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(rep.getImage())));%>"
+										width="150" height="auto" alt="">
+
 								</div>
 								<div class="col-lg-auto">
 									<div class="row">
@@ -153,15 +171,14 @@
 						for (CompanyReportBeanView rep : compReports) {
 					%>
 
-
 					<!-- Single Row for JSP -->
 					<li class="list-group-item ">
 						<div class="container ml-0">
 							<div class="row  ">
 								<div class="col-sm-auto  ">
 									<img
-										src="http://3.citynews-romatoday.stgy.ovh/~media/original-hi/1635172152210/disservizi-a-roma-in-piazza-irnerio-55-piazza-irnerio-degrado-disordine-e-sporcizia.jpg"
-										width="150" height="auto" alt="" />
+										src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(rep.getImage())));%>"
+										width="150" height="auto" alt="">
 								</div>
 								<div class="col-lg-auto">
 									<div class="row">
@@ -203,7 +220,7 @@
 											if (!rep.getJobs().isEmpty()) {
 													out.println("Job created");
 												} else {
-													out.println("No event created");
+													out.println("No job created");
 												}
 										%>
 

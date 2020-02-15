@@ -52,7 +52,9 @@
 			<column name="related_company" type="VARCHAR(30)" />
 			<column name="refuseDescription" type="VARCHAR(90)" />
 			<column name="refuseCounter" type="INTEGER" />
+
 		</createTable>
+
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-4">
 		<createTable tableName="company_users">

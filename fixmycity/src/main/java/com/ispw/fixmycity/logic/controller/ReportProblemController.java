@@ -7,8 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Logger;
 
-import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
-import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
@@ -20,6 +18,8 @@ import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyUserDAO;
 import com.ispw.fixmycity.logic.dao.UserDAO;
+import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
+import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.City;
 import com.ispw.fixmycity.logic.model.CityFactory;
@@ -78,7 +78,8 @@ public class ReportProblemController {
 		compRepDAO.add(compRepBean);
 	}
 
-	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) throws CouldNotConnectToGeolocationServiceException {
+	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude)
+			throws CouldNotConnectToGeolocationServiceException {
 		SessionView.setLatitudeSetOnMap(latitude);
 		SessionView.setLongitudeSetOnMap(longitude);
 
@@ -112,7 +113,7 @@ public class ReportProblemController {
 			addr.setCountry(addrJson.get("AdditionalData").getAsJsonArray().get(0).getAsJsonObject().get("value")
 					.getAsString());
 			String num = "";
-			if(addrJson.get("HouseNumber") != null)
+			if (addrJson.get("HouseNumber") != null)
 				num = addrJson.get("HouseNumber").getAsString();
 			if (num.isBlank())
 				addr.setRoad(addrJson.get("Street").getAsString());

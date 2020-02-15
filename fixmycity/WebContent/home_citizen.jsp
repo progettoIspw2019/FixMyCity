@@ -5,19 +5,23 @@
 <%@page import="com.ispw.fixmycity.logic.model.CityFactory"%>
 <%@page import="com.ispw.fixmycity.logic.model.City"%>
 
-<%@ page
-	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
+
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
-<%@ page import="com.ispw.fixmycity.logic.exceptions.InvalidFieldException"%>
+<%@ page
+	import="com.ispw.fixmycity.logic.exceptions.InvalidFieldException"%>
+
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.Map"%>
+<%@ page import="java.time.LocalDateTime"%>
+<%@ page import="java.time.ZoneId"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
@@ -33,31 +37,32 @@
 	if (SessionView.getMode() != UserMode.CITIZEN) {
 		response.sendRedirect("index.jsp");
 	}
-
-	VolunteeringEventController controller = new VolunteeringEventController();
-	Map<Integer, String> reports = controller.getCommunityReportMap();
+	SystemFacade facade = new SystemFacade();
+	Map<Integer, String> reports = facade.getCommunityReportMap();
 
 	String id = request.getParameter("reportId");
 	String title = request.getParameter("inputTitleEvent");
 	String description = request.getParameter("inputEventDescription");
 	String date = request.getParameter("inputDateEvent");
 	String time = request.getParameter("inputTimeEvent");
-	
-		
-	
+
 	if (id != null && !title.isBlank() && !description.isBlank() && !date.isBlank() && !time.isBlank()) {
-		CommunityReportBean selectedReport = controller.getCommunityReportFromId(Integer.parseInt(id));
+		CommunityReportBean selectedReport = facade.getCommunityReportFromId(Integer.parseInt(id));
 		VolunteeringEventBean bean = new VolunteeringEventBean();
 		bean.setCommunityReport(selectedReport);
 		bean.setEventDate(date);
-		try{
+		bean.setTitle(title);
+		bean.setFullDescription(description);
+		LocalDateTime localDateTime = LocalDateTime.now();
+		bean.setCreationDate(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
+		try {
 			bean.setEventTime(time);
-		} catch(InvalidFieldException e){
+		} catch (InvalidFieldException e) {
 			//TODO throw some error
 		}
-		controller.createVolunteeringEvent(bean);
+		facade.createVolunteeringEvent(bean);
 	}
-	
+
 	String repLatitude = (String) request.getParameter("latitudeInput");
 	String repLongitude = (String) request.getParameter("longitudeInput");
 	String repAddress = request.getParameter("inputReportAddress");
@@ -66,11 +71,9 @@
 	String repCategory = request.getParameter("inputReportCategory");
 	String repBase64Image = request.getParameter("base64ImageReport");
 
-	
-	
-	if (repLatitude != null && repLongitude != null && repAddress != null && repTitle != null && repCategory != null && repBase64Image != null) {
-		   
-	
+	if (repLatitude != null && repLongitude != null && repAddress != null && repTitle != null
+			&& repCategory != null && repBase64Image != null) {
+
 		ReportBeanView reportBeanView = new ReportBeanView();
 		reportBeanView.setAddress(repAddress);
 		reportBeanView.setLatitude(new BigDecimal(repLatitude));
@@ -81,19 +84,16 @@
 		reportBeanView.setCity(SessionView.getCityEnum().toString());
 		reportBeanView.setDescription(repDescription);
 		reportBeanView.setImage(Base64.getDecoder().decode(repBase64Image));
-		SystemFacade facade = new SystemFacade();
 		facade.reportProblem(reportBeanView);
-	
-	} 
-	
-	
+
+	}
+
 	List<CommunityReportBeanView> commReps = new SystemFacade().getCommunityReports();
 	List<CompanyReportBeanView> compReps = new SystemFacade().getCompanyReports();
 	CityFactory cityFactory = new CityFactory();
 	City city = cityFactory.getCity(SessionView.getCityEnum());
 	List<String> categories = new ArrayList<String>();
 	categories = city.getAllCategories();
-		
 %>
 <head>
 <!-- Required meta tags -->
@@ -128,9 +128,13 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><span class="navbar-brand mb-0 h1">User_96</span> <img
-				src="style/img/placeholder-profile.jpg" width="40" height="40"
-				class="rounded-circle" alt=""></li>
+			<li><span class="navbar-brand mb-0 h1">
+					<%
+						out.println(SessionView.getUsername());
+					%>
+			</span> <img
+				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
+				width="40" height="40" class="rounded-circle" alt=""></li>
 		</ul>
 	</nav>
 	<div class="d-flex" id="wrapper">
@@ -150,8 +154,7 @@
 		<!-- /#sidebar-wrapper -->
 		<!-- Page Content -->
 		<div id="page-content-wrapper">
-			<nav
-				aria-label="navbar"
+			<nav aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
 				<!-- 		<button class="btn btn-primary" id="menu-toggle">Toggle
                   Menu</button>
@@ -195,13 +198,14 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
-				<form action="home_citizen.jsp" method="GET" id="reportProblemFormId">
+				<form action="home_citizen.jsp" method="GET"
+					id="reportProblemFormId">
 					<input type="hidden" value="" id="latitudeInputId"
 						name="latitudeInput"> <input type="hidden" value=""
 						id="longitudeInputId" name="longitudeInput"> <input
-						type="hidden" value="" id="addressInputId" name="inputReportAddress">
-					<input type="hidden" value="" id="base64ImageReportId"
-						name="base64ImageReport" value="">
+						type="hidden" value="" id="addressInputId"
+						name="inputReportAddress"> <input type="hidden" value=""
+						id="base64ImageReportId" name="base64ImageReport" value="">
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-sm">
@@ -227,9 +231,17 @@
 									<label for="inputReportCategoryId">Category</label> <select
 										class="form-control" name="inputReportCategory"
 										id="inputReportCategoryId">
-										<% for (String cat : categories) { %>
-										<option><% out.println(cat); %></option>
-										<% } %>
+										<%
+											for (String cat : categories) {
+										%>
+										<option>
+											<%
+												out.println(cat);
+											%>
+										</option>
+										<%
+											}
+										%>
 									</select>
 								</div>
 							</div>
@@ -239,8 +251,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputReportPictureId">Add a picture</label> <br>
-									<input type="file" accept="image/png, image/jpeg" id="inputReportPictureId"
-										name="inputReportPicture">
+									<input type="file" accept="image/png, image/jpeg"
+										id="inputReportPictureId" name="inputReportPicture">
 								</div>
 							</div>
 						</div>
@@ -393,44 +405,40 @@
 
 
 <script type="text/javascript">
-
-
-function getBase64(file) {
-	   var reader = new FileReader();
-	   reader.readAsDataURL(file);
-	   reader.onload = function () {
-	     console.log(reader.result);
-	     document.getElementById('base64ImageReportId').value =btoa(reader.result);
-alert(document.getElementById('base64ImageReportId').value);
-	   };
-	   reader.onerror = function (error) {
-	     alert("Invalid file");
-	   };
+	function getBase64(file) {
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function() {
+			console.log(reader.result);
+			document.getElementById('base64ImageReportId').value = btoa(reader.result);
+			alert(document.getElementById('base64ImageReportId').value);
+		};
+		reader.onerror = function(error) {
+			alert("Invalid file");
+		};
 	}
 
+	$("#inputReportPictureId").change(function() {
+		var file = document.getElementById('inputReportPictureId').files[0];
+		getBase64(file);
+	});
 
+	var cityBorder = [
+<%int len = city.getBorderShape().length;
+			for (int i = 0; i < len; i++) {
+				out.println(Arrays.toString(city.getBorderShape()[i]));
+				if (i < len - 1) {
+					out.println(", ");
+				}
+			}%>
+	];
 
-
-$("#inputReportPictureId").change(function(){
-	var file = document.getElementById('inputReportPictureId').files[0];
-	getBase64(file);});
-
-
-
-
-
-var cityBorder =  [
-<% int len = city.getBorderShape().length;
-for (int i=0; i<len; i++) 
-{
-	out.println(Arrays.toString(city.getBorderShape()[i]));
-	if (i<len-1) { out.println(", ");  }
-} 
-%>];
-
-
-
-	var mymap = L.map('mapid').setView([<% out.println(city.getLatitude()); %>, <% out.println(city.getLongitude()); %> ], 13);
+	var mymap = L.map('mapid').setView(
+			[
+<%out.println(city.getLatitude());%>
+	,
+<%out.println(city.getLongitude());%>
+	], 13);
 	L
 			.tileLayer(
 					"https://1.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8"
@@ -443,11 +451,17 @@ for (int i=0; i<len; i++)
 					}).addTo(mymap);
 <%for (CommunityReportBeanView commRep : commReps) {
 				out.println("L.marker([" + commRep.getLatitude() + ", " + commRep.getLongitude()
-						+ "]).addTo(mymap).bindPopup('" + commRep.getTitle() + "');");
+						+ "]).addTo(mymap).bindPopup('<b>" + commRep.getTitle() + "</b><br>" + commRep.getDescription()
+						+ "<br>" + "<i>submitted on "
+						+ new SimpleDateFormat("dd-MM-yyyy").format(commRep.getDateSubmission()) + " by "
+						+ commRep.getSubmitter() + "</i>');");
 			}
 			for (CompanyReportBeanView compRep : compReps) {
 				out.println("L.marker([" + compRep.getLatitude() + ", " + compRep.getLongitude()
-						+ "]).addTo(mymap).bindPopup('" + compRep.getTitle() + "');");
+						+ "]).addTo(mymap).bindPopup('<b>" + compRep.getTitle() + "</b><br>" + compRep.getDescription()
+						+ "<br>" + "<i>submitted on "
+						+ new SimpleDateFormat("dd-MM-yyyy").format(compRep.getDateSubmission()) + " by "
+						+ compRep.getSubmitter() + "</i>');");
 			}%>
 	var geocodeService = L.esri.Geocoding.geocodeService();
 
@@ -456,11 +470,11 @@ for (int i=0; i<len; i++)
 		fillColor : "#343a40",
 		color : "blue",
 
-		opacity : 1,
-		fillOpacity : 0
+		opacity : 0.5,
+		fillOpacity : 0.1
 
 	}).addTo(mymap);
-	
+
 	mymap.fitBounds(polygon.getBounds());
 
 	var selectionMarker = {};

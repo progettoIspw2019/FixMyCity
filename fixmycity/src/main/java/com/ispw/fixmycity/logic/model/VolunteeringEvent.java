@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,13 +56,13 @@ public class VolunteeringEvent implements Serializable {
 	private Date eventTime;
 
 	// bi-directional many-to-many association to CitizenUser
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "participations", joinColumns = { @JoinColumn(name = "id_event") }, inverseJoinColumns = {
 			@JoinColumn(name = "username") })
 	private List<CitizenUser> citizenUsers;
 
 	// bi-directional many-to-one association to CommunityReport
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_community_report")
 	private CommunityReport communityReport;
 
@@ -79,6 +80,7 @@ public class VolunteeringEvent implements Serializable {
 		this.setFullDescription(volEventBean.getFullDescription());
 		this.setTitle(volEventBean.getTitle());
 		this.setCreationDate(volEventBean.getCreationDate());
+		this.setEventTime(volEventBean.getEventTime());
 	}
 
 	public int getIdEvent() {
@@ -135,6 +137,14 @@ public class VolunteeringEvent implements Serializable {
 
 	public void setFullDescription(String fullDescription) {
 		this.fullDescription = fullDescription;
+	}
+
+	public Date getEventTime() {
+		return eventTime;
+	}
+
+	public void setEventTime(Date eventTime) {
+		this.eventTime = eventTime;
 	}
 
 }

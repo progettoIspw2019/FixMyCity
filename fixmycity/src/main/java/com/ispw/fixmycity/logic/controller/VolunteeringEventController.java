@@ -11,9 +11,11 @@ import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;
 import com.ispw.fixmycity.logic.dao.VolunteeringEventDAO;
+import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CommunityReport;
 import com.ispw.fixmycity.logic.model.VolunteeringEvent;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 public class VolunteeringEventController {
 
@@ -23,16 +25,18 @@ public class VolunteeringEventController {
 
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
 		VolunteeringEvent event = dao.addVolunteeringEvent(volunteeringEventBean);
-
-		dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(), event);
+		dao.joinVolunteeringEvent(SessionView.getUsername(), event.getIdEvent());
 
 	}
 
 	public void joinVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
-		// VolunteeringEventDAO dao = new VolunteeringEventDAO();
-		// VolunteeringEvent event = dao.findById;
-		// dao.joinVolunteeringEvent(UserSessionBean.getInstance().getActiveCitizenUser().getUsername(),
-		// event);
+		VolunteeringEventDAO dao = new VolunteeringEventDAO();
+		dao.joinVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
+	}
+
+	public void quitVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
+		VolunteeringEventDAO dao = new VolunteeringEventDAO();
+		dao.quitVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
 	}
 
 	public VolunteeringEventController() {
@@ -80,12 +84,17 @@ public class VolunteeringEventController {
 		return null;
 	}
 
-	public List<VolunteeringEventListElementBean> getActiveVolunteeringEvents() {
+	public List<VolunteeringEventListElementBean> getActiveVolunteeringEvents() throws EmptyResultListException {
 
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
 		List<VolunteeringEvent> events = dao.findActiveEvents();
+
+		if (events == null || events.isEmpty()) {
+			throw new EmptyResultListException("At the moment, there are no active events available", null);
+		}
+
 		ArrayList<VolunteeringEventListElementBean> eventsBean = new ArrayList<>();
-		String currentUser = UserSessionBean.getInstance().getActiveCitizenUser().getUsername();
+		String currentUser = SessionView.getUsername();
 		for (VolunteeringEvent event : events) {
 
 			VolunteeringEventListElementBean eventBean = new VolunteeringEventListElementBean();
@@ -95,6 +104,7 @@ public class VolunteeringEventController {
 			eventBean.setEventDate(event.getEventDate());
 			eventBean.setFullDescription(event.getFullDescription());
 			eventBean.setTitle(event.getTitle());
+			eventBean.setEventId(event.getIdEvent());
 
 			for (CitizenUser citizenUser : event.getCitizenUsers()) {
 				if (citizenUser.getUsername().equals(currentUser)) {
@@ -106,6 +116,8 @@ public class VolunteeringEventController {
 
 			eventBean.setAddress(event.getCommunityReport().getAddress());
 			eventBean.setCity(event.getCommunityReport().getCity());
+			eventBean.setImage(event.getCommunityReport().getImage());
+
 			eventsBean.add(eventBean);
 		}
 

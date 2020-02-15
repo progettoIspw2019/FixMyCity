@@ -12,59 +12,75 @@ import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
+import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
 import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
+import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 
 public class SystemFacade {
-	
+
 	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		new ReportProblemController().reportProblem(repBean);
 	}
 
-
-	public List<CommunityReportBeanView> getMyCommunityReports() {
+	public List<CommunityReportBeanView> getMyCommunityReports() throws EmptyResultListException {
 		return new LoadReportsController().getMyCommunityReports();
 	}
-	
 
-	public List<CompanyReportBeanView> getMyCompanyReports() {
+	public List<CompanyReportBeanView> getMyCompanyReports() throws EmptyResultListException {
 		return new LoadReportsController().getMyCompanyReports();
 	}
-	
-	public List<CompanyReportBeanView> getCompanyReports () {
+
+	public List<CompanyReportBeanView> getCompanyReports() {
 		return new LoadReportsController().getCompanyReports();
 	}
-	
+
 	public List<CommunityReportBeanView> getCommunityReports() {
 		return new LoadReportsController().getCommunityReports();
 	}
-	
+
+	public Map<Integer, String> getCommunityReportMap() {
+		return new VolunteeringEventController().getCommunityReportMap();
+	}
+
 	public boolean signupCompanyUser(CompanyUserBean user) {
 		return new LoginController().signupCompanyUser(user);
 	}
-	
+
 	public boolean signupCitizenUser(CitizenUserBean user) {
 		return new LoginController().signupCitizenUser(user);
 	}
-	
+
 	public BaseUserBean isSignedUp(BaseUserBean userBean) throws UserNotFoundException {
 		return new LoginController().checkCredentials(userBean);
 	}
-	
+
 	public void createVolunteeringEvent(VolunteeringEventBean volEventBean) {
 		new VolunteeringEventController().createVolunteeringEvent(volEventBean);
 	}
-	
+
+	public List<VolunteeringEventListElementBean> getActiveVolunteeringEvents() throws EmptyResultListException {
+		return new VolunteeringEventController().getActiveVolunteeringEvents();
+	}
+
 	public Map<Integer, String> getMappedCommunityReports() {
 		return new VolunteeringEventController().getCommunityReportMap();
 	}
-	
+
 	public CommunityReportBean getCommunityReportFromId(Integer id) {
 		return new VolunteeringEventController().getCommunityReportFromId(id);
 	}
-	
+
 	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) throws CouldNotConnectToGeolocationServiceException {
 		new ReportProblemController().setAddressForReport(longitude, latitude);
+	}
+	
+	public void joinVolunteeringEvent(VolunteeringEventBean eventBean) {
+		 new VolunteeringEventController().joinVolunteeringEvent(eventBean);
+	}
+	
+	public void quitVolunteeringEvent(VolunteeringEventBean eventBean) {
+		 new VolunteeringEventController().quitVolunteeringEvent(eventBean);
 	}
 }

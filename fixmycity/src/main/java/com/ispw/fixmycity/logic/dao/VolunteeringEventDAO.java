@@ -14,21 +14,23 @@ import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 public class VolunteeringEventDAO {
 
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public VolunteeringEventDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
 	}
 
 	public List<VolunteeringEvent> getAllVolunteeringEvents() {
-		entityManager = entityManagerFactory.createEntityManager();
-		return entityManager.createNamedQuery("VolunteeringEvent.findAll", VolunteeringEvent.class).getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<VolunteeringEvent> result = entityManager
+				.createNamedQuery("VolunteeringEvent.findAll", VolunteeringEvent.class).getResultList();
+		entityManager.close();
+		return result;
 	}
 
 	public VolunteeringEvent addVolunteeringEvent(VolunteeringEventBean eventBean) {
 		VolunteeringEvent volunteeringEvent = new VolunteeringEvent();
 		volunteeringEvent.setFromBean(eventBean);
-		entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		// Setting foreign key
 		Integer idCommReport = eventBean.getCommunityReport().getIdReport();
@@ -38,17 +40,16 @@ public class VolunteeringEventDAO {
 		entityManager.getTransaction().begin();
 		entityManager.persist(volunteeringEvent);
 		entityManager.getTransaction().commit();
-
+		entityManager.close();
 		return volunteeringEvent;
 	}
 
-	public void joinVolunteeringEvent(String username, VolunteeringEvent event) {
-		entityManager = entityManagerFactory.createEntityManager();
+	public void joinVolunteeringEvent(String username, Integer eventId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		CitizenUser citizenUser = entityManager.find(CitizenUser.class, username);
-		citizenUser.getVolunteeringEvents().add(event);
+		VolunteeringEvent tempEvent = entityManager.find(VolunteeringEvent.class, eventId);
 
-		VolunteeringEvent tempEvent = entityManager.getReference(VolunteeringEvent.class, event.getIdEvent());
-
+		citizenUser.getVolunteeringEvents().add(tempEvent);
 		tempEvent.getCitizenUsers().add(citizenUser);
 
 		entityManager.getTransaction().begin();
@@ -56,11 +57,32 @@ public class VolunteeringEventDAO {
 		entityManager.persist(tempEvent);
 
 		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void quitVolunteeringEvent(String username, Integer eventId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		CitizenUser citizenUser = entityManager.find(CitizenUser.class, username);
+		VolunteeringEvent tempEvent = entityManager.find(VolunteeringEvent.class, eventId);
+
+		tempEvent.getCitizenUsers().remove(citizenUser);
+		citizenUser.getVolunteeringEvents().remove(tempEvent);
+
+		entityManager.getTransaction().begin();
+		entityManager.persist(citizenUser);
+		entityManager.persist(tempEvent);
+
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public List<VolunteeringEvent> findActiveEvents() {
-		entityManager = entityManagerFactory.createEntityManager();
-		return entityManager.createNamedQuery("VolunteeringEvent.findActiveEvents", VolunteeringEvent.class).getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<VolunteeringEvent> result = entityManager
+				.createNamedQuery("VolunteeringEvent.findActiveEvents", VolunteeringEvent.class).getResultList();
+		entityManager.close();
+		return result;
 	}
 
 }
