@@ -83,4 +83,9 @@ public class SystemFacade {
 	public void quitVolunteeringEvent(VolunteeringEventBean eventBean) {
 		 new VolunteeringEventController().quitVolunteeringEvent(eventBean);
 	}
+	
+	public void logout() {
+		new LoginController().logout();
+	}
+	
 }

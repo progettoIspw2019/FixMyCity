@@ -29,7 +29,11 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-					<li><span class="navbar-brand mb-0 h1"><% out.println(SessionView.getUsername()); %></span> <img
+			<li><span class="navbar-brand mb-0 h1">
+					<%
+						out.println(SessionView.getUsername());
+					%>
+			</span> <img
 				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
 				width="40" height="40" class="rounded-circle" alt=""></li>
 		</ul>
@@ -41,7 +45,9 @@
 			<div class="list-group list-group-flush">
 				<a href="#" class="list-group-item list-group-item-action bg-light">Pending
 					reports</a> <a href="jobs.jsp"
-					class="list-group-item list-group-item-action bg-light">Jobs</a>
+					class="list-group-item list-group-item-action bg-light">Jobs</a><a
+					href="logout.jsp"
+					class="list-group-item list-group-item-action bg-light logout-btn">Logout</a>
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
@@ -88,7 +94,7 @@
 										<!-- label-company if company report -->
 										<div class="row justify-content-end mt-2">
 											<button type="button" class="btn btn-danger ">Refuse</button>
-										
+
 											<button type="button" class="btn btn-join ml-2">Accept</button>
 										</div>
 

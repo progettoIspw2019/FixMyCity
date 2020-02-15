@@ -136,7 +136,11 @@ html, body {
 
 #mapid {
 	position: relative;
-	height: 400px; 
+	height: 400px;
 	width: 100%;
 }
 
+.logout-btn {
+	position: absolute !important;
+	bottom: 20px;
+}

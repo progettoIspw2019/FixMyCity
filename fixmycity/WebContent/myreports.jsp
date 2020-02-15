@@ -68,7 +68,8 @@
 					class="list-group-item list-group-item-action bg-light">Active
 					Events</a> <a href="myreports.jsp"
 					class="list-group-item list-group-item-action bg-light">My
-					Reports</a>
+					Reports</a><a href="logout.jsp"
+					class="list-group-item list-group-item-action bg-light logout-btn">Logout</a>
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->

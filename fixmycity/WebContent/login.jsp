@@ -13,6 +13,12 @@
 <html lang="en">
 
 <%
+	if (SessionView.getMode() == UserMode.CITIZEN) {
+		response.sendRedirect("home_citizen.jsp");
+	} else if (SessionView.getMode() == UserMode.COMPANY) {
+		response.sendRedirect("home_company.jsp");
+	}
+
 	String errTemplate = "<script>alert('{0}')</script>";
 
 	String username = new String();

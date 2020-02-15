@@ -128,10 +128,9 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><span class="navbar-brand mb-0 h1">
-					<%
-						out.println(SessionView.getUsername());
-					%>
+			<li><span class="navbar-brand mb-0 h1"> <%
+ 	out.println(SessionView.getUsername());
+ %>
 			</span> <img
 				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
 				width="40" height="40" class="rounded-circle" alt=""></li>
@@ -148,7 +147,9 @@
 					class="list-group-item list-group-item-action bg-light">Active
 					Events</a> <a href="myreports.jsp"
 					class="list-group-item list-group-item-action bg-light">My
-					Reports</a>
+					Reports</a> <a href="logout.jsp"
+					class="list-group-item list-group-item-action bg-light logout-btn">Logout</a>
+
 			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->

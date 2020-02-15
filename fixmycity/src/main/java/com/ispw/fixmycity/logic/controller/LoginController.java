@@ -14,6 +14,7 @@ import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.util.UserMode;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 public class LoginController {
 
@@ -74,6 +75,16 @@ public class LoginController {
 
 		return true;
 
+	}
+	
+	public void logout() {
+		SessionView.setMode(UserMode.GUEST);
+		SessionView.setCityEnum(null);
+		SessionView.setImageProfile(null);
+		SessionView.setLatitudeSetOnMap(null);
+		SessionView.setLongitudeSetOnMap(null);
+		SessionView.setUsername(null);
+		SessionView.setAddressSetOnMap(null);
 	}
 
 }
