@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
-import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
@@ -14,6 +12,8 @@ import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
+import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
+import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 
 public class SystemFacade {
 	
@@ -47,7 +47,7 @@ public class SystemFacade {
 		return new LoginController().signupCitizenUser(user);
 	}
 	
-	public BaseUserBean isSignedUp(BaseUserBean userBean) throws NoUserFound {
+	public BaseUserBean isSignedUp(BaseUserBean userBean) throws UserNotFoundException {
 		return new LoginController().checkCredentials(userBean);
 	}
 	

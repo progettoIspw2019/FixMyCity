@@ -1,8 +1,8 @@
 package com.ispw.fixmycity.logic.view;
 
-import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 
 public class LoginForm {
 
@@ -27,7 +27,7 @@ public class LoginForm {
 		try{
 			new SystemFacade().isSignedUp(baseUser).getMode();
 		}
-		catch (NoUserFound e) {
+		catch (UserNotFoundException e) {
 			// failed login 
 		}
 

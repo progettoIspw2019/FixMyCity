@@ -7,11 +7,14 @@
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
-<%@ page import="com.ispw.fixmycity.logic.exceptions.NoUserFound"%>
+<%@ page
+	import="com.ispw.fixmycity.logic.exceptions.UserNotFoundException"%>
 
 <html lang="en">
 
 <%
+	String errTemplate = "<script>alert('{0}')</script>";
+
 	String username = new String();
 	String password = new String();
 	username = (String) request.getParameter("inputUsername");
@@ -22,21 +25,21 @@
 		userBean.setUsername(username);
 		userBean.setPassword(password);
 		SessionView.setUsername(username);
-		try{
+		try {
 			BaseUserBean responseFromSystem = new SystemFacade().isSignedUp(userBean);
 			if (responseFromSystem.getMode() == UserMode.CITIZEN) {
 				SessionView.setMode(UserMode.CITIZEN);
 				SessionView.setCityEnum(responseFromSystem.getCity());
 				response.sendRedirect("home_citizen.jsp");
-	
+
 			} else if (responseFromSystem.getMode() == UserMode.COMPANY) {
 				SessionView.setMode(UserMode.COMPANY);
 				SessionView.setCityEnum(responseFromSystem.getCity());
 				response.sendRedirect("home_company.jsp");
 			}
-		} catch(NoUserFound e){
-			//TODO : throw some error
-			
+		} catch (UserNotFoundException e) {
+			String errMessage = errTemplate.replace("{0}", e.getMessage());
+			out.println(errMessage);
 		}
 	}
 %>

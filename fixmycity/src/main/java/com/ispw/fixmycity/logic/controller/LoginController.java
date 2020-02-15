@@ -5,11 +5,11 @@ import java.util.logging.Logger;
 
 import javax.persistence.NoResultException;
 
-import com.ispw.fixmycity.logic.exceptions.NoUserFound;
 import com.ispw.fixmycity.logic.bean.BaseUserBean;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.dao.UserDAO;
+import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.CityEnum;
@@ -17,7 +17,7 @@ import com.ispw.fixmycity.logic.util.UserMode;
 
 public class LoginController {
 
-	public BaseUserBean checkCredentials(BaseUserBean user) throws NoUserFound {
+	public BaseUserBean checkCredentials(BaseUserBean user) throws UserNotFoundException {
 
 		UserDAO dao = new UserDAO();
 		try {
@@ -42,7 +42,7 @@ public class LoginController {
 				return user;
 			}
 		} catch (NoResultException e) {
-			throw new NoUserFound();
+			throw new UserNotFoundException("No user found with given username and password!", e);
 		}
 		user.setMode(UserMode.GUEST);
 		return user;

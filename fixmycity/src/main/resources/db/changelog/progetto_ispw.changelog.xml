@@ -46,6 +46,7 @@
 			<column name="latitude" type="DECIMAL(10, 8)" />
 			<column name="longitude" type="DECIMAL(11, 8)" />
 			<column name="city" type="VARCHAR(30)" />
+			<column name="status" type="VARCHAR(30)" />
 			<column name="submitter" type="VARCHAR(30)" />
 			<column name="image" type="LONGBLOB" />
 			<column name="related_company" type="VARCHAR(30)" />

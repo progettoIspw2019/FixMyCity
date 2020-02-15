@@ -9,8 +9,8 @@
 
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
-<%@ page import="com.ispw.fixmycity.logic.exceptions.NoUserFound"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
+<%@ page import="com.ispw.fixmycity.logic.exceptions.UserNotFoundException"%>
 
 <%@ page import="java.util.Base64"%>
 
@@ -47,7 +47,7 @@
 					SessionView.setCityEnum(responseFromSystem.getCity());
 					response.sendRedirect("home_citizen.jsp");
 				}
-			} catch (NoUserFound e) {
+			} catch (UserNotFoundException e) {
 				//TODO : throw some error
 			}
 		}
@@ -84,7 +84,7 @@
 					response.sendRedirect("home_company.jsp");
 
 				}
-			} catch (NoUserFound e) {
+			} catch (UserNotFoundException e) {
 				//TODO : throw some error
 			}
 		}
