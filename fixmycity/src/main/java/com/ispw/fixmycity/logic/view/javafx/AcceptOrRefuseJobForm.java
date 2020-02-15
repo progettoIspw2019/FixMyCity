@@ -74,7 +74,6 @@ public class AcceptOrRefuseJobForm implements Observer  {
 	private TextArea status;
 
 	private CompanyReport reportSelected;
-	private CompanyReport report;
 	
 	AcceptOrRefuseJobBean bean = new AcceptOrRefuseJobBean();
 	AcceptOrRefuseAJobController controller = new AcceptOrRefuseAJobController();
@@ -180,7 +179,6 @@ public class AcceptOrRefuseJobForm implements Observer  {
       }
     	 
     	
-      @SuppressWarnings("null")
 	@FXML
       public void backButton(ActionEvent event) {
     	  

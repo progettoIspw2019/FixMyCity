@@ -21,6 +21,7 @@ module com.ispw.fixmycity.logic {
 	requires java.logging;
 	requires com.jfoenix;
 	requires org.apache.commons.codec;
+	requires com.google.gson;
 	
 
 	opens com.ispw.fixmycity.logic.app to javafx.fxml;

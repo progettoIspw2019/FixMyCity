@@ -12,6 +12,7 @@ import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
+import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 
@@ -63,7 +64,7 @@ public class SystemFacade {
 		return new VolunteeringEventController().getCommunityReportFromId(id);
 	}
 	
-	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) {
+	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) throws CouldNotConnectToGeolocationServiceException {
 		new ReportProblemController().setAddressForReport(longitude, latitude);
 	}
 }

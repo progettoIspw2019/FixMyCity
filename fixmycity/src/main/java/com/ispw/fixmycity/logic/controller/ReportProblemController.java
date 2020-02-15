@@ -1,13 +1,17 @@
 package com.ispw.fixmycity.logic.controller;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.util.logging.Level;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.logging.Logger;
 
-import org.apache.http.impl.client.HttpClients;
-
+import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
@@ -23,19 +27,18 @@ import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.view.SessionView;
 
-import fr.dudie.nominatim.client.JsonNominatimClient;
-import fr.dudie.nominatim.model.Address;
-
 public class ReportProblemController {
 
+	private Logger log;
+
 	public ReportProblemController() {
-		// there is nothing to instantiate
+		log = Logger.getLogger("fixmycity");
 	}
 
 	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		// if repBean has category for companies -> reportProblem company
 		// else -> reportProblem community
-		
+
 		City city = new CityFactory().getCity(CityEnum.valueOf(repBean.getCity().toUpperCase()));
 
 		if (city.isForCommunity(repBean.getCategory())) {
@@ -51,10 +54,10 @@ public class ReportProblemController {
 		CompanyUser compUser = this.findCompany(repBean.getCategory(), repBean.getCity());
 
 		if (compUser == null) {
-			Logger.getLogger("fixmycity").log(Level.SEVERE, "No Company User Found with matching category and city!\n\n");
+			log.severe("No Company User Found with matching category and city!\n\n");
 			throw new NoMatchingCompanyFound();
 		}
-		
+
 		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());
 
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
@@ -75,34 +78,60 @@ public class ReportProblemController {
 		compRepDAO.add(compRepBean);
 	}
 
-	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) {
-		JsonNominatimClient client = new JsonNominatimClient(HttpClients.createDefault(),
-				"progetto.ispw.uniroma2@gmail.com");
-
+	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) throws CouldNotConnectToGeolocationServiceException {
 		SessionView.setLatitudeSetOnMap(latitude);
 		SessionView.setLongitudeSetOnMap(longitude);
 
 		AddressBean addr = new AddressBean();
-		try {
-			Address address = client.getAddress(longitude.doubleValue(), latitude.doubleValue());
 
-			for (var elem : address.getAddressElements()) {
-				if (elem.getKey().equals("road"))
-					addr.setRoad(elem.getValue());
-				if (elem.getKey().equals("city"))
-					addr.setCity(elem.getValue());
-				if (elem.getKey().equals("country"))
-					addr.setCountry(elem.getValue());
-			}
+		URL url;
+		JsonReader jRdr;
+
+		try {
+			String req = "https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json"
+					+ "?apiKey=JUvOvJVjLrhz-jdc2OBX9V63RJyWzTKjp54rBd-1oE4" + "&mode=retrieveAddresses" + "&prox="
+					+ latitude.doubleValue() + "," + longitude.doubleValue() + "&maxresults=1";
+			Logger.getLogger("fixmycity").info(() -> "Requesting... \n" + req);
+			url = new URL(req);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.connect();
+			int responsecode = conn.getResponseCode();
+
+			if (responsecode != 200)
+				throw new CouldNotConnectToGeolocationServiceException();
+
+			log.info("\nParsing...\n");
+			jRdr = new JsonReader(new InputStreamReader(url.openStream()));
+
+			JsonObject addrJson = JsonParser.parseReader(jRdr).getAsJsonObject().get("Response").getAsJsonObject()
+					.get("View").getAsJsonArray().get(0).getAsJsonObject().get("Result").getAsJsonArray().get(0)
+					.getAsJsonObject().get("Location").getAsJsonObject().get("Address").getAsJsonObject();
+
+			addr.setCity(addrJson.get("City").getAsString());
+			addr.setCountry(addrJson.get("AdditionalData").getAsJsonArray().get(0).getAsJsonObject().get("value")
+					.getAsString());
+			String num = "";
+			if(addrJson.get("HouseNumber") != null)
+				num = addrJson.get("HouseNumber").getAsString();
+			if (num.isBlank())
+				addr.setRoad(addrJson.get("Street").getAsString());
+			else
+				addr.setRoad(num + ", " + addrJson.get("Street").getAsString());
+
+			String label = addr.getRoad() + ", " + addr.getCity() + ", " + addr.getCountry();
+			log.fine(() -> "\nJSON parsed\n" + label);
 			SessionView.setAddressSetOnMap(addr);
+
 		} catch (IOException e) {
-			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
+			log.severe(e.getLocalizedMessage());
+
 		}
 	}
 
 	private void reportProblemCommunity(ReportBeanView repBean) {
 		CommunityReportDAO commRepDAO = new CommunityReportDAO();
-		
+
 		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());
 
 		CommunityReportBean commRepBean = new CommunityReportBean();

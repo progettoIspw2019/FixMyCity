@@ -8,6 +8,7 @@ import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
+import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.model.City;
 import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.util.ReportFilter;
@@ -168,7 +169,13 @@ public class MapController {
 			BigDecimal latitude = BigDecimal.valueOf(latD);
 			BigDecimal longitude = BigDecimal.valueOf(longD);
 
-			new SystemFacade().setAddressForReport(longitude, latitude);
+			try {
+				new SystemFacade().setAddressForReport(longitude, latitude);
+			} catch (CouldNotConnectToGeolocationServiceException e) {
+				Alert alert = new Alert(AlertType.ERROR, "It seems like there are having trouble connecting to the geolocation service...", ButtonType.OK);
+				alert.setHeaderText("Could not connect to geolocation service!");
+				alert.showAndWait();
+			}
 			AddressBean addr = SessionView.getAddressSetOnMap();
 
 			Popup popup = new Popup(new PopupOptions().setMaxWidth(200))

@@ -3,7 +3,7 @@
 <%@page import="com.ispw.fixmycity.logic.model.CityFactory"%>
 <%@page import="com.ispw.fixmycity.logic.model.City"%>
 
-<%@page import="com.ispw.fixmycity.logic.view.MapController"%>
+<%@page import="com.ispw.fixmycity.logic.view.javafx.MapController"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
 <%@ page
 	import="com.ispw.fixmycity.logic.controller.VolunteeringEventController"%>
