@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Observer;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.App;
@@ -32,7 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AcceptOrRefuseJobForm implements Observer {
+public class AcceptOrRefuseJobForm {
 
 	Stage stage;
 
@@ -79,7 +80,7 @@ public class AcceptOrRefuseJobForm implements Observer {
 	private TextArea status;
 
 	private CompanyReport reportSelected;
-	
+
 	private Logger logger;
 
 	AcceptOrRefuseJobBean bean = new AcceptOrRefuseJobBean();
@@ -90,9 +91,9 @@ public class AcceptOrRefuseJobForm implements Observer {
 
 	@FXML
 	public void initialize() {
-		
+
 		logger = Logger.getLogger("fixmycity");
-		
+
 		List<CompanyReport> reports = dao.findAll();
 		if (reports.isEmpty()) {
 			Alert alert = new Alert(AlertType.INFORMATION, "No problems were reported for this company.");
@@ -106,12 +107,12 @@ public class AcceptOrRefuseJobForm implements Observer {
 		reportTable.setShowRoot(false);
 		root.setExpanded(true);
 		reports.stream().forEach(report -> root.getChildren().add(new TreeItem<>(report)));
-		
+
 		reportTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-			if(newSelection != null) {
+			if (newSelection != null) {
 				reportSelected = newSelection.getValue();
-				logger.info(() -> "Loading...\n" + reportSelected.getTitle() +"\n");
-				
+				logger.info(() -> "Loading...\n" + reportSelected.getTitle() + "\n");
+
 				reportTitleText.setText(reportSelected.getTitle());
 				Image image = new Image(new ByteArrayInputStream(reportSelected.getImage()));
 				reportImageView.setImage(image);
@@ -120,7 +121,6 @@ public class AcceptOrRefuseJobForm implements Observer {
 				submissionDate.setText(new SimpleDateFormat("dd-MM-yyyy").format(reportSelected.getDateSubmission()));
 			}
 		});
-
 
 		statusColumn.setCellValueFactory(
 				(TreeTableColumn.CellDataFeatures<CompanyReport, String> param) -> new SimpleStringProperty(
@@ -184,18 +184,13 @@ public class AcceptOrRefuseJobForm implements Observer {
 
 	}
 
-	@Override
-	public void update() {
-		// initialize();//refresh windows}
-	}
-
 	@FXML
 	public void backButton(ActionEvent event) {
 
 		Stage stage = (Stage) backButton.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	@FXML
 	private void logout() {
 		new LoginController().logout();

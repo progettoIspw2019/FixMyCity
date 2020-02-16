@@ -20,22 +20,22 @@ public class VolunteeringEventController {
 
 	List<CommunityReportBean> filteredReports = new ArrayList<>();
 
-	public void createVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
+	public boolean createVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
 
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
 		VolunteeringEvent event = dao.addVolunteeringEvent(volunteeringEventBean);
 		dao.joinVolunteeringEvent(SessionView.getUsername(), event.getIdEvent());
-
+		return (event != null);
 	}
 
-	public void joinVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
+	public boolean joinVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
-		dao.joinVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
+		return dao.joinVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
 	}
 
-	public void quitVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
+	public boolean quitVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
-		dao.quitVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
+		return dao.quitVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
 	}
 
 	public VolunteeringEventController() {

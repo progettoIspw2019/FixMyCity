@@ -44,7 +44,7 @@ public class VolunteeringEventDAO {
 		return volunteeringEvent;
 	}
 
-	public void joinVolunteeringEvent(String username, Integer eventId) {
+	public boolean joinVolunteeringEvent(String username, Integer eventId) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		CitizenUser citizenUser = entityManager.find(CitizenUser.class, username);
 		VolunteeringEvent tempEvent = entityManager.find(VolunteeringEvent.class, eventId);
@@ -58,9 +58,11 @@ public class VolunteeringEventDAO {
 
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		
+		return tempEvent.getCitizenUsers().contains(citizenUser);
 	}
 
-	public void quitVolunteeringEvent(String username, Integer eventId) {
+	public boolean quitVolunteeringEvent(String username, Integer eventId) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		CitizenUser citizenUser = entityManager.find(CitizenUser.class, username);
@@ -75,6 +77,9 @@ public class VolunteeringEventDAO {
 
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		
+		return !tempEvent.getCitizenUsers().contains(citizenUser);
+
 	}
 
 	public List<VolunteeringEvent> findActiveEvents() {

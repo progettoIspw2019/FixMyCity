@@ -4,7 +4,6 @@
 <%@page import="java.awt.ActiveEvent"%>
 <%@page
 	import="com.ispw.fixmycity.logic.exceptions.EmptyResultListException"%>
-<%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>

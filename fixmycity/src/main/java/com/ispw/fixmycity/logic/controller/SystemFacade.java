@@ -22,8 +22,8 @@ import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 
 public class SystemFacade {
 
-	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
-		new ReportProblemController().reportProblem(repBean);
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
+		return new ReportProblemController().reportProblem(repBean);
 	}
 
 	public List<CommunityReportBeanView> getMyCommunityReports() throws EmptyResultListException {
@@ -66,8 +66,8 @@ public class SystemFacade {
 		return new LoginController().checkCredentials(userBean);
 	}
 
-	public void createVolunteeringEvent(VolunteeringEventBean volEventBean) {
-		new VolunteeringEventController().createVolunteeringEvent(volEventBean);
+	public boolean createVolunteeringEvent(VolunteeringEventBean volEventBean) {
+		return new VolunteeringEventController().createVolunteeringEvent(volEventBean);
 	}
 
 	public List<VolunteeringEventListElementBean> getActiveVolunteeringEvents() throws EmptyResultListException {

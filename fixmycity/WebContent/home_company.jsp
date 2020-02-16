@@ -1,7 +1,6 @@
 <!doctype html>
 <%@page import="com.ispw.fixmycity.logic.controller.AcceptOrRefuseAJobController"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.Base64"%>

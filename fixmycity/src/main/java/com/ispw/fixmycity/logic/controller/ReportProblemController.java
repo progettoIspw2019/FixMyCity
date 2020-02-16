@@ -35,22 +35,23 @@ public class ReportProblemController {
 		log = Logger.getLogger("fixmycity");
 	}
 
-	public void reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		// if repBean has category for companies -> reportProblem company
 		// else -> reportProblem community
 
 		City city = new CityFactory().getCity(CityEnum.valueOf(repBean.getCity().toUpperCase()));
 
 		if (city.isForCommunity(repBean.getCategory())) {
-			reportProblemCommunity(repBean);
+			return reportProblemCommunity(repBean);
 		}
 
 		if (city.isForCompany(repBean.getCategory())) {
-			reportProblemCompany(repBean);
+			return reportProblemCompany(repBean);
 		}
+		return -1;
 	}
 
-	private void reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {
+	private Integer reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		CompanyUser compUser = this.findCompany(repBean.getCategory(), repBean.getCity());
 
 		if (compUser == null) {
@@ -75,7 +76,7 @@ public class ReportProblemController {
 		compRepBean.setSubmitter(submitter);
 		compRepBean.setCity(repBean.getCity());
 
-		compRepDAO.add(compRepBean);
+		return compRepDAO.add(compRepBean).getIdReport();
 	}
 
 	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude)
@@ -130,7 +131,7 @@ public class ReportProblemController {
 		}
 	}
 
-	private void reportProblemCommunity(ReportBeanView repBean) {
+	private Integer reportProblemCommunity(ReportBeanView repBean) {
 		CommunityReportDAO commRepDAO = new CommunityReportDAO();
 
 		CitizenUser submitter = new UserDAO().findAllCitizensFromUsername(repBean.getSubmitter());
@@ -147,7 +148,8 @@ public class ReportProblemController {
 		commRepBean.setCity(repBean.getCity());
 		commRepBean.setSubmitter(submitter);
 
-		commRepDAO.add(commRepBean);
+		return commRepDAO.add(commRepBean).getIdReport();
+
 	}
 
 	private CompanyUser findCompany(String category, String areaOfInterest) {

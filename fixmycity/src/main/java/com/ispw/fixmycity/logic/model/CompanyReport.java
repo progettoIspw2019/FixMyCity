@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "company_reports")
 @NamedQuery(name = "CompanyReport.findAll", query = "SELECT c FROM CompanyReport c")
-public class CompanyReport implements Serializable, Subject {
+public class CompanyReport implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -69,23 +69,6 @@ public class CompanyReport implements Serializable, Subject {
 
 	public CompanyReport() {
 		// This is a POJO, and there are no default values
-	}
-
-	@Override
-	public void attach() {
-		// form.observableReportId.add(this.idReport);
-
-	}
-
-	@Override
-	public void detach() {
-		// form.observableReportId.remove(this.idReport);
-	}
-
-	@Override
-	public void notifyGui() {
-		// form.update();
-
 	}
 
 	public int getIdReport() {

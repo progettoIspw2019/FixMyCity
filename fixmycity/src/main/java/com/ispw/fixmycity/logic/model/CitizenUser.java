@@ -66,9 +66,9 @@ public class CitizenUser implements Serializable {
 		setPwd(ConverterUtil.md5FromString((citizenUserBean.getPassword())));
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
-		if (citizenUserBean.getProfilePicture() != null) {
-			setProfilePicture(citizenUserBean.getProfilePicture());
-		}
+//		if (citizenUserBean.getProfilePicture() != null && citizenUserBean.getProfilePicture().length != 0) {
+//			setProfilePicture(citizenUserBean.getProfilePicture());
+//		}
 		setCity(citizenUserBean.getCity().toString());
 	}
 

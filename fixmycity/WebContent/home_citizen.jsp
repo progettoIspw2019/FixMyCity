@@ -8,7 +8,6 @@
 
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.VolunteeringEventBean"%>
-<%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBean"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
