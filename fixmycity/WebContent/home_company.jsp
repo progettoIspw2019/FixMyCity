@@ -1,14 +1,22 @@
 <!doctype html>
+<%@page import="com.ispw.fixmycity.logic.controller.AcceptOrRefuseAJobController"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page import="com.ispw.fixmycity.logic.bean.UserSessionBean"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.Base64"%>
-
+<%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
+<%@page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
+<%@ page import="java.util.List"%>
+<%@page
+	import="com.ispw.fixmycity.logic.exceptions.EmptyResultListException"%>
 <html lang="en">
 <%
 	if (SessionView.getMode() != UserMode.COMPANY) {
 		response.sendRedirect("index.jsp");
 	}
+	List<CompanyReportBeanView> compReports = new ArrayList<CompanyReportBeanView>();
+	
 %>
 <head>
 <!-- Required meta tags -->
@@ -22,6 +30,11 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="style/style.css">
 <title>FixMyCity</title>
+<script>
+	function printError(message) {
+		document.getElementById("errorPrinterId").innerHTML = message;
+	}
+</script>
 </head>
 <body>
 	<nav aria-label="navbar" class="navbar navbar-dark bg-dark">
@@ -29,10 +42,9 @@
 			<li><span class="navbar-brand mb-0 h1">FixMyCity</span></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><span class="navbar-brand mb-0 h1">
-					<%
-						out.println(SessionView.getUsername());
-					%>
+			<li><span class="navbar-brand mb-0 h1"> <%
+ 	out.println(SessionView.getUsername());
+ %>
 			</span> <img
 				src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(SessionView.getImageProfile())));%>"
 				width="40" height="40" class="rounded-circle" alt=""></li>
@@ -44,9 +56,7 @@
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
 				<a href="#" class="list-group-item list-group-item-action bg-light">Pending
-					reports</a> <a href="jobs.jsp"
-					class="list-group-item list-group-item-action bg-light">Jobs</a><a
-					href="logout.jsp"
+					reports</a><a href="logout.jsp"
 					class="list-group-item list-group-item-action bg-light logout-btn">Logout</a>
 			</div>
 		</div>
@@ -55,63 +65,196 @@
 		<div id="page-content-wrapper">
 			<nav aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
-				<!-- 		<button class="btn btn-primary" id="menu-toggle">Toggle
-                  Menu</button>
-                  -->
+	
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
 			</nav>
 			<div class="container-fluid p-0">
+				<div id="errorPrinterId"></div>
+				<div id="errorPrinterId"></div>
+				<%
+					String errTemplate = "<script>printError('{0}');</script>";
+					String errMessage = "";
+					try {
+						compReports = new SystemFacade().getCompanyReportsWihoutJob();
+					} catch (EmptyResultListException e) {
+						errMessage += e.getMessage() + "<br\\>";
+					}
+
+					if (!errMessage.isBlank()) {
+						String err = errTemplate.replace("{0}", errMessage);
+						out.println(err);
+					}
+				%>
 				<ul class="list-group">
-
-
+					<%
+						for (CompanyReportBeanView rep : compReports) {
+					%>
 					<!-- Single Row for JSP -->
 					<li class="list-group-item ">
 						<div class="container ml-0">
 							<div class="row  ">
 								<div class="col-sm-auto  ">
 									<img
-										src="https://www.ilmessaggero.it/photos/MED/46/29/3844629_0924_buche.jpg"
-										width="150" height="auto" alt="" />
+										src="data:image/jpeg;base64, <%out.println(new String(Base64.getEncoder().encodeToString(rep.getImage())));%>"
+										width="150" height="auto" alt="">
 								</div>
 								<div class="col-lg-auto">
 									<div class="row">
-										<h5>Buche viale palmiro togliatti</h5>
+										<h5>
+											<%
+												out.println(rep.getTitle());
+											%>
+										</h5>
 									</div>
-									<div class="row">Per favore intervenite prima che
-										qualcuno si faccia male</div>
-									<div class="row">Viale palmiro togliatti</div>
-									<div class="row">8/02/2020</div>
+									<div class="row">
+										<%
+											out.println(rep.getDescription());
+										%>
+									</div>
+									<div class="row">
+										<%
+											out.println(rep.getAddress());
+										%>
+									</div>
+									<div class="row">
+										<%
+											out.println(rep.getDateSubmission());
+										%>
+									</div>
 								</div>
-
 								<div class="col">
 									<div class="row justify-content-end mt-2">
 										<!-- label-company if company report -->
 										<div class="row justify-content-end mt-2">
-											<button type="button" class="btn btn-danger ">Refuse</button>
-
-											<button type="button" class="btn btn-join ml-2">Accept</button>
+											<button type="button" data-toggle="modal"
+												data-target="#refuseDialog" class="btn btn-danger ">Refuse</button>
+											<button type="button" data-toggle="modal"
+												data-target="#acceptDialog" class="btn btn-join ml-2">Accept</button>
 										</div>
-
 									</div>
-
 								</div>
-
 							</div>
-
 						</div>
 					</li>
 					<!-- End of Single Row for JSP  -->
-
+					<%
+						}
+					%>
 				</ul>
 			</div>
 		</div>
 	</div>
+
+
+
+	<!-- Form modals -->
+	<!-- Accept Report -->
+	<div class="modal" id="acceptDialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h3 class="modal-title">Accept Report</h3>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<form action="home_citizen.jsp" method="GET"
+					id="reportProblemFormId">
+					<input type="hidden" value="" id="latitudeInputId"
+						name="latitudeInput"> <input type="hidden" value=""
+						id="longitudeInputId" name="longitudeInput"> <input
+						type="hidden" value="" id="addressInputId"
+						name="inputReportAddress"> <input type="hidden" value=""
+						id="base64ImageReportId" name="base64ImageReport" value="">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="inputDateEvent">Start of the Job</label> <input
+										type="date" class="form-control" name="acceptReportStartDate">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="acceptReportEndDate">Expected end of the
+										Job</label> <input type="date" class="form-control"
+										name="acceptReportEndDate">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="acceptReportInfoFileId">(Optional) PDF file
+										with additional info</label> <br> <input type="file"
+										accept="application/pdf" id="acceptReportInfoFileId"
+										name="acceptReportInfoFile">
+								</div>
+							</div>
+						</div>
+
+
+
+					</div>
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<div class="row">
+							<div class="col-sm">
+								<button type="submit" class="btn btn-primary w-100">Accept</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Refuse -->
+	<div class="modal" id="refuseDialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h3 class="modal-title">Refuse Report</h3>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<form action="home_citizen.jsp" method="GET">
+					<div class="modal-body">
+
+						<div class="row">
+							<div class="col-sm">
+								<div class="form-group">
+									<label for="refuseReportMotivation">Refusal motivation</label>
+									<textarea class="form-control" name="refuseReportMotivation"
+										rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<div class="row">
+							<div class="col-sm">
+								<button type="submit" class="btn btn-primary w-100">Refuse</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
 </body>
 <!-- 
       <div class="container-flex">

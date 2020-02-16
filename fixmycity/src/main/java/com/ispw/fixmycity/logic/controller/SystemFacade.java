@@ -10,6 +10,8 @@ import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
+import com.ispw.fixmycity.logic.bean.JobBean;
+import com.ispw.fixmycity.logic.bean.JobBeanView;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
@@ -30,6 +32,14 @@ public class SystemFacade {
 
 	public List<CompanyReportBeanView> getMyCompanyReports() throws EmptyResultListException {
 		return new LoadReportsController().getMyCompanyReports();
+	}
+
+	public List<CompanyReportBeanView> getCompanyReportsWihoutJob() throws EmptyResultListException {
+		return new LoadReportsController().getCompanyReportsWihoutJob();
+	}
+
+	public List<JobBeanView> getJobsByCurrentCompany() throws EmptyResultListException {
+		return new LoadReportsController().getJobsByCurrentCompany();
 	}
 
 	public List<CompanyReportBeanView> getCompanyReports() {
@@ -72,20 +82,21 @@ public class SystemFacade {
 		return new VolunteeringEventController().getCommunityReportFromId(id);
 	}
 
-	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude) throws CouldNotConnectToGeolocationServiceException {
+	public void setAddressForReport(BigDecimal longitude, BigDecimal latitude)
+			throws CouldNotConnectToGeolocationServiceException {
 		new ReportProblemController().setAddressForReport(longitude, latitude);
 	}
-	
+
 	public void joinVolunteeringEvent(VolunteeringEventBean eventBean) {
-		 new VolunteeringEventController().joinVolunteeringEvent(eventBean);
+		new VolunteeringEventController().joinVolunteeringEvent(eventBean);
 	}
-	
+
 	public void quitVolunteeringEvent(VolunteeringEventBean eventBean) {
-		 new VolunteeringEventController().quitVolunteeringEvent(eventBean);
+		new VolunteeringEventController().quitVolunteeringEvent(eventBean);
 	}
-	
+
 	public void logout() {
 		new LoginController().logout();
 	}
-	
+
 }
