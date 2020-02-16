@@ -15,8 +15,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXButton?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.AcceptOrRefuseJobForm">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.AcceptOrRefuseJobForm">
    <center>
       <AnchorPane>
          <children>
@@ -43,81 +45,105 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <BorderPane prefHeight="400.0" prefWidth="376.0">
-                     <top>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="372.0" prefWidth="423.0">
                            <children>
-                              <Text layoutX="175.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" AnchorPane.topAnchor="8.0" />
-                           </children>
-                        </AnchorPane>
-                     </top>
-                     <center>
-                        <AnchorPane BorderPane.alignment="CENTER">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="342.0" prefWidth="338.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Text fx:id="reportTitleText" layoutX="191.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" textAlignment="CENTER" AnchorPane.topAnchor="7.0" />
+                              <AnchorPane layoutY="32.0" prefHeight="337.0" prefWidth="405.0">
                                  <children>
-                                    <AnchorPane prefHeight="361.0" prefWidth="421.0">
+                                    <VBox alignment="CENTER" prefHeight="342.0" prefWidth="338.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="334.0" prefWidth="345.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <AnchorPane prefHeight="331.0" prefWidth="338.0">
-                                                   <children>
-                                                      <ImageView fx:id="reportImageView" fitHeight="130.0" fitWidth="370.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                                      <AnchorPane layoutY="140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="140.0">
+                                          <AnchorPane prefHeight="361.0" prefWidth="421.0">
+                                             <children>
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="334.0" prefWidth="345.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <content>
+                                                      <AnchorPane prefHeight="331.0" prefWidth="338.0">
                                                          <children>
-                                                            <GridPane prefHeight="190.0" prefWidth="370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <ImageView fx:id="reportImageView" fitHeight="83.0" fitWidth="106.0" layoutX="149.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="149.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="14.0" />
+                                                            <GridPane layoutY="140.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
                                                                <columnConstraints>
                                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.6000244140625" minWidth="10.0" prefWidth="70.4" />
                                                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.6" minWidth="10.0" prefWidth="273.6" />
                                                                </columnConstraints>
                                                                <rowConstraints>
-                                                                  <RowConstraints maxHeight="87.20001831054688" minHeight="10.0" prefHeight="80.8000244140625" vgrow="SOMETIMES" />
-                                                                  <RowConstraints maxHeight="74.4" minHeight="10.0" prefHeight="36.8" vgrow="SOMETIMES" />
-                                                                  <RowConstraints maxHeight="43.19996337890626" minHeight="10.0" prefHeight="37.19998779296874" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="96.0" minHeight="8.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="54.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
                                                                </rowConstraints>
                                                                <children>
                                                                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
                                                                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.rowIndex="1" />
                                                                   <Text strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
-                                                                  <TextArea fx:id="city" editable="false" prefHeight="13.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Submission" GridPane.rowIndex="2" />
-                                                                  <TextArea fx:id="description" editable="false" prefHeight="88.0" prefWidth="222.0" GridPane.columnIndex="1" />
-                                                                  <TextArea fx:id="submissionDate" editable="false" prefHeight="33.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <TextArea fx:id="city" editable="false" prefHeight="52.0" prefWidth="274.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Submission" wrappingWidth="60.375" GridPane.rowIndex="2" />
+                                                                  <TextArea fx:id="description" editable="false" prefHeight="88.0" prefWidth="234.0" wrapText="true" GridPane.columnIndex="1" />
+                                                                  <TextArea fx:id="submissionDate" editable="false" prefHeight="28.0" prefWidth="274.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                                </children>
                                                             </GridPane>
                                                          </children>
                                                       </AnchorPane>
-                                                   </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </ScrollPane>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
-                                    </AnchorPane>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
-                     </center>
-                     <bottom>
-                        <AnchorPane BorderPane.alignment="BOTTOM_CENTER">
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="32.0" prefWidth="369.0" spacing="270.0">
                            <children>
-                              <HBox alignment="BOTTOM_CENTER" prefHeight="21.0" prefWidth="370.0" spacing="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="58.0" prefWidth="369.0">
                                  <children>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="32.0" prefWidth="373.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#acceptJob" prefHeight="26.0" prefWidth="83.0" text="Accept" AnchorPane.rightAnchor="15.0" />
-                                          <Button mnemonicParsing="false" onAction="#refuseJob" prefHeight="26.0" prefWidth="82.0" text="Reject" AnchorPane.leftAnchor="15.0" />
-                                       </children>
-                                    </AnchorPane>
+                                    <Button mnemonicParsing="false" onAction="#acceptJob" prefHeight="26.0" prefWidth="83.0" text="Accept" AnchorPane.rightAnchor="20.0" />
+                                    <Button mnemonicParsing="false" onAction="#refuseJob" prefHeight="26.0" prefWidth="82.0" text="Reject" AnchorPane.leftAnchor="15.0" />
                                  </children>
-                              </HBox>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                     </bottom>
-                  </BorderPane>
+                        </HBox>
+                     </children>
+                  </VBox>
               </items>
             </SplitPane>
          </children>
       </AnchorPane>
    </center>
+   <top>
+      <AnchorPane maxHeight="60.0" minHeight="60.0" minWidth="600.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #343A40;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="21.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FixMyCity" AnchorPane.bottomAnchor="18.482421875" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="17.576171875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="usernameText" fill="WHITE" layoutX="494.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User_96" textAlignment="CENTER" AnchorPane.bottomAnchor="22.98828125" AnchorPane.rightAnchor="61.990234375" AnchorPane.topAnchor="21.05078125">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="profileImg" fitHeight="40.0" fitWidth="40.0" layoutX="557.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="340.0" prefWidth="148.0" style="-fx-border-color: #bfbfbf; -fx-background-color: #fff;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="342.0" prefWidth="156.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutY="40.0" prefHeight="21.0" prefWidth="156.0"  text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                  <JFXButton layoutY="65.0" style="-fx-border-color: #bfbfbf; -fx-border-style: solid outside; -fx-text-alignment: left;" text="My Reports" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                  <JFXButton layoutY="312.0" onAction="#logout" style="-fx-background-color: #fff5f5;" text="Log out" textFill="#ff3737" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>

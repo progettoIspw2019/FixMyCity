@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ispw.fixmycity.logic.bean.CommunityReportBean;
-import com.ispw.fixmycity.logic.bean.UserSessionBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
 import com.ispw.fixmycity.logic.dao.CommunityReportDAO;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox prefHeight="150.0" prefWidth="640.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="150.0" prefWidth="645.0" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView id="imageView" fitHeight="132.0" fitWidth="175.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.75" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="456.0" AnchorPane.topAnchor="9.0">
+               <image>
+                  <Image url="@img/viaCupa.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="202.0" layoutY="-3.0" prefHeight="152.0" prefWidth="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text id="textEventTitle" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event Title" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <JFXTextArea id="jfxTextAreaDescription" editable="false" layoutY="21.265625" prefHeight="68.0" prefWidth="266.0" promptText="description" text="&#10;description&#10;" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+                  <Text id="textEventAddress" fill="#797979" layoutY="97.265625" strokeType="OUTSIDE" strokeWidth="0.0" text="event address" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" />
+                  <Text id="textEventDate" fill="#797979" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="event date" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <JFXButton id="jfxButtonJoin" layoutX="513.0" layoutY="19.0" style="-fx-background-color: #025c78;" text="Join" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+            <JFXButton id="jfxButtonQuit" layoutX="532.0" layoutY="53.0" style="-fx-background-color: #fff;" text="Quit" textFill="#030303" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="593.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="23.0">
+               <image>
+                  <Image url="@img/icons8-conferenza-telefonica-24.png" />
+               </image>
+            </ImageView>
+            <Text id="textNumParticipants" layoutX="623.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="12.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

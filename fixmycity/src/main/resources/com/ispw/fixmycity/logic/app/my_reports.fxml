@@ -7,28 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.web.WebView?>
 
-<BorderPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.MapBoundary">
-   <center>
-      <BorderPane minHeight="22.0" minWidth="600.0" prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <center>
-      		<AnchorPane prefHeight="399.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-      			<children>
-      				<WebView fx:id="mapContainerWebView" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      			</children>
-      		</AnchorPane>
-         </center>
-         <top>
-            <AnchorPane fx:id="mapNavbarPane" maxHeight="60.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-border-style: solid outside; -fx-border-color: #bfbfbf;" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton layoutX="198.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#createReport" prefHeight="36.0" prefWidth="109.0" style="-fx-background-color: #F5F5F5;" text="Report a Problem" textAlignment="CENTER" textFill="#212121" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="6.0" />
-                  <JFXButton layoutX="14.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#createEvent" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F5F5F5;" text="Create a Volunteering Event" textAlignment="CENTER" textFill="#212121" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="6.0" />
-               </children>
-            </AnchorPane>
-         </top>
-      </BorderPane>
-   </center>
+<BorderPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.MyReportsControllerFX">
    <top>
       <AnchorPane maxHeight="60.0" minHeight="60.0" minWidth="600.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #343A40;" BorderPane.alignment="CENTER">
          <children>
@@ -47,6 +27,9 @@
          </children>
       </AnchorPane>
    </top>
+   <center>
+      <VBox fx:id="reportsContainer" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
    <left>
       <VBox prefHeight="340.0" prefWidth="148.0" style="-fx-border-color: #bfbfbf; -fx-background-color: #fff;" BorderPane.alignment="CENTER">
          <children>
@@ -57,9 +40,9 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <JFXButton layoutY="40.0" prefHeight="21.0" prefWidth="156.0" style="-fx-border-color: #bfbfbf; -fx-border-style: solid outside; -fx-text-alignment: left;" text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                  <JFXButton layoutY="40.0" onAction="#toMap" prefHeight="21.0" prefWidth="156.0"  text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                   <JFXButton layoutY="65.0" onAction="#toActiveEvents" text="Active Events" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
-                  <JFXButton layoutY="90.0" onAction="#toMyReports" text="My Reports" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
+                  <JFXButton layoutY="90.0" text="My Reports" style="-fx-border-color: #bfbfbf; -fx-border-style: solid outside; -fx-text-alignment: left;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
                   <JFXButton layoutY="312.0" onAction="#logout" style="-fx-background-color: #fff5f5;" text="Log out" textFill="#ff3737" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>

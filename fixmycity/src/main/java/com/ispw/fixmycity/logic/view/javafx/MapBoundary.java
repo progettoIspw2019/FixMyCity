@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.app.App;
+import com.ispw.fixmycity.logic.controller.LoginController;
 import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.view.SessionView;
 
@@ -79,5 +80,21 @@ public class MapBoundary {
 	@FXML
 	private void createEvent() {
 		App.setRoot("create_event");
+	}
+	
+	@FXML
+	private void toMyReports() {
+		App.setRoot("my_reports");
+	}
+	
+	@FXML
+	private void toActiveEvents() {
+		App.setRoot("my_events");
+	}
+	
+	@FXML
+	private void logout() {
+		new LoginController().logout();
+		App.setRoot("login");
 	}
 }

@@ -8,7 +8,7 @@
 		<!-- <provider>org.hibernate.ejb.HibernatePersistenceProvider</provider> -->
 		<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>jdbc/myDS</jta-data-source>
+<!-- 		<jta-data-source>jdbc/myDS</jta-data-source> -->
 		<class>com.ispw.fixmycity.logic.model.CommunityReport</class>
 		<class>com.ispw.fixmycity.logic.model.CitizenUser</class>
 		<class>com.ispw.fixmycity.logic.model.CompanyUser</class>

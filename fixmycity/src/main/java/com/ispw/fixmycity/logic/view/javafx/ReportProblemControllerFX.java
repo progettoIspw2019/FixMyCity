@@ -1,16 +1,10 @@
 package com.ispw.fixmycity.logic.view.javafx;
 
-import java.awt.image.DataBufferByte;
 import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.imageio.ImageIO;
 
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;

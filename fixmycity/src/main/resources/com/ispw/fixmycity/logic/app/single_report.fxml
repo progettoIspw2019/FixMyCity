@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox prefHeight="150.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="150.0" prefWidth="645.0" style="-fx-background-color: #fff; -fx-border-style: solid none none none; -fx-border-color: #bfbfbf; -fx-border-width: 2;" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView id="imageView" fitHeight="132.0" fitWidth="175.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.75" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="456.0" AnchorPane.topAnchor="9.0" />
+            <Text id="textReportTitle" layoutX="200.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Title" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="8.734375">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <JFXTextArea id="jfxTextAreaDescription" editable="false" layoutX="198.0" layoutY="35.0" prefHeight="70.0" prefWidth="301.0" promptText="description" text="&#10;description&#10;" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="35.0" />
+            <Text id="textAddress" fill="#797979" layoutX="200.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="report address" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="200.0" />
+            <Text id="textSubmissionDate" fill="#797979" layoutX="200.0" layoutY="137.83203125" strokeType="OUTSIDE" strokeWidth="0.0" text="submission date" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="200.0" />
+            <JFXButton id="jfxButtonCommReport" layoutX="513.0" layoutY="19.0" style="-fx-background-color: #025c78;" text="Community Report" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+            <Text id="textEventJobCreated" layoutX="533.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Event/Job created" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="12.0" />
+            <JFXButton id="jfxButtonCompReport" layoutX="532.0" layoutY="20.0" style="-fx-background-color: #B83B5D;" text="company name" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>
