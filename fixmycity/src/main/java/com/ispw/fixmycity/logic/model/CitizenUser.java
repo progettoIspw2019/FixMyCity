@@ -62,14 +62,14 @@ public class CitizenUser implements Serializable {
 	}
 
 	public void setFromBean(CitizenUserBean citizenUserBean) {
+		
 		setUsername(citizenUserBean.getUsername());
 		setPwd(ConverterUtil.md5FromString((citizenUserBean.getPassword())));
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
 		setCity(citizenUserBean.getCity().toString());
-		
-		if (citizenUserBean.getImage() != null) {
-			setProfilePicture(citizenUserBean.getImage());
+		if (citizenUserBean.getProfilePicture() != null) {
+			setProfilePicture(citizenUserBean.getProfilePicture());
 		}
 	}
 

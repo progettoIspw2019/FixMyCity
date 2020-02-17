@@ -6,8 +6,8 @@
 	<persistence-unit name="fixmycitydb"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!-- 		<jta-data-source>jdbc/myDS</jta-data-source> -->
-		<class>com.ispw.fixmycity.logic.model.CommunityReport</class>
+<!--  		<jta-data-source>jdbc/myDS</jta-data-source> 
+ -->		<class>com.ispw.fixmycity.logic.model.CommunityReport</class>
 		<class>com.ispw.fixmycity.logic.model.CitizenUser</class>
 		<class>com.ispw.fixmycity.logic.model.CompanyUser</class>
 		<class>com.ispw.fixmycity.logic.model.CompanyReport</class>
