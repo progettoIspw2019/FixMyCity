@@ -21,6 +21,40 @@ public class LoadReportsController {
 		// there is nothing to initialize
 	}
 
+	private CompanyReportBeanView getCompRepBeanFromCompReport(CompanyReport rep) {
+		CompanyReportBeanView compRepBean = new CompanyReportBeanView();
+
+		compRepBean.setAddress(rep.getAddress());
+		compRepBean.setCategory(rep.getCategory());
+		compRepBean.setCity(rep.getCity());
+		compRepBean.setDateSubmission(rep.getDateSubmission());
+		compRepBean.setDescription(rep.getFullDescription());
+		compRepBean.setImage(rep.getImage());
+		compRepBean.setLatitude(rep.getLatitude());
+		compRepBean.setLongitude(rep.getLongitude());
+		compRepBean.setTitle(rep.getTitle());
+		compRepBean.setSubmitter(rep.getCitizenUser().getUsername());
+		compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
+
+		return compRepBean;
+	}
+
+	private CommunityReportBeanView getCommRepBeanFromCommReport(CommunityReport rep) {
+		CommunityReportBeanView commRepBean = new CommunityReportBeanView();
+		commRepBean.setAddress(rep.getAddress());
+		commRepBean.setCategory(rep.getCategory());
+		commRepBean.setCity(rep.getCity());
+		commRepBean.setDateSubmission(rep.getDateSubmission());
+		commRepBean.setDescription(rep.getFullDescription());
+		commRepBean.setImage(rep.getImage());
+		commRepBean.setLatitude(rep.getLatitude());
+		commRepBean.setLongitude(rep.getLongitude());
+		commRepBean.setTitle(rep.getTitle());
+		commRepBean.setSubmitter(rep.getCitizenUser().getUsername());
+
+		return commRepBean;
+	}
+
 	public List<CommunityReportBeanView> getCommunityReports() {
 
 		CommunityReportDAO daoComm = new CommunityReportDAO();
@@ -30,18 +64,7 @@ public class LoadReportsController {
 		ArrayList<CommunityReportBeanView> commRepBeanList = new ArrayList<>();
 
 		for (var rep : reports) {
-			CommunityReportBeanView commRepBean = new CommunityReportBeanView();
-
-			commRepBean.setAddress(rep.getAddress());
-			commRepBean.setCategory(rep.getCategory());
-			commRepBean.setCity(rep.getCity());
-			commRepBean.setDateSubmission(rep.getDateSubmission());
-			commRepBean.setDescription(rep.getFullDescription());
-			commRepBean.setImage(rep.getImage());
-			commRepBean.setLatitude(rep.getLatitude());
-			commRepBean.setLongitude(rep.getLongitude());
-			commRepBean.setTitle(rep.getTitle());
-			commRepBean.setSubmitter(rep.getCitizenUser().getUsername());
+			CommunityReportBeanView commRepBean = this.getCommRepBeanFromCommReport(rep);
 
 			ArrayList<String> eventsStr = new ArrayList<>();
 
@@ -62,25 +85,7 @@ public class LoadReportsController {
 
 		ArrayList<CompanyReportBeanView> compRepBeanList = new ArrayList<>();
 		for (var rep : reports) {
-			CompanyReportBeanView compRepBean = new CompanyReportBeanView();
-
-			compRepBean.setAddress(rep.getAddress());
-			compRepBean.setCategory(rep.getCategory());
-			compRepBean.setCity(rep.getCity());
-			compRepBean.setDateSubmission(rep.getDateSubmission());
-			compRepBean.setDescription(rep.getFullDescription());
-			compRepBean.setImage(rep.getImage());
-			compRepBean.setLatitude(rep.getLatitude());
-			compRepBean.setLongitude(rep.getLongitude());
-			compRepBean.setTitle(rep.getTitle());
-			compRepBean.setSubmitter(rep.getCitizenUser().getUsername());
-			compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
-			ArrayList<String> jobsStr = new ArrayList<>();
-
-			rep.getJobs().forEach(j -> jobsStr.add(String.valueOf(j.getIdJob())));
-
-			compRepBean.setJobs(jobsStr);
-
+			CompanyReportBeanView compRepBean = this.getCompRepBeanFromCompReport(rep);
 			compRepBeanList.add(compRepBean);
 		}
 
@@ -97,17 +102,7 @@ public class LoadReportsController {
 		String username = SessionView.getUsername();
 		for (var rep : reports) {
 			if (rep.getCitizenUser().getUsername().equals(username)) {
-				CommunityReportBeanView commRepBean = new CommunityReportBeanView();
-
-				commRepBean.setAddress(rep.getAddress());
-				commRepBean.setCategory(rep.getCategory());
-				commRepBean.setCity(rep.getCity());
-				commRepBean.setDateSubmission(rep.getDateSubmission());
-				commRepBean.setDescription(rep.getFullDescription());
-				commRepBean.setImage(rep.getImage());
-				commRepBean.setLatitude(rep.getLatitude());
-				commRepBean.setLongitude(rep.getLongitude());
-				commRepBean.setTitle(rep.getTitle());
+				CommunityReportBeanView commRepBean = this.getCommRepBeanFromCommReport(rep);
 
 				ArrayList<String> eventsStr = new ArrayList<>();
 
@@ -136,24 +131,7 @@ public class LoadReportsController {
 		for (var rep : reports) {
 			if (rep.getCitizenUser().getUsername().equals(username)) {
 
-				CompanyReportBeanView compRepBean = new CompanyReportBeanView();
-
-				compRepBean.setAddress(rep.getAddress());
-				compRepBean.setCategory(rep.getCategory());
-				compRepBean.setCity(rep.getCity());
-				compRepBean.setDateSubmission(rep.getDateSubmission());
-				compRepBean.setDescription(rep.getFullDescription());
-				compRepBean.setImage(rep.getImage());
-				compRepBean.setLatitude(rep.getLatitude());
-				compRepBean.setLongitude(rep.getLongitude());
-				compRepBean.setTitle(rep.getTitle());
-				compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
-				ArrayList<String> jobsStr = new ArrayList<>();
-
-				rep.getJobs().forEach(j -> jobsStr.add(String.valueOf(j.getIdJob())));
-
-				compRepBean.setJobs(jobsStr);
-
+				CompanyReportBeanView compRepBean = this.getCompRepBeanFromCompReport(rep);
 				compRepBeanList.add(compRepBean);
 			}
 		}
@@ -165,37 +143,6 @@ public class LoadReportsController {
 		return compRepBeanList;
 	}
 
-	public List<CompanyReportBeanView> getCompanyReportsWihoutJob() throws EmptyResultListException {
-		CompanyReportDAO compRepDAO = new CompanyReportDAO();
-
-		List<CompanyReport> reports = compRepDAO.findAll();
-
-		ArrayList<CompanyReportBeanView> compRepBeanList = new ArrayList<>();
-		String username = SessionView.getUsername();
-
-		for (var rep : reports) {
-			if (rep.getCompanyUser().getUsername().equals(username) && rep.getJobs().isEmpty()) {
-
-				CompanyReportBeanView compRepBean = new CompanyReportBeanView();
-				compRepBean.setAddress(rep.getAddress());
-				compRepBean.setCategory(rep.getCategory());
-				compRepBean.setCity(rep.getCity());
-				compRepBean.setDateSubmission(rep.getDateSubmission());
-				compRepBean.setDescription(rep.getFullDescription());
-				compRepBean.setImage(rep.getImage());
-				compRepBean.setLatitude(rep.getLatitude());
-				compRepBean.setLongitude(rep.getLongitude());
-				compRepBean.setTitle(rep.getTitle());
-				compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
-
-				compRepBeanList.add(compRepBean);
-			}
-		}
-		if (compRepBeanList.isEmpty()) {
-			throw new EmptyResultListException("There are no pending reports without a Job assigned", null);
-		}
-		return compRepBeanList;
-	}
 
 	public List<JobBeanView> getJobsByCurrentCompany() throws EmptyResultListException {
 		JobDAO jobDAO = new JobDAO();

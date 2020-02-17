@@ -207,37 +207,4 @@
 		<createView fullDefinition="false" remarks="VIEW"
 			viewName="base_user">select `c`.`username` AS `username`,`c`.`pwd` AS `pwd` from `progetto_ispw`.`citizen_users` `c` union select `com`.`username` AS `username`,`com`.`pwd` AS `pwd` from `progetto_ispw`.`company_users` `com` order by `username`</createView>
 	</changeSet>
-
-	<!-- <changeSet author="adria (generated)" id="1580848304201-22" runAlways="true"> 
-		<loadUpdateData encoding="UTF-8" file="initialData/citizen_users.csv" primaryKey="username" 
-		quotchar="" relativeToChangelogFile="true" schemaName="progetto_ispw" separator="," 
-		tableName="citizen_users"> <column name="username" type="STRING" /> <column 
-		name="pwd" type="STRING" /> <column name="first_name" type="STRING" /> <column 
-		name="surname" type="STRING" /> <column name="profile_picture" type="BLOB" 
-		/> </loadUpdateData> </changeSet> -->
-	<changeSet author="adria (generated)" id="1580848304201-23"
-		runAlways="true">
-		<loadUpdateData encoding="UTF-8"
-			file="initialData/company_users.csv" primaryKey="username"
-			quotchar="'" relativeToChangelogFile="true"
-			schemaName="progetto_ispw" separator="," tableName="company_users">
-			<column name="username" type="STRING" />
-			<column name="pwd" type="STRING" />
-			<column name="companyName" type="STRING" />
-			<column name="category" type="STRING" />
-			<column name="city" type="STRING" />
-			<column name="image" type="BLOB" />
-		</loadUpdateData>
-	</changeSet>
-
-	<!-- <changeSet author="adria (generated)" id="1580848304201-24" runAlways="true"> 
-		<loadUpdateData encoding="UTF-8" file="initialData/community_reports.csv" 
-		primaryKey="id_report" quotchar="'" relativeToChangelogFile="true" schemaName="progetto_ispw" 
-		separator="," tableName="community_reports"> <column name="id_report" type="NUMERIC" 
-		/> <column name="category" type="STRING"/> <column name="title" type="STRING" 
-		/> <column name="full_description" type="STRING" /> <column name="date_submission" 
-		type="DATE" /> <column name="address" type="STRING" /> <column name="latitude" 
-		type="NUMERIC" /> <column name="longitude" type="NUMERIC" /> <column name="city" 
-		type="STRING"/> <column name="submitter" type="STRING" /> <column name="image" 
-		type="BLOB" /> </loadUpdateData> </changeSet> -->
 </databaseChangeLog>

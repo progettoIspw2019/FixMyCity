@@ -67,6 +67,10 @@ public class CitizenUser implements Serializable {
 		setSurname(citizenUserBean.getLastName());
 		setFirstName(citizenUserBean.getFirstName());
 		setCity(citizenUserBean.getCity().toString());
+		
+		if (citizenUserBean.getImage() != null) {
+			setProfilePicture(citizenUserBean.getImage());
+		}
 	}
 
 	public String getUsername() {

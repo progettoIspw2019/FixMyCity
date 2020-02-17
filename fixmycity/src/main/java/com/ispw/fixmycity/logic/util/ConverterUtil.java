@@ -47,13 +47,14 @@ public class ConverterUtil {
 
 			String hashtext = no.toString(16);
 			while (hashtext.length() < 32) {
-				hashtext = "0" + hashtext;
+				hashtext = "0".concat(hashtext);
 			}
 			return hashtext;
 		}
 
 		catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			Logger.getLogger("fixmycity").severe(e.toString());
+			return null;
 		}
 	}
 

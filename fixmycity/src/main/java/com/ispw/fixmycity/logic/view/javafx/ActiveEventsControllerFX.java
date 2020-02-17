@@ -20,7 +20,7 @@ public class ActiveEventsControllerFX {
 	
 	@FXML
 	private void initialize() {
-		
+		// TODO: javafx page for events in the city
 	}
 	
 	@FXML

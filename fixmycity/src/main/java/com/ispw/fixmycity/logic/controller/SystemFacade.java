@@ -35,10 +35,6 @@ public class SystemFacade {
 		return new LoadReportsController().getMyCompanyReports();
 	}
 
-	public List<CompanyReportBeanView> getCompanyReportsWihoutJob() throws EmptyResultListException {
-		return new LoadReportsController().getCompanyReportsWihoutJob();
-	}
-
 	public List<JobBeanView> getJobsByCurrentCompany() throws EmptyResultListException {
 		return new LoadReportsController().getJobsByCurrentCompany();
 	}

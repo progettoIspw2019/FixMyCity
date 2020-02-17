@@ -211,23 +211,6 @@
 		</loadUpdateData>
 	</changeSet>
 
-	<!-- <changeSet author="adria (generated)" id="1580848304201-23" runAlways="true"> -->
-	<!-- <loadUpdateData -->
-	<!-- encoding="UTF-8" -->
-	<!-- file="initialData/company_users.csv" -->
-	<!-- primaryKey="username" -->
-	<!-- quotchar="" -->
-	<!-- relativeToChangelogFile="true" -->
-	<!-- schemaName="progetto_ispw" -->
-	<!-- separator="," -->
-	<!-- tableName="company_users"> -->
-	<!-- <column name="username" type="STRING"/> -->
-	<!-- <column name="pwd" type="STRING"/> -->
-	<!-- <column name="category" type="STRING"/> -->
-	<!-- <column name="interested_area" type="STRING"/> -->
-	<!-- </loadUpdateData> -->
-	<!-- </changeSet> -->
-
 	<changeSet author="adria (generated)" id="1580848304201-24"
 		runAlways="true">
 		<loadUpdateData encoding="UTF-8"
