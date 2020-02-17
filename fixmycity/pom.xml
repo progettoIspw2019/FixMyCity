@@ -160,13 +160,29 @@
 							</excludes>
 						</configuration>
 					</execution>
-				</executions> 
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.3</version>
 				<configuration>
+					<options>
+						<option>--add-opens</option>
+						<option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+						<option>--add-opens</option>
+						<option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+						<option>--add-exports</option>
+						<option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+						<option>--add-exports</option>
+						<option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+						<option>--add-exports</option>
+						<option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
+						<option>--add-exports</option>
+						<option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
+						<option>--add-exports</option>
+						<option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
+					</options>
 					<mainClass>com.ispw.fixmycity.logic.app.App</mainClass>
 				</configuration>
 			</plugin>
