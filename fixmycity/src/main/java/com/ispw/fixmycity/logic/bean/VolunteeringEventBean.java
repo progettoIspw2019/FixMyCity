@@ -45,7 +45,6 @@ public class VolunteeringEventBean {
 			Date date = formatter.parse(eventDate);
 			setEventDate(date);
 		} catch (ParseException e) {
-			// TODO devo implementare l'eccezione creata
 			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 		}
 	}

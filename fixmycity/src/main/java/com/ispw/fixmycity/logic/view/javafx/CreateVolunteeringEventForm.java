@@ -18,11 +18,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -69,7 +72,7 @@ public class CreateVolunteeringEventForm {
 	@FXML
 	private Text errorText;
 
-	private Integer selectionId;
+	private Integer selectionId = -1;
 
 	private CommunityReportBean selectedReport;
 
@@ -80,7 +83,8 @@ public class CreateVolunteeringEventForm {
 		secondGrid.setVisible(false);
 		errorText.setVisible(false);
 
-		ObservableMap<Integer, String> observableList = FXCollections.observableMap(new SystemFacade().getMappedCommunityReports());
+		ObservableMap<Integer, String> observableList = FXCollections
+				.observableMap(new SystemFacade().getMappedCommunityReports());
 
 		List<Integer> keys = new ArrayList<>(observableList.keySet());
 		commrepListView.getItems().setAll(observableList.values());
@@ -95,6 +99,14 @@ public class CreateVolunteeringEventForm {
 
 	@FXML
 	public void handleNextButton() {
+
+		if (selectionId == -1) {
+			Alert alert = new Alert(AlertType.INFORMATION, "Please select a report", ButtonType.OK);
+			alert.setHeaderText("No report selected");
+			alert.showAndWait();
+			return;
+		}
+
 		firstGrid.setVisible(false);
 		secondGrid.setVisible(true);
 		selectedReport = new SystemFacade().getCommunityReportFromId(selectionId);
@@ -121,6 +133,16 @@ public class CreateVolunteeringEventForm {
 	public void handleSubmitButton() {
 
 		errorText.setVisible(false);
+
+		if (eventTitleTextField.getText() == null || eventDescriptionTextArea.getText() == null
+				|| eventDatePicker.getValue() == null || eventTimeTextField.getText() == null) {
+			Alert alert = new Alert(AlertType.INFORMATION, "Please make sure that every field is filled",
+					ButtonType.OK);
+			alert.setHeaderText("Invalid field");
+			alert.showAndWait();
+			return;
+		}
+
 		VolunteeringEventBean volunteeringEventBean = new VolunteeringEventBean();
 		volunteeringEventBean.setCommunityReport(selectedReport);
 		volunteeringEventBean.setTitle(eventTitleTextField.getText());
@@ -130,14 +152,14 @@ public class CreateVolunteeringEventForm {
 		try {
 			volunteeringEventBean.setEventTime(eventTimeTextField.getText());
 		} catch (InvalidFieldException e) {
-			errorText.setText(e.getMessage());
-			errorText.setVisible(true);
+			Alert alert = new Alert(AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
+			alert.setHeaderText("Invalid field");
+			alert.showAndWait();
 			return;
 		}
+
 		new SystemFacade().createVolunteeringEvent(volunteeringEventBean);
 
 	}
-
-	
 
 }

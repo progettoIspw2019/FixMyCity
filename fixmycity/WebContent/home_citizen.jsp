@@ -57,7 +57,6 @@
 		try {
 			bean.setEventTime(time);
 		} catch (InvalidFieldException e) {
-			//TODO throw some error
 		}
 		facade.createVolunteeringEvent(bean);
 	}

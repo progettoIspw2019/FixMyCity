@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.controller.LoadReportsController;
 import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 
@@ -19,8 +21,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -42,20 +44,29 @@ public class MyReportsControllerFX {
 	@FXML
 	private void initialize() {
 		logger = Logger.getLogger("fixmycity");
-		List<CommunityReportBeanView> commReports = new LoadReportsController().getCommunityReports();
-		List<CompanyReportBeanView> compReports = new LoadReportsController().getCompanyReports();
+		List<CommunityReportBeanView> commReports = new ArrayList<>();
+		List<CompanyReportBeanView> compReports = new ArrayList<>();
+		try {
+			commReports = new LoadReportsController().getMyCommunityReports();
+		} catch (EmptyResultListException e) {
+			//
+		}
+		try {
+			compReports = new LoadReportsController().getMyCompanyReports();
+		} catch (EmptyResultListException e) {
+			//
+		}
 
 		URL url = App.class.getResource("single_report.fxml");
 		logger.info(() -> "Loading...\n" + url);
 
-		this.fillCommunityReports(commReports, url);
 		this.fillCompanyReports(compReports, url);
-		
+		this.fillCommunityReports(commReports, url);
 	}
-	
+
 	private void fillCompanyReports(List<CompanyReportBeanView> compReports, URL urlSingleReportFXML) {
 		compReports.stream().forEach(report -> {
-			logger.fine( () -> "Loading report\n\n" + report );
+			logger.fine(() -> "Loading report\n\n" + report);
 			AnchorPane singleReport;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);
@@ -85,22 +96,22 @@ public class MyReportsControllerFX {
 						break;
 					case "textEventJobCreated":
 						Text eventCreated = (Text) node;
-						if(report.getJobs().isEmpty())
+						if (report.getJobs().isEmpty())
 							eventCreated.setText("Job not created");
 						else
 							eventCreated.setText("Job created");
 						break;
-						
+
 					case "jfxButtonCompReport":
 						JFXButton button = (JFXButton) node;
 						button.setText(report.getCompanyRelated());
 						break;
-					
+
 					case "jfxButtonCommReport":
 						JFXButton butt = (JFXButton) node;
 						butt.setVisible(false);
 						break;
-					
+
 					default:
 						continue;
 
@@ -115,10 +126,10 @@ public class MyReportsControllerFX {
 			}
 		});
 	}
-	
+
 	private void fillCommunityReports(List<CommunityReportBeanView> commReports, URL urlSingleReportFXML) {
 		commReports.stream().forEach(report -> {
-			logger.fine( () -> "Loading report\n\n" + report );
+			logger.fine(() -> "Loading report\n\n" + report);
 			AnchorPane singleReport;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);
@@ -148,17 +159,17 @@ public class MyReportsControllerFX {
 						break;
 					case "textEventJobCreated":
 						Text eventCreated = (Text) node;
-						if(report.getEvents().isEmpty())
+						if (report.getEvents().isEmpty())
 							eventCreated.setText("Event not created");
 						else
 							eventCreated.setText("Event created");
 						break;
-					
+
 					case "jfxButtonCompReport":
 						JFXButton butt = (JFXButton) node;
 						butt.setVisible(false);
 						break;
-					
+
 					default:
 						continue;
 

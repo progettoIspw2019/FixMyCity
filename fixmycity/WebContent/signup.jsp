@@ -51,7 +51,6 @@
 					response.sendRedirect("home_citizen.jsp");
 				}
 			} catch (UserNotFoundException e) {
-				//TODO : throw some error
 			}
 		}
 	}
@@ -89,7 +88,6 @@
 
 				}
 			} catch (UserNotFoundException e) {
-				//TODO : throw some error
 			}
 		}
 	}

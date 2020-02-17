@@ -18,9 +18,12 @@ public class ConverterUtil {
 
 	public static Date dateFromDatePicker(DatePicker datePicker) {
 		LocalDate ld = datePicker.getValue();
-		Calendar c = Calendar.getInstance();
-		c.set(ld.getYear(), ld.getMonthValue() - 1, ld.getDayOfMonth());
-		return c.getTime();
+		if (ld != null) {
+			Calendar c = Calendar.getInstance();
+			c.set(ld.getYear(), ld.getMonthValue() - 1, ld.getDayOfMonth());
+			return c.getTime();
+		}
+		return null;
 	}
 
 	public static byte[] byteArrayFromImage(File file) {
@@ -40,7 +43,7 @@ public class ConverterUtil {
 		try {
 
 			MessageDigest md = MessageDigest.getInstance("MD5");
-	
+
 			byte[] messageDigest = md.digest(input.getBytes());
 
 			BigInteger no = new BigInteger(1, messageDigest);
@@ -57,7 +60,6 @@ public class ConverterUtil {
 			return null;
 		}
 	}
-
 
 	private ConverterUtil() {
 
