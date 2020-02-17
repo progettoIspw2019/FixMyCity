@@ -10,6 +10,8 @@ import javax.persistence.Persistence;
 
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
 import com.ispw.fixmycity.logic.model.CompanyReport;
+import com.ispw.fixmycity.logic.model.CompanyUser;
+import com.ispw.fixmycity.logic.util.Status;
 
 public class CompanyReportDAO {
 	private EntityManagerFactory entityManagerFactory;
@@ -31,6 +33,8 @@ public class CompanyReportDAO {
 	public CompanyReport add(CompanyReportBean compRepBean) {
 		CompanyReport compReport = new CompanyReport();
 		compReport.setFromBean(compRepBean);
+		compReport.setStatus(Status.PENDING.toString());
+		compReport.initRejectCounter();
 		Logger.getLogger("fixmycity").log(Level.INFO, compReport.getTitle() + "\n" + compReport.getCitizenUser());
 		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
@@ -48,6 +52,13 @@ public class CompanyReportDAO {
 
 	public void delete(Integer id) {
 		CompanyReport repRef = entityManager.getReference(CompanyReport.class, id);
+		entityManager.getTransaction().begin();
 		entityManager.remove(repRef);
+		entityManager.getTransaction().commit();
+	}
+
+	public List<CompanyReport> findAllMyCompany(String compUsername) {
+		CompanyUser compUser = new CompanyUserDAO().findByPrimaryKey(compUsername);
+		return entityManager.createNamedQuery("CompanyReport.findAllFromCompanyUsername", CompanyReport.class).setParameter("input_company", compUser).getResultList();
 	}
 }

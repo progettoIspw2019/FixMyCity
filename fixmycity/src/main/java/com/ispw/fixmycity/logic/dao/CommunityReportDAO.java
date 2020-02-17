@@ -41,12 +41,16 @@ public class CommunityReportDAO {
 
 	// Versione in cui i controller usano le entity
 	public void update(CommunityReport commReport) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(commReport);
+		entityManager.getTransaction().commit();
 	}
 
 	public void delete(Integer id) {
+		entityManager.getTransaction().begin();
 		CommunityReport repRef = entityManager.getReference(CommunityReport.class, id);
 		entityManager.remove(repRef);
+		entityManager.getTransaction().commit();
 	}
 
 	public void assignVolunteeringEvent(Integer eventId, Integer communityReportId) {

@@ -8,7 +8,9 @@ public class JobBeanView {
 	private byte[] jobInfo;
 	private Date startDate;
 	private String state;
-	private CompanyReportBeanView relatedReport;
+	private String rejectingMotivation;
+	private int relatedReport;
+	private String relatedCompany;
 
 	public int getIdJob() {
 		return idJob;
@@ -50,12 +52,28 @@ public class JobBeanView {
 		this.state = state;
 	}
 
-	public CompanyReportBeanView getRelatedReport() {
+	public int getRelatedReport() {
 		return relatedReport;
 	}
 
-	public void setRelatedReport(CompanyReportBeanView relatedReport) {
+	public void setRelatedReport(int relatedReport) {
 		this.relatedReport = relatedReport;
+	}
+
+	public String getRejectingMotivation() {
+		return rejectingMotivation;
+	}
+
+	public void setRejectingMotivation(String rejectingMotivation) {
+		this.rejectingMotivation = rejectingMotivation;
+	}
+
+	public String getRelatedCompany() {
+		return relatedCompany;
+	}
+
+	public void setRelatedCompany(String relatedCompany) {
+		this.relatedCompany = relatedCompany;
 	}
 
 }

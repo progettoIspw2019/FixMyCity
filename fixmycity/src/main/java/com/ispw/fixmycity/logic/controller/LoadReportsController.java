@@ -215,9 +215,8 @@ public class LoadReportsController {
 				compRep.setAddress(job.getCompanyReport().getAddress());
 				compRep.setDescription(job.getCompanyReport().getFullDescription());
 				compRep.setImage(job.getCompanyReport().getImage());
-				jobBean.setRelatedReport(compRep);
+				jobBean.setRelatedReport(compRep.getId());
 				jobBean.setStartDate(job.getStartDate());
-				jobBean.setState(job.getCompanyReport().getStatus());
 			}
 		}
 		if (jobBeanList.isEmpty()) {

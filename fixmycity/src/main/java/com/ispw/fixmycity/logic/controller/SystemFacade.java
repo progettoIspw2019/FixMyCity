@@ -10,15 +10,16 @@ import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
-import com.ispw.fixmycity.logic.bean.JobBean;
 import com.ispw.fixmycity.logic.bean.JobBeanView;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 import com.ispw.fixmycity.logic.bean.VolunteeringEventListElementBean;
+import com.ispw.fixmycity.logic.exceptions.CompanyReportIsAcceptedException;
 import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
+import com.ispw.fixmycity.logic.view.SessionView;
 
 public class SystemFacade {
 
@@ -98,5 +99,16 @@ public class SystemFacade {
 	public void logout() {
 		new LoginController().logout();
 	}
+	
+	public List<CompanyReportBeanView> loadMyCompanyReports() {
+		return new AcceptOrRefuseAJobController().loadCompanyReports(SessionView.getUsername());
+	}
 
+	public int rejectReport(JobBeanView job) throws CompanyReportIsAcceptedException {
+		return new AcceptOrRefuseAJobController().rejectReport(job);
+	}
+	
+	public boolean jobCreation(JobBeanView jBean) throws CompanyReportIsAcceptedException {
+		return new AcceptOrRefuseAJobController().jobCreation(jBean);
+	}
 }

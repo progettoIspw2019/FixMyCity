@@ -4,8 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.ispw.fixmycity.logic.bean.CompanyReportBean;
-
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "company_reports")
 @NamedQuery(name = "CompanyReport.findAll", query = "SELECT c FROM CompanyReport c")
+@NamedQuery(name = "CompanyReport.findAllFromCompanyUsername", query = "SELECT c FROM CompanyReport c WHERE companyUser = :input_company")
 public class CompanyReport implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -159,20 +160,6 @@ public class CompanyReport implements Serializable {
 		this.jobs = jobs;
 	}
 
-	public Job addJob(Job job) {
-		getJobs().add(job);
-		job.setCompanyReport(this);
-
-		return job;
-	}
-
-	public Job removeJob(Job job) {
-		getJobs().remove(job);
-		job.setCompanyReport(null);
-
-		return job;
-	}
-
 	public void setFromBean(CompanyReportBean compRepBean) {
 		this.setAddress(compRepBean.getAddress());
 		this.setCitizenUser(compRepBean.getSubmitter());
@@ -225,7 +212,29 @@ public class CompanyReport implements Serializable {
 
 	}
 
-	public void setRefuseCounter() {
+	public void increaseRefuseCounter() {
 		this.refuseCounter++;
+	}
+	
+	public void addJob(Job job) {
+		if(this.getJobs() != null) {
+    		List<Job> jobList = this.getJobs();
+    		jobList.add(job);
+    		this.setJobs(jobList);
+    	}
+    	else {
+    		List<Job> jobList = new ArrayList<>();
+    		jobList.add(job);
+    		this.setJobs(jobList);
+    	}
+	}
+	
+	public void initRejectCounter() {
+		this.refuseCounter = 0;
+	}
+
+	public void removeJob(Job job) {
+		if(this.jobs.contains(job))
+			this.jobs.remove(job);
 	}
 }

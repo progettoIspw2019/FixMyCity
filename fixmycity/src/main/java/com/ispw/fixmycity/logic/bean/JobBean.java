@@ -9,7 +9,6 @@ public class JobBean {
 	private Date endDate;
 	private byte[] jobInfo;
 	private Date startDate;
-	private String state;
 	private CompanyReport relatedReport;
 	
 	public int getIdJob() {
@@ -36,12 +35,7 @@ public class JobBean {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
+	
 	public CompanyReport getRelatedReport() {
 		return relatedReport;
 	}

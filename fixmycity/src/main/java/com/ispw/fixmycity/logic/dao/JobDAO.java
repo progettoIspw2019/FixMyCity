@@ -44,7 +44,15 @@ public class JobDAO {
 	}
 	
 	public void delete(Integer id) {
+		entityManager.getTransaction().begin();
 		Job job = entityManager.getReference(Job.class, id);
+		
+		job.getCompanyReport().removeJob(job);
+		new CompanyReportDAO().update(job.getCompanyReport());
+		entityManager.getTransaction().commit();
+		
+		entityManager.getTransaction().begin();
 		entityManager.remove(job);
+		entityManager.getTransaction().commit();
 	}
 }

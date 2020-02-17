@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AcceptOrRefuseJobForm">
+<VBox fx:id="form" alignment="TOP_CENTER" prefHeight="374.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.AcceptControllerFX">
    <children>
-      <DatePicker fx:id="startDatePicker" layoutX="32.0" layoutY="43.0" promptText="Start date" />
-      <DatePicker fx:id="endDatePicker" layoutX="32.0" layoutY="100.0" promptText="End date" />
-      <Button layoutX="246.0" layoutY="272.0" mnemonicParsing="false" onAction="#uploadDocButton" prefHeight="39.0" prefWidth="128.0" text="Upload document" />
-      <Button fx:id="submitAcceptButton" layoutX="246.0" layoutY="343.0" mnemonicParsing="false" onAction="#submitAcceptJob" prefHeight="32.0" prefWidth="128.0" text="Submit job" />
-      <Button fx:id="backButton" layoutX="526.0" layoutY="18.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
+      <JFXButton onAction="#cancel" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #FF4949;;" text="Cancel" textFill="WHITE">
+         <VBox.margin>
+            <Insets bottom="40.0" top="20.0" />
+         </VBox.margin>
+      </JFXButton>
+      <GridPane alignment="CENTER" prefHeight="261.0" prefWidth="499.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="53.80001220703125" minHeight="10.0" prefHeight="29.80001029968262" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="87.39998970031738" minHeight="10.0" prefHeight="29.600013732910163" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="125.79998016357422" minHeight="10.0" prefHeight="70.19997406005861" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="135.19998168945312" minHeight="10.0" prefHeight="116.0000259399414" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXButton onAction="#uploadDocument" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #fff;" text="Upload Document" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <JFXButton onAction="#submitJob" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #5fe214;;" text="Submit Job" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <JFXDatePicker fx:id="startDatePicker" promptText="Start Date" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <JFXDatePicker fx:id="endDatePicker" promptText="End Date" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+         </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </GridPane>
    </children>
-</AnchorPane>
+</VBox>

@@ -1,87 +1,87 @@
 package com.ispw.fixmycity.logic.controller;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import com.ispw.fixmycity.logic.bean.AcceptOrRefuseJobBean;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ispw.fixmycity.logic.bean.JobBeanView;
+import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
+import com.ispw.fixmycity.logic.bean.JobBean;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
+import com.ispw.fixmycity.logic.dao.JobDAO;
+import com.ispw.fixmycity.logic.exceptions.CompanyReportIsAcceptedException;
 import com.ispw.fixmycity.logic.model.CompanyReport;
 import com.ispw.fixmycity.logic.model.Job;
-import com.ispw.fixmycity.logic.view.javafx.AcceptOrRefuseJobForm;
+import com.ispw.fixmycity.logic.util.Status;
 
-import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+public class AcceptOrRefuseAJobController {	
 
-public class AcceptOrRefuseAJobController {
-	public void updateReportStatus(CompanyReport report, String status) {
-		report.setStatus(status);
+	public boolean jobCreation(JobBeanView bean) throws CompanyReportIsAcceptedException {
+		CompanyReportDAO compRepDAO = new CompanyReportDAO();
+		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
+		
+		if(compRep.getJobs() != null && !compRep.getJobs().isEmpty())
+			throw new CompanyReportIsAcceptedException();
+		
+		JobBean jobBean = new JobBean();
+		
+		jobBean.setEndDate(bean.getEndDate());
+		jobBean.setIdJob(bean.getIdJob());
+		jobBean.setJobInfo(bean.getJobInfo());
+		
+		jobBean.setRelatedReport(compRep);
+		
+		jobBean.setStartDate(bean.getStartDate());
+    	compRep.setStatus(Status.ACCEPTED.toString());
+    	
+    	Job job = new JobDAO().add(jobBean);
+    	
+    	compRep.addJob(job);
+    	compRepDAO.update(compRep);
+    	return true;
 	}
 
-	
-  
-	public byte[] uploadDocument() {
-		GridPane gridPane = new GridPane();
-		Window window = gridPane.getScene().getWindow();
-		FileChooser docFileChooser = new FileChooser();
-		File file = docFileChooser.showOpenDialog(window);
+	public int rejectReport(JobBeanView bean) throws CompanyReportIsAcceptedException {
+		CompanyReportDAO compRepDAO = new CompanyReportDAO();
+		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
+		if(compRep.getJobs() != null && !compRep.getJobs().isEmpty())
+			throw new CompanyReportIsAcceptedException();
+		if (compRep.getRefuseCounter() < 3) {
+			compRep.setRefuseDescription(bean.getRejectingMotivation());
+			compRep.increaseRefuseCounter();
+			compRep.setStatus(Status.REJECTED.toString());
+     		compRepDAO.update(compRep);
+     		return 1;
 
-		if (file != null) {
-			try {
-				DataInputStream dis = new DataInputStream(new FileInputStream(file));
-				byte[] theBytes = new byte[dis.available()];
-				dis.read(theBytes, 0, dis.available());
-				dis.close();
-				return theBytes;
-
-			} catch (IOException ex) {
-			}
-			return null;
-		}
-		return null;
-	}
-
-	public void jobCreation(AcceptOrRefuseJobBean bean) {
-		Job job = new Job();
-		job.setIdJob(bean.getIdJob());
-		job.setStartDate(bean.getStartDate());
-		job.setEndDate(bean.getEndDate());
-		job.setJobInfo(bean.getDocument());
-		job.setRelatedCompany(bean.getRelatedUser());
-    	job.setCompanyReport(bean.getCompanyReport());
-		updateReportStatus(job.getCompanyReport(), "ReportAccepted");
-		CompanyReportDAO dao = new CompanyReportDAO();
-		dao.update(bean.getCompanyReport());
-	//	job.getCompanyReport().notify();
-		Stage stage = (Stage) AcceptOrRefuseJobForm.submitAcceptButton.getScene().getWindow();
-		stage.close();
-
-	}
-
-	public void refuseReport(AcceptOrRefuseJobBean bean) {
-		CompanyReportDAO dao = new CompanyReportDAO();
-		if (bean.getCompanyReport().getRefuseCounter() <= 3) {
-			bean.getCompanyReport().setRefuseDescription(bean.getRefuseMotivation());
-			updateReportStatus(bean.getCompanyReport(), "reporRefused");
-     		dao.update(bean.getCompanyReport());
-
-//			bean.getCompanyReport().notify();
-			Stage stage = (Stage) AcceptOrRefuseJobForm.submitRefuseButton.getScene().getWindow();
-			stage.close();
 		} else {
-		 dao.delete(bean.getCompanyReport().getIdReport());
-			Stage stage = (Stage) AcceptOrRefuseJobForm.submitRefuseButton.getScene().getWindow();
-			stage.close();
+			compRepDAO.delete(compRep.getIdReport());
+			return -1;
 		}
 
 	}
 
-	public void deleteReport(int id) {
-		CompanyReportDAO dao = new CompanyReportDAO();
-		dao.delete(id);
-
+	public List<CompanyReportBeanView> loadCompanyReports(String compUsername) {
+		List<CompanyReport> reports = new CompanyReportDAO().findAllMyCompany(compUsername);
+		List <CompanyReportBeanView> repBeanList = new ArrayList<>();
+		
+		reports.stream().forEach(rep ->{
+			CompanyReportBeanView repBean = new CompanyReportBeanView();
+			repBean.setAddress(rep.getAddress());
+			repBean.setCategory(rep.getCategory());
+			repBean.setCity(rep.getCity());
+			repBean.setDateSubmission(rep.getDateSubmission());
+			repBean.setDescription(rep.getFullDescription());
+			repBean.setImage(rep.getImage());
+			repBean.setLatitude(rep.getLatitude());
+			repBean.setLongitude(rep.getLongitude());
+			repBean.setSubmitter(rep.getCitizenUser().getUsername());
+			repBean.setTitle(rep.getTitle());
+			repBean.setStatus(rep.getStatus());
+			repBean.setId(rep.getIdReport());
+			repBeanList.add(repBean);
+		});
+		
+		return repBeanList;
+		
 	}
 
 	
