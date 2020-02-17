@@ -144,35 +144,29 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
+				<version>3.8.1</version>
+				<executions>
+					<execution>
+						<id>default-compile</id>
+						<configuration>
+							<source>11</source>
+							<target>11</target>
+							<compilerArguments>
+								<sourcepath>${project.basedir}/src/main/java</sourcepath>
+							</compilerArguments>
+							<excludes>
+								<exclude>**/com/ispw/fixmycity/logic/view/**/*.java</exclude>
+								<exclude>**/com/ispw/fixmycity/logic/app/**/*.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions> 
 			</plugin>
-
-
-
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<version>0.0.3</version>
 				<configuration>
-					<options>
-						<option>--add-opens</option>
-						<option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
-						<option>--add-opens</option>
-						<option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
-						<option>--add-exports</option>
-						<option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
-						<option>--add-exports</option>
-						<option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
-						<option>--add-exports</option>
-						<option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
-						<option>--add-exports</option>
-						<option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
-						<option>--add-exports</option>
-						<option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
-					</options>
 					<mainClass>com.ispw.fixmycity.logic.app.App</mainClass>
 				</configuration>
 			</plugin>
@@ -188,6 +182,7 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>2.19.1</version>
 						<configuration>
+							<testFailureIgnore>true</testFailureIgnore>
 							<properties>
 								<property>
 									<name>listener</name>
@@ -199,12 +194,19 @@
 					<plugin>
 						<groupId>org.jacoco</groupId>
 						<artifactId>jacoco-maven-plugin</artifactId>
-						<version>0.7.2.201409121644</version>
+						<version>0.8.2</version>
 						<executions>
 							<execution>
-								<id>prepare-agent</id>
 								<goals>
 									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<!-- attached to Maven test phase -->
+							<execution>
+								<id>report</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
 								</goals>
 							</execution>
 						</executions>
