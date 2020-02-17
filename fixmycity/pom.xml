@@ -9,7 +9,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-		<sonar.sources>src/main/java,src/main/resources,WebContent,src/test/java</sonar.sources>
+		<sonar.sources>WebContent,src/**/*</sonar.sources>
 		<sonar.exclusions>src/main/resources/com/ispw/fixmycity/logic/view/**/*,WebContent/lib/**/*</sonar.exclusions>
 	</properties>
 	<dependencies>
