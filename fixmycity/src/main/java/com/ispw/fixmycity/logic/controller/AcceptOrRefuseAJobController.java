@@ -25,7 +25,6 @@ public class AcceptOrRefuseAJobController {
 		JobBean jobBean = new JobBean();
 		
 		jobBean.setEndDate(bean.getEndDate());
-		jobBean.setIdJob(bean.getIdJob());
 		jobBean.setJobInfo(bean.getJobInfo());
 		
 		jobBean.setRelatedReport(compRep);

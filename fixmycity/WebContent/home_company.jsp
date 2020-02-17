@@ -1,8 +1,10 @@
 <!doctype html>
-<%@page import="com.ispw.fixmycity.logic.controller.AcceptOrRefuseAJobController"%>
+<%@page
+	import="com.ispw.fixmycity.logic.controller.AcceptOrRefuseAJobController"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
+<%@ page import="com.ispw.fixmycity.logic.bean.JobBeanView"%>
 <%@ page import="java.util.Base64"%>
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>
@@ -15,7 +17,36 @@
 		response.sendRedirect("index.jsp");
 	}
 	List<CompanyReportBeanView> compReports = new ArrayList<CompanyReportBeanView>();
-	
+
+	String endDate = request.getParameter("acceptReportEndDate");
+	String jobInfoBase64 = request.getParameter("acceptReportInfoFileBase64");
+	String relatedReport = request.getParameter("relatedReport");
+	String startDate = request.getParameter("acceptReportStartDate");
+	String rejectingMotivation = request.getParameter("refuseReportMotivation");
+
+	// Accept job case
+	if (endDate != null && relatedReport != null && startDate != null) {
+		JobBeanView jobBean = new JobBeanView();
+
+		jobBean.setEndDate(endDate);
+		jobBean.setRelatedReport(Integer.parseInt(relatedReport));
+		jobBean.setStartDate(startDate);
+
+		if (jobInfoBase64 != null) {
+			jobBean.setJobInfo(Base64.getDecoder().decode(jobInfoBase64));
+		} else {
+			jobBean.setJobInfo(null);
+		}
+		new SystemFacade().jobCreation(jobBean);
+	}
+
+	// Refuse job case
+	if (rejectingMotivation != null) {
+		JobBeanView jobBean = new JobBeanView();
+
+		jobBean.setRejectingMotivation(rejectingMotivation);
+		new SystemFacade().rejectReport(jobBean);
+	}
 %>
 <head>
 <!-- Required meta tags -->
@@ -64,7 +95,7 @@
 		<div id="page-content-wrapper">
 			<nav aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
-	
+
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -79,8 +110,8 @@
 					String errTemplate = "<script>printError('{0}');</script>";
 					String errMessage = "";
 					try {
-						compReports = new SystemFacade().getCompanyReportsWihoutJob();
-					} catch (EmptyResultListException e) {
+						compReports = new SystemFacade().getCompanyReports();
+					} catch (Exception e) {
 						errMessage += e.getMessage() + "<br\\>";
 					}
 
@@ -131,9 +162,11 @@
 										<!-- label-company if company report -->
 										<div class="row justify-content-end mt-2">
 											<button type="button" data-toggle="modal"
-												data-target="#refuseDialog" class="btn btn-danger ">Refuse</button>
+												data-target="#refuseDialog" class="btn btn-danger"
+												onclick='setReportId(<%out.println(rep.getId());%>)'>Refuse</button>
 											<button type="button" data-toggle="modal"
-												data-target="#acceptDialog" class="btn btn-join ml-2">Accept</button>
+												data-target="#acceptDialog" class="btn btn-join ml-2"
+												onclick='setReportId(<%out.println(rep.getId());%>)'>Accept</button>
 										</div>
 									</div>
 								</div>
@@ -162,14 +195,11 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
-				<form action="home_citizen.jsp" method="GET"
-					id="reportProblemFormId">
-					<input type="hidden" value="" id="latitudeInputId"
-						name="latitudeInput"> <input type="hidden" value=""
-						id="longitudeInputId" name="longitudeInput"> <input
-						type="hidden" value="" id="addressInputId"
-						name="inputReportAddress"> <input type="hidden" value=""
-						id="base64ImageReportId" name="base64ImageReport" value="">
+				<form action="home_company.jsp" method="GET" id="acceptJobFormId">
+					<input type="hidden" value="" id="acceptReleatedReportId"
+						name="acceptReleatedReport"> <input type="hidden" value=""
+						id="acceptReportInfoFileBase64Id"
+						name="acceptReportInfoFileBase64" value="">
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-sm">
@@ -227,7 +257,8 @@
 				<!-- Modal body -->
 				<form action="home_citizen.jsp" method="GET">
 					<div class="modal-body">
-
+						<input type="hidden" value="" id="refuseReleatedReportId"
+							name="refuseReleatedReport">
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
@@ -277,6 +308,33 @@
 	$("#menu-toggle").click(function(e) {
 		e.preventDefault();
 		$("#wrapper").toggleClass("toggled");
+	});
+
+	function setReportId(reportId) {
+		document.getElementById('acceptReleatedReportId').value = reportId;
+		document.getElementById('refuseReleatedReportId').value = reportId;
+	}
+	
+	   
+	
+	   
+	function getBase64(file) {
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function() {
+			console.log(reader.result);
+			document.getElementById('acceptReportInfoFileBase64Id').value = btoa(reader.result);
+		
+		alert(document.getElementById('acceptReportInfoFileBase64Id').value);
+		};
+		reader.onerror = function(error) {
+			alert("Invalid file");
+		};
+	}
+
+	$("#acceptReportInfoFileId").change(function() {
+		var file = document.getElementById('acceptReportInfoFileId').files[0];
+		getBase64(file);
 	});
 </script>
 </body>

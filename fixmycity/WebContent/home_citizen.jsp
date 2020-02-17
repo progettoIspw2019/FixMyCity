@@ -71,7 +71,7 @@
 
 	if (repLatitude != null && repLongitude != null && repAddress != null && repTitle != null
 			&& repCategory != null && repBase64Image != null) {
-
+		LocalDateTime localDateTime = LocalDateTime.now();
 		ReportBeanView reportBeanView = new ReportBeanView();
 		reportBeanView.setAddress(repAddress);
 		reportBeanView.setLatitude(new BigDecimal(repLatitude));
@@ -82,6 +82,8 @@
 		reportBeanView.setCity(SessionView.getCityEnum().toString());
 		reportBeanView.setDescription(repDescription);
 		reportBeanView.setImage(Base64.getDecoder().decode(repBase64Image));
+		reportBeanView.setDateSubmission(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
+
 		facade.reportProblem(reportBeanView);
 
 	}
@@ -410,7 +412,6 @@
 		reader.onload = function() {
 			console.log(reader.result);
 			document.getElementById('base64ImageReportId').value = btoa(reader.result);
-			alert(document.getElementById('base64ImageReportId').value);
 		};
 		reader.onerror = function(error) {
 			alert("Invalid file");

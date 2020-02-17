@@ -1,6 +1,10 @@
 package com.ispw.fixmycity.logic.bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JobBeanView {
 	private int idJob;
@@ -28,6 +32,16 @@ public class JobBeanView {
 		this.endDate = endDate;
 	}
 
+	public void setEndDate(String endDate) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date = formatter.parse(endDate);
+			setEndDate(date);
+		} catch (ParseException e) {
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
+		}
+	}
+
 	public byte[] getJobInfo() {
 		return jobInfo;
 	}
@@ -42,6 +56,16 @@ public class JobBeanView {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date = formatter.parse(startDate);
+			setStartDate(date);
+		} catch (ParseException e) {
+			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
+		}
 	}
 
 	public String getState() {
