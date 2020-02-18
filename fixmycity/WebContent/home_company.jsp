@@ -20,18 +20,16 @@
 
 	String endDate = request.getParameter("acceptReportEndDate");
 	String jobInfoBase64 = request.getParameter("acceptReportInfoFileBase64");
-	String relatedReport = request.getParameter("relatedReport");
 	String startDate = request.getParameter("acceptReportStartDate");
 	String rejectingMotivation = request.getParameter("refuseReportMotivation");
 
 	// Accept job case
-	if (endDate != null && relatedReport != null && startDate != null) {
+	if (endDate != null  && startDate != null) {
 		JobBeanView jobBean = new JobBeanView();
 
 		jobBean.setEndDate(endDate);
-		jobBean.setRelatedReport(Integer.parseInt(relatedReport));
 		jobBean.setStartDate(startDate);
-
+		jobBean.setRelatedReport(Integer.parseInt(request.getParameter("acceptReleatedReport")));
 		if (jobInfoBase64 != null) {
 			jobBean.setJobInfo(Base64.getDecoder().decode(jobInfoBase64));
 		} else {
@@ -43,6 +41,7 @@
 	// Refuse job case
 	if (rejectingMotivation != null) {
 		JobBeanView jobBean = new JobBeanView();
+		jobBean.setRelatedReport(Integer.parseInt(request.getParameter("refuseReleatedReport")));
 
 		jobBean.setRejectingMotivation(rejectingMotivation);
 		new SystemFacade().rejectReport(jobBean);
@@ -110,7 +109,7 @@
 					String errTemplate = "<script>printError('{0}');</script>";
 					String errMessage = "";
 					try {
-						compReports = new SystemFacade().getCompanyReports();
+						compReports = new SystemFacade().getMyCompanyReports();
 					} catch (Exception e) {
 						errMessage += e.getMessage() + "<br\\>";
 					}
@@ -255,7 +254,7 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
-				<form action="home_citizen.jsp" method="GET">
+				<form action="home_company.jsp" method="GET">
 					<div class="modal-body">
 						<input type="hidden" value="" id="refuseReleatedReportId"
 							name="refuseReleatedReport">
@@ -320,7 +319,7 @@
 	   
 	function getBase64(file) {
 		var reader = new FileReader();
-		reader.readAsDataURL(file);
+		reader.readAsBinaryString(file);
 		reader.onload = function() {
 			console.log(reader.result);
 			document.getElementById('acceptReportInfoFileBase64Id').value = btoa(reader.result);

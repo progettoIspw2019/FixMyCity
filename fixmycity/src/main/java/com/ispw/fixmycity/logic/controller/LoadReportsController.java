@@ -35,6 +35,7 @@ public class LoadReportsController {
 		compRepBean.setTitle(rep.getTitle());
 		compRepBean.setSubmitter(rep.getCitizenUser().getUsername());
 		compRepBean.setCompanyRelated(rep.getCompanyUser().getUsername());
+		compRepBean.setId(rep.getIdReport());
 
 		return compRepBean;
 	}
@@ -142,7 +143,6 @@ public class LoadReportsController {
 
 		return compRepBeanList;
 	}
-
 
 	public List<JobBeanView> getJobsByCurrentCompany() throws EmptyResultListException {
 		JobDAO jobDAO = new JobDAO();

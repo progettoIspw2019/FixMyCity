@@ -408,7 +408,7 @@
 <script type="text/javascript">
 	function getBase64(file) {
 		var reader = new FileReader();
-		reader.readAsDataURL(file);
+		reader.readAsBinaryString(file);
 		reader.onload = function() {
 			console.log(reader.result);
 			document.getElementById('base64ImageReportId').value = btoa(reader.result);
