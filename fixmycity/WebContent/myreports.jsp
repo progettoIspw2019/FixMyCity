@@ -2,7 +2,6 @@
 <%@page
 	import="com.ispw.fixmycity.logic.exceptions.EmptyResultListException"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="javax.persistence.NoResultException"%>
 <%@page import="com.ispw.fixmycity.logic.model.Job"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CommunityReportBeanView"%>
 <%@page import="com.ispw.fixmycity.logic.bean.CompanyReportBeanView"%>

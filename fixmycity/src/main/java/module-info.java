@@ -16,8 +16,6 @@ module com.ispw.fixmycity.logic {
 	requires javafx.base;
 	requires javafx.graphics;
 	requires java.desktop;
-	requires nominatim.api;
-	requires org.apache.httpcomponents.httpclient;
 	requires java.logging;
 	requires com.jfoenix;
 	requires org.apache.commons.codec;

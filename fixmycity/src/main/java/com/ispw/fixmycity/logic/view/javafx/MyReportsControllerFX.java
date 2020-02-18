@@ -60,13 +60,18 @@ public class MyReportsControllerFX {
 		URL url = App.class.getResource("single_report.fxml");
 		logger.info(() -> "Loading...\n" + url);
 
+		logger.info("Calling fillCompanyReports...");
 		this.fillCompanyReports(compReports, url);
 		this.fillCommunityReports(commReports, url);
 	}
 
 	private void fillCompanyReports(List<CompanyReportBeanView> compReports, URL urlSingleReportFXML) {
+		if(compReports.isEmpty())
+			return;
+		logger.info("Iterating reports...");
 		compReports.stream().forEach(report -> {
-			logger.fine(() -> "Loading report\n\n" + report);
+			logger.info(() -> "Loading report\n\n" + report);
+			logger.info( () -> "Loading FXML: " + urlSingleReportFXML);
 			AnchorPane singleReport;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);
@@ -96,7 +101,7 @@ public class MyReportsControllerFX {
 						break;
 					case "textEventJobCreated":
 						Text eventCreated = (Text) node;
-						if (report.getJobs().isEmpty())
+						if (report.getJobs() == null || report.getJobs().isEmpty())
 							eventCreated.setText("Job not created");
 						else
 							eventCreated.setText("Job created");
@@ -128,6 +133,8 @@ public class MyReportsControllerFX {
 	}
 
 	private void fillCommunityReports(List<CommunityReportBeanView> commReports, URL urlSingleReportFXML) {
+		if(commReports.isEmpty())
+			return;
 		commReports.stream().forEach(report -> {
 			logger.fine(() -> "Loading report\n\n" + report);
 			AnchorPane singleReport;
@@ -159,7 +166,7 @@ public class MyReportsControllerFX {
 						break;
 					case "textEventJobCreated":
 						Text eventCreated = (Text) node;
-						if (report.getEvents().isEmpty())
+						if (report.getEvents() == null || report.getEvents().isEmpty())
 							eventCreated.setText("Event not created");
 						else
 							eventCreated.setText("Event created");

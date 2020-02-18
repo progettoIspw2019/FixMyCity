@@ -28,7 +28,7 @@ public class CompanyReportBeanView extends ReportBeanView {
 	public String toString() {
 		return "Title: " + this.getTitle() + "\nDescription: " + this.getDescription() 
 		+ "\nSubmission date: " + new SimpleDateFormat("dd-MM-yyyy").format(this.getDateSubmission())
-		+" by " + this.getSubmitter() + "\nHas Job: " + !this.getJobs().isEmpty();
+		+" by " + this.getSubmitter() + "\nHas Job: " + (this.getJobs()!=null && !this.getJobs().isEmpty());
 	}
 
 	public String getStatus() {
