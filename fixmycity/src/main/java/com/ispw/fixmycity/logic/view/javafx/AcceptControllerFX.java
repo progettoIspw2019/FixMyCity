@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.bean.JobBeanView;
+import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
 import com.jfoenix.controls.JFXDatePicker;
 
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class AcceptControllerFX {
 	}
 
 	@FXML
-	private void submitJob() {
+	private void submitJob() throws InvalidDateIntervalException {
 		if(document == null) {
 			Alert alert = new Alert(AlertType.INFORMATION,
 					"First, we need a document that explains how works will get done.",

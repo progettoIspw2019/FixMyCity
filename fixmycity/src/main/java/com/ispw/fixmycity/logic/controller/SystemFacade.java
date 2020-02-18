@@ -18,6 +18,7 @@ import com.ispw.fixmycity.logic.exceptions.CompanyReportIsAcceptedException;
 import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
+import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 import com.ispw.fixmycity.logic.view.SessionView;
 
@@ -104,7 +105,7 @@ public class SystemFacade {
 		return new AcceptOrRefuseAJobController().rejectReport(job);
 	}
 	
-	public boolean jobCreation(JobBeanView jBean) throws CompanyReportIsAcceptedException {
+	public boolean jobCreation(JobBeanView jBean) throws CompanyReportIsAcceptedException, InvalidDateIntervalException {
 		return new AcceptOrRefuseAJobController().jobCreation(jBean);
 	}
 }

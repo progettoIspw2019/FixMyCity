@@ -13,6 +13,7 @@ import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
 import com.ispw.fixmycity.logic.controller.LoginController;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.exceptions.CompanyReportIsAcceptedException;
+import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
 import com.ispw.fixmycity.logic.view.SessionView;
 import com.jfoenix.controls.JFXTextArea;
 
@@ -152,14 +153,22 @@ public class AcceptOrRefuseJobForm {
         stage.show();
 	}
 	
-	public void submitJob(JobBeanView jBean) {
+	public void submitJob(JobBeanView jBean)throws InvalidDateIntervalException {
 		try {
 			new SystemFacade().jobCreation(jBean);
+			
 		} catch (CompanyReportIsAcceptedException e) {
 			Alert alert = new Alert(AlertType.WARNING, "This report was already accepted.", ButtonType.OK);
 			alert.setHeaderText("Cannot accept!");
 			alert.showAndWait();
 			return;
+		}
+		
+		catch(InvalidDateIntervalException e) {
+			Alert alert = new Alert(AlertType.WARNING, "The starting date is in the past!.", ButtonType.OK);
+			alert.setHeaderText("Cannot submit");
+			alert.showAndWait();
+			
 		}
 		App.setRoot("home_company");
 	}

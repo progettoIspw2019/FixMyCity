@@ -22,18 +22,18 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>9.0.9</version>
+			<version>9.0.8</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>13</version>
+			<version>11.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>13</version>
+			<version>11.0.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-web</artifactId>
-			<version>13.0.1</version>
+			<version>11.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.netbeans.html</groupId>
@@ -80,11 +80,6 @@
 			<version>0.7.7</version>
 		</dependency>
 		<dependency>
-			<groupId>fr.dudie</groupId>
-			<artifactId>nominatim-api</artifactId>
-			<version>3.4</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
@@ -96,20 +91,11 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.14</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.11</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.13</version>
-			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
@@ -155,8 +141,6 @@
 								<sourcepath>${project.basedir}/src/main/java</sourcepath>
 							</compilerArguments>
 							<excludes>
-								<exclude>**/com/ispw/fixmycity/logic/view/**/*.java</exclude>
-								<exclude>**/com/ispw/fixmycity/logic/app/**/*.java</exclude>
 							</excludes>
 						</configuration>
 					</execution>

@@ -1,6 +1,9 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ispw.fixmycity.logic.bean.JobBeanView;
@@ -9,13 +12,14 @@ import com.ispw.fixmycity.logic.bean.JobBean;
 import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.JobDAO;
 import com.ispw.fixmycity.logic.exceptions.CompanyReportIsAcceptedException;
+import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
 import com.ispw.fixmycity.logic.model.CompanyReport;
 import com.ispw.fixmycity.logic.model.Job;
 import com.ispw.fixmycity.logic.util.Status;
 
 public class AcceptOrRefuseAJobController {	
 
-	public boolean jobCreation(JobBeanView bean) throws CompanyReportIsAcceptedException {
+	public boolean jobCreation(JobBeanView bean) throws CompanyReportIsAcceptedException, InvalidDateIntervalException {
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
 		
@@ -24,10 +28,24 @@ public class AcceptOrRefuseAJobController {
 		
 		JobBean jobBean = new JobBean();
 		
+		
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date)); 
+		
+		if(bean.getStartDate().before(date)) {
+			throw new InvalidDateIntervalException();
+		}
+		if(bean.getEndDate().before(bean.getStartDate())){
+			throw new InvalidDateIntervalException();
+		}
+		
+		
 		jobBean.setEndDate(bean.getEndDate());
 		jobBean.setJobInfo(bean.getJobInfo());
-		
 		jobBean.setRelatedReport(compRep);
+		
 		
 		jobBean.setStartDate(bean.getStartDate());
     	compRep.setStatus(Status.ACCEPTED.toString());
