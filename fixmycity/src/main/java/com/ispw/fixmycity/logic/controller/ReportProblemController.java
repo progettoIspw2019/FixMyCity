@@ -19,6 +19,7 @@ import com.ispw.fixmycity.logic.dao.CompanyReportDAO;
 import com.ispw.fixmycity.logic.dao.CompanyUserDAO;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
+import com.ispw.fixmycity.logic.exceptions.InvalidReportException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.model.CitizenUser;
 import com.ispw.fixmycity.logic.model.City;
@@ -35,10 +36,14 @@ public class ReportProblemController {
 		log = Logger.getLogger("fixmycity");
 	}
 
-	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
-		// if repBean has category for companies -> reportProblem company
-		// else -> reportProblem community
-
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
+		
+		this.checkIfValid(repBean);
+		
+		if(repBean.getImage() == null) {
+			throw new InvalidReportException("Invalid image or null");
+		}
+		
 		City city = new CityFactory().getCity(CityEnum.valueOf(repBean.getCity().toUpperCase()));
 
 		if (city.isForCommunity(repBean.getCategory())) {
@@ -49,6 +54,42 @@ public class ReportProblemController {
 			return reportProblemCompany(repBean);
 		}
 		return -1;
+	}
+	
+	private void checkIfValid(ReportBeanView repBean) throws InvalidReportException {
+		
+		if(repBean.getAddress() == null || repBean.getAddress().isEmpty()) {
+			throw new InvalidReportException("Invalid address or null");
+		}
+		
+		if(repBean.getCategory() == null || repBean.getCategory().isEmpty()) {
+			throw new InvalidReportException("Invalid category or null");
+		}
+		
+		if(repBean.getCity() == null || repBean.getCity().isEmpty()) {
+			throw new InvalidReportException("Invalid city or null");
+		}
+		
+		if(repBean.getDateSubmission() == null) {
+			throw new InvalidReportException("Invalid submission date or null");
+		}
+		
+		if(repBean.getDescription() == null || repBean.getDescription().isEmpty()) {
+			throw new InvalidReportException("Invalid description or null");
+		}
+
+		
+		if(repBean.getLatitude() == null || repBean.getLongitude() == null) {
+			throw new InvalidReportException("Invalid latitude and longitude or null");
+		}
+
+		if(repBean.getSubmitter() == null || repBean.getSubmitter().isEmpty()) {
+			throw new InvalidReportException("Invalid submitter username or null");
+		}
+		
+		if(repBean.getTitle() == null || repBean.getTitle().isEmpty()) {
+			throw new InvalidReportException("Invalid title or null");
+		}
 	}
 
 	private Integer reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {

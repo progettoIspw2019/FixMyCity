@@ -2,6 +2,7 @@ package com.ispw.fixmycity.logic.view.javafx;
 
 import java.io.File;
 
+import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
@@ -174,6 +175,11 @@ public class SignupForm {
 		companyNameField.clear();
 		selectedImageView.setImage(defaultImage);
 		selectedImage = defaultImage;
+	}
+	
+	@FXML
+	private void toLogin() {
+		App.setRoot("login");
 	}
 
 }

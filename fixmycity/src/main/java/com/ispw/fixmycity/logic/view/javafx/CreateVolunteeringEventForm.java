@@ -159,7 +159,7 @@ public class CreateVolunteeringEventForm {
 		}
 
 		new SystemFacade().createVolunteeringEvent(volunteeringEventBean);
-
+		App.setRoot("home_citizen");
 	}
 
 }

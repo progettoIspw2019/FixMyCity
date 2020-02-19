@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import com.ispw.fixmycity.logic.app.App;
+import com.ispw.fixmycity.logic.exceptions.InvalidReportException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.bean.AddressBean;
 import com.ispw.fixmycity.logic.bean.ReportBeanView;
@@ -139,6 +140,12 @@ public class ReportProblemControllerFX {
 			alert.setHeaderText("No matching company found!");
 			alert.showAndWait();
 			return;
+		} catch (InvalidReportException e) {
+			Alert alert = new Alert(AlertType.INFORMATION,
+					"Cannot submit your report at the moment, try again at a later time or contact our support team.",
+					ButtonType.OK);
+			alert.setHeaderText("Cannot submit!");
+			alert.showAndWait();
 		}
 
 		App.setRoot("home_citizen");

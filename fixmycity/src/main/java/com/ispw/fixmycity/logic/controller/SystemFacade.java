@@ -19,12 +19,13 @@ import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceEx
 import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
+import com.ispw.fixmycity.logic.exceptions.InvalidReportException;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 public class SystemFacade {
 
-	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound {
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
 		return new ReportProblemController().reportProblem(repBean);
 	}
 

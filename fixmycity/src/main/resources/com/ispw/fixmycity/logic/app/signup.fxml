@@ -93,6 +93,7 @@
                   <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="240.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
+            <Button mnemonicParsing="false" onAction="#toLogin" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
 			</children>
 		</GridPane>
 	</children>

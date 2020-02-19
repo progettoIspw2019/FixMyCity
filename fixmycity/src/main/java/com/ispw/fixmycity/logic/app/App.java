@@ -20,9 +20,9 @@ public class App extends Application {
 	@Override
 	public void start(Stage initialStage) throws IOException {
 		App.setStage(initialStage);
-		stage.setScene(new Scene(loadFXML("login"), 800, 600));
-		stage.setMinHeight(600);
-		stage.setMinWidth(800);
+		stage.setScene(new Scene(loadFXML("login"), 900, 700));
+		stage.setMinHeight(700);
+		stage.setMinWidth(900);
 		stage.show();
 	}
 
@@ -45,6 +45,7 @@ public class App extends Application {
 			return fxmlLoader.load();
 		}
 		catch(IOException e) {
+			e.printStackTrace();
 			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 			return null;
 		}

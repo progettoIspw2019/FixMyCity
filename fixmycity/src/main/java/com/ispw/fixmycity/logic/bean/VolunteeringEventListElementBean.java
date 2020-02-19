@@ -95,5 +95,10 @@ public class VolunteeringEventListElementBean {
 	public void setUserJoined(boolean userJoined) {
 		this.userJoined = userJoined;
 	}
-
+	
+	public String toString() {
+		return "Title: " + this.getTitle() +"\nDescription: " + this.getFullDescription()
+			+ "\nEvent date: " + this.getEventDate() + "\nSubmission date: " + this.getCreationDate()
+			+ "\nParticipants: " + this.getParticipantsNumber();
+	}
 }

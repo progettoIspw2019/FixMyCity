@@ -11,8 +11,7 @@ import java.util.logging.Logger;
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.bean.CommunityReportBeanView;
 import com.ispw.fixmycity.logic.bean.CompanyReportBeanView;
-import com.ispw.fixmycity.logic.controller.LoadReportsController;
-import com.ispw.fixmycity.logic.controller.LoginController;
+import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
@@ -43,16 +42,17 @@ public class MyReportsControllerFX {
 
 	@FXML
 	private void initialize() {
+		NavbarManager.setNavbarData(usernameText, profileImg);
 		logger = Logger.getLogger("fixmycity");
 		List<CommunityReportBeanView> commReports = new ArrayList<>();
 		List<CompanyReportBeanView> compReports = new ArrayList<>();
 		try {
-			commReports = new LoadReportsController().getMyCommunityReports();
+			commReports = new SystemFacade().getMyCommunityReports();
 		} catch (EmptyResultListException e) {
 			//
 		}
 		try {
-			compReports = new LoadReportsController().getMyCompanyReports();
+			compReports = new SystemFacade().getMyCompanyReports();
 		} catch (EmptyResultListException e) {
 			//
 		}
@@ -199,7 +199,7 @@ public class MyReportsControllerFX {
 
 	@FXML
 	private void logout() {
-		new LoginController().logout();
+		new SystemFacade().logout();
 		App.setRoot("login");
 	}
 
