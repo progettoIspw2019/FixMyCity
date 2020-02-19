@@ -1,5 +1,8 @@
 package com.ispw.fixmycity.logic.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +14,7 @@ import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.dao.UserDAO;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 import com.ispw.fixmycity.logic.model.CitizenUser;
+import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.CityEnum;
 import com.ispw.fixmycity.logic.util.UserMode;
@@ -30,7 +34,7 @@ public class LoginController {
 				user.setCity(CityEnum.valueOf(citizenUser.getCity().toUpperCase()));
 				return user;
 			}
-		} catch(NoResultException e) {
+		} catch (NoResultException e) {
 			// ignore first exception
 		}
 		try {
@@ -76,7 +80,7 @@ public class LoginController {
 		return true;
 
 	}
-	
+
 	public void logout() {
 		SessionView.setMode(UserMode.GUEST);
 		SessionView.setCityEnum(null);
@@ -87,4 +91,12 @@ public class LoginController {
 		SessionView.setAddressSetOnMap(null);
 	}
 
-}
+	public Map<String, List<String>> getCategoriesForCompanySignUp() {
+		HashMap<String, List<String>> categoriesMap = new HashMap<>();
+		CityFactory cityFactory = new CityFactory();
+		categoriesMap.put("Roma", cityFactory.getCityRoma().getCompaniesCategories());
+		categoriesMap.put("Fiuggi", cityFactory.getCityFiuggi().getCompaniesCategories());
+		return categoriesMap;
+	}
+
+} 

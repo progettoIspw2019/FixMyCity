@@ -96,7 +96,7 @@ public class SystemFacade {
 	public void logout() {
 		new LoginController().logout();
 	}
-	
+
 	public List<CompanyReportBeanView> loadMyCompanyReports() {
 		return new AcceptOrRefuseAJobController().loadCompanyReports(SessionView.getUsername());
 	}
@@ -104,8 +104,13 @@ public class SystemFacade {
 	public int rejectReport(JobBeanView job) throws CompanyReportIsAcceptedException {
 		return new AcceptOrRefuseAJobController().rejectReport(job);
 	}
-	
-	public boolean jobCreation(JobBeanView jBean) throws CompanyReportIsAcceptedException, InvalidDateIntervalException {
+
+	public boolean jobCreation(JobBeanView jBean)
+			throws CompanyReportIsAcceptedException, InvalidDateIntervalException {
 		return new AcceptOrRefuseAJobController().jobCreation(jBean);
+	}
+
+	public Map<String, List<String>> getCategoriesForCompanySignUp() {
+		return new LoginController().getCategoriesForCompanySignUp();
 	}
 }
