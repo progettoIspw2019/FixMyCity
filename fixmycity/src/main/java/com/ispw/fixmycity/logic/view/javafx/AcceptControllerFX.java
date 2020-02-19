@@ -7,12 +7,11 @@ import java.sql.Date;
 import java.util.logging.Logger;
 
 import com.ispw.fixmycity.logic.bean.JobBeanView;
-import com.ispw.fixmycity.logic.exceptions.InvalidDateIntervalException;
-import com.jfoenix.controls.JFXDatePicker;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -28,10 +27,10 @@ public class AcceptControllerFX {
 	private VBox form;
 
 	@FXML
-	private JFXDatePicker startDatePicker;
+	private DatePicker startDatePicker;
 
 	@FXML
-	private JFXDatePicker endDatePicker;
+	private DatePicker endDatePicker;
 
 	public void setMasterControllerAndJob(AcceptOrRefuseJobForm masterController, JobBeanView jBean) {
 		this.masterController = masterController;
@@ -39,7 +38,7 @@ public class AcceptControllerFX {
 	}
 
 	@FXML
-	private void submitJob() throws InvalidDateIntervalException {
+	private void submitJob() {
 		if(document == null) {
 			Alert alert = new Alert(AlertType.INFORMATION,
 					"First, we need a document that explains how works will get done.",

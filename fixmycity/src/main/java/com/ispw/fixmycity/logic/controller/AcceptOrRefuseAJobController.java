@@ -1,7 +1,7 @@
 package com.ispw.fixmycity.logic.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,13 +28,9 @@ public class AcceptOrRefuseAJobController {
 		
 		JobBean jobBean = new JobBean();
 		
+		Date currDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
 		
-		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date = new Date();
-		System.out.println(dateFormat.format(date)); 
-		
-		if(bean.getStartDate().before(date)) {
+		if(bean.getStartDate().before(currDate)) {
 			throw new InvalidDateIntervalException();
 		}
 		if(bean.getEndDate().before(bean.getStartDate())){

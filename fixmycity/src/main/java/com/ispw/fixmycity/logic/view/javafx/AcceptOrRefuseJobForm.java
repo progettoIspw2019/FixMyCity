@@ -153,7 +153,7 @@ public class AcceptOrRefuseJobForm {
         stage.show();
 	}
 	
-	public void submitJob(JobBeanView jBean)throws InvalidDateIntervalException {
+	public void submitJob(JobBeanView jBean) {
 		try {
 			new SystemFacade().jobCreation(jBean);
 			
@@ -165,7 +165,7 @@ public class AcceptOrRefuseJobForm {
 		}
 		
 		catch(InvalidDateIntervalException e) {
-			Alert alert = new Alert(AlertType.WARNING, "The starting date is in the past!.", ButtonType.OK);
+			Alert alert = new Alert(AlertType.WARNING, "Starting and ending date are invalid.", ButtonType.OK);
 			alert.setHeaderText("Cannot submit");
 			alert.showAndWait();
 			
