@@ -13,4 +13,4 @@ install: true
 
 script:
  - cd fixmycity
- - mvn clean javafx:compile -Pcoverage test sonar:sonar -Dsonar.organization=progettoispw2019 -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=progettoIspw2019_FixMyCity -Dsonar.host.url=https://sonarcloud.io
+ - mvn clean javafx:compile -Pcoverage sonar:sonar -Dsonar.organization=progettoispw2019 -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey=progettoIspw2019_FixMyCity -Dsonar.host.url=https://sonarcloud.io
