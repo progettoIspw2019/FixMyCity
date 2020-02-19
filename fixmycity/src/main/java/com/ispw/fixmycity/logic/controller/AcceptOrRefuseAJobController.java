@@ -56,7 +56,7 @@ public class AcceptOrRefuseAJobController {
 	public int rejectReport(JobBeanView bean) throws CompanyReportIsAcceptedException {
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
-		if(compRep.getJobs() != null && !compRep.getJobs().isEmpty())
+		if(compRep.getJobs() == null || compRep.getJobs().isEmpty())
 			throw new CompanyReportIsAcceptedException();
 		if (compRep.getRefuseCounter() < 3) {
 			compRep.setRefuseDescription(bean.getRejectingMotivation());
