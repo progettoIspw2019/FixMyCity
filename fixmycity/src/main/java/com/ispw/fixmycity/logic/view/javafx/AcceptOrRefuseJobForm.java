@@ -213,4 +213,9 @@ public class AcceptOrRefuseJobForm {
 		}
 		App.setRoot("home_company");
 	}
+	
+	@FXML
+	private void toMap() {
+		App.setRoot("MapCompany");
+	}
 }

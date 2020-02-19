@@ -12,6 +12,7 @@ import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceEx
 import com.ispw.fixmycity.logic.model.City;
 import com.ispw.fixmycity.logic.model.CityFactory;
 import com.ispw.fixmycity.logic.util.ReportFilter;
+import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.scene.control.Alert;
@@ -82,8 +83,9 @@ public class MapController {
 			// initialize listeners
 			this.initListeners();
 
-			// add mouse listener to map -> setting position for problem reporting
-			map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
+			if(SessionView.getMode() == UserMode.CITIZEN)
+				// add mouse listener to map -> setting position for problem reporting
+				map.addMouseListener(MouseEvent.Type.CLICK, mouseListener);
 
 			// setup for markers
 			this.iconComp = new Icon(
@@ -101,6 +103,8 @@ public class MapController {
 					addEveryCommunityReport(map);
 				if (filter == ReportFilter.ALL_COMPANY_REPORT)
 					addEveryCompanyReport(map);
+				if(filter == ReportFilter.ALL_MY_COMPANY_REPORT)
+					addEveryCompanyReportFiltered(map);
 			}
 		});
 	}
@@ -119,14 +123,27 @@ public class MapController {
 	}
 
 	public void addEveryCommunityReport(Map map) {
-		List<CommunityReportBeanView> reports = new SystemFacade().getCommunityReports();
+		List<CommunityReportBeanView> reportsComm = new SystemFacade().getCommunityReports();
 
-		for (var report : reports) {
+		for (var report : reportsComm) {
 			new Marker(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()), markerOptComm)
 					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle()
 							+ "</b><br>" + report.getDescription() + "<br>" + "<i>submitted on "
 							+ new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) + " by "
 							+ report.getSubmitter() + "</i>"))
+					.addTo(map);
+		}
+	}
+	
+	public void addEveryCompanyReportFiltered(Map map) {
+		List<CompanyReportBeanView> reportsFiltered = new SystemFacade().getCompanyReportsFiltered();
+
+		for (var rep : reportsFiltered) {
+			new Marker(new LatLng(rep.getLatitude().floatValue(), rep.getLongitude().floatValue()), markerOptComp)
+					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + rep.getTitle()
+							+ "</b><br>" + rep.getDescription() + "<br>" + "<i>submitted on "
+							+ new SimpleDateFormat("dd-MM-yyyy").format(rep.getDateSubmission()) + " by "
+							+ rep.getSubmitter() + "</i>"))
 					.addTo(map);
 		}
 	}

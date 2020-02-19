@@ -53,7 +53,7 @@ public class VolunteeringEventDAO {
 		tempEvent.getCitizenUsers().add(citizenUser);
 
 		entityManager.getTransaction().begin();
-		entityManager.persist(citizenUser);
+		entityManager.merge(citizenUser);
 		entityManager.persist(tempEvent);
 
 		entityManager.getTransaction().commit();
@@ -72,7 +72,7 @@ public class VolunteeringEventDAO {
 		citizenUser.getVolunteeringEvents().remove(tempEvent);
 
 		entityManager.getTransaction().begin();
-		entityManager.persist(citizenUser);
+		entityManager.merge(citizenUser);
 		entityManager.persist(tempEvent);
 
 		entityManager.getTransaction().commit();

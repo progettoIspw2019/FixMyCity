@@ -44,6 +44,10 @@ public class SystemFacade {
 	public List<CompanyReportBeanView> getCompanyReports() {
 		return new LoadReportsController().getCompanyReports();
 	}
+	
+	public List<CompanyReportBeanView> getCompanyReportsFiltered() {
+		return new LoadReportsController().getCompanyReportsFiltered();
+	}
 
 	public List<CommunityReportBeanView> getCommunityReports() {
 		return new LoadReportsController().getCommunityReports();

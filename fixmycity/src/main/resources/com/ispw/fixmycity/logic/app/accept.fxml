@@ -33,7 +33,7 @@
             <Insets top="20.0" />
          </VBox.margin>
          <children>
-            <DatePicker fx:id="startEndPicker" prefHeight="25.0" prefWidth="190.0" promptText="When will works start?" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="190.0" promptText="When will works start?" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="190.0" promptText="When will they finish?" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>

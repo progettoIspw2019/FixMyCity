@@ -6,6 +6,7 @@ import java.util.List;
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ReportFilter;
+import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
@@ -37,7 +38,7 @@ public class MapBoundary {
 		List<ReportFilter> reportFilters = new ArrayList<>();
 		reportFilters.add(ReportFilter.ALL_COMMUNITY_REPORT);
 		reportFilters.add(ReportFilter.ALL_COMPANY_REPORT);
-
+		
 		MapController mapController = new MapController(mapContainerWebView);
 		mapController.loadMap(reportFilters);
 	}

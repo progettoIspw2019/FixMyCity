@@ -63,18 +63,12 @@ public class ActiveEventsControllerFX {
 	}
 	
 	private void fillWithEvents(List<VolunteeringEventListElementBean> events, URL urlEventUI) {
-		logger.info("Iterating events...");
 		events.stream().forEach(ev -> {
-			logger.info(() -> "Loading event\n\n" + ev);
-			logger.info( () -> "Loading FXML: " + urlEventUI);
 			AnchorPane singleEvent;
 			try {
 				HBox parent = FXMLLoader.load(urlEventUI);
-				System.out.println(parent);
 				singleEvent = (AnchorPane) parent.getChildren().get(0);
-				logger.info(ev.toString());
 				for (Node node : singleEvent.getChildren()) {
-					logger.info(node.getId());
 					switch (node.getId()) {
 					case "imageView":
 						ImageView imgView = (ImageView) node;

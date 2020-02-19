@@ -68,10 +68,7 @@ public class MyReportsControllerFX {
 	private void fillCompanyReports(List<CompanyReportBeanView> compReports, URL urlSingleReportFXML) {
 		if(compReports.isEmpty())
 			return;
-		logger.info("Iterating reports...");
 		compReports.stream().forEach(report -> {
-			logger.info(() -> "Loading report\n\n" + report);
-			logger.info( () -> "Loading FXML: " + urlSingleReportFXML);
 			AnchorPane singleReport;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);

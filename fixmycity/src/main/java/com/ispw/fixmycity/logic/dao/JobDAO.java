@@ -49,7 +49,7 @@ public class JobDAO {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager.getTransaction().begin();
-		entityManager.persist(job);
+		entityManager.merge(job);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}

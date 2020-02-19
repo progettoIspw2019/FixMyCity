@@ -140,7 +140,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <JFXButton layoutY="40.0" prefHeight="21.0" prefWidth="156.0" text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                  <JFXButton layoutY="40.0" onAction="#toMap" prefHeight="21.0" prefWidth="156.0" text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
                   <JFXButton layoutY="65.0" style="-fx-border-color: #bfbfbf; -fx-border-style: solid outside; -fx-text-alignment: left;" text="My Reports" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
                   <JFXButton layoutY="312.0" onAction="#logout" style="-fx-background-color: #fff5f5;" text="Log out" textFill="#ff3737" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>

@@ -17,66 +17,65 @@ import com.ispw.fixmycity.logic.model.CompanyReport;
 import com.ispw.fixmycity.logic.model.Job;
 import com.ispw.fixmycity.logic.util.Status;
 
-public class AcceptOrRefuseAJobController {	
+public class AcceptOrRefuseAJobController {
 
 	public boolean jobCreation(JobBeanView bean) throws CompanyReportIsAcceptedException, InvalidDateIntervalException {
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
-		
-		if(compRep.getJobs() != null && !compRep.getJobs().isEmpty())
+
+		if (compRep.getJobs() != null && !compRep.getJobs().isEmpty())
 			throw new CompanyReportIsAcceptedException();
-		
+
 		JobBean jobBean = new JobBean();
-		
+
 		Date currDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-		
-		if(bean.getStartDate().before(currDate)) {
+
+		if (bean.getStartDate().before(currDate)) {
 			throw new InvalidDateIntervalException();
 		}
-		if(bean.getEndDate().before(bean.getStartDate())){
+		if (bean.getEndDate().before(bean.getStartDate())) {
 			throw new InvalidDateIntervalException();
 		}
-		
-		
+
 		jobBean.setEndDate(bean.getEndDate());
 		jobBean.setJobInfo(bean.getJobInfo());
 		jobBean.setRelatedReport(compRep);
-		
-		
+
 		jobBean.setStartDate(bean.getStartDate());
-    	compRep.setStatus(Status.ACCEPTED.toString());
-    	
-    	Job job = new JobDAO().add(jobBean);
-    	
-    	compRep.addJob(job);
-    	compRepDAO.update(compRep);
-    	return true;
+		compRep.setStatus(Status.ACCEPTED.toString());
+
+		Job job = new JobDAO().add(jobBean);
+
+		compRep.addJob(job);
+		compRepDAO.update(compRep);
+		return true;
 	}
 
 	public int rejectReport(JobBeanView bean) throws CompanyReportIsAcceptedException {
 		CompanyReportDAO compRepDAO = new CompanyReportDAO();
 		CompanyReport compRep = compRepDAO.findByPrimaryKey(bean.getRelatedReport());
-		if(compRep.getJobs() == null || compRep.getJobs().isEmpty())
-			throw new CompanyReportIsAcceptedException();
-		if (compRep.getRefuseCounter() < 3) {
-			compRep.setRefuseDescription(bean.getRejectingMotivation());
-			compRep.increaseRefuseCounter();
-			compRep.setStatus(Status.REJECTED.toString());
-     		compRepDAO.update(compRep);
-     		return 1;
+		if (compRep.getJobs() == null || compRep.getJobs().isEmpty()) {
+			if (compRep.getRefuseCounter() < 3) {
+				compRep.setRefuseDescription(bean.getRejectingMotivation());
+				compRep.increaseRefuseCounter();
+				compRep.setStatus(Status.REJECTED.toString());
+				compRepDAO.update(compRep);
+				return 1;
 
+			} else {
+				compRepDAO.delete(compRep.getIdReport());
+				return -1;
+			}
 		} else {
-			compRepDAO.delete(compRep.getIdReport());
-			return -1;
+			throw new CompanyReportIsAcceptedException();
 		}
-
 	}
 
 	public List<CompanyReportBeanView> loadCompanyReports(String compUsername) {
 		List<CompanyReport> reports = new CompanyReportDAO().findAllMyCompany(compUsername);
-		List <CompanyReportBeanView> repBeanList = new ArrayList<>();
-		
-		reports.stream().forEach(rep ->{
+		List<CompanyReportBeanView> repBeanList = new ArrayList<>();
+
+		reports.stream().forEach(rep -> {
 			CompanyReportBeanView repBean = new CompanyReportBeanView();
 			repBean.setAddress(rep.getAddress());
 			repBean.setCategory(rep.getCategory());
@@ -92,11 +91,9 @@ public class AcceptOrRefuseAJobController {
 			repBean.setId(rep.getIdReport());
 			repBeanList.add(repBean);
 		});
-		
-		return repBeanList;
-		
-	}
 
-	
+		return repBeanList;
+
+	}
 
 }

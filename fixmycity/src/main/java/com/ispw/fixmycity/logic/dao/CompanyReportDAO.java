@@ -56,7 +56,7 @@ public class CompanyReportDAO {
 	public void update(CompanyReport compReport) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
-		entityManager.persist(compReport);
+		entityManager.merge(compReport);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}

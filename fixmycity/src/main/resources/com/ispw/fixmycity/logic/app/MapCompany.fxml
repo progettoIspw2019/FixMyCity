@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ispw.fixmycity.logic.view.javafx.MapCompany">
+   <center>
+      <BorderPane minHeight="22.0" minWidth="600.0" prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <center>
+      		<AnchorPane prefHeight="399.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      			<children>
+      				<WebView fx:id="mapContainer" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      			</children>
+      		</AnchorPane>
+         </center>
+      </BorderPane>
+   </center>
+   <top>
+      <AnchorPane maxHeight="60.0" minHeight="60.0" minWidth="600.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #343A40;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="21.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FixMyCity" AnchorPane.bottomAnchor="18.482421875" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="17.576171875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="usernameText" fill="WHITE" layoutX="494.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User_96" textAlignment="CENTER" AnchorPane.bottomAnchor="22.98828125" AnchorPane.rightAnchor="61.990234375" AnchorPane.topAnchor="21.05078125">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="profileImg" fitHeight="40.0" fitWidth="40.0" layoutX="557.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="340.0" prefWidth="148.0" style="-fx-border-color: #bfbfbf; -fx-background-color: #fff;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="342.0" prefWidth="156.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <JFXButton layoutY="40.0" prefHeight="21.0" prefWidth="156.0" style="-fx-border-color: #bfbfbf; -fx-border-style: solid outside; -fx-text-alignment: left;" text="Map" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                  <JFXButton layoutY="65.0" onAction="#toCompanyReports" text="My Reports" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
+                  <JFXButton layoutY="312.0" onAction="#logout" style="-fx-background-color: #fff5f5;" text="Log out" textFill="#ff3737" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

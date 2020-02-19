@@ -51,7 +51,7 @@ public class CommunityReportDAO {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager.getTransaction().begin();
-		entityManager.persist(commReport);
+		entityManager.merge(commReport);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}

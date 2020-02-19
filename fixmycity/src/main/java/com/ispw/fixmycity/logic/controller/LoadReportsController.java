@@ -92,6 +92,22 @@ public class LoadReportsController {
 
 		return compRepBeanList;
 	}
+	
+	public List<CompanyReportBeanView> getCompanyReportsFiltered() {
+		CompanyReportDAO compRepDAO = new CompanyReportDAO();
+
+		List<CompanyReport> reports = compRepDAO.findAll();
+
+		ArrayList<CompanyReportBeanView> compRepBeanList = new ArrayList<>();
+		for (var rep : reports) {
+			if(!rep.getCompanyUser().getUsername().equals(SessionView.getUsername()))
+				continue;
+			CompanyReportBeanView compRepBean = this.getCompRepBeanFromCompReport(rep);
+			compRepBeanList.add(compRepBean);
+		}
+
+		return compRepBeanList;
+	}
 
 	public List<CommunityReportBeanView> getMyCommunityReports() throws EmptyResultListException {
 
