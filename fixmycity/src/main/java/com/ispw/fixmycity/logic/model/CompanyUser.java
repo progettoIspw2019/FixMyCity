@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.ispw.fixmycity.logic.bean.CompanyUserBean;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
@@ -43,11 +47,13 @@ public class CompanyUser implements Serializable {
 	private byte[] image;
 
 	// bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy = "companyUser")
+	@OneToMany(mappedBy = "companyUser", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<CompanyReport> companyReports;
 
 	// bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy = "relatedCompany")
+	@OneToMany(mappedBy = "relatedCompany", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Job> jobs;
 
 	public CompanyUser() {

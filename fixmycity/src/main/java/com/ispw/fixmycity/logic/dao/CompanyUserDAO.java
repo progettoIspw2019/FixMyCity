@@ -11,26 +11,34 @@ import javax.persistence.Persistence;
 
 public class CompanyUserDAO {
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public CompanyUserDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
-		entityManager = entityManagerFactory.createEntityManager();
 	}
 
 	public List<CompanyUser> findAll() {
-		return entityManager.createNamedQuery("CompanyUser.findAll", CompanyUser.class).getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<CompanyUser> result = entityManager.createNamedQuery("CompanyUser.findAll", CompanyUser.class)
+				.getResultList();
+		entityManager.close();
+		return result;
 	}
 
 	public CompanyUser findByPrimaryKey(String username) {
-		return entityManager.createNamedQuery("CompanyUser.find", CompanyUser.class)
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CompanyUser result = entityManager.createNamedQuery("CompanyUser.find", CompanyUser.class)
 				.setParameter("input_username", username).getSingleResult();
+		entityManager.close();
+		return result;
 	}
 
 	public CompanyUser findByCategoryAndCity(String category, String city) {
 		try {
-			return entityManager.createNamedQuery("CompanyUser.findByCategoryAndCity", CompanyUser.class)
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			CompanyUser result = entityManager.createNamedQuery("CompanyUser.findByCategoryAndCity", CompanyUser.class)
 					.setParameter("input_category", category).setParameter("input_city", city).getSingleResult();
+			entityManager.close();
+			return result;
 		} catch (NoResultException e) {
 			return null;
 		}

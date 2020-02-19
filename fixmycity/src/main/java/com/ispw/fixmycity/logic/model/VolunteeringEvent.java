@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.ispw.fixmycity.logic.bean.VolunteeringEventBean;
 
 /**
@@ -57,6 +60,7 @@ public class VolunteeringEvent implements Serializable {
 
 	// bi-directional many-to-many association to CitizenUser
 	@ManyToMany(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name = "participations", joinColumns = { @JoinColumn(name = "id_event") }, inverseJoinColumns = {
 			@JoinColumn(name = "username") })
 	private List<CitizenUser> citizenUsers;

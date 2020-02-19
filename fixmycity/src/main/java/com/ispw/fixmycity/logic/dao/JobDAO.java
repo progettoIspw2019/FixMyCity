@@ -11,48 +11,62 @@ import com.ispw.fixmycity.logic.model.Job;
 
 public class JobDAO {
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public JobDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
-		entityManager = entityManagerFactory.createEntityManager();
 	}
-	
-	public List<Job> findAll(){
-		return entityManager.createNamedQuery("Job.findAll", Job.class).getResultList();
+
+	public List<Job> findAll() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<Job> result = entityManager.createNamedQuery("Job.findAll", Job.class).getResultList();
+		entityManager.close();
+		return result;
 	}
-	
+
 	public Job findByPrimaryKey(int id) {
-		return entityManager.find(Job.class, id);
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		Job result = entityManager.find(Job.class, id);
+		entityManager.close();
+		return result;
 	}
-	
+
 	public Job add(JobBean jobBean) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		Job job = new Job();
 		job.setFromBean(jobBean);
-		
+
 		entityManager.getTransaction().begin();
 		entityManager.persist(job);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 
 		return job; // must return entity, auto-generated id might be useful
 	}
-	
+
 	public void update(Job job) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		entityManager.getTransaction().begin();
 		entityManager.persist(job);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
-	
+
 	public void delete(Integer id) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		entityManager.getTransaction().begin();
 		Job job = entityManager.getReference(Job.class, id);
-		
+
 		job.getCompanyReport().removeJob(job);
 		new CompanyReportDAO().update(job.getCompanyReport());
 		entityManager.getTransaction().commit();
-		
+
 		entityManager.getTransaction().begin();
 		entityManager.remove(job);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 }

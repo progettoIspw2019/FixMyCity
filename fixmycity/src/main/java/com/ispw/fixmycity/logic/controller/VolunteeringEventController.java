@@ -18,8 +18,6 @@ import com.ispw.fixmycity.logic.view.SessionView;
 
 public class VolunteeringEventController {
 
-	List<CommunityReportBean> filteredReports = new ArrayList<>();
-
 	public boolean createVolunteeringEvent(VolunteeringEventBean volunteeringEventBean) {
 
 		VolunteeringEventDAO dao = new VolunteeringEventDAO();
@@ -38,14 +36,11 @@ public class VolunteeringEventController {
 		return dao.quitVolunteeringEvent(SessionView.getUsername(), volunteeringEventBean.getEventId());
 	}
 
-	public VolunteeringEventController() {
-		this.initializeCommunityReportList();
-	}
 
-	public void initializeCommunityReportList() {
+	public List<CommunityReportBean> initializeCommunityReportList() {
 		CommunityReportDAO dao = new CommunityReportDAO();
 		List<CommunityReport> reports = dao.findAll();
-
+		List<CommunityReportBean> filteredReports = new ArrayList<>();
 		for (CommunityReport report : reports) {
 			if (report.getVolunteeringEvents().isEmpty()) {
 				CommunityReportBean commRepBean = new CommunityReportBean();
@@ -60,14 +55,14 @@ public class VolunteeringEventController {
 				filteredReports.add(commRepBean);
 			}
 		}
-
+		return filteredReports;
 	}
 
 	public Map<Integer, String> getCommunityReportMap() {
 
 		Map<Integer, String> commReps = new HashMap<>();
 
-		for (CommunityReportBean report : filteredReports) {
+		for (CommunityReportBean report : initializeCommunityReportList()) {
 			commReps.put(report.getIdReport(), report.getTitle() + " - " + report.getAddress());
 		}
 
@@ -75,7 +70,7 @@ public class VolunteeringEventController {
 	}
 
 	public CommunityReportBean getCommunityReportFromId(Integer selectionId) {
-		for (CommunityReportBean report : filteredReports) {
+		for (CommunityReportBean report : initializeCommunityReportList()) {
 			if (selectionId.equals(report.getIdReport())) {
 				return report;
 			}

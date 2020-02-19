@@ -14,23 +14,32 @@ import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.util.Status;
 
 public class CompanyReportDAO {
+
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public CompanyReportDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
-		entityManager = entityManagerFactory.createEntityManager();
 	}
-	
+
 	public List<CompanyReport> findAll() {
-		return entityManager.createNamedQuery("CompanyReport.findAll", CompanyReport.class).getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<CompanyReport> result = entityManager.createNamedQuery("CompanyReport.findAll", CompanyReport.class)
+				.getResultList();
+		entityManager.close();
+		return result;
 	}
 
 	public CompanyReport findByPrimaryKey(Integer id) {
-		return entityManager.find(CompanyReport.class, id);
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		CompanyReport result = entityManager.find(CompanyReport.class, id);
+		entityManager.close();
+		return result;
 	}
 
 	public CompanyReport add(CompanyReportBean compRepBean) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CompanyReport compReport = new CompanyReport();
 		compReport.setFromBean(compRepBean);
 		compReport.setStatus(Status.PENDING.toString());
@@ -39,26 +48,37 @@ public class CompanyReportDAO {
 		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
 		entityManager.getTransaction().commit();
-		
+		entityManager.close();
 		return compReport; // must return entity, auto-generated id might be useful
 	}
 
 	// Versione in cui i controller usano le entity
 	public void update(CompanyReport compReport) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(compReport);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public void delete(Integer id) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CompanyReport repRef = entityManager.getReference(CompanyReport.class, id);
 		entityManager.getTransaction().begin();
 		entityManager.remove(repRef);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public List<CompanyReport> findAllMyCompany(String compUsername) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CompanyUser compUser = new CompanyUserDAO().findByPrimaryKey(compUsername);
-		return entityManager.createNamedQuery("CompanyReport.findAllFromCompanyUsername", CompanyReport.class).setParameter("input_company", compUser).getResultList();
+		List<CompanyReport> result = entityManager
+				.createNamedQuery("CompanyReport.findAllFromCompanyUsername", CompanyReport.class)
+				.setParameter("input_company", compUser).getResultList();
+		entityManager.close();
+		return result;
 	}
 }

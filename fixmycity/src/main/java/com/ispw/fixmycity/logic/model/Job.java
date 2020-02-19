@@ -35,12 +35,12 @@ public class Job implements Serializable {
 	private Date startDate;
 
 	// omni-directional many-to-one association to CompanyReport
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_company_report")
 	private CompanyReport companyReport;
 
 	// bi-directional many-to-one association to CompanyUser
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "related_company")
 	private CompanyUser relatedCompany;
 

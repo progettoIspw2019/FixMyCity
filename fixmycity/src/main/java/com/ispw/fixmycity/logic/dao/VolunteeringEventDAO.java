@@ -28,9 +28,9 @@ public class VolunteeringEventDAO {
 	}
 
 	public VolunteeringEvent addVolunteeringEvent(VolunteeringEventBean eventBean) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		VolunteeringEvent volunteeringEvent = new VolunteeringEvent();
 		volunteeringEvent.setFromBean(eventBean);
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		// Setting foreign key
 		Integer idCommReport = eventBean.getCommunityReport().getIdReport();

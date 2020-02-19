@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.ispw.fixmycity.logic.bean.CitizenUserBean;
 import com.ispw.fixmycity.logic.util.ConverterUtil;
@@ -46,15 +50,18 @@ public class CitizenUser implements Serializable {
 	private String city;
 
 	// bi-directional many-to-one association to CommunityReport
-	@OneToMany(mappedBy = "citizenUser")
+	@OneToMany(mappedBy = "citizenUser", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<CommunityReport> communityReports;
 
 	// bi-directional many-to-one association to CompanyReport
-	@OneToMany(mappedBy = "citizenUser")
+	@OneToMany(mappedBy = "citizenUser", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<CompanyReport> companyReports;
 
 	// bi-directional many-to-many association to VolunteeringEvent
-	@ManyToMany(mappedBy = "citizenUsers")
+	@ManyToMany(mappedBy = "citizenUsers", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CitizenUser() {
@@ -62,7 +69,7 @@ public class CitizenUser implements Serializable {
 	}
 
 	public void setFromBean(CitizenUserBean citizenUserBean) {
-		
+
 		setUsername(citizenUserBean.getUsername());
 		setPwd(ConverterUtil.md5FromString((citizenUserBean.getPassword())));
 		setSurname(citizenUserBean.getLastName());

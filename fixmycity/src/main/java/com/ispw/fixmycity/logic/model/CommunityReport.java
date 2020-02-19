@@ -1,13 +1,29 @@
 package com.ispw.fixmycity.logic.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.ispw.fixmycity.logic.bean.CommunityReportBean;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.ispw.fixmycity.logic.bean.CommunityReportBean;
 
 /**
  * The persistent class for the community_reports database table.
@@ -41,18 +57,19 @@ public class CommunityReport implements Serializable {
 	private BigDecimal longitude;
 
 	private String title;
-	
+
 	private String category;
-	
+
 	private String city;
 
 	// bi-directional many-to-one association to CitizenUser
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "submitter")
 	private CitizenUser citizenUser;
 
 	// bi-directional many-to-one association to VolunteeringEvent
-	@OneToMany(mappedBy = "communityReport")
+	@OneToMany(mappedBy = "communityReport", fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<VolunteeringEvent> volunteeringEvents;
 
 	public CommunityReport() {

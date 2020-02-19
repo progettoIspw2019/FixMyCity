@@ -16,34 +16,36 @@ import com.ispw.fixmycity.logic.model.CompanyUser;
 import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 
 public class UserDAO {
-	
+
 	private static final String PARAM_USRNAME = "input_username";
 	private static final String PARAM_PASSW = "input_pwd";
-	
 
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public UserDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
-		entityManager = entityManagerFactory.createEntityManager();
 	}
 
 	public CitizenUser findAllCitizensFromCredentials(BaseUserBean user) {
-		entityManager = entityManagerFactory.createEntityManager();
-
-		return entityManager.createNamedQuery("CitizenUser.findAllFromCredentials", CitizenUser.class)
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CitizenUser result = entityManager.createNamedQuery("CitizenUser.findAllFromCredentials", CitizenUser.class)
 				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
+		entityManager.close();
+		return result;
 	}
 
 	public CompanyUser findAllCompanyUserFromCredentials(BaseUserBean user) {
-		return entityManager.createNamedQuery("CompanyUser.findAllFromCredentials", CompanyUser.class)
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CompanyUser result = entityManager.createNamedQuery("CompanyUser.findAllFromCredentials", CompanyUser.class)
 				.setParameter(PARAM_USRNAME, user.getUsername()).setParameter(PARAM_PASSW, user.getPassword())
 				.getSingleResult();
+		entityManager.close();
+		return result;
 	}
 
 	public boolean userExists(String username) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager = entityManagerFactory.createEntityManager();
 		int count = 0;
@@ -53,11 +55,13 @@ public class UserDAO {
 
 		count += ((Number) entityManager.createNamedQuery("CitizenUser.countFromUsername")
 				.setParameter(PARAM_USRNAME, username).getSingleResult()).intValue();
-
+		entityManager.close();
 		return (count != 0);
 	}
 
 	public void insertCitizenUser(CitizenUserBean user) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CitizenUser citizenUser = new CitizenUser();
 
 		citizenUser.setFromBean(user);
@@ -68,23 +72,28 @@ public class UserDAO {
 		entityManager.getTransaction().begin();
 		entityManager.persist(citizenUser);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public void insertCompanyUser(CompanyUserBean user) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CompanyUser companyUser = new CompanyUser();
 		companyUser.setFromBean(user);
 
 		entityManager.getTransaction().begin();
 		entityManager.persist(companyUser);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public CitizenUser findAllCitizensFromUsername(String submitter) {
-		entityManager = entityManagerFactory.createEntityManager();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-		return entityManager.createNamedQuery("CitizenUser.findAllFromUsername", CitizenUser.class)
-				.setParameter(PARAM_USRNAME, submitter)
-				.getSingleResult();
+		CitizenUser result = entityManager.createNamedQuery("CitizenUser.findAllFromUsername", CitizenUser.class)
+				.setParameter(PARAM_USRNAME, submitter).getSingleResult();
+		entityManager.close();
+		return result;
 	}
 
 }

@@ -13,47 +13,62 @@ import com.ispw.fixmycity.logic.model.VolunteeringEvent;
 public class CommunityReportDAO {
 
 	private EntityManagerFactory entityManagerFactory;
-	private EntityManager entityManager;
 
 	public CommunityReportDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("fixmycitydb");
-		entityManager = entityManagerFactory.createEntityManager();
 	}
-	
+
 	public List<CommunityReport> findAll() {
-		return entityManager.createNamedQuery("CommunityReport.findAll", CommunityReport.class).getResultList();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<CommunityReport> result = entityManager.createNamedQuery("CommunityReport.findAll", CommunityReport.class)
+				.getResultList();
+		entityManager.close();
+		return result;
 	}
 
 	public CommunityReport findByPrimaryKey(Integer id) {
-		return entityManager.find(CommunityReport.class, id);
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CommunityReport result = entityManager.find(CommunityReport.class, id);
+		entityManager.close();
+		return result;
 	}
 
 	public CommunityReport add(CommunityReportBean commRepBean) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CommunityReport commReport = new CommunityReport();
 		commReport.setFromBean(commRepBean);
-		
+
 		entityManager.getTransaction().begin();
 		entityManager.persist(commReport);
 		entityManager.getTransaction().commit();
-
+		entityManager.close();
 		return commReport; // must return entity, auto-generated id might be useful
 	}
 
 	// Versione in cui i controller usano le entity
 	public void update(CommunityReport commReport) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		entityManager.getTransaction().begin();
 		entityManager.persist(commReport);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public void delete(Integer id) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		entityManager.getTransaction().begin();
 		CommunityReport repRef = entityManager.getReference(CommunityReport.class, id);
 		entityManager.remove(repRef);
 		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 	public void assignVolunteeringEvent(Integer eventId, Integer communityReportId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 		CommunityReport repRef = entityManager.getReference(CommunityReport.class, communityReportId);
 		VolunteeringEvent eventRef = entityManager.getReference(VolunteeringEvent.class, eventId);
 
@@ -62,5 +77,6 @@ public class CommunityReportDAO {
 		repEvents.add(eventRef);
 		repRef.setVolunteeringEvents(repEvents);
 		update(repRef);
+		entityManager.close();
 	}
 }
