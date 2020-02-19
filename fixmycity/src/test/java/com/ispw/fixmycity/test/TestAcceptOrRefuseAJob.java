@@ -20,7 +20,7 @@ public class TestAcceptOrRefuseAJob {
 		Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
 		String sDate2="31/12/2022";
 		Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);*/
-		bean.setRelatedReport(relatedReport);
+		//bean.setRelatedReport(relatedReport);
 		//facade.jobCreation(jBean);
 	}
 

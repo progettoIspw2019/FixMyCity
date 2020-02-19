@@ -24,7 +24,7 @@
 	String rejectingMotivation = request.getParameter("refuseReportMotivation");
 
 	// Accept job case
-	if (endDate != null  && startDate != null) {
+	if (endDate != null && startDate != null) {
 		JobBeanView jobBean = new JobBeanView();
 
 		jobBean.setEndDate(endDate);
@@ -109,7 +109,7 @@
 					String errTemplate = "<script>printError('{0}');</script>";
 					String errMessage = "";
 					try {
-						compReports = new SystemFacade().getMyCompanyReports();
+						compReports = new SystemFacade().loadMyCompanyReports();
 					} catch (Exception e) {
 						errMessage += e.getMessage() + "<br\\>";
 					}
@@ -204,7 +204,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputDateEvent">Start of the Job</label> <input
-										type="date" class="form-control" name="acceptReportStartDate">
+										type="date" required class="form-control"
+										name="acceptReportStartDate">
 								</div>
 							</div>
 						</div>
@@ -212,7 +213,7 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="acceptReportEndDate">Expected end of the
-										Job</label> <input type="date" class="form-control"
+										Job</label> <input required type="date" class="form-control"
 										name="acceptReportEndDate">
 								</div>
 							</div>
@@ -256,7 +257,7 @@
 				<!-- Modal body -->
 				<form action="home_company.jsp" method="GET">
 					<div class="modal-body">
-						<input type="hidden" value="" id="refuseReleatedReportId"
+						<input type="hidden" value="" id="refuseReleatedReportId" required
 							name="refuseReleatedReport">
 						<div class="row">
 							<div class="col-sm">

@@ -99,12 +99,13 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-api</artifactId>
-			<version>3.141.59</version>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>4.0.0-alpha-4</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -148,8 +149,8 @@
 								<sourcepath>${project.basedir}/src/main/java</sourcepath>
 							</compilerArguments>
 							<excludes>
-<!-- 								<exclude>**/com/ispw/fixmycity/logic/view/**/*.java</exclude> -->
-<!-- 								<exclude>**/com/ispw/fixmycity/logic/app/**/*.java</exclude> -->
+								<!-- <exclude>**/com/ispw/fixmycity/logic/view/**/*.java</exclude> -->
+								<!-- <exclude>**/com/ispw/fixmycity/logic/app/**/*.java</exclude> -->
 							</excludes>
 						</configuration>
 					</execution>

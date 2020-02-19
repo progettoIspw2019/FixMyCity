@@ -20,6 +20,7 @@ import com.ispw.fixmycity.logic.controller.VolunteeringEventController;
 import com.ispw.fixmycity.logic.exceptions.CouldNotConnectToGeolocationServiceException;
 import com.ispw.fixmycity.logic.exceptions.EmptyResultListException;
 import com.ispw.fixmycity.logic.exceptions.InvalidFieldException;
+import com.ispw.fixmycity.logic.exceptions.InvalidReportException;
 import com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound;
 import com.ispw.fixmycity.logic.exceptions.UserNotFoundException;
 import com.ispw.fixmycity.logic.model.City;
@@ -32,7 +33,7 @@ public class JUnitTest {
 
 	@Test
 	public void testCreateVolunteeringEventCase() throws ParseException, NoMatchingCompanyFound,
-			CouldNotConnectToGeolocationServiceException, InvalidFieldException {
+			CouldNotConnectToGeolocationServiceException, InvalidFieldException, InvalidReportException {
 
 		SystemFacade facade = new SystemFacade();
 		VolunteeringEventBean event = new VolunteeringEventBean();

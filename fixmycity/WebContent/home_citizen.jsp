@@ -16,6 +16,9 @@
 
 <%@ page import="java.text.SimpleDateFormat"%>
 
+<%@ page
+	import="com.ispw.fixmycity.logic.exceptions.NoMatchingCompanyFound"%>
+
 <%@ page import="com.ispw.fixmycity.logic.util.UserMode"%>
 <%@ page import="com.ispw.fixmycity.logic.view.SessionView"%>
 <%@ page import="java.util.Map"%>
@@ -83,9 +86,12 @@
 		reportBeanView.setDescription(repDescription);
 		reportBeanView.setImage(Base64.getDecoder().decode(repBase64Image));
 		reportBeanView.setDateSubmission(Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()));
-
-		facade.reportProblem(reportBeanView);
-
+		try {
+			facade.reportProblem(reportBeanView);
+		} catch (NoMatchingCompanyFound e) {
+			out.println(
+					"<script>alert('The issue might not get addressed until the public company that is responsible signs up');</script>");
+		}
 	}
 
 	List<CommunityReportBeanView> commReps = new SystemFacade().getCommunityReports();
@@ -211,8 +217,8 @@
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<input type="text" class="form-control" name="inputReportTitle"
-										placeholder="Title">
+									<input type="text" required class="form-control"
+										name="inputReportTitle" placeholder="Title">
 								</div>
 							</div>
 						</div>
@@ -220,8 +226,9 @@
 						<div class="row">
 							<div class="col-sm">
 								<div class="form-group">
-									<textarea class="form-control" name="inputReportDescription"
-										placeholder="Description" rows="10"></textarea>
+									<textarea required class="form-control"
+										name="inputReportDescription" placeholder="Description"
+										rows="10"></textarea>
 								</div>
 							</div>
 						</div>
@@ -230,7 +237,7 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputReportCategoryId">Category</label> <select
-										class="form-control" name="inputReportCategory"
+										required class="form-control" name="inputReportCategory"
 										id="inputReportCategoryId">
 										<%
 											for (String cat : categories) {
@@ -252,7 +259,7 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputReportPictureId">Add a picture</label> <br>
-									<input type="file" accept="image/png, image/jpeg"
+									<input required type="file" accept="image/png, image/jpeg"
 										id="inputReportPictureId" name="inputReportPicture">
 								</div>
 							</div>
@@ -290,7 +297,7 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputReportId">Select a report</label> <select
-										class="form-control" name="reportId">
+										required class="form-control" name="reportId">
 										<%
 											if (!reports.isEmpty()) {
 												Iterator<Map.Entry<Integer, String>> iterator = reports.entrySet().iterator();
@@ -308,8 +315,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputTitleEvent">Title of the event</label> <input
-										type="text" class="form-control" name="inputTitleEvent"
-										placeholder="Title of the Event">
+										type="text" class="form-control" required
+										name="inputTitleEvent" placeholder="Title of the Event">
 								</div>
 							</div>
 						</div>
@@ -317,8 +324,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputEventDescription">Describe your event</label>
-									<textarea class="form-control" name="inputEventDescription"
-										rows="3"></textarea>
+									<textarea class="form-control" required
+										name="inputEventDescription" rows="3"></textarea>
 								</div>
 							</div>
 						</div>
@@ -327,7 +334,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputDateEvent">Date of the event</label> <input
-										type="date" class="form-control" name="inputDateEvent">
+										type="date" required class="form-control"
+										name="inputDateEvent">
 								</div>
 							</div>
 						</div>
@@ -336,8 +344,8 @@
 							<div class="col-sm">
 								<div class="form-group">
 									<label for="inputTimeEvent">Time of the event</label> <input
-										type="time" class="form-control" name="inputTimeEvent"
-										placeholder="Time of the Event">
+										type="time" required class="form-control"
+										name="inputTimeEvent" placeholder="Time of the Event">
 								</div>
 							</div>
 						</div>
