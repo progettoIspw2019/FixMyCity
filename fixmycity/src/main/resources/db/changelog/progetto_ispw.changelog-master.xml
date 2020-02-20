@@ -15,10 +15,10 @@
 			<column name="username" type="VARCHAR(30)">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
-			<column name="pwd" type="CHAR(32)" />
-			<column name="first_name" type="VARCHAR(30)" />
-			<column name="surname" type="VARCHAR(30)" />
-			<column name="city" type="VARCHAR(30)" />
+			<column name="pwd" type="CHAR(200)" />
+			<column name="first_name" type="VARCHAR(200)" />
+			<column name="surname" type="VARCHAR(200)" />
+			<column name="city" type="VARCHAR(200)" />
 			<column name="profile_picture" type="LONGBLOB" />
 		</createTable>
 	</changeSet>
@@ -27,15 +27,15 @@
 			<column autoIncrement="true" name="id_report" type="INT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
-			<column name="category" type="VARCHAR(30)" />
-			<column name="title" type="VARCHAR(30)" />
-			<column name="full_description" type="VARCHAR(90)" />
+			<column name="category" type="VARCHAR(200)" />
+			<column name="title" type="VARCHAR(200)" />
+			<column name="full_description" type="VARCHAR(200)" />
 			<column name="date_submission" type="date" />
-			<column name="address" type="VARCHAR(60)" />
+			<column name="address" type="VARCHAR(200)" />
 			<column name="latitude" type="DECIMAL(10, 8)" />
 			<column name="longitude" type="DECIMAL(11, 8)" />
-			<column name="city" type="VARCHAR(30)" />
-			<column name="submitter" type="VARCHAR(30)" />
+			<column name="city" type="VARCHAR(200)" />
+			<column name="submitter" type="VARCHAR(200)" />
 			<column name="image" type="LONGBLOB" />
 		</createTable>
 	</changeSet>
@@ -45,31 +45,31 @@
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="category" type="VARCHAR(30)" />
-			<column name="title" type="VARCHAR(30)" />
-			<column name="full_description" type="VARCHAR(90)" />
+			<column name="title" type="200" />
+			<column name="full_description" type="VARCHAR(200)" />
 			<column name="date_submission" type="date" />
-			<column name="address" type="VARCHAR(60)" />
+			<column name="address" type="VARCHAR(200)" />
 			<column name="latitude" type="DECIMAL(10, 8)" />
 			<column name="longitude" type="DECIMAL(11, 8)" />
-			<column name="city" type="VARCHAR(30)" />
-			<column name="status" type="VARCHAR(30)" />
-			<column name="submitter" type="VARCHAR(30)" />
+			<column name="city" type="VARCHAR(200)" />
+			<column name="status" type="VARCHAR(200)" />
+			<column name="submitter" type="VARCHAR(200)" />
 			<column name="image" type="LONGBLOB" />
-			<column name="related_company" type="VARCHAR(30)" />
-			<column name="refuseDescription" type="VARCHAR(90)" />
+			<column name="related_company" type="VARCHAR(200)" />
+			<column name="refuseDescription" type="VARCHAR(200)" />
 			<column name="refuseCounter" type="INTEGER" />
 
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-4">
 		<createTable tableName="company_users">
-			<column name="username" type="VARCHAR(30)">
+			<column name="username" type="VARCHAR(200)">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
-			<column name="pwd" type="CHAR(32)" />
-			<column name="companyName" type="VARCHAR(30)" />
-			<column name="category" type="VARCHAR(30)" />
-			<column name="city" type="VARCHAR(30)" />
+			<column name="pwd" type="CHAR(200)" />
+			<column name="companyName" type="VARCHAR(200)" />
+			<column name="category" type="VARCHAR(200)" />
+			<column name="city" type="VARCHAR(200)" />
 			<column name="image" type="LONGBLOB" />
 
 		</createTable>
@@ -83,7 +83,7 @@
 			<column name="start_date" type="date" />
 			<column name="end_date" type="date" />
 			<column name="job_info" type="LONGBLOB" />
-			<column name="related_company" type="VARCHAR(30)" />
+			<column name="related_company" type="VARCHAR(200)" />
 		</createTable>
 	</changeSet>
 	<changeSet author="adria (generated)" id="1580847007586-6">
@@ -91,7 +91,7 @@
 			<column name="id_event" type="INT">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
-			<column name="username" type="VARCHAR(30)">
+			<column name="username" type="VARCHAR(200)">
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 		</createTable>
@@ -102,8 +102,8 @@
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="id_community_report" type="INT" />
-			<column name="title" type="VARCHAR(30)" />
-			<column name="full_description" type="VARCHAR(90)" />
+			<column name="title" type="VARCHAR(200)" />
+			<column name="full_description" type="VARCHAR(200)" />
 			<column name="creation_date" type="date" />
 			<column name="event_date" type="date" />
 			<column name="event_time" type="time" />
