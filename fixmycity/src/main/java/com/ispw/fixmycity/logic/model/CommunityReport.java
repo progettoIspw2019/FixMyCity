@@ -52,15 +52,15 @@ public class CommunityReport implements Serializable {
 	@Lob
 	private byte[] image;
 
-	private BigDecimal latitude;
+	private BigDecimal latitudeComm;
 
-	private BigDecimal longitude;
+	private BigDecimal longitudeComm;
 
-	private String title;
+	private String titleComm;
 
-	private String category;
+	private String categoryComm;
 
-	private String city;
+	private String cityComm;
 
 	// bi-directional many-to-one association to CitizenUser
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -130,27 +130,27 @@ public class CommunityReport implements Serializable {
 	}
 
 	public BigDecimal getLatitude() {
-		return this.latitude;
+		return this.latitudeComm;
 	}
 
 	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
+		this.latitudeComm = latitude;
 	}
 
 	public BigDecimal getLongitude() {
-		return this.longitude;
+		return this.longitudeComm;
 	}
 
 	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
+		this.longitudeComm = longitude;
 	}
 
 	public String getTitle() {
-		return this.title;
+		return this.titleComm;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.titleComm = title;
 	}
 
 	public CitizenUser getCitizenUser() {
@@ -184,19 +184,19 @@ public class CommunityReport implements Serializable {
 	}
 
 	public String getCategory() {
-		return category;
+		return categoryComm;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryComm = category;
 	}
 
 	public String getCity() {
-		return city;
+		return cityComm;
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.cityComm = city;
 	}
 
 }

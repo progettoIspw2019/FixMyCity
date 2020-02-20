@@ -67,35 +67,35 @@ public class MyReportsControllerFX {
 		if(compReports.isEmpty())
 			return;
 		compReports.stream().forEach(report -> {
-			AnchorPane singleReport;
+			AnchorPane singleReportComp;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);
-				singleReport = (AnchorPane) parent.getChildren().get(0);
+				singleReportComp = (AnchorPane) parent.getChildren().get(0);
 
-				for (Node node : singleReport.getChildren()) {
-					switch (node.getId()) {
+				for (Node nodeRepComp : singleReportComp.getChildren()) {
+					switch (nodeRepComp.getId()) {
 					case "imageView":
-						ImageView imgView = (ImageView) node;
+						ImageView imgView = (ImageView) nodeRepComp;
 						imgView.setImage(new Image(new ByteArrayInputStream(report.getImage())));
 						break;
 					case "textReportTitle":
-						Text repTitle = (Text) node;
+						Text repTitle = (Text) nodeRepComp;
 						repTitle.setText(report.getTitle());
 						break;
 					case "jfxTextAreaDescription":
-						JFXTextArea description = (JFXTextArea) node;
+						JFXTextArea description = (JFXTextArea) nodeRepComp;
 						description.setText(report.getDescription());
 						break;
 					case "textAddress":
-						Text addr = (Text) node;
+						Text addr = (Text) nodeRepComp;
 						addr.setText(report.getAddress());
 						break;
 					case "textSubmissionDate":
-						Text subDate = (Text) node;
+						Text subDate = (Text) nodeRepComp;
 						subDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(report.getDateSubmission()));
 						break;
 					case "textEventJobCreated":
-						Text eventCreated = (Text) node;
+						Text eventCreated = (Text) nodeRepComp;
 						if (report.getJobs() == null || report.getJobs().isEmpty())
 							eventCreated.setText("Job not created");
 						else
@@ -103,12 +103,12 @@ public class MyReportsControllerFX {
 						break;
 
 					case "jfxButtonCompReport":
-						JFXButton button = (JFXButton) node;
+						JFXButton button = (JFXButton) nodeRepComp;
 						button.setText(report.getCompanyRelated());
 						break;
 
 					case "jfxButtonCommReport":
-						JFXButton butt = (JFXButton) node;
+						JFXButton butt = (JFXButton) nodeRepComp;
 						butt.setVisible(false);
 						break;
 
@@ -117,7 +117,7 @@ public class MyReportsControllerFX {
 
 					}
 				}
-				reportsContainer.getChildren().add(singleReport);
+				reportsContainer.getChildren().add(singleReportComp);
 			} catch (IOException e) {
 				Alerter.alert("Community Report files not found!", "There are missing files, you might want to reinstall your app...", AlertType.ERROR);
 			}
@@ -129,12 +129,12 @@ public class MyReportsControllerFX {
 			return;
 		commReports.stream().forEach(report -> {
 			logger.fine(() -> "Loading report\n\n" + report);
-			AnchorPane singleReport;
+			AnchorPane singleReportComm;
 			try {
 				HBox parent = FXMLLoader.load(urlSingleReportFXML);
-				singleReport = (AnchorPane) parent.getChildren().get(0);
+				singleReportComm = (AnchorPane) parent.getChildren().get(0);
 
-				for (Node node : singleReport.getChildren()) {
+				for (Node node : singleReportComm.getChildren()) {
 					switch (node.getId()) {
 					case "imageView":
 						ImageView imgView = (ImageView) node;
@@ -174,7 +174,7 @@ public class MyReportsControllerFX {
 
 					}
 				}
-				reportsContainer.getChildren().add(singleReport);
+				reportsContainer.getChildren().add(singleReportComm);
 			} catch (IOException e) {
 				Alerter.alert("Report files not found!", "There are missing files, you might want to reinstall your app...", AlertType.ERROR);
 			}
