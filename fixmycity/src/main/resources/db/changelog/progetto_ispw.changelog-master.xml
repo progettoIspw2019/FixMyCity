@@ -45,7 +45,7 @@
 				<constraints nullable="false" primaryKey="true" />
 			</column>
 			<column name="category" type="VARCHAR(30)" />
-			<column name="title" type="200" />
+			<column name="title" type="VARCHAR(200)" />
 			<column name="full_description" type="VARCHAR(200)" />
 			<column name="date_submission" type="date" />
 			<column name="address" type="VARCHAR(200)" />
