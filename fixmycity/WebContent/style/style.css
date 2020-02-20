@@ -102,13 +102,6 @@ html, body {
 
 .btn-join {
 	padding: .3em .5em .3em .5em;
-	background-color: #005c78;
-	border-radius: .2em .2em .2em .2em;
-	color: white;
-}
-
-.btn-join {
-	padding: .3em .5em .3em .5em;
 	background-color: #116d89;
 	border-radius: .2em .2em .2em .2em;
 	color: white;

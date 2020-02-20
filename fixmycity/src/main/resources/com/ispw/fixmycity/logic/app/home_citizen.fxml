@@ -15,12 +15,12 @@
          <center>
       		<AnchorPane prefHeight="399.0" prefWidth="600.0" BorderPane.alignment="CENTER">
       			<children>
-      				<WebView fx:id="mapContainerWebView" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      				<WebView fx:id="mapContainerWebViewHome" maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       			</children>
       		</AnchorPane>
          </center>
          <top>
-            <AnchorPane fx:id="mapNavbarPane" maxHeight="60.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-border-style: solid outside; -fx-border-color: #bfbfbf;" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="mapNavbarPaneHome" maxHeight="60.0" minHeight="40.0" minWidth="600.0" prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: #fff; -fx-border-style: solid outside; -fx-border-color: #bfbfbf;" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton layoutX="198.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#createReport" prefHeight="36.0" prefWidth="109.0" style="-fx-background-color: #F5F5F5;" text="Report a Problem" textAlignment="CENTER" textFill="#212121" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="6.0" />
                   <JFXButton layoutX="14.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#createEvent" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F5F5F5;" text="Create a Volunteering Event" textAlignment="CENTER" textFill="#212121" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="6.0" />
@@ -37,12 +37,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="usernameText" fill="WHITE" layoutX="494.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User_96" textAlignment="CENTER" AnchorPane.bottomAnchor="22.98828125" AnchorPane.rightAnchor="61.990234375" AnchorPane.topAnchor="21.05078125">
+            <Text fx:id="usernameTextHome" fill="WHITE" layoutX="494.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User_96" textAlignment="CENTER" AnchorPane.bottomAnchor="22.98828125" AnchorPane.rightAnchor="61.990234375" AnchorPane.topAnchor="21.05078125">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
-            <ImageView fx:id="profileImg" fitHeight="40.0" fitWidth="40.0" layoutX="557.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <ImageView fx:id="profileImgHome" fitHeight="40.0" fitWidth="40.0" layoutX="557.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             </ImageView>
          </children>
       </AnchorPane>

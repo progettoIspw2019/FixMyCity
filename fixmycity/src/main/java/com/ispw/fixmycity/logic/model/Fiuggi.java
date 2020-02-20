@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Fiuggi implements City {
 
-	private List<String> companiesCategories;
-	private List<String> communityCategories;
+	private List<String> companiesCategoriesFiuggi;
+	private List<String> communityCategoriesFiuggi;
 
 	@Override
 	public Double getLatitude() {
@@ -20,24 +20,24 @@ public class Fiuggi implements City {
 	}
 
 	public Fiuggi() {
-		companiesCategories = new ArrayList<>();
-		companiesCategories.add("Water loss");
-		companiesCategories.add("Bus too far");
-		companiesCategories.add("Generic proposal");
+		companiesCategoriesFiuggi = new ArrayList<>();
+		companiesCategoriesFiuggi.add("Water loss");
+		companiesCategoriesFiuggi.add("Bus too far");
+		companiesCategoriesFiuggi.add("Generic proposal");
 
-		communityCategories = new ArrayList<>();
-		communityCategories.add("Urban decor");
-		communityCategories.add("Dirty green area");
+		communityCategoriesFiuggi = new ArrayList<>();
+		communityCategoriesFiuggi.add("Urban decor");
+		communityCategoriesFiuggi.add("Dirty green area");
 	}
 
 	@Override
 	public List<String> getCompaniesCategories() {
-		return companiesCategories;
+		return companiesCategoriesFiuggi;
 	}
 
 	@Override
 	public List<String> getCommunityCategories() {
-		return communityCategories;
+		return communityCategoriesFiuggi;
 	}
 
 	@Override
@@ -54,8 +54,8 @@ public class Fiuggi implements City {
 	@Override
 	public List<String> getAllCategories() {
 		List<String> categories = new ArrayList<>();
-		categories.addAll(companiesCategories);
-		categories.addAll(communityCategories);
+		categories.addAll(companiesCategoriesFiuggi);
+		categories.addAll(communityCategoriesFiuggi);
 		Collections.sort(categories);
 
 		return categories;
@@ -63,12 +63,12 @@ public class Fiuggi implements City {
 
 	@Override
 	public boolean isForCommunity(String cat) {
-		return communityCategories.contains(cat);
+		return communityCategoriesFiuggi.contains(cat);
 	}
 
 	@Override
 	public boolean isForCompany(String cat) {
-		return companiesCategories.contains(cat);
+		return companiesCategoriesFiuggi.contains(cat);
 	}
 
 }

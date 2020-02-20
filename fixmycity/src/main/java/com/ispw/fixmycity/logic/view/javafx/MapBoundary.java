@@ -19,35 +19,35 @@ import javafx.scene.web.WebView;
 
 public class MapBoundary {
 	@FXML
-	private WebView mapContainerWebView;
+	private WebView mapContainerWebViewHome;
 
 	@FXML
-	private AnchorPane mapNavbarPane;
+	private AnchorPane mapNavbarPaneHome;
 
 	@FXML
-	private Text usernameText;
+	private Text usernameTextHome;
 
 	@FXML
-	private ImageView profileImg;
+	private ImageView profileImgHome;
 
 	@FXML
 	public void initialize() {
-		NavbarManager.setNavbarData(usernameText, profileImg);
+		NavbarManager.setNavbarData(usernameTextHome, profileImgHome);
 
 		List<ReportFilter> reportFilters = new ArrayList<>();
 		reportFilters.add(ReportFilter.ALL_COMMUNITY_REPORT);
 		reportFilters.add(ReportFilter.ALL_COMPANY_REPORT);
 		
-		MapController mapController = new MapController(mapContainerWebView);
+		MapController mapController = new MapController(mapContainerWebViewHome);
 		mapController.loadMap(reportFilters);
 	}
 
 	public WebView getMapContainerWebView() {
-		return mapContainerWebView;
+		return mapContainerWebViewHome;
 	}
 
 	public void setMapContainerWebView(WebView mapContainerWebView) {
-		this.mapContainerWebView = mapContainerWebView;
+		this.mapContainerWebViewHome = mapContainerWebView;
 	}
 
 	@FXML

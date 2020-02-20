@@ -40,22 +40,24 @@ public class CompanyReport implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_report")
-	private int idReport;
+	private int idReportComp;
 
+	@Column(name = "address")
 	private String address;
 
-	private String category;
+	@Column(name = "category")
+	private String categoryComp;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_submission")
-	private Date dateSubmission;
+	private Date dateSubmissionRep;
 
 	@Column(name = "full_description")
 	private String fullDescription;
 
 	@Lob
-	@Column(length = 16777215)
-	private byte[] image;
+	@Column(length = 16777215, name = "image")
+	private byte[] imageCompRep;
 
 	private BigDecimal latitude;
 
@@ -91,11 +93,11 @@ public class CompanyReport implements Serializable {
 	}
 
 	public int getIdReport() {
-		return this.idReport;
+		return this.idReportComp;
 	}
 
 	public void setIdReport(int idReport) {
-		this.idReport = idReport;
+		this.idReportComp = idReport;
 	}
 
 	public String getAddress() {
@@ -107,11 +109,11 @@ public class CompanyReport implements Serializable {
 	}
 
 	public Date getDateSubmission() {
-		return this.dateSubmission;
+		return this.dateSubmissionRep;
 	}
 
 	public void setDateSubmission(Date dateSubmission) {
-		this.dateSubmission = dateSubmission;
+		this.dateSubmissionRep = dateSubmission;
 	}
 
 	public String getFullDescription() {
@@ -123,11 +125,11 @@ public class CompanyReport implements Serializable {
 	}
 
 	public byte[] getImage() {
-		return this.image;
+		return this.imageCompRep;
 	}
 
 	public void setImage(byte[] image) {
-		this.image = image;
+		this.imageCompRep = image;
 	}
 
 	public BigDecimal getLatitude() {
@@ -193,11 +195,11 @@ public class CompanyReport implements Serializable {
 	}
 
 	public String getCategory() {
-		return category;
+		return categoryComp;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryComp = category;
 	}
 
 	public String getCity() {
