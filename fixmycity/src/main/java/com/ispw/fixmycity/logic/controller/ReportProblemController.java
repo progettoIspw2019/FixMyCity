@@ -36,7 +36,7 @@ public class ReportProblemController {
 		log = Logger.getLogger("fixmycity");
 	}
 
-	public long reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
 		
 		this.checkIfValid(repBean);
 		
@@ -92,7 +92,7 @@ public class ReportProblemController {
 		}
 	}
 
-	private long reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {
+	private Integer reportProblemCompany(ReportBeanView repBean) throws NoMatchingCompanyFound {
 		CompanyUser compUser = this.findCompany(repBean.getCategory(), repBean.getCity());
 
 		if (compUser == null) {

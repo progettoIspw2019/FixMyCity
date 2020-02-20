@@ -25,7 +25,7 @@ import com.ispw.fixmycity.logic.view.SessionView;
 
 public class SystemFacade {
 
-	public long reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
+	public Integer reportProblem(ReportBeanView repBean) throws NoMatchingCompanyFound, InvalidReportException {
 		return new ReportProblemController().reportProblem(repBean);
 	}
 

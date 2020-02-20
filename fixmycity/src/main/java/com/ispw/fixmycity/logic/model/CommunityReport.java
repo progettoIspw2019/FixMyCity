@@ -52,14 +52,19 @@ public class CommunityReport implements Serializable {
 	@Lob
 	private byte[] image;
 
+	@Column(name="latitude")
 	private BigDecimal latitudeComm;
 
+	@Column(name="longitude")
 	private BigDecimal longitudeComm;
 
+	@Column(name="title")
 	private String titleComm;
 
+	@Column(name="category")
 	private String categoryComm;
 
+	@Column(name="city")
 	private String cityComm;
 
 	// bi-directional many-to-one association to CitizenUser

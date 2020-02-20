@@ -80,7 +80,7 @@ public class ReportAProblemTest {
 		repBean.setAddress("88, Via della Balduina");
 		
 		repBean.setCategory("Public transport");
-		assertEquals(1, new ReportProblemController().reportProblem(repBean));
+		assertEquals(1, (long) new ReportProblemController().reportProblem(repBean));
 	}
 	
 	@Test
