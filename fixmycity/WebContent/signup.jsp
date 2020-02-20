@@ -164,7 +164,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input required type="text" class="form-control"
 											name="inputFirstNameCit" id="inputFirstNameCitId"
 											placeholder="First Name">
 									</div>
@@ -173,7 +173,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input required type="text" class="form-control"
 											id="inputLastNameCitId" name="inputLastNameCit"
 											placeholder="Last Name">
 									</div>
@@ -183,7 +183,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<label for="inputCityId">City</label> <select
+										<label for="inputCityId">City</label> <select required
 											class="form-control" name="inputCityCit" id="inputCityCitId"
 											name="inputCityCit">
 											<option>Roma</option>
@@ -196,7 +196,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" required
 											id="inputUsernameCitId" name="inputUsernameCit"
 											placeholder="Username">
 									</div>
@@ -205,7 +205,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="password" class="form-control"
+										<input type="password" class="form-control" required
 											name="inputPasswordCit" id="inputPasswordCitId"
 											placeholder="Password">
 									</div>
@@ -254,7 +254,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" required
 											id="inputCompanyNameCompId" name="inputCompanyNameComp"
 											placeholder="Company Name">
 									</div>
@@ -265,7 +265,7 @@
 								<div class="col-sm">
 									<div class="form-group">
 										<label for="inputCityId">City</label> <select
-											onchange="setCategories()" class="form-control"
+											onchange="setCategories()" class="form-control" required
 											name="inputCityComp" id="inputCityCompId">
 											<option>Roma</option>
 											<option>Fiuggi</option>
@@ -276,7 +276,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" required
 											id="inputUsernameCompId" name="inputUsernameComp"
 											placeholder="Username">
 									</div>
@@ -286,7 +286,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<input type="password" class="form-control"
+										<input type="password" class="form-control" required
 											id="inputPasswordCompId" name="inputPasswordComp"
 											placeholder="Password">
 									</div>
@@ -296,7 +296,7 @@
 							<div class="row">
 								<div class="col-sm">
 									<div class="form-group">
-										<select class="form-control" id="inputCategoryCompId"
+										<select class="form-control" id="inputCategoryCompId" required
 											name="inputCategoryComp"></select>
 									</div>
 								</div>
@@ -420,7 +420,7 @@
 				categories = categoryRoma;
 			} else if (!citySelected.localeCompare("Fiuggi")) {
 				categories = categoryFiuggi;
-			} 
+			}
 			for (i = select.options.length - 1; i >= 0; i--) {
 				select.remove(i);
 			}

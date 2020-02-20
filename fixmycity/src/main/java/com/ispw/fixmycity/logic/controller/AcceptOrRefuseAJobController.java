@@ -42,13 +42,9 @@ public class AcceptOrRefuseAJobController {
 		jobBean.setRelatedReport(compRep);
 
 		jobBean.setStartDate(bean.getStartDate());
-		compRep.setStatus(Status.ACCEPTED.toString());
 
-		Job job = new JobDAO().add(jobBean);
-
-		compRep.addJob(job);
-		compRepDAO.update(compRep);
-		return true;
+		Job job = new JobDAO().activateJob(jobBean, bean.getRelatedReport());
+		return job != null;
 	}
 
 	public int rejectReport(JobBeanView bean) throws CompanyReportIsAcceptedException {

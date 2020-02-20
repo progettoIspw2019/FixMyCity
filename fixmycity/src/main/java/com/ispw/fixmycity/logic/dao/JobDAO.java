@@ -7,7 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.ispw.fixmycity.logic.bean.JobBean;
+import com.ispw.fixmycity.logic.model.CompanyReport;
 import com.ispw.fixmycity.logic.model.Job;
+import com.ispw.fixmycity.logic.util.Status;
 
 public class JobDAO {
 	private EntityManagerFactory entityManagerFactory;
@@ -43,6 +45,23 @@ public class JobDAO {
 		entityManager.close();
 
 		return job; // must return entity, auto-generated id might be useful
+	}
+
+	public Job activateJob(JobBean jobBean, int crId) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+
+		Job job = new Job();
+		job.setFromBean(jobBean);
+		CompanyReport tempReport = entityManager.getReference(CompanyReport.class, crId);
+		tempReport.setStatus(Status.ACCEPTED.toString());
+		tempReport.getJobs().add(job);
+		entityManager.merge(tempReport);
+		entityManager.persist(job);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+		return job;
 	}
 
 	public void update(Job job) {

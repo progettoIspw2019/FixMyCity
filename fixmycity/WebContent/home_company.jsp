@@ -25,6 +25,7 @@
 
 	// Accept job case
 	if (endDate != null && startDate != null) {
+
 		JobBeanView jobBean = new JobBeanView();
 
 		jobBean.setEndDate(endDate);
@@ -40,6 +41,7 @@
 
 	// Refuse job case
 	if (rejectingMotivation != null) {
+
 		JobBeanView jobBean = new JobBeanView();
 		jobBean.setRelatedReport(Integer.parseInt(request.getParameter("refuseReleatedReport")));
 
@@ -84,7 +86,7 @@
 		<div class="bg-light border-right" id="sidebar-wrapper">
 			<div class="sidebar-heading">Menu</div>
 			<div class="list-group list-group-flush">
-				<a href="#" class="list-group-item list-group-item-action bg-light">Pending
+				<a href="#" class="list-group-item list-group-item-action bg-light">My
 					reports</a><a href="logout.jsp"
 					class="list-group-item list-group-item-action bg-light logout-btn">Logout</a>
 			</div>
@@ -154,6 +156,12 @@
 										<%
 											out.println(rep.getDateSubmission());
 										%>
+									</div>
+									<div class="row">
+										Status:
+										<%
+										out.print(" " + rep.getStatus());
+									%>
 									</div>
 								</div>
 								<div class="col">

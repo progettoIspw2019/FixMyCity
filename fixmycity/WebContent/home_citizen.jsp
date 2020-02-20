@@ -180,10 +180,10 @@
 									height="24"> Add a Report
 							</button></li>
 						<li class="nav-item active ml-4">
-							<button data-toggle="modal" data-target="#newEvent"
+							<button id="createEventModalBtnId" data-toggle="modal" data-target="#newEvent"
 								class="nav-link">
 								<img src="style/icons/Calendar.svg" alt="" width="24"
-									height="24"> Create an Event
+									height="24"> Organize an Event
 							</button>
 						</li>
 					</ul>
@@ -286,7 +286,7 @@
 			<div class="modal-content">
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h3 class="modal-title">Create Volunteering Event</h3>
+					<h3 class="modal-title">Organize Volunteering Event</h3>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
