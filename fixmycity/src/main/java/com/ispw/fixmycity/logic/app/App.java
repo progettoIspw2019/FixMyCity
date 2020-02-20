@@ -45,7 +45,6 @@ public class App extends Application {
 			return fxmlLoader.load();
 		}
 		catch(IOException e) {
-			e.printStackTrace();
 			Logger.getLogger("fixmycity").log(Level.SEVERE, e.toString());
 			return null;
 		}

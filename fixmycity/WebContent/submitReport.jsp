@@ -21,7 +21,8 @@
 <%@ page import="java.util.Arrays"%>
 
 <html lang="en">
-<head title="submitting">
+<head>
+<title>FixMyCity</title>
 <%
 
 %>

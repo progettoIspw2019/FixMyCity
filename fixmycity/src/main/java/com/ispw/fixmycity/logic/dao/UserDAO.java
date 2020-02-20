@@ -47,7 +47,6 @@ public class UserDAO {
 	public boolean userExists(String username) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-		entityManager = entityManagerFactory.createEntityManager();
 		int count = 0;
 
 		count += ((Number) entityManager.createNamedQuery("CompanyUser.countFromUsername")

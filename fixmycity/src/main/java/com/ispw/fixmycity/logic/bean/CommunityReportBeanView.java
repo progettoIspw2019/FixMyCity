@@ -4,14 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CommunityReportBeanView extends ReportBeanView {
-	private List<String> events;
+	private List<String> eventsBean;
 
 	public List<String> getEvents() {
-		return events;
+		return eventsBean;
 	}
 
 	public void setEvents(List<String> events) {
-		this.events = events;
+		this.eventsBean = events;
 	}
 	
 	@Override

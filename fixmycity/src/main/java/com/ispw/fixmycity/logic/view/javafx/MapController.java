@@ -44,6 +44,9 @@ public class MapController {
 	private MarkerOptions markerOptComm;
 	private City city;
 	private Marker markerSetPosMap;
+	private String str = "</b><br>";
+	private String dateFormat = "dd-MM-yyyy";
+	private String submitted = "<i>submitted on  ";
 
 	public MapController(WebView mapView) {
 		this.setMapView(mapView);
@@ -113,8 +116,8 @@ public class MapController {
 		for (var report : reports) {
 			new Marker(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()), markerOptComp)
 					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle()
-							+ "</b><br>" + report.getDescription() + "<br>" + "<i>submitted on "
-							+ new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) + " by "
+							+ str + report.getDescription() + "<br>" + submitted
+							+ new SimpleDateFormat(dateFormat).format(report.getDateSubmission()) + " by "
 							+ report.getSubmitter() + "</i>"))
 					.addTo(map);
 		}
@@ -126,8 +129,8 @@ public class MapController {
 		for (var report : reportsComm) {
 			new Marker(new LatLng(report.getLatitude().floatValue(), report.getLongitude().floatValue()), markerOptComm)
 					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + report.getTitle()
-							+ "</b><br>" + report.getDescription() + "<br>" + "<i>submitted on "
-							+ new SimpleDateFormat("dd-MM-yyyy").format(report.getDateSubmission()) + " by "
+							+ str + report.getDescription() + "<br>" + submitted
+							+ new SimpleDateFormat(dateFormat).format(report.getDateSubmission()) + " by "
 							+ report.getSubmitter() + "</i>"))
 					.addTo(map);
 		}
@@ -139,8 +142,8 @@ public class MapController {
 		for (var rep : reportsFiltered) {
 			new Marker(new LatLng(rep.getLatitude().floatValue(), rep.getLongitude().floatValue()), markerOptComp)
 					.bindPopup(new Popup(new PopupOptions().setMaxWidth(200)).setContent("<b>" + rep.getTitle()
-							+ "</b><br>" + rep.getDescription() + "<br>" + "<i>submitted on "
-							+ new SimpleDateFormat("dd-MM-yyyy").format(rep.getDateSubmission()) + " by "
+							+ str + rep.getDescription() + "<br>" + submitted
+							+ new SimpleDateFormat(dateFormat).format(rep.getDateSubmission()) + " by "
 							+ rep.getSubmitter() + "</i>"))
 					.addTo(map);
 		}

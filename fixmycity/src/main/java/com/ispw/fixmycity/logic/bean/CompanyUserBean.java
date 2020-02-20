@@ -3,64 +3,64 @@ package com.ispw.fixmycity.logic.bean;
 import com.ispw.fixmycity.logic.util.CityEnum;
 
 public class CompanyUserBean {
-	private String username;
+	private String usernameBean;
 
-	private String password;
+	private String passwordBean;
 
-	private String companyName;
+	private String companyNameBean;
 
-	private String category;
+	private String categoryBean;
 
-	private CityEnum city;
+	private CityEnum cityBean;
 
-	private byte[] image;
+	private byte[] imageBean;
 
 	public String getUsername() {
-		return username;
+		return usernameBean;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.usernameBean = username;
 	}
 
 	public String getPassword() {
-		return password;
+		return passwordBean;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.passwordBean = password;
 	}
 
 	public String getCompanyName() {
-		return companyName;
+		return companyNameBean;
 	}
 
 	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+		this.companyNameBean = companyName;
 	}
 
 	public String getCategory() {
-		return category;
+		return categoryBean;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryBean = category;
 	}
 
 	public CityEnum getCity() {
-		return city;
+		return cityBean;
 	}
 
 	public void setCity(CityEnum city) {
-		this.city = city;
+		this.cityBean = city;
 	}
 
 	public byte[] getImage() {
-		return image;
+		return imageBean;
 	}
 
 	public void setImage(byte[] image) {
-		this.image = image;
+		this.imageBean = image;
 	}
 
 }

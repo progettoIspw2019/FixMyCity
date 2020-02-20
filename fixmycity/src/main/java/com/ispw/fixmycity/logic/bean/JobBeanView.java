@@ -7,29 +7,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JobBeanView {
-	private int idJob;
-	private Date endDate;
-	private byte[] jobInfo;
-	private Date startDate;
-	private String state;
-	private String rejectingMotivation;
-	private int relatedReport;
-	private String relatedCompany;
+	private int idJobView;
+	private Date endDateView;
+	private byte[] jobInfoView;
+	private Date startDateView;
+	private String stateView;
+	private String rejectingMotivationView;
+	private int relatedReportView;
+	private String relatedCompanyView;
 
 	public int getIdJob() {
-		return idJob;
+		return idJobView;
 	}
 
 	public void setIdJob(int idJob) {
-		this.idJob = idJob;
+		this.idJobView = idJob;
 	}
 
 	public Date getEndDate() {
-		return endDate;
+		return endDateView;
 	}
 
 	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+		this.endDateView = endDate;
 	}
 
 	public void setEndDate(String endDate) {
@@ -43,19 +43,19 @@ public class JobBeanView {
 	}
 
 	public byte[] getJobInfo() {
-		return jobInfo;
+		return jobInfoView;
 	}
 
 	public void setJobInfo(byte[] jobInfo) {
-		this.jobInfo = jobInfo;
+		this.jobInfoView = jobInfo;
 	}
 
 	public Date getStartDate() {
-		return startDate;
+		return startDateView;
 	}
 
 	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		this.startDateView = startDate;
 	}
 
 	public void setStartDate(String startDate) {
@@ -69,35 +69,35 @@ public class JobBeanView {
 	}
 
 	public String getState() {
-		return state;
+		return stateView;
 	}
 
 	public void setState(String state) {
-		this.state = state;
+		this.stateView = state;
 	}
 
 	public int getRelatedReport() {
-		return relatedReport;
+		return relatedReportView;
 	}
 
 	public void setRelatedReport(int relatedReport) {
-		this.relatedReport = relatedReport;
+		this.relatedReportView = relatedReport;
 	}
 
 	public String getRejectingMotivation() {
-		return rejectingMotivation;
+		return rejectingMotivationView;
 	}
 
 	public void setRejectingMotivation(String rejectingMotivation) {
-		this.rejectingMotivation = rejectingMotivation;
+		this.rejectingMotivationView = rejectingMotivation;
 	}
 
 	public String getRelatedCompany() {
-		return relatedCompany;
+		return relatedCompanyView;
 	}
 
 	public void setRelatedCompany(String relatedCompany) {
-		this.relatedCompany = relatedCompany;
+		this.relatedCompanyView = relatedCompany;
 	}
 
 }

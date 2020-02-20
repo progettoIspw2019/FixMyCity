@@ -163,9 +163,6 @@
 		<div id="page-content-wrapper">
 			<nav aria-label="navbar"
 				class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
-				<!-- 		<button class="btn btn-primary" id="menu-toggle">Toggle
-                  Menu</button>
-                  -->
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -363,13 +360,6 @@
 		</div>
 	</div>
 </body>
-<!-- 
-      <div class="container-flex">
-      	<div id="commands" class="container-flex">Crea report</div>
-      </div>
-      -->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 	crossorigin="anonymous"></script>

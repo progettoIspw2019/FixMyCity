@@ -4,25 +4,25 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CompanyReportBeanView extends ReportBeanView {
-	private String companyRelated;
-	private String status;
-	private List<String> jobs;
-	private int id;
+	private String companyRelatedBean;
+	private String statusBean;
+	private List<String> jobsBean;
+	private int idBean;
 
 	public String getCompanyRelated() {
-		return companyRelated;
+		return companyRelatedBean;
 	}
 
 	public void setCompanyRelated(String companyRelated) {
-		this.companyRelated = companyRelated;
+		this.companyRelatedBean = companyRelated;
 	}
 
 	public List<String> getJobs() {
-		return jobs;
+		return jobsBean;
 	}
 
 	public void setJobs(List<String> jobs) {
-		this.jobs = jobs;
+		this.jobsBean = jobs;
 	}
 	
 	public String toString() {
@@ -32,19 +32,19 @@ public class CompanyReportBeanView extends ReportBeanView {
 	}
 
 	public String getStatus() {
-		return status;
+		return statusBean;
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		this.statusBean = status;
 	}
 
 	public int getId() {
-		return id;
+		return idBean;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idBean = id;
 	}
 
 }

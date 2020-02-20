@@ -4,88 +4,88 @@ import java.util.Date;
 
 public class VolunteeringEventListElementBean {
 
-	private Integer eventId;
-	private Date creationDate;
-	private Date eventDate;
-	private String title;
-	private String fullDescription;
-	private String address;
-	private String city;
-	private Integer participantsNumber;
-	private byte[] image;
+	private Integer elemEventId;
+	private Date elemCreationDate;
+	private Date elemEventDate;
+	private String elemTitle;
+	private String elemFullDescription;
+	private String elemAddress;
+	private String elemCity;
+	private Integer elemParticipantsNumber;
+	private byte[] elemImage;
 
 	public byte[] getImage() {
-		return image;
+		return elemImage;
 	}
 
 	public void setImage(byte[] image) {
-		this.image = image;
+		this.elemImage = image;
 	}
 
 	private boolean userJoined;
 
 	public Integer getEventId() {
-		return eventId;
+		return elemEventId;
 	}
 
 	public void setEventId(Integer eventId) {
-		this.eventId = eventId;
+		this.elemEventId = eventId;
 	}
 
 	public Date getCreationDate() {
-		return creationDate;
+		return elemCreationDate;
 	}
 
 	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+		this.elemCreationDate = creationDate;
 	}
 
 	public Date getEventDate() {
-		return eventDate;
+		return elemEventDate;
 	}
 
 	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
+		this.elemEventDate = eventDate;
 	}
 
 	public String getTitle() {
-		return title;
+		return elemTitle;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.elemTitle = title;
 	}
 
 	public String getFullDescription() {
-		return fullDescription;
+		return elemFullDescription;
 	}
 
 	public void setFullDescription(String fullDescription) {
-		this.fullDescription = fullDescription;
+		this.elemFullDescription = fullDescription;
 	}
 
 	public String getAddress() {
-		return address;
+		return elemAddress;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.elemAddress = address;
 	}
 
 	public String getCity() {
-		return city;
+		return elemCity;
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.elemCity = city;
 	}
 
 	public Integer getParticipantsNumber() {
-		return participantsNumber;
+		return elemParticipantsNumber;
 	}
 
 	public void setParticipantsNumber(Integer participantsNumber) {
-		this.participantsNumber = participantsNumber;
+		this.elemParticipantsNumber = participantsNumber;
 	}
 
 	public boolean hasUserJoined() {

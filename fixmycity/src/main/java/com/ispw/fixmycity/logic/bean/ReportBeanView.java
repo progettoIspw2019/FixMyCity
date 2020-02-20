@@ -4,96 +4,96 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ReportBeanView {
-	private String title;
-	private String category;
-	private String city;
-	private String fullDescription;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
-	private String address;
-	private byte[] image;
-	private Date dateSubmission;
-	private String submitter;
+	private String titleView;
+	private String categoryView;
+	private String cityView;
+	private String fullDescriptionView;
+	private BigDecimal latitudeView;
+	private BigDecimal longitudeView;
+	private String addressView;
+	private byte[] imageView;
+	private Date dateSubmissionView;
+	private String submitterView;
 
 	public String getTitle() {
-		return title;
+		return titleView;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.titleView = title;
 	}
 
 	public String getCategory() {
-		return category;
+		return categoryView;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryView = category;
 	}
 
 	public String getDescription() {
-		return fullDescription;
+		return fullDescriptionView;
 	}
 
 	public void setDescription(String description) {
-		this.fullDescription = description;
+		this.fullDescriptionView = description;
 	}
 
 	public BigDecimal getLatitude() {
-		return latitude;
+		return latitudeView;
 	}
 
 	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
+		this.latitudeView = latitude;
 	}
 
 	public BigDecimal getLongitude() {
-		return longitude;
+		return longitudeView;
 	}
 
 	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
+		this.longitudeView = longitude;
 	}
 
 	public String getAddress() {
-		return address;
+		return addressView;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.addressView = address;
 	}
 	
 	
 	public void setImage(byte[] image) {
-		this.image = image;
+		this.imageView = image;
 	}
 	
 	public byte[] getImage() {
-		return image;
+		return imageView;
 		
 	}
 
 	public Date getDateSubmission() {
-		return dateSubmission;
+		return dateSubmissionView;
 	}
 
 	public void setDateSubmission(Date dateSubmission) {
-		this.dateSubmission = dateSubmission;
+		this.dateSubmissionView = dateSubmission;
 	}
 
 	public String getCity() {
-		return city;
+		return cityView;
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.cityView = city;
 	}
 
 	public String getSubmitter() {
-		return submitter;
+		return submitterView;
 	}
 
 	public void setSubmitter(String submitter) {
-		this.submitter = submitter;
+		this.submitterView = submitter;
 	}
 }

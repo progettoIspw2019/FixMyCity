@@ -13,30 +13,30 @@ import com.ispw.fixmycity.logic.model.CitizenUser;
 
 public class VolunteeringEventBean {
 
-	private Integer eventId;
-	private Date creationDate;
-	private Date eventDate;
-	private String title;
-	private String fullDescription;
-	private Date eventTime;
+	private Integer volEventId;
+	private Date evCreationDate;
+	private Date evDate;
+	private String titleBean;
+	private String fullDescriptionBean;
+	private Date evTime;
 
 	private List<CitizenUser> citizenUsers;
 	private CommunityReportBean communityReport;
 
 	public Date getCreationDate() {
-		return creationDate;
+		return evCreationDate;
 	}
 
 	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+		this.evCreationDate = creationDate;
 	}
 
 	public Date getEventDate() {
-		return eventDate;
+		return evDate;
 	}
 
 	public void setEventDate(Date eventDate) {
-		this.eventDate = eventDate;
+		this.evDate = eventDate;
 	}
 
 	public void setEventDate(String eventDate) {
@@ -66,41 +66,41 @@ public class VolunteeringEventBean {
 	}
 
 	public String getTitle() {
-		return title;
+		return titleBean;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.titleBean = title;
 	}
 
 	public String getFullDescription() {
-		return fullDescription;
+		return fullDescriptionBean;
 	}
 
 	public void setFullDescription(String fullDescription) {
-		this.fullDescription = fullDescription;
+		this.fullDescriptionBean = fullDescription;
 	}
 
 	public Date getEventTime() {
-		return eventTime;
+		return evTime;
 	}
 
 	public void setEventTime(String eventTime) throws InvalidFieldException {
 		try {
 			DateFormat df = new SimpleDateFormat("HH:mm");
 			Date time = df.parse(eventTime);
-			this.eventTime = time;
+			this.evTime = time;
 		} catch (ParseException e) {
 			throw new InvalidFieldException("Incorrect date");
 		}
 	}
 
 	public Integer getEventId() {
-		return eventId;
+		return volEventId;
 	}
 
 	public void setEventId(Integer eventId) {
-		this.eventId = eventId;
+		this.volEventId = eventId;
 	}
 
 

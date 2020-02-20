@@ -5,35 +5,35 @@ import java.util.Date;
 import com.ispw.fixmycity.logic.model.CompanyReport;
 
 public class JobBean {
-	private int idJob;
-	private Date endDate;
-	private byte[] jobInfo;
-	private Date startDate;
+	private int idJobBean;
+	private Date endDateBean;
+	private byte[] jobInfoBean;
+	private Date startDateBean;
 	private CompanyReport relatedReport;
 	
 	public int getIdJob() {
-		return idJob;
+		return idJobBean;
 	}
 	public void setIdJob(int idJob) {
-		this.idJob = idJob;
+		this.idJobBean = idJob;
 	}
 	public Date getEndDate() {
-		return endDate;
+		return endDateBean;
 	}
 	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+		this.endDateBean = endDate;
 	}
 	public byte[] getJobInfo() {
-		return jobInfo;
+		return jobInfoBean;
 	}
 	public void setJobInfo(byte[] jobInfo) {
-		this.jobInfo = jobInfo;
+		this.jobInfoBean = jobInfo;
 	}
 	public Date getStartDate() {
-		return startDate;
+		return startDateBean;
 	}
 	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+		this.startDateBean = startDate;
 	}
 	
 	public CompanyReport getRelatedReport() {

@@ -5,7 +5,7 @@
 <%@ page import="com.ispw.fixmycity.logic.controller.SystemFacade"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Logout</title>

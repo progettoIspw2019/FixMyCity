@@ -2,33 +2,33 @@ package com.ispw.fixmycity.logic.bean;
 
 public class CitizenUserBean extends BaseUserBean {
 
-	private String firstName;
+	private String firstNameBean;
 
-	private byte[] profilePicture;
+	private byte[] profilePictureBean;
 
-	private String lastName;
+	private String lastNameBean;
 
 	public String getFirstName() {
-		return firstName;
+		return firstNameBean;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstNameBean = firstName;
 	}
 
 	public byte[] getProfilePicture() {
-		return profilePicture;
+		return profilePictureBean;
 	}
 
 	public void setProfilePicture(byte[] profilePicture) {
-		this.profilePicture = profilePicture;
+		this.profilePictureBean = profilePicture;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastNameBean;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastNameBean = lastName;
 	}
 }

@@ -7,104 +7,104 @@ import com.ispw.fixmycity.logic.model.CitizenUser;
 
 public abstract class ReportBean {
 
-	private int idReport;
-	private String title;
-	private String category;
-	private String fullDescription;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
-	private String address;
-	private byte[] image;
-	private Date dateSubmission;
-	private CitizenUser referenceSubmitter;
-	private String city;
+	private int idReportBean;
+	private String titleBean;
+	private String categoryBean;
+	private String fullDescriptionBean;
+	private BigDecimal latitudeBean;
+	private BigDecimal longitudeBean;
+	private String addressBean;
+	private byte[] imageBean;
+	private Date dateSubmissionBean;
+	private CitizenUser referenceSubmitterBean;
+	private String cityBean;
 
 	public int getIdReport() {
-		return idReport;
+		return idReportBean;
 	}
 
 	public void setIdReport(int idReport) {
-		this.idReport = idReport;
+		this.idReportBean = idReport;
 	}
 
 	public String getTitle() {
-		return title;
+		return titleBean;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.titleBean = title;
 	}
 
 	public String getCategory() {
-		return category;
+		return categoryBean;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.categoryBean = category;
 	}
 
 	public String getFullDescription() {
-		return fullDescription;
+		return fullDescriptionBean;
 	}
 
 	public void setFullDescription(String fullDescription) {
-		this.fullDescription = fullDescription;
+		this.fullDescriptionBean = fullDescription;
 	}
 
 	public BigDecimal getLatitude() {
-		return latitude;
+		return latitudeBean;
 	}
 
 	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
+		this.latitudeBean = latitude;
 	}
 
 	public BigDecimal getLongitude() {
-		return longitude;
+		return longitudeBean;
 	}
 
 	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
+		this.longitudeBean = longitude;
 	}
 
 	public String getAddress() {
-		return address;
+		return addressBean;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.addressBean = address;
 	}
 
 	public byte[] getImage() {
-		return image;
+		return imageBean;
 	}
 
 	public void setImage(byte[] file) {
-		this.image = file;
+		this.imageBean = file;
 	}
 
 	public Date getDateSubmission() {
-		return dateSubmission;
+		return dateSubmissionBean;
 	}
 
 	public void setDateSubmission(Date dateSubmission) {
-		this.dateSubmission = dateSubmission;
+		this.dateSubmissionBean = dateSubmission;
 	}
 
 	public CitizenUser getSubmitter() {
-		return this.referenceSubmitter;
+		return this.referenceSubmitterBean;
 	}
 
 	public void setSubmitter(CitizenUser referenceSubmitter) {
-		this.referenceSubmitter = referenceSubmitter;
+		this.referenceSubmitterBean = referenceSubmitter;
 	}
 
 	public String getCity() {
-		return city;
+		return cityBean;
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.cityBean = city;
 	}
 
 }
