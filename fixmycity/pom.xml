@@ -10,7 +10,7 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<sonar.sources>WebContent,src/main/java</sonar.sources>
-		<sonar.exclusions>src/main/resources/com/ispw/fixmycity/logic/view/**/*,WebContent/lib/**/*,src/main/test</sonar.exclusions>
+		<sonar.exclusions>src/main/resources/com/ispw/fixmycity/logic/view/**/*,WebContent/lib/**/*,src/test</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
