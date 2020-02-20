@@ -8,10 +8,8 @@ import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -53,9 +51,7 @@ public class LoginControllerFX {
 			}
 
 		} catch (UserNotFoundException e) {
-			Alert alert = new Alert(AlertType.ERROR, "Log in failed.", ButtonType.OK);
-			alert.setHeaderText(e.getMessage());
-			alert.showAndWait();
+			Alerter.alert(e.getMessage(), "Login failed.", AlertType.ERROR);
 		}
 	}
 

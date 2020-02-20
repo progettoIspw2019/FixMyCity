@@ -6,7 +6,6 @@ import java.util.List;
 import com.ispw.fixmycity.logic.app.App;
 import com.ispw.fixmycity.logic.controller.SystemFacade;
 import com.ispw.fixmycity.logic.util.ReportFilter;
-import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
 import javafx.fxml.FXML;

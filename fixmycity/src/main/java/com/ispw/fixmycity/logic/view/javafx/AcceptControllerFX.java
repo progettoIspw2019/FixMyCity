@@ -9,8 +9,6 @@ import java.util.logging.Logger;
 import com.ispw.fixmycity.logic.bean.JobBeanView;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
@@ -40,11 +38,12 @@ public class AcceptControllerFX {
 	@FXML
 	private void submitJob() {
 		if(document == null) {
-			Alert alert = new Alert(AlertType.INFORMATION,
-					"First, we need a document that explains how works will get done.",
-					ButtonType.OK);
-			alert.setHeaderText("No document uploaded!");
-			alert.showAndWait();
+			Alerter.alert("No document uploaded!", "First, we need a document that explains how works will get done", AlertType.INFORMATION);
+			return;
+		}
+		
+		if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) {
+			Alerter.alert("Invalid date interval!", "Pick a date interval.", AlertType.INFORMATION);
 			return;
 		}
 		

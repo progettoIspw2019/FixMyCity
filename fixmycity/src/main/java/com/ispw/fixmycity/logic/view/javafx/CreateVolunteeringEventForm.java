@@ -18,9 +18,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -101,9 +99,7 @@ public class CreateVolunteeringEventForm {
 	public void handleNextButton() {
 
 		if (selectionId == -1) {
-			Alert alert = new Alert(AlertType.INFORMATION, "Please select a report", ButtonType.OK);
-			alert.setHeaderText("No report selected");
-			alert.showAndWait();
+			Alerter.alert("No report selected!", "Please select a report.", AlertType.WARNING);
 			return;
 		}
 
@@ -136,10 +132,7 @@ public class CreateVolunteeringEventForm {
 
 		if (eventTitleTextField.getText() == null || eventDescriptionTextArea.getText() == null
 				|| eventDatePicker.getValue() == null || eventTimeTextField.getText() == null) {
-			Alert alert = new Alert(AlertType.INFORMATION, "Please make sure that every field is filled",
-					ButtonType.OK);
-			alert.setHeaderText("Invalid field");
-			alert.showAndWait();
+			Alerter.alert("Invalid field!", "Please make sure that every field is filled.", AlertType.INFORMATION);
 			return;
 		}
 
@@ -152,9 +145,7 @@ public class CreateVolunteeringEventForm {
 		try {
 			volunteeringEventBean.setEventTime(eventTimeTextField.getText());
 		} catch (InvalidFieldException e) {
-			Alert alert = new Alert(AlertType.INFORMATION, e.getMessage(), ButtonType.OK);
-			alert.setHeaderText("Invalid field");
-			alert.showAndWait();
+			Alerter.alert("Invalid time field!", e.getMessage(), AlertType.WARNING);
 			return;
 		}
 

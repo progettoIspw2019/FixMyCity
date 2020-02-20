@@ -12,7 +12,10 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.ispw.fixmycity.logic.view.javafx.Alerter;
+
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Alert.AlertType;
 
 public class ConverterUtil {
 
@@ -27,8 +30,11 @@ public class ConverterUtil {
 	}
 
 	public static byte[] byteArrayFromImage(File file) {
-
 		byte[] b = null;
+		if(file == null) {
+			Alerter.alert("No image uploaded!", "First, pick a picture for your user profile", AlertType.INFORMATION);
+			return b;
+		}
 
 		try (FileInputStream fileInputStream = new FileInputStream(file.getAbsolutePath())) {
 			b = fileInputStream.readAllBytes();

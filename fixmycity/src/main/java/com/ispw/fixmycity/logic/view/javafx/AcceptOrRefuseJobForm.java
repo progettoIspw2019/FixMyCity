@@ -22,8 +22,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
@@ -92,9 +90,7 @@ public class AcceptOrRefuseJobForm {
 		List<CompanyReportBeanView> reports = new SystemFacade().loadMyCompanyReports();
 		
 		if (reports.isEmpty()) {
-			Alert alert = new Alert(AlertType.INFORMATION, "No problems were reported for this company.");
-			alert.setHeaderText("No reports to show!");
-			alert.showAndWait();
+			Alerter.alert("No reports to show!", "No problems were reported for this company.", AlertType.INFORMATION);
 			return;
 		}
 		
@@ -133,9 +129,7 @@ public class AcceptOrRefuseJobForm {
 	@FXML
 	public void acceptJob() throws IOException {
 		if(reportSelected == null) {
-			Alert alert = new Alert(AlertType.INFORMATION, "First pick a report!", ButtonType.OK);
-			alert.setHeaderText("No report selected!");
-			alert.showAndWait();
+			Alerter.alert("No report selected!", "First pick a report.", AlertType.INFORMATION);
 			return;
 		}
 		JobBeanView bean = new JobBeanView();
@@ -158,17 +152,13 @@ public class AcceptOrRefuseJobForm {
 			new SystemFacade().jobCreation(jBean);
 			
 		} catch (CompanyReportIsAcceptedException e) {
-			Alert alert = new Alert(AlertType.WARNING, "This report was already accepted.", ButtonType.OK);
-			alert.setHeaderText("Cannot accept!");
-			alert.showAndWait();
+			Alerter.alert("Cannot accept!", "This report was already accepted.", AlertType.WARNING);
 			return;
 		}
 		
 		catch(InvalidDateIntervalException e) {
-			Alert alert = new Alert(AlertType.WARNING, "Starting and ending date are invalid.", ButtonType.OK);
-			alert.setHeaderText("Cannot submit");
-			alert.showAndWait();
-			
+			Alerter.alert("Cannot submit!", "Starting and ending date are invalid.", AlertType.WARNING);	
+			return;
 		}
 		App.setRoot("home_company");
 	}
@@ -176,9 +166,7 @@ public class AcceptOrRefuseJobForm {
 	@FXML
 	public void rejectJob() throws IOException {
 		if(reportSelected == null) {
-			Alert alert = new Alert(AlertType.INFORMATION, "First pick a report!", ButtonType.OK);
-			alert.setHeaderText("No report selected!");
-			alert.showAndWait();
+			Alerter.alert("No report selected!", "First, pick a report.", AlertType.INFORMATION);
 			return;
 		}
 		JobBeanView bean = new JobBeanView();
@@ -206,9 +194,7 @@ public class AcceptOrRefuseJobForm {
 		try {
 			new SystemFacade().rejectReport(currJob);
 		} catch (CompanyReportIsAcceptedException e) {
-			Alert alert = new Alert(AlertType.WARNING, "This report was accepted.", ButtonType.OK);
-			alert.setHeaderText("Cannot reject!");
-			alert.showAndWait();
+			Alerter.alert("Cannot reject!", "This report was accepted", AlertType.WARNING);
 			return;
 		}
 		App.setRoot("home_company");

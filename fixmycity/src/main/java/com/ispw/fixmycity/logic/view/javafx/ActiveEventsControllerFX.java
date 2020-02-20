@@ -19,8 +19,6 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,9 +48,7 @@ public class ActiveEventsControllerFX {
 		try {
 			events = new SystemFacade().getActiveVolunteeringEvents();
 		} catch (EmptyResultListException e) {
-			Alert alert = new Alert(AlertType.INFORMATION, "There are no active events at the moment.");
-			alert.setHeaderText("No events!");
-			alert.showAndWait();
+			Alerter.alert("No events!", "There are no active events at the moment.", AlertType.INFORMATION);
 			logger.info("Could not load any events!");
 			return;
 		}
@@ -116,10 +112,7 @@ public class ActiveEventsControllerFX {
 				}
 				eventsContainer.getChildren().add(singleEvent);
 			} catch (IOException e) {
-				Alert alertFiles = new Alert(AlertType.ERROR,
-						"There are missing files, you might want to reinstall your app...", ButtonType.OK);
-				alertFiles.setHeaderText("File not found!");
-				alertFiles.showAndWait();
+				Alerter.alert("File not found!", "There are missing files, you might want to reinstall your app...", AlertType.ERROR);
 			}
 		});
 	}

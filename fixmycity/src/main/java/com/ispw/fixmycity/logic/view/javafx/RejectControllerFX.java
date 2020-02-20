@@ -3,8 +3,6 @@ package com.ispw.fixmycity.logic.view.javafx;
 import com.ispw.fixmycity.logic.bean.JobBeanView;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 
@@ -23,11 +21,7 @@ public class RejectControllerFX {
 	@FXML
 	private void submit() {
 		if(rejectDescription.getText().isEmpty()) {
-			Alert alert = new Alert(AlertType.INFORMATION, "We want to communicate "
-					+ "to citizens the reason why no works will be done for this issue.", ButtonType.OK);
-			alert.setHeaderText("Missing description!");
-			alert.showAndWait();
-			return;
+			Alerter.alert("Missing description!", "Citizens might want to know the reason behind the rejection.", AlertType.INFORMATION);
 		}
 		currJob.setRejectingMotivation(rejectDescription.getText());
 		masterController.submitReject(currJob);

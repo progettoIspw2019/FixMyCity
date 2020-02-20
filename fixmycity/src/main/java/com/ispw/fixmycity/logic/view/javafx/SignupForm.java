@@ -13,9 +13,7 @@ import com.ispw.fixmycity.logic.util.ConverterUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
@@ -131,21 +129,20 @@ public class SignupForm {
 	}
 
 	public void signupCitizen() {
-
 		CitizenUserBean user = new CitizenUserBean();
 		user.setFirstName(firstNameField.getText());
 		user.setLastName(lastNameField.getText());
 		user.setUsername(userNameField.getText());
 		user.setPassword(passwordField.getText());
-		user.setProfilePicture(ConverterUtil.byteArrayFromImage(imageFile));
+		byte[] imByte = ConverterUtil.byteArrayFromImage(imageFile);
+		if(imByte == null) return;
+		user.setProfilePicture(imByte);
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));
 
 		if (new SystemFacade().signupCitizenUser(user)) {
 			new LoginControllerFX().loginUser(user.getUsername(), user.getPassword());
 		} else {
-			Alert alert = new Alert(AlertType.ERROR, "This username is already in use.", ButtonType.OK);
-			alert.setHeaderText("Could not sign you up!");
-			alert.showAndWait();
+			Alerter.alert("Could not sign you up!", "This username is already in use.", AlertType.ERROR);
 		}
 	}
 
@@ -153,7 +150,9 @@ public class SignupForm {
 		CompanyUserBean user = new CompanyUserBean();
 		user.setCategory(categoryChoiceBox.getValue());
 		user.setCompanyName(companyNameField.getText());
-		user.setImage(ConverterUtil.byteArrayFromImage(imageFile));
+		byte[] imByte = ConverterUtil.byteArrayFromImage(imageFile);
+		if(imByte == null) return;
+		user.setImage(imByte);
 		user.setPassword(passwordField.getText());
 		user.setUsername(userNameField.getText());
 		user.setCity(CityEnum.valueOf(cityChoiceBox.getValue().toUpperCase()));
@@ -161,9 +160,7 @@ public class SignupForm {
 		if (new SystemFacade().signupCompanyUser(user)) {
 			new LoginControllerFX().loginUser(user.getUsername(), user.getPassword());
 		} else {
-			Alert alert = new Alert(AlertType.ERROR, "This username is already in use.", ButtonType.OK);
-			alert.setHeaderText("Could not sign you up!");
-			alert.showAndWait();
+			Alerter.alert("Could not sign you up!", "This username is already in use.", AlertType.ERROR);
 		}
 	}
 

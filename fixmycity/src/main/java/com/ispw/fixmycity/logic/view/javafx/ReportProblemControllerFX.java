@@ -19,8 +19,6 @@ import com.ispw.fixmycity.logic.view.SessionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -84,27 +82,18 @@ public class ReportProblemControllerFX {
 
 	public void handleSubmit() {
 		if (titleField.getText().isEmpty()) {
-			Alert alert = new Alert(AlertType.INFORMATION, "A title summarises the description"
-					+ " of the issue and it allows better filtering for users on the platform.", ButtonType.OK);
-			alert.setHeaderText("Missing title!");
-			alert.showAndWait();
+			Alerter.alert("Missing title!", "A title summarises the description"
+					+ " of the issue and it allows better filtering for users on the platform.", AlertType.INFORMATION);
 			return;
 		}
 
 		if (descriptionField.getText().isEmpty()) {
-			Alert alert = new Alert(AlertType.INFORMATION, "A description is needed so that"
-					+ " there is enough information to understand what the problem is.", ButtonType.OK);
-			alert.setHeaderText("Missing description!");
-			alert.showAndWait();
-			return;
+			Alerter.alert("Missing description", "A description is needed so that"
+					+ " there is enough information to understand what the problem is.", AlertType.INFORMATION);
 		}
 
 		if (selectedImage == null) {
-			Alert alert = new Alert(AlertType.INFORMATION,
-					"A picture greatly improves" + " efficiency and allows us to detect the severity of the issue.",
-					ButtonType.OK);
-			alert.setHeaderText("No image uploaded!");
-			alert.showAndWait();
+			Alerter.alert("No image uploaded!", "A picture greatly improves\" + \" efficiency and allows us to detect the severity of the issue.", AlertType.INFORMATION);
 			return;
 		}
 
@@ -133,19 +122,11 @@ public class ReportProblemControllerFX {
 		try {
 			new SystemFacade().reportProblem(repBean);
 		} catch (NoMatchingCompanyFound e) {
-			Alert alert = new Alert(AlertType.INFORMATION,
-					"The issue might not get addressed until the public company that is responsible signs up, "
-							+ "we'd be grateful if you could try to get them to contact us so that everyone can benefit from our platform!",
-					ButtonType.OK);
-			alert.setHeaderText("No matching company found!");
-			alert.showAndWait();
+			Alerter.alert("No matching company found!", "The issue might not get addressed until the public company that is responsible signs up, "
+					+ "we'd be grateful if you could try to get them to contact us so that everyone can benefit from our platform!", AlertType.INFORMATION);
 			return;
 		} catch (InvalidReportException e) {
-			Alert alert = new Alert(AlertType.INFORMATION,
-					"Cannot submit your report at the moment, try again at a later time or contact our support team.",
-					ButtonType.OK);
-			alert.setHeaderText("Cannot submit!");
-			alert.showAndWait();
+			Alerter.alert("Cannot submit!", "Cannot submit your report at the moment, try again at a later time or contact our support team.", AlertType.INFORMATION);
 		}
 
 		App.setRoot("home_citizen");

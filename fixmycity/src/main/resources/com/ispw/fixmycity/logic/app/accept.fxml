@@ -37,7 +37,7 @@
             <DatePicker fx:id="endDatePicker" prefHeight="25.0" prefWidth="190.0" promptText="When will they finish?" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#uploadDocument" prefHeight="50.0" prefWidth="148.0" style="-fx-background-color: #fff; -fx-alignment: center;" text="Upload Document (optional)" textAlignment="CENTER" wrapText="true">
+      <JFXButton alignment="CENTER" contentDisplay="CENTER" onAction="#uploadDocument" prefHeight="50.0" prefWidth="148.0" style="-fx-background-color: #fff; -fx-alignment: center;" text="Upload Document" textAlignment="CENTER" wrapText="true">
          <VBox.margin>
             <Insets bottom="20.0" top="20.0" />
          </VBox.margin>

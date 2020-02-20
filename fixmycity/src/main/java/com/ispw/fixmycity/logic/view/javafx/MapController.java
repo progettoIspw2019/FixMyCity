@@ -15,8 +15,6 @@ import com.ispw.fixmycity.logic.util.ReportFilter;
 import com.ispw.fixmycity.logic.util.UserMode;
 import com.ispw.fixmycity.logic.view.SessionView;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.web.WebView;
 import net.java.html.boot.fx.FXBrowsers;
@@ -172,11 +170,7 @@ public class MapController {
 			}
 
 			if (!inside) {
-				Alert alert = new Alert(AlertType.INFORMATION,
-						"You can only pick locations " + "that are inside the polygon surrounding your city.",
-						ButtonType.OK);
-				alert.setHeaderText("Out of city bounds!");
-				alert.showAndWait();
+				Alerter.alert("Out of city bounds!", "You can only pick locations inside the polygon.", AlertType.INFORMATION);
 				return;
 			}
 
@@ -189,9 +183,7 @@ public class MapController {
 			try {
 				new SystemFacade().setAddressForReport(longitude, latitude);
 			} catch (CouldNotConnectToGeolocationServiceException e) {
-				Alert alert = new Alert(AlertType.ERROR, "It seems like there are having trouble connecting to the geolocation service...", ButtonType.OK);
-				alert.setHeaderText("Could not connect to geolocation service!");
-				alert.showAndWait();
+				Alerter.alert("Could not connect to geolocation service!", "It seems we are having connectivity issues", AlertType.ERROR);
 			}
 			AddressBean addr = SessionView.getAddressSetOnMap();
 

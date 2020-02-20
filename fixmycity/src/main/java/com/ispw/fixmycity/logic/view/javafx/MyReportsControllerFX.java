@@ -19,9 +19,7 @@ import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -121,10 +119,7 @@ public class MyReportsControllerFX {
 				}
 				reportsContainer.getChildren().add(singleReport);
 			} catch (IOException e) {
-				Alert alert = new Alert(AlertType.ERROR,
-						"There are some missing files, you might want to reinstall your app...", ButtonType.OK);
-				alert.setHeaderText("File not found!");
-				alert.showAndWait();
+				Alerter.alert("Community Report files not found!", "There are missing files, you might want to reinstall your app...", AlertType.ERROR);
 			}
 		});
 	}
@@ -181,10 +176,7 @@ public class MyReportsControllerFX {
 				}
 				reportsContainer.getChildren().add(singleReport);
 			} catch (IOException e) {
-				Alert alert = new Alert(AlertType.ERROR,
-						"There are some missing files, you might want to reinstall your app...", ButtonType.OK);
-				alert.setHeaderText("File not found!");
-				alert.showAndWait();
+				Alerter.alert("Report files not found!", "There are missing files, you might want to reinstall your app...", AlertType.ERROR);
 			}
 		});
 	}
